@@ -31,7 +31,7 @@ const ModelFallback = () => (
 // Optimize material creation
 const createOptimizedMaterial = (baseMaterial: THREE.MeshStandardMaterial) => {
   const material = baseMaterial.clone()
-  material.roughness = 0.7 // Adjust based on your needs
+  material.roughness = 0.7 
   material.metalness = 0.3
   material.needsUpdate = true
   return material
