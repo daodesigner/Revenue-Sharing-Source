@@ -175,7 +175,7 @@ export const data : ObjectDescription[] = [
     // Snuff Cup - Lueji Wa Nkonde
     {
        title: 'Lueji Wa Nkonde',
-       object_URL: <Snuff />,
+       object_URL: <Snuff levelOfDetail='high' />,
        object_name: 'Snuff Cup',
        Object_description: [
           ['Used to store and carry snuff (Tobacco).'],
