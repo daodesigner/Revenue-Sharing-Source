@@ -3,7 +3,7 @@ const { ethers } = require("hardhat");
 
 async function main() {
   // Retrieve signers
-  const [controller, owner] = await ethers.getSigners();
+  const [owner] = await ethers.getSigners();
 
   const usdtTokenAddress = "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
 
