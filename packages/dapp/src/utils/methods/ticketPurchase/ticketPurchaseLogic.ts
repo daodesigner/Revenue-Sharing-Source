@@ -3,7 +3,7 @@ import {
    contracts,
    estimateGas,
    CONTRACT_ADDRESSES,
-} from '@/utils/dev/contractInit';
+} from '@/utils/prod/contractInit';
 import { PurchaseHandlerProps } from '@/utils/dev/frontEndInterfaces';
 import { handleContractError } from '@/utils/dev/handleContractError';
 import axios from 'axios';

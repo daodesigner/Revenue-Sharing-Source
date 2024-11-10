@@ -2,7 +2,7 @@
 
 import { ethers } from 'ethers';
 import { fetchEthUsdtPrice } from './eth_usd_price';
-import { CONTRACT_ADDRESSES, estimateGas } from '@/utils/dev/contractInit';
+import { CONTRACT_ADDRESSES, estimateGas } from '@/utils/prod/contractInit';
 
 export const estimateGasFees = async (
    provider: any,
