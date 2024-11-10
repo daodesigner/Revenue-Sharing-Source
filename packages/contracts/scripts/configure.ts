@@ -3,9 +3,8 @@ import { ethers } from "hardhat";
 async function main() {
 
     // Get the signers
-    const [controller, owner, beneficiary1, beneficiary2] = await ethers.getSigners();
+    const [owner, beneficiary1, beneficiary2] = await ethers.getSigners();
     // Hardcoded addresses
-    const usdtTokenAddress = "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58";
     const museumAddress = "";
     const organizerServiceAddress = "";
     const artifactNFT1 = "";
@@ -16,7 +15,7 @@ async function main() {
         symbol: "LLEZ",
         ticketPrice: ethers.parseUnits("5", 6),
         beneficiaries: [beneficiary1.address, beneficiary2.address],
-        shares: [50, 50],
+        shares: [80, 20],
         baseURI: "https://s3.tebi.io/tickets/",
         location: "Virtual Space",
         artifactNFT: artifactNFT1,
@@ -27,18 +26,16 @@ async function main() {
     // Connect to the contracts
     const OrganizerService = await ethers.getContractFactory("EventOrganizerService");
     const Museum = await ethers.getContractFactory("Museum");
-    const UsdtToken = await ethers.getContractFactory("USDT");
     const ArtifactNFT = await ethers.getContractFactory("ArtifactNFT");
     
     const organizerService = OrganizerService.attach(organizerServiceAddress).connect(owner);
     const museum = Museum.attach(museumAddress).connect(owner);
-    const usdtToken = UsdtToken.attach(usdtTokenAddress).connect(owner);
     const artifactNFT = ArtifactNFT.attach(artifactNFT1).connect(owner);
     
     // Organize an exhibit
     const tx1 = await organizerService.connect(owner).organizeExhibit( 
-            exhibit1.name,
-            exhibit1.symbol,
+            exhibit1.name, // name
+            exhibit1.symbol, // exhibit symbol
             exhibit1.ticketPrice, // ticket price
             exhibit1.beneficiaries, // beneficiaries
             exhibit1.shares, // shares
@@ -70,7 +67,6 @@ async function main() {
     const tx4 = await artifactNFT.mint(owner.address, 6);
     const receipt4 = await tx4.wait(6);
     console.log("Minted ArtifactNFT 1", receipt4.status)
-
 }
 
 main()

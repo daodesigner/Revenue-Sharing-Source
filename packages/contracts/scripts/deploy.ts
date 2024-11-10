@@ -10,12 +10,12 @@ async function main() {
   // Deploying Museum contract
   const Museum = await ethers.getContractFactory("Museum");
   const museum = await Museum.connect(owner).deploy(usdtTokenAddress);
-  await museum.deploymentTransaction().wait(1);
+  await museum.deploymentTransaction().wait(2);
 
   // Deploy EventOrganizerService with the deployed Museum and USDC token addresses
   const EventOrganizerService = await ethers.getContractFactory("EventOrganizerService");
   const organizerService = await EventOrganizerService.deploy(museum.target, usdtTokenAddress);
-  await organizerService.deploymentTransaction().wait(1);
+  await organizerService.deploymentTransaction().wait(2);
 
 
   // Deploy ArtifactNFT
