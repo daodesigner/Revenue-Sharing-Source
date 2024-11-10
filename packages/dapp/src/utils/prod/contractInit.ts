@@ -19,6 +19,8 @@ export const CONTRACT_ADDRESSES = {
    MuseumAdd: '',
    exhibitId: '',
    EscrowAdd: '',
+   exhibiId: '',
+   eventId: '',
 };
 
 // Export ABIs directly
@@ -60,7 +62,7 @@ export const contracts = {
       );
    },
 
-   getMUSDC: () => {
+   getUSDT: () => {
       const { signer } = initializeUserWallet();
       return new ethers.Contract(
          CONTRACT_ADDRESSES.USDTAdd,
