@@ -3,6 +3,10 @@
     "EventOrganizerService": {
       "address": "0x662388C92915aD4be269452E7069d4AC56b07e82",
       "startBlock": 127827591
+    },
+    "Museum": {
+      "address": "0x3935e5BED378aCeD49655b3E1fA8c0e68550fbaa",
+      "startBlock": "127827586"
     }
   }
 }
