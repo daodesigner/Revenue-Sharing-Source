@@ -3,18 +3,21 @@ import { ethers } from "hardhat";
 async function main() {
 
     // Get the signers
-    const [owner, beneficiary1, beneficiary2] = await ethers.getSigners();
+    const [owner, ] = await ethers.getSigners();
     // Hardcoded addresses
     const museumAddress = "";
     const organizerServiceAddress = "";
     const artifactNFT1 = "";
+
+    const beneficiary1 : string =  "" ;
+    const  beneficiary2 : string = "";
 
   
     const exhibit1 ={
         name: "The Leading Ladies of Zambia",
         symbol: "LLEZ",
         ticketPrice: ethers.parseUnits("5", 6),
-        beneficiaries: [beneficiary1.address, beneficiary2.address],
+        beneficiaries: [beneficiary1, beneficiary2],
         shares: [80, 20],
         baseURI: "https://s3.tebi.io/tickets/",
         location: "Virtual Space",

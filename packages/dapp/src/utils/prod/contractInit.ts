@@ -6,12 +6,12 @@ Purpose: Provides utility functions for initializing and interacting with smart 
 import { ethers } from 'ethers';
 import { initializeDevWallet, initializeUserWallet } from './walletInit';
 
-import EventOrganizerServiceABI from '../artifacts/contracts/EventOrganizerService.sol/EventOrganizerService.json';
-import MuseumABI from '../artifacts/contracts/Museum.sol/Museum.json';
-import ArtifactNFTABI from '../artifacts/contracts/ArtifactNFT.sol/ArtifactNFT.json';
-import EventEscrowABI from '../artifacts/contracts/EventEscrow.sol/EventEscrow.json';
-import ExhibitNFTABI from '../artifacts/contracts/ExhibitNFT.sol/ExhibitNFT.json';
-import USDTABI from '../artifacts/contracts/USDT_OP/usdtoptimism.json';
+import EventOrganizerServiceABI from '../prod/abis/EventOrganizerService.json';
+import MuseumABI from '../prod/abis/Museum.json';
+import ArtifactNFTABI from '../prod/abis/ArtifactNFT.json';
+import EventEscrowABI from '../prod/abis/EventEscrow.json';
+import ExhibitNFTABI from '../prod/abis/ExhibitNFT.json';
+import USDTABI from '../prod/abis/usdtoptimism.json';
 
 export const CONTRACT_ADDRESSES = {
    EventOrganizerServiceAdd: '',

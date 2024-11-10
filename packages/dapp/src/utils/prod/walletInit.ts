@@ -14,10 +14,11 @@ export const initializeUserWallet = () => {
 
 const devPrivateKey = process.env.PROD_PRIVATE_KEY;
 const sepoliapcUrl = process.env.RPC_URL;
+const opURl = process.env.PROD_RPC_URL;
 
 // Initialize developer wallet (for server-side or admin operations)
 export const initializeDevWallet = () => {
-   const provider = new ethers.providers.JsonRpcProvider(sepoliapcUrl);
+   const provider = new ethers.providers.JsonRpcProvider(opURl);
 
    if (!devPrivateKey) {
       throw new Error('dev key is not defined');
