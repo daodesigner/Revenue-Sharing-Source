@@ -5,9 +5,9 @@ async function main() {
     // Get the signers
     const [owner] = await ethers.getSigners();
     // Hardcoded addresses
-    const museumAddress = "";
-    const organizerServiceAddress = "";
-    const artifactNFT1 = "";
+    const museumAddress = "0x3935e5BED378aCeD49655b3E1fA8c0e68550fbaa";
+    const organizerServiceAddress = "0x662388C92915aD4be269452E7069d4AC56b07e82";
+    const artifactNFT1 = "0xE3f9Cb6608fEFb78FDB2FD5496d62dc547236AAa";
 
     const beneficiary1 : string =  "0xc0243933ba0a7b3fffbb960c58011be37ab3a3fd" ;
     const beneficiary2 : string = "0x54b7BdD2c88E5241E30bf7961ec1768DCB813676";
