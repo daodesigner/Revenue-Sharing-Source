@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "contract IERC20",
-        "name": "_usdcToken",
+        "name": "_usdtToken",
         "type": "address"
       }
     ],
@@ -185,7 +185,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "usdcAmount",
+        "name": "usdtAmount",
         "type": "uint256"
       }
     ],
@@ -216,7 +216,7 @@
   },
   {
     "inputs": [],
-    "name": "usdcToken",
+    "name": "usdtToken",
     "outputs": [
       {
         "internalType": "contract IERC20",
