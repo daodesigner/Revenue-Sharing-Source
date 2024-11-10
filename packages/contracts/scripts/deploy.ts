@@ -5,19 +5,16 @@ async function main() {
   // Retrieve signers
   const [ owner ] = await ethers.getSigners();
 
-  //const usdtTokenAddress = "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
-  const USDT = await ethers.getContractFactory("USDT");
-  const usdt = await USDT.connect(owner).deploy(ethers.parseUnits("200000", 5))
-  await usdt.deploymentTransaction().wait(2);
+  const usdtTokenAddress = "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
 
   // Deploying Museum contract
   const Museum = await ethers.getContractFactory("Museum");
-  const museum = await Museum.connect(owner).deploy(usdt.target);
+  const museum = await Museum.connect(owner).deploy(usdtTokenAddress);
   await museum.deploymentTransaction().wait(2);
 
   // Deploy EventOrganizerService with the deployed Museum and USDC token addresses
   const EventOrganizerService = await ethers.getContractFactory("EventOrganizerService");
-  const organizerService = await EventOrganizerService.deploy(museum.target, usdt.target);
+  const organizerService = await EventOrganizerService.deploy(museum.target, usdtTokenAddress);
   await organizerService.deploymentTransaction().wait(2);
 
 
