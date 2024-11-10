@@ -17,7 +17,7 @@ export function handleMuseumCreated(event: MuseumCreatedEvent): void {
   let tokenAddress = event.params.tokenAddress
   let ownerAddress = event.params.ownerAddress
   let museum = new Museum(museumAddress.toHexString())
-  museum.usdcAddress = tokenAddress
+  museum.usdtAddress = tokenAddress
   museum.owner = ownerAddress
   museum.save()
 

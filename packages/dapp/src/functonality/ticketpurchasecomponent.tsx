@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { TicketPurchaseProps } from '@/utils/dev/typeInit';
-import { CONTRACT_ADDRESSES, contracts } from '@/utils/dev/contractInit';
+import { CONTRACT_ADDRESSES, contracts } from '@/utils/prod/contractInit';
 import useExhibit from '@/lib/useGetExhibitById';
 import {
    useWeb3Provider,
@@ -46,7 +46,7 @@ const TicketPurchaseComponent = ({
 
    // Price calculations
    const ticketPriceWei = BigInt(exhibit.exhibitDetails[0]?.ticketPrice || '0');
-   const ticketPriceFormatted = ethers.utils.formatUnits(ticketPriceWei, 18);
+   const ticketPriceFormatted = ethers.utils.formatUnits(ticketPriceWei, 6);
    const ticketPriceWithToken = `${ticketPriceFormatted} USDT`;
 
    // Handlers

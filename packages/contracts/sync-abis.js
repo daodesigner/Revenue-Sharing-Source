@@ -5,7 +5,7 @@ const path = require('path');
 
 // Configuration - directory files
 const HARDHAT_ARTIFACTS_PATH = './artifacts/contracts';
-const REACT_ABI_PATH = '../dapp/src/utils/artifacts/abis';
+const REACT_ABI_PATH = '../dapp/src/utils/artifacts/prod/abis';
 
 // Create the React ABI directory if it doesn't exist
 if (!fs.existsSync(REACT_ABI_PATH)) {

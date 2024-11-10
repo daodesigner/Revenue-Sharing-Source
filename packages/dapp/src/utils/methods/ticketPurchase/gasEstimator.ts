@@ -2,7 +2,7 @@
 
 import { ethers } from 'ethers';
 import { fetchEthUsdtPrice } from './eth_usd_price';
-import { CONTRACT_ADDRESSES, estimateGas } from '@/utils/dev/contractInit';
+import { CONTRACT_ADDRESSES, estimateGas } from '@/utils/prod/contractInit';
 
 export const estimateGasFees = async (
    provider: any,
@@ -20,11 +20,11 @@ export const estimateGasFees = async (
 
    setIsEstimating(true);
    try {
-      const usdcContract = contracts.getMUSDC();
+      const usdtContract = contracts.getUSDT();
       const museumContract = contracts.getMuseum();
 
       // Estimate gas for approval
-      const gasLimitApprove = await estimateGas(usdcContract, 'approve', [
+      const gasLimitApprove = await estimateGas(usdtContract, 'approve', [
          CONTRACT_ADDRESSES.MuseumAdd,
          ticketPrice,
       ]);

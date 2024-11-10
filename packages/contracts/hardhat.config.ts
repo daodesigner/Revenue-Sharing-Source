@@ -10,8 +10,11 @@ dotenv.config();
 // You should replace these values with your own node URL and private keys
 
 const SEPOLIA_RPC_URL = process.env.RPC_URL;
-const accounts = process.env.PRIVATE_KEYS?.split(',');
+const OP_RPC_URL = process.env.PROD_RPC_URL;
 
+// const accounts = process.env.PRIVATE_KEYS?.split(',');
+const accounts = process.env.PROD_PRIVATE_KEYS?.split(',')
+//const prod_accounts = process.env.PROD_PRIVATE_KEYS?.split(',')
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -23,10 +26,6 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defender:{
-    apiKey: process.env.DEFENDER_KEY as string,
-    apiSecret: process.env.DEFENDER_SECRET as string,
-  },
   networks: {
     sepolia: {
       url: SEPOLIA_RPC_URL,
@@ -34,6 +33,13 @@ const config: HardhatUserConfig = {
       chainId: 11155420, // OP Sepolia chain ID
       gasPrice: "auto",
     },
+
+    optimism: {
+      url: OP_RPC_URL,
+      accounts,
+      chainId: 10, // OP mainnet
+      gasPrice: "auto",
+    }
   },
 
   gasReporter: {

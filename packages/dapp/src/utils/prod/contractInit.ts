@@ -6,19 +6,20 @@ Purpose: Provides utility functions for initializing and interacting with smart 
 import { ethers } from 'ethers';
 import { initializeDevWallet, initializeUserWallet } from './walletInit';
 
-import EventOrganizerServiceABI from '../artifacts/contracts/EventOrganizerService.sol/EventOrganizerService.json';
-import MuseumABI from '../artifacts/contracts/Museum.sol/Museum.json';
-import ArtifactNFTABI from '../artifacts/contracts/ArtifactNFT.sol/ArtifactNFT.json';
-import EventEscrowABI from '../artifacts/contracts/EventEscrow.sol/EventEscrow.json';
-import ExhibitNFTABI from '../artifacts/contracts/ExhibitNFT.sol/ExhibitNFT.json';
-import USDTABI from '../artifacts/contracts/USDT_OP/usdtoptimism.json';
+import EventOrganizerServiceABI from '../prod/abis/EventOrganizerService.json';
+import MuseumABI from '../prod/abis/Museum.json';
+import ArtifactNFTABI from '../prod/abis/ArtifactNFT.json';
+import EventEscrowABI from '../prod/abis/EventEscrow.json';
+import ExhibitNFTABI from '../prod/abis/ExhibitNFT.json';
+import USDTABI from '../prod/abis/usdtoptimism.json';
 
 export const CONTRACT_ADDRESSES = {
    EventOrganizerServiceAdd: '',
    USDTAdd: '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58',
-   MuseumAdd: '',
-   exhibitId: '',
-   EscrowAdd: '',
+   MuseumAdd: '0xA23Cd2AD1966b17cae9442410eE13A01f58358FF',
+   EscrowAdd: '0x1a46734b26591ec4c023111d6f5785ae1a229d5f',
+   exhibitId: '0xf2a23b768ff33701fa41a0e359782bbc74d44b2c',
+   eventId: 'LLE1',
 };
 
 // Export ABIs directly
@@ -51,16 +52,16 @@ export const contracts = {
       );
    },
 
-   getEventEscrow: (address: string) => {
+   getEventEscrow: () => {
       const { signer } = initializeUserWallet();
       return new ethers.Contract(
-         address,
+         CONTRACT_ADDRESSES.EscrowAdd,
          EventEscrowABI as ethers.ContractInterface,
          signer
       );
    },
 
-   getMUSDC: () => {
+   getUSDT: () => {
       const { signer } = initializeUserWallet();
       return new ethers.Contract(
          CONTRACT_ADDRESSES.USDTAdd,
@@ -84,3 +85,20 @@ export const contracts = {
       );
    },
 };
+
+
+
+export async function estimateGas(
+   contract: ethers.Contract,
+   method: string,
+   args: any[]
+): Promise<bigint> {
+   try {
+      const estimatedGas = await contract.estimateGas[method](...args);
+      // Add a buffer to the estimated gas (e.g., 20% more)
+      return BigInt(Math.floor(Number(estimatedGas) * 1.2));
+   } catch (error) {
+      console.error(`Error estimating gas for ${method}:`, error);
+      throw error;
+   }
+}

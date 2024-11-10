@@ -56,6 +56,11 @@
     "type": "error"
   },
   {
+    "inputs": [],
+    "name": "NotCompatibleWithSpotMints",
+    "type": "error"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -85,6 +90,26 @@
   {
     "inputs": [],
     "name": "OwnershipNotInitializedForExtraData",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SequentialMintExceedsLimit",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SequentialUpToTooSmall",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SpotMintTokenIdTooSmall",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TokenAlreadyExists",
     "type": "error"
   },
   {
@@ -551,7 +576,7 @@
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "result",
         "type": "uint256"
       }
     ],
