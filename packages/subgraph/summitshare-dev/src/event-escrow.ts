@@ -9,7 +9,7 @@ export function handleEventEscrowDeployed(
   event: EventEscrowDeployedEvent
 ): void {
 
-  let usdcToken = event.params.usdcToken
+  let usdtToken = event.params.usdtToken
   let beneficiaries = event.params.beneficiaries
   let shares = event.params.shares
   let numBeneficiaries = event.params.numBeneficiaries
@@ -27,7 +27,7 @@ export function handleEventEscrowDeployed(
     newBeneficiaries.push(beneficiary.id)
     beneficiary.save()
   }
-  escrow.usdcToken = usdcToken
+  escrow.usdtToken = usdtToken
   escrow.shares = shares
   escrow.beneficiaries = newBeneficiaries
   escrow.save()

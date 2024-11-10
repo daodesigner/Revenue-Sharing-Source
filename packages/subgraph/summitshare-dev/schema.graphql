@@ -72,7 +72,7 @@ type Artifact @entity {
 
 type Escrow @entity {
   id: ID! # escrowAddress
-  usdcToken: Bytes
+  usdtToken: Bytes
   exhibit: Exhibit!
   shares: [BigInt!]
   beneficiaries: [Beneficiary!]
@@ -87,7 +87,7 @@ type Beneficiary @entity {
 
 type Museum @entity {
   id: ID! # museum address
-  usdcAddress: Bytes!
+  usdtAddress: Bytes!
   owner: Bytes!
   exhibits: [Exhibit!]! @derivedFrom(field: "museum")
 }type Approval @entity(immutable: true) {
