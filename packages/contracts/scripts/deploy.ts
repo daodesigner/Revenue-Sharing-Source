@@ -3,18 +3,21 @@ const { ethers } = require("hardhat");
 
 async function main() {
   // Retrieve signers
-  const [owner] = await ethers.getSigners();
+  const [ owner ] = await ethers.getSigners();
 
-  const usdtTokenAddress = "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
+  //const usdtTokenAddress = "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
+  const USDT = await ethers.getContractFactory("USDT");
+  const usdt = await USDT.connect(owner).deploy(ethers.parseUnits("200000", 5))
+  await usdt.deploymentTransaction().wait(2);
 
   // Deploying Museum contract
   const Museum = await ethers.getContractFactory("Museum");
-  const museum = await Museum.connect(owner).deploy(usdtTokenAddress);
+  const museum = await Museum.connect(owner).deploy(usdt.target);
   await museum.deploymentTransaction().wait(2);
 
   // Deploy EventOrganizerService with the deployed Museum and USDC token addresses
   const EventOrganizerService = await ethers.getContractFactory("EventOrganizerService");
-  const organizerService = await EventOrganizerService.deploy(museum.target, usdtTokenAddress);
+  const organizerService = await EventOrganizerService.deploy(museum.target, usdt.target);
   await organizerService.deploymentTransaction().wait(2);
 
 
@@ -23,7 +26,7 @@ async function main() {
     name: "The Leading Ladies of Zambia",
     symbol: "LLE",
     owner: owner.address,
-    baseURI: "https://s3.tebi.io/summitsharemetadata/leadingLadies/",
+    baseURI: "https://s3.tebi.io/summitshare-uris/",
   }
 
   const tx0 = await organizerService.connect(owner).deployArtifactNFT(

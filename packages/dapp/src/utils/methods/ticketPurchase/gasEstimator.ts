@@ -20,11 +20,11 @@ export const estimateGasFees = async (
 
    setIsEstimating(true);
    try {
-      const usdcContract = contracts.getMUSDC();
+      const usdtContract = contracts.getUSDT();
       const museumContract = contracts.getMuseum();
 
       // Estimate gas for approval
-      const gasLimitApprove = await estimateGas(usdcContract, 'approve', [
+      const gasLimitApprove = await estimateGas(usdtContract, 'approve', [
          CONTRACT_ADDRESSES.MuseumAdd,
          ticketPrice,
       ]);

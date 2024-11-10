@@ -13,7 +13,7 @@ const SEPOLIA_RPC_URL = process.env.RPC_URL;
 const OP_RPC_URL = process.env.PROD_RPC_URL;
 
 const accounts = process.env.PRIVATE_KEYS?.split(',');
-const prod_accounts = process.env.PROD_PRIVATE_KEYS?.split(',')
+//const prod_accounts = process.env.PROD_PRIVATE_KEYS?.split(',')
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -35,7 +35,7 @@ const config: HardhatUserConfig = {
 
     optimism: {
       url: OP_RPC_URL,
-      accounts: prod_accounts,
+      accounts,
       chainId: 10, // OP mainnet
       gasPrice: "auto",
     }

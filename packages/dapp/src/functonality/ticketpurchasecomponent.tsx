@@ -46,7 +46,7 @@ const TicketPurchaseComponent = ({
 
    // Price calculations
    const ticketPriceWei = BigInt(exhibit.exhibitDetails[0]?.ticketPrice || '0');
-   const ticketPriceFormatted = ethers.utils.formatUnits(ticketPriceWei, 18);
+   const ticketPriceFormatted = ethers.utils.formatUnits(ticketPriceWei, 6);
    const ticketPriceWithToken = `${ticketPriceFormatted} USDT`;
 
    // Handlers
