@@ -25,7 +25,7 @@ export const handleTicketPurchase = async ({
    }
 
    try {
-      const usdcContract = contracts.getMUSDC();
+      const usdtContract = contracts.getUSDT();
       const museumContract = contracts.getMuseum();
 
       setStatus('Approving token transfer...');
@@ -33,11 +33,11 @@ export const handleTicketPurchase = async ({
       setButtonText('processing...');
 
       // Token approval
-      const gasLimitApprove = await estimateGas(usdcContract, 'approve', [
+      const gasLimitApprove = await estimateGas(usdtContract, 'approve', [
          CONTRACT_ADDRESSES.MuseumAdd,
          ticketPrice,
       ]);
-      const approveTx = await usdcContract.approve(
+      const approveTx = await usdtContract.approve(
          CONTRACT_ADDRESSES.MuseumAdd,
          ticketPrice,
          {
