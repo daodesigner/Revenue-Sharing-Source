@@ -26,7 +26,7 @@ const errorLink = onError(
 );
 
 const httpLink = new HttpLink({
-   uri: 'https://api.studio.thegraph.com/query/76738/summitshare-dev/version/latest',
+   uri: 'https://api.studio.thegraph.com/query/76738/summitshare-prod/0.1',
 });
 
 const client = new ApolloClient({

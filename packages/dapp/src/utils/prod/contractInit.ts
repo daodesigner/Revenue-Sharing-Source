@@ -14,11 +14,11 @@ import ExhibitNFTABI from '../prod/abis/ExhibitNFT.json';
 import USDTABI from '../prod/abis/usdtoptimism.json';
 
 export const CONTRACT_ADDRESSES = {
-   EventOrganizerServiceAdd: '',
+   EventOrganizerServiceAdd: '0x662388C92915aD4be269452E7069d4AC56b07e82',
    USDTAdd: '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58',
-   MuseumAdd: '0xA23Cd2AD1966b17cae9442410eE13A01f58358FF',
-   EscrowAdd: '0x1a46734b26591ec4c023111d6f5785ae1a229d5f',
-   exhibitId: '0xf2a23b768ff33701fa41a0e359782bbc74d44b2c',
+   MuseumAdd: '0x3935e5BED378aCeD49655b3E1fA8c0e68550fbaa',
+   EscrowAdd: '0xf38bfab9369664537c0dd3c56deed489c530e6e7',
+   exhibitId: '0xbf41a8ff480edc10f5d65a9bf7ccc8b36ec1dd38',
    eventId: 'LLE1',
 };
 

@@ -10,7 +10,7 @@ async function main() {
     const artifactNFT1 = "0xE3f9Cb6608fEFb78FDB2FD5496d62dc547236AAa";
 
     const beneficiary1 : string =  "0xc0243933ba0a7b3fffbb960c58011be37ab3a3fd" ;
-    const beneficiary2 : string = "0x54b7BdD2c88E5241E30bf7961ec1768DCB813676";
+    const beneficiary2 : string = "0x3B6b0Ba44Ef20324c99F5A152C2fF19a13369498";
 
   
     const exhibit1 ={
