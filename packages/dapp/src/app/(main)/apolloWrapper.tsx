@@ -9,7 +9,7 @@ import {
 
 function makeClient() {
    const httpLink = new HttpLink({
-      uri: 'https://api.studio.thegraph.com/query/76738/summitshare-dev/version/latest',
+      uri: 'https://api.studio.thegraph.com/query/76738/summitshare-prod/0.2',
       fetchOptions: { cache: 'no-store' },
    });
 

@@ -4,17 +4,17 @@ import { ConnectKitProvider, getDefaultConfig } from 'connectkit';
 import * as React from 'react';
 import { http } from 'viem';
 import { WagmiProvider, createConfig } from 'wagmi';
-import { sepolia, optimismSepolia } from 'wagmi/chains';
+import { sepolia, optimismSepolia, optimism } from 'wagmi/chains';
 import { customTheme } from './customTheme';
 
 const config = createConfig(
    getDefaultConfig({
       appName: 'SummitShare.',
       walletConnectProjectId: process.env.WC_ID ?? 'd',
-      chains: [optimismSepolia],
+      chains: [optimism],
       transports: {
-         [optimismSepolia.id]: http(
-            `https://opt-sepolia.g.alchemy.com/v2/5Jk48tzhV8aBBl8C1uoO8ZNyRVWi-Uf4}`
+         [optimism.id]: http(
+            `https://opt-mainnet.g.alchemy.com/v2/_I5FVfPvQLRwoSBy0H8RFigtTPMcA0cA`
          ),
       },
       // Optional App Info

@@ -6,7 +6,7 @@
     },
     "Museum": {
       "address": "0x3935e5BED378aCeD49655b3E1fA8c0e68550fbaa",
-      "startBlock": "127827586"
+      "startBlock": 127827586
     }
   }
 }

@@ -4,7 +4,7 @@ import {
    contracts,
    CONTRACT_ADDRESSES,
    estimateGas,
-} from '@/utils/dev/contractInit';
+} from '@/utils/prod/contractInit';
 import { handleContractError } from '@/utils/dev/handleContractError';
 import { EventEscrowComponentProps } from '@/utils/dev/typeInit';
 import useExhibit from '@/lib/useGetExhibitById';
