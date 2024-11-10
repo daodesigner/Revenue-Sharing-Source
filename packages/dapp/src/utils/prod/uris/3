@@ -1,12 +1,20 @@
 {
-    "id": "3",
-    "name": "1909.17.0012 :: Snuff Box",
-    "image": "https://s3.tebi.io/summitsharemetadata/leadingLadies/3.glb",
-    "animation_url": "https://s3.tebi.io/summitsharemetadata/leadingLadies/3.glb",
+    "id": "4",
+    "name": "1912.06.0132 :: Headrest",
+    "image": "https://s3.tebi.io/summitshare-previews/4.png",
+    "animation_url": "https://s3.tebi.io/summitshare-artifacts/4.glb",
     "attributes": [
         {
             "trait_type": "Category",
-            "value": "Snuff Box"
+            "value": "Headrest"
+        },
+        {
+            "trait_type": "Ethnic Group",
+            "value": "Twa"
+        },
+        {
+            "trait_type": "Region of Origin",
+            "value": "Lake Bangweulu"
         },
         {
             "trait_type": "Country of Origin",
@@ -14,37 +22,36 @@
         },
         {
             "trait_type": "Material",
-            "value": "Mixed Material"
+            "value": "Wood"
         },
         {
             "trait_type": "Collector",
-            "value": "Magnus Leijer"
+            "value": "Eric von Rosen"
         },
         {
             "trait_type": "Acquisition Year",
-            "value": "1909"
+            "value": "1912"
         },
         {
             "trait_type": "Description",
-            "value": "Snuff box according to the general catalog."
+            "value": "Wooden stool, with carved ornaments."
         },
         {
-            "trait_type": "Special Features",
-            "value": "Used for holding snuff, showcasing craftsmanship from Zambia."
+            "trait_type": "Expedition",
+            "value": "Swedish Rhodesia-Congo Expedition (1911-1912)"
+        },
+        {
+            "trait_type": "Additional Info",
+            "value": "Features carved ornaments often used by the swamp people, including a net-like pattern formed by diamond cuts and parallel zigzag lines."
         }
     ],
-    "description": "This snuff box, collected by Magnus Leijer, reflects the intricate craftsmanship of Zambia. Leijer, a prominent figure known for his contributions as a big game hunter, vice consul, and a significant collector of African artifacts, acquired this piece in 1909. The box symbolizes the cultural heritage and practices surrounding snuff use in Zambia. Furthermore, the piece was part of a collection visit by Victoria Phiri Chitungu in 2022, underlining the ongoing exploration and sharing of Zambian and Swedish heritage through projects like 'Empowering Women's Histories: Sharing Digital Heritage between Zambia and Sweden'.",
-    "external_url": "https://collections.smvk.se/carlotta-em/web/object/1304494",
+    "description": "This headrest, collected by Eric von Rosen during the Swedish Rhodesia-Congo Expedition of 1911-1912, is crafted from wood with intricate carved ornaments. Originating from the Twa people near Lake Bangweulu in Zambia, it showcases the detailed craftsmanship and cultural heritage of the region. Von Rosen's expedition contributed significantly to the documentation and preservation of Central African cultures, bringing back a wealth of ethnographic items to Sweden.",
+    "external_url": "https://collections.smvk.se/carlotta-em/web/object/1261202",
     "collector_info": {
-        "name": "Magnus Leijer",
-        "lifetime": "1869 - 1946",
-        "roles": ["Big Game Hunter", "Vice Consul", "Collector"],
-        "background": "Leijer's career spanned roles as a factory manager in Cameroon, a civil administrator in Northern Rhodesia (now Zambia), and a British vice-consul. His contributions to collections of African artifacts have been significant, particularly those acquired during his time in Africa, which include not only this snuff box but also various everyday objects reflecting the social history and material culture of the region."
-    },
-    "event_info": {
-        "event": "Collection visit by Victoria Phiri Chitungu",
-        "date": "2022-11-08",
-        "description": "Part of the 'Empowering Women's Histories: Sharing Digital Heritage between Zambia and Sweden' project, this visit involved the examination of physical objects to deepen understanding of their manufacture, material, ornamentation, and both historical and contemporary use."
+        "name": "Eric von Rosen",
+        "lifetime": "1879 - 1948",
+        "roles": ["Explorer", "Ethnographer"],
+        "contributions": "Documented the Twa people and their artifacts during the Swedish Rhodesia-Congo Expedition, enriching the Swedish National Museum of World Culture with a significant collection of ethnographic items."
     }
 }
 

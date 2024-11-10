@@ -1,20 +1,20 @@
 {
-    "id": "5",
-    "name": "1912.06.0417 :: Calabash - Gourd Water Bottle",
-    "image": "https://s3.tebi.io/summitsharemetadata/leadingLadies/5",
-    "animation_url": "https://s3.tebi.io/summitsharemetadata/leadingLadies/5.glb",
+    "id": "6",
+    "name": "1969.29.0062 :: Luwale Mask",
+    "image": "https://s3.tebi.io/summitshare-previews/6.png",
+    "animation_url": "https://s3.tebi.io/summitshare-artifacts/6.glb",
     "attributes": [
         {
             "trait_type": "Category",
-            "value": "Vessel"
+            "value": "Mask"
         },
         {
             "trait_type": "Material",
-            "value": "Gourd, Bast"
+            "value": "Wood, Bark, Strings"
         },
         {
             "trait_type": "Ethnic Group",
-            "value": "Bisa"
+            "value": "Luvale"
         },
         {
             "trait_type": "Country of Origin",
@@ -22,33 +22,37 @@
         },
         {
             "trait_type": "Description",
-            "value": "Large water bottle of gourd with burnt ornaments, wrapped with bast for easier carrying."
+            "value": "Wooden mask with red-painted face, dot tattoo, half-open mouth with teeth marks, and blue-black strings for hair."
+        },
+        {
+            "trait_type": "Dimensions",
+            "value": "Height: 20 cm, Width: 15 cm, Hair Length: 55 cm"
         },
         {
             "trait_type": "Collector",
-            "value": "Eric von Rosen"
+            "value": "John-Erik Elmberg"
         },
         {
             "trait_type": "Acquisition Year",
-            "value": "1912"
+            "value": "1969"
         },
         {
-            "trait_type": "Expedition",
-            "value": "Swedish Rhodesia-Congo Expedition (1911-1912)"
+            "trait_type": "Fieldwork",
+            "value": "Fieldwork by John-Erik Elmberg in Zambia, 1969"
         }
     ],
-    "description": "This large gourd water bottle, collected by Eric von Rosen during the Swedish Rhodesia-Congo Expedition of 1911-1912, is a remarkable artifact from the Bisa people of Zambia. The vessel's surface features burnt ornaments, a traditional decorative technique, and is wrapped with bast to facilitate carrying. This bottle exemplifies the ingenuity and artistry of the Bisa people in creating functional yet aesthetically pleasing objects for daily use.",
-    "external_url": "https://collections.smvk.se/carlotta-em/web/object/1996935",
+    "description": "This Luwale mask, collected by John-Erik Elmberg during his 1969 fieldwork in Zambia, is a profound representation of the Luvale people's artistic and cultural expressions. Elmberg, a significant figure in ethnographic studies, conducted extensive research across various regions, including Africa. His work has contributed valuable insights into the cultures of the Zambian people. The mask, characterized by its intricate design and symbolic decorations, was part of Elmberg's collections donated to the Ethnographic Museum, showcasing the diverse heritage of Zambia.",
+    "external_url": "https://collections.smvk.se/carlotta-em/web/object/2042752",
     "collector_info": {
-        "name": "Eric von Rosen",
-        "lifetime": "1879 - 1948",
-        "roles": ["Explorer", "Ethnographer"],
-        "background": "Eric von Rosen was a notable figure in early 20th-century exploration and ethnography. His contributions to the documentation of African cultures, including the Bisa people's way of life, have provided valuable insights into the diverse cultural heritage of Zambia. The collection and donation of artifacts like this gourd water bottle to museums have allowed for the preservation and study of African material culture."
+        "name": "John-Erik Elmberg",
+        "lifetime": "1917 - 1970",
+        "roles": ["Docent", "Researcher"],
+        "background": "Elmberg's scholarly work and field research in Zambia and other locations have greatly contributed to the understanding of social changes and agricultural development in post-colonial Africa. His collections offer a glimpse into the daily life and spiritual practices of various ethnic groups."
     },
     "event_info": {
-        "event": "Rhodesia-Congo Expedition Exhibition",
-        "start_date": "1913-02-04",
-        "description": "The exhibition showcased the findings from the Swedish Rhodesia-Congo Expedition, highlighting the diverse cultures and artifacts collected by Eric von Rosen and his team. This gourd water bottle was among the many items presented, offering a glimpse into the daily life and craftsmanship of the Bisa people."
+        "event": "Collection visit by the Women's History Museum Zambia",
+        "date": "2020-09-18",
+        "description": "The visit by Mulenga Kapwepwe and Samba Yonga aimed to explore Zambian artifacts within the 'Empowering women's histories: sharing digital heritage between Zambia and Sweden' project. This collaboration seeks to make cultural heritage more accessible and relevant through digital tools, emphasizing women's histories."
     }
 }
 
