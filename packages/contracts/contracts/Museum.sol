@@ -29,7 +29,7 @@ contract Museum is Ownable {
         // emmit an event with the contract address, token address, and owner address
         emit MuseumCreated(address(this), address(usdcToken), owner());
     }
-
+ 
     /**
      * @dev Curates a new exhibit.
      * @param exhibitId The unique identifier for the exhibit.
