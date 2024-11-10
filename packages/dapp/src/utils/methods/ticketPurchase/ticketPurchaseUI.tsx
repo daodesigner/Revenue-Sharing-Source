@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import useExhibit from '@/lib/useGetExhibitById';
-import { CONTRACT_ADDRESSES } from '@/utils/dev/contractInit';
+import { CONTRACT_ADDRESSES } from '@/utils/prod/contractInit';
 import { TicketPurchaseUIProps } from '@/utils/dev/frontEndInterfaces';
 import { useAccount } from 'wagmi';
 

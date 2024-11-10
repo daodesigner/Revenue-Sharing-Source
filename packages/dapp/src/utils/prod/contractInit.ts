@@ -52,10 +52,10 @@ export const contracts = {
       );
    },
 
-   getEventEscrow: (address: string) => {
+   getEventEscrow: () => {
       const { signer } = initializeUserWallet();
       return new ethers.Contract(
-         address,
+         CONTRACT_ADDRESSES.EscrowAdd,
          EventEscrowABI as ethers.ContractInterface,
          signer
       );

@@ -1,6 +1,5 @@
 // ticketService.ts
 
-import { CONTRACT_ADDRESSES } from '@/utils/dev/contractInit';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
