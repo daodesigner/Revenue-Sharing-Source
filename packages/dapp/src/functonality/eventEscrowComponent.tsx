@@ -126,7 +126,7 @@ const EventEscrowComponent = ({ userAddress }: any) => {
                <p className="text-sm text-white font-semibold">
                   Funds distributed successfully! View transaction hash{' '}
                   <a
-                     href={`https://sepolia.etherscan.io/tx/${txHash}`}
+                     href={`https://optimistic.etherscan.io/tx/${txHash}`}
                      target="_blank"
                      rel="noopener noreferrer"
                      className="underline text-white"

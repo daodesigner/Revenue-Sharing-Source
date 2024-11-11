@@ -185,7 +185,7 @@ const TicketPurchaseUI: React.FC<TicketPurchaseUIProps> = ({
                                  </div>
                                  <div>
                                     <strong>
-                                       Gas Fees Estimate: {estimatedGasFees} USDT
+                                       Gas Fees Estimate: {estimatedGasFees} ETH
                                     </strong>{' '}
                                  </div>
                                  <div className="text-xs mt-2">
