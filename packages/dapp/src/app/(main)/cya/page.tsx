@@ -8,8 +8,14 @@ import {
 import TicketPurchaseComponent from '@/functonality/ticketpurchasecomponent';
 import Link from 'next/link';
 import useTicketCount from '@/lib/getTickets';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import Buttons from '@/app/components/button/Butons';
+import { ButtonConfig, TicketPurchaseUIProps } from '@/utils/dev/frontEndInterfaces'; 
+
 
 const ResponsiveVideo: React.FC = () => {
+
    const [isMobile, setIsMobile] = useState(false);
 
    // Function to check window width
@@ -56,6 +62,8 @@ export default function Cya() {
    const [isClient, setIsClient] = useState(false);
    const [isComplete, setIsComplete] = useState(false);
    const ticketCount = useTicketCount();
+   const router = useRouter();
+   const {data: session} = useSession();
 
    // Check if we are running in the browser
    useEffect(() => {
@@ -67,6 +75,38 @@ export default function Cya() {
 
       return () => clearInterval(timer);
    }, []);
+
+   interface buttonType{
+   buttonType: 'primary' | 'secondary' | 'tartary' | 'subTartary';
+   setButtonType: (
+      type: 'primary' | 'secondary' | 'tartary' | 'subTartary'
+   ) => void;
+   buttonText: string;
+   buttonConfig: ButtonConfig;
+   isProcessing: boolean; 
+}
+
+   // Function to check if the user is signed in
+   const isSignedIn = () => session?.user.status === 'authenticated'
+
+   // Handle ticket purchase
+   const handleTicketPurchase = () => {
+      // Redirect to authentication if not signed in
+      if (!isSignedIn()) {
+         router.push('/auth-register');
+         return null;
+      }
+
+      // Render the TicketPurchaseComponent if signed in
+      return <TicketPurchaseComponent userAddress={''} user_id={''} />
+   };
+
+const buttonConfig: ButtonConfig = {
+   text: 'Purchase',
+   action: handleTicketPurchase,
+   type: 'primary',
+
+};
 
    return (
       <main className="relative h-screen overflow-hidden mt-12 mb-20 z-0">
@@ -156,7 +196,47 @@ export default function Cya() {
 
             {/* Ticket Purchase Section */}
             <div className="z-10 relative mb-8">
-               <TicketPurchaseComponent userAddress={''} user_id={''} />
+               
+            <Buttons
+               type={buttonConfig.type}
+               size="large"
+               onClick={buttonConfig.action}
+               disabled={false}
+               //@ts-ignore
+               style={{
+                  border: '2px solid white', // White edges
+                  backgroundColor: 'transparent', // Optional: make the background transparent
+                  color: 'white', // Text color
+                  padding: '16px 32px', // Increased padding for a bigger button
+                  fontSize: '1.5rem', // Increased font size for better visibility
+                  borderRadius: '8px', // Rounded corners
+                  transition: 'background-color 0.3s, transform 0.3s', // Smooth transitions
+                  cursor: 'pointer', // Pointer cursor on hover
+                  display: 'flex', // Use flexbox to align text
+                  justifyContent: 'center', // Center horizontally
+                  alignItems: 'center', // Center vertically
+                  textAlign: 'center', // Center text
+               }}
+               onMouseEnter={(e: {
+                  currentTarget: {
+                     style: { backgroundColor: string; transform: string };
+                  };
+               }) => {
+                  e.currentTarget.style.backgroundColor =
+                     'rgba(255, 255, 255, 0.2)'; // Change background on hover
+                  e.currentTarget.style.transform = 'scale(1.05)'; // Slightly enlarge button on hover
+               }}
+               onMouseLeave={(e: {
+                  currentTarget: {
+                     style: { backgroundColor: string; transform: string };
+                  };
+               }) => {
+                  e.currentTarget.style.backgroundColor = 'transparent'; // Reset background
+                  e.currentTarget.style.transform = 'scale(1)'; // Reset size
+               }}
+            >
+               Purchase
+            </Buttons>
             </div>
 
             <div className="flex flex-col items-center mt-12">
