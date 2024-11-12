@@ -63,6 +63,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
          <h2>{figure.title}</h2>
          <article className="space-y-8 md:space-y-0 md:grid md:grid-cols-2 gap-6 w-full">
             <SummitShareCanvas>{figure.object_URL}</SummitShareCanvas>
+                  <div>{figure.object_address}</div>
 
             <ul className="flex flex-col gap-3">
                <h2>About the {figure.object_name}</h2>

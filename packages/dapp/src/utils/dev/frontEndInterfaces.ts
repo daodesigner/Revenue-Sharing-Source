@@ -237,6 +237,7 @@ export interface ObjectDescription {
    title: string;
    object_URL?: string | ReactNode;
    object_name: string;
+   object_address: string;
    Object_description: string[][];
    Figure_artifact_details: string;
    figure_details: string[][];
