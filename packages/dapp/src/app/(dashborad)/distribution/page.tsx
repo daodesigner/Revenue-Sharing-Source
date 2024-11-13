@@ -14,7 +14,6 @@ import {
    TableHeader,
    TableRow,
 } from '@/components/ui/table';
-import { CONTRACT_ADDRESSES } from '@/utils/dev/contractInit';
 
 
 const Page: React.FC = () => {
