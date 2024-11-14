@@ -8,11 +8,10 @@ import {
 import TicketPurchaseComponent from '@/functonality/ticketpurchasecomponent';
 import Link from 'next/link';
 import useTicketCount from '@/lib/getTickets';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Buttons from '@/app/components/button/Butons';
 import { ButtonConfig, TicketPurchaseUIProps } from '@/utils/dev/frontEndInterfaces'; 
-
 
 const ResponsiveVideo: React.FC = () => {
 
@@ -63,7 +62,7 @@ export default function Cya() {
    const [isComplete, setIsComplete] = useState(false);
    const ticketCount = useTicketCount();
    const router = useRouter();
-   const {data: session} = useSession();
+   const session = useSession();
 
    // Check if we are running in the browser
    useEffect(() => {
@@ -76,30 +75,13 @@ export default function Cya() {
       return () => clearInterval(timer);
    }, []);
 
-   interface buttonType{
-   buttonType: 'primary' | 'secondary' | 'tartary' | 'subTartary';
-   setButtonType: (
-      type: 'primary' | 'secondary' | 'tartary' | 'subTartary'
-   ) => void;
-   buttonText: string;
-   buttonConfig: ButtonConfig;
-   isProcessing: boolean; 
-}
-
-   // Function to check if the user is signed in
-   const isSignedIn = () => session?.user.status === 'authenticated'
-
    // Handle ticket purchase
    const handleTicketPurchase = () => {
-      // Redirect to authentication if not signed in
-      if (!isSignedIn()) {
-         router.push('/auth-register');
-         return null;
+      if (session?.status !== 'authenticated') {
+        router.push('/auth-register');
+        return;
       }
-
-      // Render the TicketPurchaseComponent if signed in
-      return <TicketPurchaseComponent userAddress={''} user_id={''} />
-   };
+    };
 
 const buttonConfig: ButtonConfig = {
    text: 'Purchase',
@@ -196,6 +178,13 @@ const buttonConfig: ButtonConfig = {
 
             {/* Ticket Purchase Section */}
             <div className="z-10 relative mb-8">
+
+            {session?.status === 'authenticated' ? (
+        <TicketPurchaseComponent 
+          userAddress={''} 
+          user_id={''}
+        />
+      ) : (
                
             <Buttons
                type={buttonConfig.type}
@@ -237,6 +226,7 @@ const buttonConfig: ButtonConfig = {
             >
                Purchase
             </Buttons>
+      )}
             </div>
 
             <div className="flex flex-col items-center mt-12">
