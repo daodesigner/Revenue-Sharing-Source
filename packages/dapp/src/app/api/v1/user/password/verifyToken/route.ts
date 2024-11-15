@@ -71,18 +71,24 @@ export async function POST(req: Request, res: NextResponse) {
          where: { id: verificationRecord.user_id! },
       });
 
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const updateStatus = await updateUser(
-         verificationRecord.user_id!,
-         hashedPassword!
-      );
 
-      if (!updateStatus) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      if (hashedPassword == user.password) {
          return NextResponse.json(
-            { message: 'failed to update user try again' },
-            { status: 500 }
+            { message: 'New password cannot be the same as last password ' },
+            { status: 409 }
          );
       }
+      const updateResponse = await prisma.users.update({
+         where: {
+            id: user_id,
+         },
+         data: {
+            password: hashedPassword,
+         },
+      });
+
       return NextResponse.json({ message: 'user updated' }, { status: 200 });
    } catch (error) {
       return NextResponse.json({ message: 'server error' }, { status: 500 });
