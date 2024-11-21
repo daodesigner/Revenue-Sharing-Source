@@ -93,6 +93,9 @@ function Page() {
                         onChange={(value) => setPassword(value)}
                      />
                   </section>
+                  <a className="underline text-sm" href="/account/forgot-request" >
+                  forgot password? 
+                  </a>
                </form>
             </section>
 
