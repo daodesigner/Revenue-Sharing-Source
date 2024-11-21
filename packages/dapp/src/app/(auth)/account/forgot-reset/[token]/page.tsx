@@ -33,7 +33,7 @@ function ResetPassword({ params }: { params: { token: string } }) {
       }
 
       const host = process.env.NEXT_PUBLIC_HOST;
-      const url = `${host}/api/v1/reset-password`;
+      const url = `${host}/api/v1/user/password/verifyToken?token=${params.token}`;
 
       try {
          const response = await fetch(url, {
@@ -43,7 +43,7 @@ function ResetPassword({ params }: { params: { token: string } }) {
             },
             body: JSON.stringify({
                token: params.token,
-               newPassword: password,
+               password: password,
             }),
          });
 

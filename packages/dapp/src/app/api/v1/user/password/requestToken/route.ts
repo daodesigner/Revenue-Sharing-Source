@@ -18,8 +18,8 @@ async function createSendTokens(user_id: string, email: string) {
       });
 
       const host = process.env.HOST;
-      const verificationLink = `${host}/verifcation/email/${verification.id}`;
-      const apiLink = `${host}/api/v1/user/password/verifytoken?token=${verification.id}`;
+      const verificationLink = `${host}/account/forgot-reset/${verification.id}`;
+
 
       const mailOptions = {
          from: emailServer,
@@ -39,13 +39,13 @@ export async function POST(req: Request, res: NextResponse) {
    try {
       const host = req.headers.get('host');
       const body = await req.json();
-      const { user_id } = body;
-      if (!user_id) {
+      const { email } = body;
+      if (!email) {
          return NextResponse.json({ message: 'user  not sent' }, { status: 404 });
       }
 
       const user = await prisma.users.findUnique({
-         where: { id: user_id },
+         where: { email: email },
       });
 
       if (!user) {

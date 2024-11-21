@@ -15,7 +15,7 @@ function ForgotPasswordRequest() {
 
    const sendPasswordResetRequest = async (email: string) => {
       const host = process.env.NEXT_PUBLIC_HOST;
-      const url = `${host}/api/v1/forgot-password`;
+      const url = `${host}/api/v1/user/password/requestToken`;
 
       try {
          const response = await fetch(url, {

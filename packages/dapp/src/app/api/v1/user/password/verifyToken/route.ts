@@ -30,13 +30,35 @@ export async function POST(req: Request, res: NextResponse) {
    try {
       const host = req.headers.get('host');
       const url = new URL(req.url!, `http://${host}`);
+      const queryParams = new URLSearchParams(url.search);
+      const token = queryParams.get('token');
       const body = await req.json();
-      const { user_id, token, password } = body;
+      const {  password } = body;
 
-      if (!token || !user_id || !password) {
+      if (!token ) {
          return NextResponse.json(
-            { message: 'no token,user_id or password sent' },
+            { message: 'no token sent' },
             { status: 401 }
+         );
+      }
+      const foundToken = await prisma.password_reset_tokens.findFirst({
+         where: {id: token}
+      })
+
+      const user_id = foundToken?.user_id
+
+      if (!user_id ) {
+         return NextResponse.json(
+            { message: 'no user_id found' },
+            { status: 401 }
+         );
+      }
+
+
+      if (!password) {
+         return NextResponse.json(
+            { message: 'please send password' },
+            { status: 400 }
          );
       }
 
@@ -101,6 +123,8 @@ export async function POST(req: Request, res: NextResponse) {
 
       return NextResponse.json({ message: 'user updated' }, { status: 200 });
    } catch (error) {
+      console.log(error)
       return NextResponse.json({ message: 'server error' }, { status: 500 });
+
    }
 }

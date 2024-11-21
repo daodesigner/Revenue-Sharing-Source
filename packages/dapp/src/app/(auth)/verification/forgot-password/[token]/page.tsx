@@ -25,7 +25,7 @@ function Page({ params }: { params: { token: string } }) {
          try {
             setLoading(true);
             const response = await fetch(
-               `${host}/api/v1/user/verification/verifyEmail?token=${params.token}`,
+               `${host}/api/v1/user/verification/verifyToken?token=${params.token}`,
                {
                   method: 'GET',
                   headers: {
@@ -129,7 +129,7 @@ function Page({ params }: { params: { token: string } }) {
                   onClick={
                      verificationStatus === 200
                         ? () => router.push('/auth-sign-in')
-                        : resendVerificationEmail
+                        : router.push('/forgot-request')
                   }
                >
                   {verificationStatus === 200 ? 'Continue' : 'Resend'}
