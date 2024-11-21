@@ -84,12 +84,12 @@ export async function POST(req: Request, res: NextResponse) {
 
       const isSamePassword = await bcrypt.compare(password, user.password);
 
-  if (isSamePassword) {
-    return NextResponse.json(
-      { message: "New password cannot be the same as the last password" },
-      { status: 409 }
-    );
-  }
+      if (isSamePassword) {
+         return NextResponse.json(
+            { message: "New password cannot be the same as the last password" },
+            { status: 409 }
+         );
+      }
       const updateResponse = await prisma.users.update({
          where: {
             id: user_id,
