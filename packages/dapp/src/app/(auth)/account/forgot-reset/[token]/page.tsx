@@ -49,14 +49,14 @@ function ResetPassword({ params }: { params: { token: string } }) {
 
          if (response.ok) {
             // Redirect to sign in or show success message
-            router.push('/auth-sign-in?passwordReset=success');
+            router.push('/auth-sign-in');
          } else {
             const errorData = await response.json();
             setErrorMessage(errorData.message || 'Failed to reset password');
          }
       } catch (error) {
          console.error('Password reset failed:', error);
-         setErrorMessage('Network error. Please try again.');
+         setErrorMessage('Please try again.');
       }
    };
 
