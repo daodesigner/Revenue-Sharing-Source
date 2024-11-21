@@ -29,36 +29,43 @@ const Page: React.FC = () => {
    const tableData = [
       {
          id_no: 1,
-         date: 'TBA',
-         goal: 'Exhibit Held',
-         status: 'yellow',
-         transaction_id: 'Transaction ID 1',
+         date: '10-11-2024',
+         goal: 'Exhibit Deployment',
+         status: 'green',
+         transaction_id: '0x92070685274364f98963c09dd193e8ad01ba1973e4914edbd1a15a4b78c06443',
       },
       {
          id_no: 2,
-         date: 'TBA',
-         goal: 'Funds distributed into community Escrow',
+         date: '06-12-2024',
+         goal: 'Physical Exhibit/Launch in Lusaka Zambia',
          status: 'yellow',
          transaction_id: 'Transaction ID 2',
       },
       {
          id_no: 3,
          date: 'TBA',
-         goal: 'Voting on SDG development',
+         goal: 'Funds distributed into community Escrow',
          status: 'yellow',
-         transaction_id: 'Transaction ID 3',
+         transaction_id: 'Transaction ID 2',
       },
       {
          id_no: 4,
          date: 'TBA',
-         goal: 'Funding/disbursement of escrow',
+         goal: 'Voting on Community Funding Proposal',
          status: 'yellow',
-         transaction_id: 'Transaction ID 4',
+         transaction_id: 'Transaction ID 3',
       },
       {
          id_no: 5,
          date: 'TBA',
-         goal: 'Completion of funded goal being implemented',
+         goal: 'Funding/Disbursement of Funds in Escrow',
+         status: 'yellow',
+         transaction_id: 'Transaction ID 4',
+      },
+      {
+         id_no: 6,
+         date: 'TBA',
+         goal: 'Funding Proposal Successfuly Implemented',
          status: 'yellow',
          transaction_id: 'Transaction ID 5',
       },
@@ -101,7 +108,16 @@ const Page: React.FC = () => {
                               {row.status === 'blank' && 'Not Done'}
                            </span>
                         </TableCell>
-                        <TableCell>{row.transaction_id}</TableCell>
+                        <TableCell>
+               <a 
+                  href={`https://optimistic.etherscan.io/tx/${row.transaction_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-white text-gray-700 px-3 py-1 rounded-full text-xs border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
+               >
+                  Explorer
+               </a>
+               </TableCell>
                      </TableRow>
                   ))}
                </TableBody>

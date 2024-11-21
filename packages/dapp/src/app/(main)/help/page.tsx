@@ -40,11 +40,11 @@ const steps = [
                   account.
                </li>
                <li>Secure your wallet by safely storing your recovery phrase.</li>
-               <li>Fund your wallet with USDT or USDC stablecoins.</li>
+               <li>Fund your wallet with USDT stablecoins on Optimism.</li>
             </ol>
             <div className="mt-2">
                SummitShare uses on-chain transactions with stablecoins for speed,
-               transparency, and price stability.
+               transparency, regional preference and price stability.
             </div>
          </>
       ),
@@ -99,15 +99,6 @@ const steps = [
                appear in your wallet as an <strong>NFT</strong>. Track your
                transaction status via your wallet&apos;s activity section or check
                it on a blockchain explorer like{' '}
-               <a
-                  href="https://etherscan.io/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-orange-600 hover:underline"
-               >
-                  Etherscan Block Scanner
-               </a>{' '}
-               or{' '}
                <a
                   href="https://optimistic.etherscan.io/"
                   target="_blank"

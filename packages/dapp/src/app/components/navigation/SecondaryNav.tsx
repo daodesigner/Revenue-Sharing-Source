@@ -30,7 +30,7 @@ function SecondaryNav() {
       { name: 'Partners', link: '/partners' },
       { name: 'Help', link: '/help' },
       { name: 'Profile', link: '/profile' },
-      { name: 'Distribution', link: '/distribution' },
+      { name: 'Insights', link: '/distribution' },
    ];
    const pathname = usePathname();
 

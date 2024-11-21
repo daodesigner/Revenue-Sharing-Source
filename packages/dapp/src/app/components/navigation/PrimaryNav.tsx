@@ -42,7 +42,7 @@ const PrimaryNav: React.FC = () => {
       { name: 'Blog', link: '/blog' },
       { name: 'Partners', link: '/partners' },
       { name: 'Support Us', link: '/donate' },
-      { name: 'Distributions', link: '/distribution' },
+      { name: 'Insights', link: '/distribution' },
       { name: 'Help', link: '/help' },
    ];
 
@@ -65,7 +65,7 @@ const PrimaryNav: React.FC = () => {
          },
          {
             title: 'Dashboard',
-            items: [{ name: 'Distribution', link: '/distribution' }],
+            items: [{ name: 'Insights', link: '/distribution' }],
          },
          {
             title: 'Settings',
