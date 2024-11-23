@@ -86,7 +86,7 @@ export default function ProfileSettings() {
                            Username
                         </label>
                         <div className="p-2 bg-gray-50 rounded-md text-gray-600">
-                            {user_name}
+                           {user_name}
                         </div>
                      </div>
 

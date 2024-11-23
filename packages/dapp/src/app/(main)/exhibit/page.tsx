@@ -14,6 +14,8 @@ import LoadingDots from './loadingDots';
 export default function Home() {
    const [open, setOpen] = useState(false);
    const [isLoading, setIsLoading] = useState(true);
+   const [loadingItem, setLoadingItem] = useState<string | null>(null);
+
    const { address } = useAccount();
    const userAddress = address;
 
@@ -116,43 +118,51 @@ export default function Home() {
 
             <section className="w-full grid grid-cols-2 md:grid-cols-3 gap-4">
                {women.map((item) => (
-                  <Link href={item.link} key={item.name}>
-                     <div
-                        className="bg-gradient-to-b from-orange-100 to-orange-50 relative flex flex-col gap-6 justify-end h-[18rem] md:h-[20rem] lg:h-[22rem] rounded-[0.5rem] px-4 py-6 overflow-hidden cursor-pointer"
-                        style={{
-                           transition: 'all 0.3s ease',
-                           boxShadow:
-                              '0 6px 8px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                        }}
-                        onMouseEnter={(e) => {
-                           e.currentTarget.style.boxShadow =
-                              '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
-                           e.currentTarget.style.transform = 'scale(1.05)';
-                        }}
-                        onMouseLeave={(e) => {
-                           e.currentTarget.style.boxShadow = 'none';
-                           e.currentTarget.style.transform = 'scale(1)';
-                        }}
-                     >
-                        <div className="absolute inset-0 bg-primary-900/25 z-[4] rounded-[0.5rem]"></div>
-                        <Image
-                           className="absolute -bottom-10 inset-x-0 w-full h-full object-cover"
-                           src={item.img}
-                           alt={item.name}
-                           fill
-                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-
-                        <div className="z-[5] space-y-2">
-                           <h3 className="text-white">{item.name}</h3>
-                           <div className="w-[66px]">
-                              <Buttons type="tartary" size="small">
-                                 View
-                              </Buttons>
+                  <div
+                     key={item.name}
+                     onClick={() => {
+                        setLoadingItem(item.name); // Set the loading item
+                        router.push(item.link); // Navigate to the dynamic page
+                     }}
+                     className="bg-gradient-to-b from-orange-100 to-orange-50 relative flex flex-col gap-6 justify-end h-[18rem] md:h-[20rem] lg:h-[22rem] rounded-[0.5rem] px-4 py-6 overflow-hidden cursor-pointer"
+                     style={{
+                        transition: 'all 0.3s ease',
+                        boxShadow:
+                           '0 6px 8px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                     }}
+                     onMouseEnter={(e) => {
+                        e.currentTarget.style.boxShadow =
+                           '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                     }}
+                     onMouseLeave={(e) => {
+                        e.currentTarget.style.boxShadow = 'none';
+                        e.currentTarget.style.transform = 'scale(1)';
+                     }}
+                  >
+                     {loadingItem === item.name ? (
+                        <LoadingDots /> // Show the loading dots if this item is clicked
+                     ) : (
+                        <>
+                           <div className="absolute inset-0 bg-primary-900/25 z-[4] rounded-[0.5rem]"></div>
+                           <Image
+                              className="absolute -bottom-10 inset-x-0 w-full h-full object-cover"
+                              src={item.img}
+                              alt={item.name}
+                              fill
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                           />
+                           <div className="z-[5] space-y-2">
+                              <h3 className="text-white">{item.name}</h3>
+                              <div className="w-[66px]">
+                                 <Buttons type="tartary" size="small">
+                                    View
+                                 </Buttons>
+                              </div>
                            </div>
-                        </div>
-                     </div>
-                  </Link>
+                        </>
+                     )}
+                  </div>
                ))}
             </section>
          </section>
