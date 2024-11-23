@@ -4,7 +4,7 @@ import { emailServer, transporter } from '../../../../../../config/nodemailer';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-async function sendDeletionConfirmationEmail(email: string) {
+async function sendDeletionConfirmationEmail(email: string, token: string) {
    try {
       // Read HTML template
       async function readHtmlTemplate(filePath: string): Promise<string> {
@@ -17,11 +17,16 @@ async function sendDeletionConfirmationEmail(email: string) {
          }
       }
 
-      const templatePath = path.join(
+      const filePath = path.join(
          process.cwd(),
-         'src/functionality/emailNewsletter/main.html'
+         'src/functonality/emailNewsletter/main.html'
       );
-      let htmlTemplate = await readHtmlTemplate(templatePath);
+
+      // Read the file
+    
+      console.log(`dir ${process.cwd()}`)
+      console.log(`dir ${filePath}`)
+      let htmlTemplate = await readHtmlTemplate(filePath);
 
       // Replace template placeholders
       htmlTemplate = htmlTemplate.replace(
@@ -32,10 +37,14 @@ async function sendDeletionConfirmationEmail(email: string) {
          '{{subtitle}}',
          'Your account has been successfully deleted'
       );
+
+      const host = process.env.HOST;
+      const verificationLink = `${host}/verification/email/${token}`;
       htmlTemplate = htmlTemplate.replace(
          '{{message}}',
          `
-            <p>We're sorry to see you go. Your account and all associated data have been successfully deleted.</p>
+            <p>We're sorry to see you go. Your account and all associated data will be deleted once you confirm</p>
+            <p> <a href="${verificationLink}">${verificationLink}</a> </p>
             <p>If you didn't request this deletion, please contact our support team immediately.</p>
             <p>Thank you for being a part of our community.</p>
             `
@@ -51,7 +60,7 @@ async function sendDeletionConfirmationEmail(email: string) {
       await transporter.sendMail(mailOptions);
    } catch (error) {
       console.error('Error sending deletion confirmation email:', error);
-      // Do NOT throw error here as email sending shouldn't block account deletion
+      throw (error)
    }
 }
 
@@ -66,27 +75,26 @@ export async function DELETE(req: Request) {
             { status: 400 }
          );
       }
+      const token = crypto.randomUUID(); // Generate a token
+      const now = new Date();
+      const expires = new Date(now.getTime() + 60 * 60 * 1000); // adds 1 hour to the current time
 
-      // transaction for clearing all user data
-      const deletedUser = await prisma.$transaction(async (prisma) => {
-         await prisma.password_reset_tokens.deleteMany({
-            where: { user_id: userId },
-         });
+      const nowISO = now.toISOString();
+      const expiresISO = expires.toISOString();
+      const id = crypto.randomUUID();
 
-         // Finally, delete the user
-         const user = await prisma.users.delete({
-            where: { id: userId },
-         });
-
-         return user;
+      const ev = await prisma.email_verification.create({
+         data: {
+            id: id,
+            user_id: userId,
+            token: token,
+            created_at: nowISO,
+            expires: expiresISO,
+         },
       });
 
-      if (!deletedUser) {
-         return NextResponse.json({ message: 'User not found' }, { status: 404 });
-      }
-
       // Send confirmation email
-      await sendDeletionConfirmationEmail(email);
+      await sendDeletionConfirmationEmail(email, ev.token);
 
       return NextResponse.json(
          { message: 'account successfully deleted from db' },

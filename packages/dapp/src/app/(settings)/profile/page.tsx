@@ -1,12 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+
 
 import Container from '@/app/components/Container';
 import Line from '@/app/components/Line';
 import Buttons from '@/app/components/button/Butons';
 import { Trash, XCircle } from 'lucide-react';
-import { useSession } from 'next-auth/react';
+import { useSession , signOut} from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 
 export default function ProfileSettings() {
@@ -35,10 +36,12 @@ export default function ProfileSettings() {
          });
 
          if (!response.ok) {
-            throw new Error('Failed to delete account');
+            throw new Error('Failed to send email account');
          }
 
-         toast.success('Account successfully deleted');
+         toast.success('Check your email to confirm');
+        
+         await signOut();
          router.push('/');
       } catch (error) {
          console.error('Error deleting account:', error);
