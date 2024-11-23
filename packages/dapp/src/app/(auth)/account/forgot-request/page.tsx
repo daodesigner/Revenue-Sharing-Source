@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Inputs from '@/app/components/inputs/Inputs';
 import Buttons from '@/app/components/button/Butons';
 import Image from 'next/image';
+import LoadingDots from '@/app/(main)/exhibit/loadingDots';
 
 function ForgotPasswordRequest() {
    const router = useRouter();
@@ -12,6 +13,7 @@ function ForgotPasswordRequest() {
    const [emailError, setEmailError] = useState(false);
    const [errorMessage, setErrorMessage] = useState('');
    const [successMessage, setSuccessMessage] = useState('');
+   const [isLoading, setIsLoading] = useState(false) 
 
    const sendPasswordResetRequest = async (email: string) => {
       const host = process.env.NEXT_PUBLIC_HOST;
@@ -53,7 +55,10 @@ function ForgotPasswordRequest() {
          return;
       }
 
+      setIsLoading(true);
       const success = await sendPasswordResetRequest(email);
+      setIsLoading(false);
+
       if (success) {
          // Optional: Auto-redirect or show success state
          setTimeout(() => {
@@ -66,70 +71,74 @@ function ForgotPasswordRequest() {
       <main className="h-screen flex flex-col justify-end items-center bg-[url('https://images.unsplash.com/photo-1621419203897-20b66b98d495?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center md:flex-row">
          <div className="bg-gray-950/35 fixed inset-0"></div>
 
-         <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
-            <nav className="w-full flex flex-row justify-between items-center">
-               <p className="text-p2-m">Forgot Password</p>
-               <Link href="/">Exit</Link>
-            </nav>
+         {isLoading ? (
+            <LoadingDots />
+         ) : (
+            <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
+               <nav className="w-full flex flex-row justify-between items-center">
+                  <p className="text-p2-m">Change Password</p> 
+                  <Link href="/">Exit</Link>
+               </nav>
 
-            <section className="space-y-4">
-               <header className="text-center space-y-2">
-                  <div className="relative mx-auto h-12 w-12">
-                     <Image
-                        src="https://summitshare3.s3.eu-north-1.amazonaws.com/IMG_3157.PNG"
-                        alt="Logo"
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        style={{ objectFit: 'contain' }}
-                     />
-                  </div>
+               <section className="space-y-4">
+                  <header className="text-center space-y-2">
+                     <div className="relative mx-auto h-12 w-12">
+                        <Image
+                           src="https://summitshare3.s3.eu-north-1.amazonaws.com/IMG_3157.PNG"
+                           alt="Logo"
+                           fill
+                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                           style={{ objectFit: 'contain' }}
+                        />
+                     </div>
 
-                  <h2>Reset Password</h2>
-                  <p>Enter the email associated with your account</p>
-               </header>
+                     <h2>Reset Password</h2>
+                     <p>Enter the email associated with your account</p>
+                  </header>
 
-               <form action="">
-                  <section className="space-y-4">
-                     <Inputs
-                        type="input"
-                        state={emailError ? 'failure' : 'success'}
-                        label="Email"
-                        value={email}
-                        onChange={(value) => {
-                           setEmail(value);
-                           setEmailError(false);
-                           setErrorMessage('');
-                        }}
-                     />
-                  </section>
-               </form>
-               
-               {errorMessage && (
-                  <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-               )}
-               
-               {successMessage && (
-                  <p className="text-green-500 text-sm mt-2">{successMessage}</p>
-               )}
-            </section>
-            
-            <section className="text-center space-y-6">
-               <Buttons
-                  type="primary"
-                  size="large"
-                  onClick={handleSubmit}
-               >
-                  Send Reset Link
-               </Buttons>
-               
-               <p>
-                  Remember your password?{' '}
-                  <a className="underline" href="/auth-sign-in">
-                     Sign in
-                  </a>
-               </p>
-            </section>
-         </div>
+                  <form action="">
+                     <section className="space-y-4">
+                        <Inputs
+                           type="input"
+                           state={emailError ? 'failure' : 'success'}
+                           label="Email"
+                           value={email}
+                           onChange={(value) => {
+                              setEmail(value);
+                              setEmailError(false);
+                              setErrorMessage('');
+                           }}
+                        />
+                     </section>
+                  </form>
+
+                  {errorMessage && (
+                     <div className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-md mt-2">
+                        {errorMessage}
+                     </div>
+                  )}
+
+                  {successMessage && (
+                     <div className="bg-green-100 text-green-700 text-sm px-4 py-2 rounded-md mt-2">
+                        {successMessage}
+                     </div>
+                  )}
+               </section>
+
+               <section className="text-center space-y-6">
+                  <Buttons type="primary" size="large" onClick={handleSubmit}>
+                     Send Reset Link
+                  </Buttons>
+
+                  <p>
+                     Remember your password?{' '}
+                     <a className="underline" href="/auth-sign-in">
+                        Sign in
+                     </a>
+                  </p>
+               </section>
+            </div>
+         )}
       </main>
    );
 }

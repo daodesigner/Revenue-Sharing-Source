@@ -6,6 +6,7 @@ import Inputs from '@/app/components/inputs/Inputs';
 import Buttons from '@/app/components/button/Butons';
 import Image from 'next/image';
 import { Eye, EyeOff } from 'lucide-react';
+import LoadingDots from '@/app/(main)/exhibit/loadingDots';
 
 function ResetPassword({ params }: { params: { token: string } }) {
    const router = useRouter();
@@ -16,6 +17,10 @@ function ResetPassword({ params }: { params: { token: string } }) {
    const [errorMessage, setErrorMessage] = useState('');
    const [showPassword, setShowPassword] = useState(false);
    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+   const [successMessage, setSuccessMessage] = useState('');
+   const [isLoading, setIsLoading] = useState(false);
+   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+   
 
    const resetPassword = async () => {
       // Validate passwords
@@ -35,6 +40,7 @@ function ResetPassword({ params }: { params: { token: string } }) {
       const host = process.env.NEXT_PUBLIC_HOST;
       const url = `${host}/api/v1/user/password/verifyToken?token=${params.token}`;
 
+      setIsLoading(true);
       try {
          const response = await fetch(url, {
             method: 'POST',
@@ -49,7 +55,13 @@ function ResetPassword({ params }: { params: { token: string } }) {
 
          if (response.ok) {
             // Redirect to sign in or show success message
-            router.push('/auth-sign-in');
+            setSuccessMessage('Password reset successful!');
+            setShowSuccessPopup(true);
+
+            // Delay and redirect to sign-in page
+            setTimeout(() => {
+               router.push('/auth-sign-in');
+            }, 3000); // duration of redirect
          } else {
             const errorData = await response.json();
             setErrorMessage(errorData.message || 'Failed to reset password');
@@ -57,12 +69,18 @@ function ResetPassword({ params }: { params: { token: string } }) {
       } catch (error) {
          console.error('Password reset failed:', error);
          setErrorMessage('Please try again.');
+      } finally{
+         setIsLoading(false);
       }
    };
 
    return (
       <main className="h-screen flex flex-col justify-end items-center bg-[url('https://images.unsplash.com/photo-1621419203897-20b66b98d495?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center md:flex-row">
          <div className="bg-gray-950/35 fixed inset-0"></div>
+
+         {isLoading ? (
+            <LoadingDots /> 
+         ) : (
 
          <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
             <nav className="w-full flex flex-row justify-between items-center">
@@ -137,6 +155,18 @@ function ResetPassword({ params }: { params: { token: string } }) {
                </p>
             </section>
          </div>
+         )}
+         {/* Success Popup */}
+         {showSuccessPopup && (
+            <div className="fixed inset-0 flex items-center justify-center bg-gray-800/50 z-50">
+               <div className="bg-white p-6 rounded-md shadow-md text-center space-y-4">
+                  <h3 className="text-xl font-semibold text-green-600">
+                     {successMessage}
+                  </h3>
+                  <p>You will be redirected to the sign-in page shortly.</p>
+               </div>
+            </div>
+         )}
       </main>
    );
 }

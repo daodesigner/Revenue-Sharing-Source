@@ -6,20 +6,24 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import LoadingDots from '@/app/(main)/exhibit/loadingDots';
 
 function Page() {
    const [email, setEmail] = useState<string>('');
    const [password, setPassword] = useState<string>('');
    const [errorMessage, setErrorMessage] = useState<string>('');
    const [isVisible, setIsVisible] = useState(false);
+   const [isLoading, setIsLoading] = useState(false);
    const router = useRouter();
 
    const onSubmit = useCallback(async () => {
+      setIsLoading(true);
       const response = await signIn('credentials', {
          email,
          password,
          redirect: false,
       });
+      setIsLoading(false);
 
       if (response) {
          if (response.error) {
@@ -54,6 +58,10 @@ function Page() {
    return (
       <main className="h-screen flex flex-col justify-end items-center bg-[url('https://images.unsplash.com/photo-1606885118474-c8baf907e998?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWZyaWNhbiUyMGFydHxlbnwwfHwwfHx8MA%3D%3D')] bg-cover bg-center md:flex-row">
          <div className="bg-gray-950/35 fixed inset-0"></div>
+
+         {isLoading ? (
+            <LoadingDots />
+         ) : (
 
          <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
             <nav className="w-full flex flex-row justify-end items-center">
@@ -93,7 +101,7 @@ function Page() {
                         onChange={(value) => setPassword(value)}
                      />
                   </section>
-                  <a className="underline text-sm" href="/account/forgot-request" >
+                  <a className="underline text-xs" href="/account/forgot-request" >
                   forgot password? 
                   </a>
                </form>
@@ -135,6 +143,8 @@ function Page() {
                </div>
             </section>
          </div>
+         )
+      }
       </main>
    );
 }
