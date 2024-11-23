@@ -7,6 +7,13 @@ import { WagmiProvider, createConfig } from 'wagmi';
 import { sepolia, optimismSepolia, optimism } from 'wagmi/chains';
 import { customTheme } from './customTheme';
 
+// Define the ConnectKitOptions
+const connectKitOptions = {
+   enforceSupportedChains: true, // Enforce the supported chains
+   initialChainId: optimism.id, // Set the initial target chain
+};
+
+
 const config = createConfig(
    getDefaultConfig({
       appName: 'SummitShare.',
@@ -26,11 +33,12 @@ const config = createConfig(
 
 const queryClient = new QueryClient();
 
+
 export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
    return (
       <WagmiProvider config={config}>
          <QueryClientProvider client={queryClient}>
-            <ConnectKitProvider customTheme={customTheme} debugMode>
+            <ConnectKitProvider customTheme={customTheme} debugMode options={connectKitOptions}>
                {children}
             </ConnectKitProvider>
          </QueryClientProvider>
