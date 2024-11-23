@@ -12,3 +12,4 @@ codeql-custom-queries-javascript
 packages/dapp/prisma/ 
 packages/dapp/auth.config.ts 
 packages/dapp/middleware.ts
+packages/dapp/src/app/api
