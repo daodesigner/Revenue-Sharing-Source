@@ -1,27 +1,30 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import ConnectWalletPrompt from '@/utils/methods/ticketPurchase/connectModal';
 
 export default function ConnectWallet() {
-   const { address } = useAccount();
-   const router = useRouter();
-   const searchParams = useSearchParams();
-
-   const redirectUrl = searchParams.get('redirect') || '/';
+   const { address } = useAccount(); 
+   const router = useRouter(); // 
+   const [redirectUrl, setRedirectUrl] = useState('/exhibit'); 
 
    useEffect(() => {
+      // Extract the redirect URL from query parameters
+      const params = new URLSearchParams(window.location.search);
+      setRedirectUrl(params.get('redirect') || '/');
+   }, []);
+
+   useEffect(() => {
+      // Redirect once wallet is connected
       if (address) {
          router.push(redirectUrl);
       }
    }, [address, redirectUrl, router]);
 
    return (
-      <React.Suspense fallback={<p>Loading...</p>}>
-         <div className="h-screen flex items-center justify-center">
-            <ConnectWalletPrompt />
-         </div>
-      </React.Suspense>
+      <div className="h-screen flex items-center justify-center">
+         <ConnectWalletPrompt />
+      </div>
    );
 }
