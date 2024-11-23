@@ -37,6 +37,7 @@ declare module 'next-auth' {
          bio?: string;
          email_verified?: boolean;
          type?: string;
+         username?: string;
          user_wallets?: Array<{
             id: string;
             wallet_address: string;
