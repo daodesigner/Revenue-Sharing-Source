@@ -5,23 +5,23 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import ConnectWalletPrompt from '@/utils/methods/ticketPurchase/connectModal';
 
 export default function ConnectWallet() {
-   const { address } = useAccount(); // Get the connected wallet address
+   const { address } = useAccount();
    const router = useRouter();
-   const searchParams = useSearchParams(); // Access query parameters
+   const searchParams = useSearchParams();
 
-   // Get the redirect URL from query parameters
    const redirectUrl = searchParams.get('redirect') || '/';
 
    useEffect(() => {
-      // If the wallet is connected, redirect to the original page
       if (address) {
          router.push(redirectUrl);
       }
    }, [address, redirectUrl, router]);
 
    return (
-      <div className="h-screen flex items-center justify-center">
-         <ConnectWalletPrompt />
-      </div>
+      <React.Suspense fallback={<p>Loading...</p>}>
+         <div className="h-screen flex items-center justify-center">
+            <ConnectWalletPrompt />
+         </div>
+      </React.Suspense>
    );
 }
