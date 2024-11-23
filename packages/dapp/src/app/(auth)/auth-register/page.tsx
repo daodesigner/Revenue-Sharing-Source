@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Eye, EyeOff } from 'lucide-react';
+import LoadingDots from '@/app/(main)/exhibit/loadingDots';
 
 function Page() {
    const router = useRouter();
@@ -18,6 +19,7 @@ function Page() {
    const [emailError, setEmailError] = useState(false);
    const [errorMessage, setErrorMessage] = useState('');
    const [showPassword, setShowPassword] = useState(false);
+   const [isLoading, setIsLoading] = useState(false);
 
    const createUser = async ({ email, password, username }: any) => {
       const host = process.env.NEXT_PUBLIC_HOST;
@@ -47,12 +49,14 @@ function Page() {
 
    const onSubmit = async (data: any) => {
       try {
+         setIsLoading(true);
          const response = await createUser(data);
          if (response.status === 409) {
             const errorData = await response.json();
             setErrorMessage('Username or email already exists');
             setUsernameError(true);
             setEmailError(true);
+            setIsLoading(false);
          } else if (response.ok) {
             router.push('/verification/email');
          } else {
@@ -67,6 +71,10 @@ function Page() {
    return (
       <main className="h-screen flex flex-col justify-end items-center bg-[url('https://images.unsplash.com/photo-1621419203897-20b66b98d495?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center md:flex-row">
          <div className="bg-gray-950/35 fixed inset-0"></div>
+
+         {isLoading ? (
+            <LoadingDots />
+         ) : (
 
          <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
             <nav className="w-full flex flex-row justify-between items-center">
@@ -160,7 +168,10 @@ function Page() {
                </p>
             </section>
          </div>
+         )
+      }
       </main>
+         
    );
 }
 
