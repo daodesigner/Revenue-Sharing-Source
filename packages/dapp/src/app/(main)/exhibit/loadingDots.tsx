@@ -16,9 +16,15 @@ const LoadingDots = () => {
 
    return (
       <div className="h-screen w-full flex items-center justify-center">
-         <span className="text-6xl text-brown-500 font-bold tracking-widest"
-         style={{ transform: 'scale(1.5)', display: 'inline-block', WebkitTextStroke: '1px #fff', color: '#8B4513', }}>
-            
+         <span
+            className="text-6xl text-brown-500 font-bold tracking-widest"
+            style={{
+               transform: 'scale(1.5)',
+               display: 'inline-block',
+               WebkitTextStroke: '1px #fff',
+               color: '#8B4513',
+            }}
+         >
             {dots}
          </span>
       </div>

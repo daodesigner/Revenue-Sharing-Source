@@ -11,10 +11,12 @@ import useTicketCount from '@/lib/getTickets';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Buttons from '@/app/components/button/Butons';
-import { ButtonConfig, TicketPurchaseUIProps } from '@/utils/dev/frontEndInterfaces'; 
+import {
+   ButtonConfig,
+   TicketPurchaseUIProps,
+} from '@/utils/dev/frontEndInterfaces';
 
 const ResponsiveVideo: React.FC = () => {
-
    const [isMobile, setIsMobile] = useState(false);
 
    // Function to check window width
@@ -78,17 +80,16 @@ export default function Cya() {
    // Handle ticket purchase
    const handleTicketPurchase = () => {
       if (session?.status !== 'authenticated') {
-        router.push('/auth-register');
-        return;
+         router.push('/auth-register');
+         return;
       }
-    };
+   };
 
-const buttonConfig: ButtonConfig = {
-   text: 'Purchase',
-   action: handleTicketPurchase,
-   type: 'primary',
-
-};
+   const buttonConfig: ButtonConfig = {
+      text: 'Purchase',
+      action: handleTicketPurchase,
+      type: 'primary',
+   };
 
    return (
       <main className="relative h-screen overflow-hidden mt-12 mb-20 z-0">
@@ -178,55 +179,50 @@ const buttonConfig: ButtonConfig = {
 
             {/* Ticket Purchase Section */}
             <div className="z-10 relative mb-8">
-
-            {session?.status === 'authenticated' ? (
-        <TicketPurchaseComponent 
-          userAddress={''} 
-          user_id={''}
-        />
-      ) : (
-               
-            <Buttons
-               type={buttonConfig.type}
-               size="large"
-               onClick={buttonConfig.action}
-               disabled={false}
-               //@ts-ignore
-               style={{
-                  border: '2px solid white', // White edges
-                  backgroundColor: 'transparent', // Optional: make the background transparent
-                  color: 'white', // Text color
-                  padding: '16px 32px', // Increased padding for a bigger button
-                  fontSize: '1.5rem', // Increased font size for better visibility
-                  borderRadius: '8px', // Rounded corners
-                  transition: 'background-color 0.3s, transform 0.3s', // Smooth transitions
-                  cursor: 'pointer', // Pointer cursor on hover
-                  display: 'flex', // Use flexbox to align text
-                  justifyContent: 'center', // Center horizontally
-                  alignItems: 'center', // Center vertically
-                  textAlign: 'center', // Center text
-               }}
-               onMouseEnter={(e: {
-                  currentTarget: {
-                     style: { backgroundColor: string; transform: string };
-                  };
-               }) => {
-                  e.currentTarget.style.backgroundColor =
-                     'rgba(255, 255, 255, 0.2)'; // Change background on hover
-                  e.currentTarget.style.transform = 'scale(1.05)'; // Slightly enlarge button on hover
-               }}
-               onMouseLeave={(e: {
-                  currentTarget: {
-                     style: { backgroundColor: string; transform: string };
-                  };
-               }) => {
-                  e.currentTarget.style.backgroundColor = 'transparent'; // Reset background
-                  e.currentTarget.style.transform = 'scale(1)'; // Reset size
-               }}
-            >
-               Purchase
-            </Buttons>
-      )}
+               {session?.status === 'authenticated' ? (
+                  <TicketPurchaseComponent userAddress={''} user_id={''} />
+               ) : (
+                  <Buttons
+                     type={buttonConfig.type}
+                     size="large"
+                     onClick={buttonConfig.action}
+                     disabled={false}
+                     //@ts-ignore
+                     style={{
+                        border: '2px solid white', // White edges
+                        backgroundColor: 'transparent', // Optional: make the background transparent
+                        color: 'white', // Text color
+                        padding: '16px 32px', // Increased padding for a bigger button
+                        fontSize: '1.5rem', // Increased font size for better visibility
+                        borderRadius: '8px', // Rounded corners
+                        transition: 'background-color 0.3s, transform 0.3s', // Smooth transitions
+                        cursor: 'pointer', // Pointer cursor on hover
+                        display: 'flex', // Use flexbox to align text
+                        justifyContent: 'center', // Center horizontally
+                        alignItems: 'center', // Center vertically
+                        textAlign: 'center', // Center text
+                     }}
+                     onMouseEnter={(e: {
+                        currentTarget: {
+                           style: { backgroundColor: string; transform: string };
+                        };
+                     }) => {
+                        e.currentTarget.style.backgroundColor =
+                           'rgba(255, 255, 255, 0.2)'; // Change background on hover
+                        e.currentTarget.style.transform = 'scale(1.05)'; // Slightly enlarge button on hover
+                     }}
+                     onMouseLeave={(e: {
+                        currentTarget: {
+                           style: { backgroundColor: string; transform: string };
+                        };
+                     }) => {
+                        e.currentTarget.style.backgroundColor = 'transparent'; // Reset background
+                        e.currentTarget.style.transform = 'scale(1)'; // Reset size
+                     }}
+                  >
+                     Purchase
+                  </Buttons>
+               )}
             </div>
 
             <div className="flex flex-col items-center mt-12">
@@ -234,9 +230,7 @@ const buttonConfig: ButtonConfig = {
                   {/* First section: 6 Unique Stories and Artifacts Preserved */}
                   <div className="flex flex-col items-center">
                      <div className="text-6xl font-bold">6</div>
-                     <div className="text-lg text-gray-300">
-                     Stories
-                     </div>
+                     <div className="text-lg text-gray-300">Stories</div>
                   </div>
 
                   {/* Second section: Incrementing Tickets Sold */}
@@ -248,22 +242,20 @@ const buttonConfig: ButtonConfig = {
                   {/* Third section: 1 Collective Legacy */}
                   <div className="flex flex-col items-center">
                      <div className="text-6xl font-bold">1</div>
-                     <div className="text-lg text-gray-300">
-                      Legacy
-                     </div>
+                     <div className="text-lg text-gray-300">Legacy</div>
                   </div>
                </div>
             </div>
 
             {/*  Different color */}
-             <Link
+            <Link
                href="https://summitshare.co/blog/SJZH2lwwA"
                className="text-lg text-white underline hover:text-gray-300 transition-colors mt-10 md:mt-6"
                target="_blank"
                rel="noopener noreferrer"
             >
                learn more here
-            </Link> 
+            </Link>
          </div>
       </main>
    );

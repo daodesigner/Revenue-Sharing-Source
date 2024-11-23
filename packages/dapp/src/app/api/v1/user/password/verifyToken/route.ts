@@ -33,27 +33,23 @@ export async function POST(req: Request, res: NextResponse) {
       const queryParams = new URLSearchParams(url.search);
       const token = queryParams.get('token');
       const body = await req.json();
-      const {  password } = body;
+      const { password } = body;
 
-      if (!token ) {
-         return NextResponse.json(
-            { message: 'no token sent' },
-            { status: 401 }
-         );
+      if (!token) {
+         return NextResponse.json({ message: 'no token sent' }, { status: 401 });
       }
       const foundToken = await prisma.password_reset_tokens.findFirst({
-         where: {id: token}
-      })
+         where: { id: token },
+      });
 
-      const user_id = foundToken?.user_id
+      const user_id = foundToken?.user_id;
 
-      if (!user_id ) {
+      if (!user_id) {
          return NextResponse.json(
             { message: 'no user_id found' },
             { status: 401 }
          );
       }
-
 
       if (!password) {
          return NextResponse.json(
@@ -93,7 +89,6 @@ export async function POST(req: Request, res: NextResponse) {
          where: { id: verificationRecord.user_id! },
       });
 
-
       const hashedPassword = await bcrypt.hash(password, 10);
 
       if (!user) {
@@ -103,12 +98,11 @@ export async function POST(req: Request, res: NextResponse) {
          );
       }
 
-
       const isSamePassword = await bcrypt.compare(password, user.password);
 
       if (isSamePassword) {
          return NextResponse.json(
-            { message: "New password cannot be the same as the last password" },
+            { message: 'New password cannot be the same as the last password' },
             { status: 409 }
          );
       }
@@ -123,8 +117,7 @@ export async function POST(req: Request, res: NextResponse) {
 
       return NextResponse.json({ message: 'user updated' }, { status: 200 });
    } catch (error) {
-      console.log(error)
+      console.log(error);
       return NextResponse.json({ message: 'server error' }, { status: 500 });
-
    }
 }

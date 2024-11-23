@@ -8,10 +8,6 @@ import { ConnectKitButton } from 'connectkit';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 
-
-
-
-
 /**
  * PrimaryNav component represents the main navigation bar for the application.
  * It includes navigation links, action buttons, and a responsive menu for smaller screens.
@@ -22,20 +18,16 @@ const PrimaryNav: React.FC = () => {
    const session = useSession();
 
    const handleAuthClick = async () => {
-
       if (session.status === 'authenticated') {
-         await signOut()
-         router.push('/auth-sign-in')
-         return
+         await signOut();
+         router.push('/auth-sign-in');
+         return;
       } else {
-         router.push('/auth-sign-in')
-         return
+         router.push('/auth-sign-in');
+         return;
       }
-      return 
-
-   }
-   
-
+      return;
+   };
 
    // Navigation items for the main nav bar
    const items: { name: string; link: string }[] = [
@@ -51,33 +43,36 @@ const PrimaryNav: React.FC = () => {
       title: string;
       items: { name: string; link: string }[];
    }[] = [
-         {
-            title: 'Pages',
-            items: [
-               { name: 'Blog', link: '/blog' },
-               { name: 'Partners', link: '/partners' },
-               { name: 'Support Us', link: '/donate' },
-            ],
-         },
-         {
-            title: 'Help',
-            items: [{ name: 'Help', link: '/help' }],
-         },
-         {
-            title: 'Dashboard',
-            items: [{ name: 'Insights', link: '/distribution' }],
-         },
-         {
-            title: 'Settings',
-            items: [
-               { name: 'Profile', link: '/profile' },
-               {
-                  name: session?.status === 'authenticated' ? 'Log Out' : 'Log In',
-                  link: session?.status === 'authenticated' ? '/auth-sign-in' : '/auth-sign-in',
-               },
-            ],
-         },
-      ];
+      {
+         title: 'Pages',
+         items: [
+            { name: 'Blog', link: '/blog' },
+            { name: 'Partners', link: '/partners' },
+            { name: 'Support Us', link: '/donate' },
+         ],
+      },
+      {
+         title: 'Help',
+         items: [{ name: 'Help', link: '/help' }],
+      },
+      {
+         title: 'Dashboard',
+         items: [{ name: 'Insights', link: '/distribution' }],
+      },
+      {
+         title: 'Settings',
+         items: [
+            { name: 'Profile', link: '/profile' },
+            {
+               name: session?.status === 'authenticated' ? 'Log Out' : 'Log In',
+               link:
+                  session?.status === 'authenticated'
+                     ? '/auth-sign-in'
+                     : '/auth-sign-in',
+            },
+         ],
+      },
+   ];
 
    // State to manage the open/close state of the responsive menu
    const [openMenu, setOpenMenu] = useState<boolean>(false);
@@ -101,9 +96,10 @@ const PrimaryNav: React.FC = () => {
                   {items.map((item, index) => (
                      <li
                         key={index}
-                        className={`hover:text-primary-600 hover:underline underline-offset-[0.625rem] cursor-pointer ${pathname === item.link &&
+                        className={`hover:text-primary-600 hover:underline underline-offset-[0.625rem] cursor-pointer ${
+                           pathname === item.link &&
                            'text-primary-600 underline underline-offset-[0.625rem]'
-                           }`}
+                        }`}
                      >
                         <a href={item.link}>{item.name}</a>
                      </li>
@@ -118,7 +114,9 @@ const PrimaryNav: React.FC = () => {
                   <li>
                      <div onClick={handleAuthClick}>
                         <Buttons type="secondary" size="small">
-                           {session.status === 'authenticated' ? 'Sign Out' : 'Sign In'}
+                           {session.status === 'authenticated'
+                              ? 'Sign Out'
+                              : 'Sign In'}
                         </Buttons>
                      </div>
                   </li>
@@ -128,8 +126,9 @@ const PrimaryNav: React.FC = () => {
                <Bars3Icon className="w-4" />
             </li>
             <nav
-               className={`fixed inset-y-0 left-0 w-[70%] md:w-[40%] bg-white z-50 transform border-r border-primary-900-5 ${openMenu ? 'translate-x-0' : '-translate-x-full'
-                  } transition-transform duration-300 ease-in-out`}
+               className={`fixed inset-y-0 left-0 w-[70%] md:w-[40%] bg-white z-50 transform border-r border-primary-900-5 ${
+                  openMenu ? 'translate-x-0' : '-translate-x-full'
+               } transition-transform duration-300 ease-in-out`}
             >
                <div className="border-b border-primary-900-5 py-4">
                   <div className="px-6 flex flex-row justify-between text-primary-900">
@@ -144,10 +143,11 @@ const PrimaryNav: React.FC = () => {
                   {menuItems.map((menu, index) => (
                      <li
                         key={index}
-                        className={`space-y-4 py-2 ${index !== menuItems.length - 1
+                        className={`space-y-4 py-2 ${
+                           index !== menuItems.length - 1
                               ? 'border-b border-primary-900-5'
                               : ''
-                           }`}
+                        }`}
                      >
                         <h4 className="font-normal text-primary-100">
                            {menu.title}
@@ -156,9 +156,10 @@ const PrimaryNav: React.FC = () => {
                            {menu.items.map((subItem, subIndex) => (
                               <li
                                  key={subIndex}
-                                 className={`text-[1.25rem] text-primary-700 font-normal ${pathname === subItem.link &&
+                                 className={`text-[1.25rem] text-primary-700 font-normal ${
+                                    pathname === subItem.link &&
                                     'text-primary-400'
-                                    }`}
+                                 }`}
                               >
                                  <a href={subItem.link}>{subItem.name}</a>
                               </li>

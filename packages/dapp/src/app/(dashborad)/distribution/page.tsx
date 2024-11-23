@@ -15,7 +15,6 @@ import {
    TableRow,
 } from '@/components/ui/table';
 
-
 const Page: React.FC = () => {
    const [eventData, setEventData] = useState<any>(null);
 
@@ -32,7 +31,8 @@ const Page: React.FC = () => {
          date: '10-11-2024',
          goal: 'Exhibit Deployment',
          status: 'green',
-         transaction_id: '0x92070685274364f98963c09dd193e8ad01ba1973e4914edbd1a15a4b78c06443',
+         transaction_id:
+            '0x92070685274364f98963c09dd193e8ad01ba1973e4914edbd1a15a4b78c06443',
       },
       {
          id_no: 2,
@@ -109,15 +109,15 @@ const Page: React.FC = () => {
                            </span>
                         </TableCell>
                         <TableCell>
-               <a 
-                  href={`https://optimistic.etherscan.io/tx/${row.transaction_id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-white text-gray-700 px-3 py-1 rounded-full text-xs border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
-               >
-                  Explorer
-               </a>
-               </TableCell>
+                           <a
+                              href={`https://optimistic.etherscan.io/tx/${row.transaction_id}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-block bg-white text-gray-700 px-3 py-1 rounded-full text-xs border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
+                           >
+                              Explorer
+                           </a>
+                        </TableCell>
                      </TableRow>
                   ))}
                </TableBody>

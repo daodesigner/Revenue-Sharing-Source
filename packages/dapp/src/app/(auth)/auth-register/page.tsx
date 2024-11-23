@@ -75,103 +75,100 @@ function Page() {
          {isLoading ? (
             <LoadingDots />
          ) : (
+            <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
+               <nav className="w-full flex flex-row justify-between items-center">
+                  <p className="text-p2-m">
+                     Step 1<span> of 2</span>
+                  </p>
+                  <Link href="/">Exit</Link>
+               </nav>
 
-         <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
-            <nav className="w-full flex flex-row justify-between items-center">
-               <p className="text-p2-m">
-                  Step 1<span> of 2</span>
-               </p>
-               <Link href="/">Exit</Link>
-            </nav>
+               <section className="space-y-4">
+                  <header className="text-center space-y-2">
+                     <div className="relative mx-auto h-12 w-12">
+                        <Image
+                           src="https://summitshare3.s3.eu-north-1.amazonaws.com/IMG_3157.PNG"
+                           alt="Logo"
+                           fill
+                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                           style={{ objectFit: 'contain' }}
+                        />
+                     </div>
 
-            <section className="space-y-4">
-               <header className="text-center space-y-2">
-                  <div className="relative mx-auto h-12 w-12">
-                     <Image
-                        src="https://summitshare3.s3.eu-north-1.amazonaws.com/IMG_3157.PNG"
-                        alt="Logo"
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        style={{ objectFit: 'contain' }}
-                     />
-                  </div>
+                     <h2>Create account</h2>
 
-                  <h2>Create account</h2>
+                     <p>Learn about the history you love!</p>
+                  </header>
 
-                  <p>Learn about the history you love!</p>
-               </header>
-
-               <form action="">
-                  <section className="space-y-4">
-                     <Inputs
-                        type="input"
-                        //@ts-ignore
-                        state={usernameError ? 'error' : 'active'}
-                        label="Username"
-                        value={username}
-                        onChange={(value) => {
-                           setUsername(value);
-                           setUsernameError(false);
-                           setErrorMessage('');
-                        }}
-                     />
-                     <Inputs
-                        type="input"
-                        //@ts-ignore
-                        state={emailError ? 'error' : 'active'}
-                        label="Email"
-                        value={email}
-                        onChange={(value) => {
-                           setEmail(value);
-                           setEmailError(false);
-                           setErrorMessage('');
-                        }}
-                     />
-                     <Inputs
-                        type="input"
-                        label="Password"
-                        state="active"
-                        isPassword={true}
-                        value={password}
-                        onChange={(value) => setPassword(value)}
-                     />
-                  </section>
-               </form>
-               {errorMessage && (
-                  <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-               )}
-            </section>
-            <section className="text-center space-y-6">
-               <Buttons
-                  type="primary"
-                  size="large"
-                  onClick={() => onSubmit({ email, password, username })}
-               >
-                  Create my account
-               </Buttons>
-               <p>
-                  By continuing you accept our standard{' '}
-                  <a className="underline" href="">
-                     terms and conditions
-                  </a>{' '}
-                  and{' '}
-                  <a className="underline" href="">
-                     our privacy policy
-                  </a>
-                  .
-               </p>
-               <p>
-                  Already have an account?{' '}
-                  <a className="underline" href="/auth-sign-in">
-                     Sign in
-                  </a>
-               </p>
-            </section>
-         </div>
-         )
-      }
+                  <form action="">
+                     <section className="space-y-4">
+                        <Inputs
+                           type="input"
+                           //@ts-ignore
+                           state={usernameError ? 'error' : 'active'}
+                           label="Username"
+                           value={username}
+                           onChange={(value) => {
+                              setUsername(value);
+                              setUsernameError(false);
+                              setErrorMessage('');
+                           }}
+                        />
+                        <Inputs
+                           type="input"
+                           //@ts-ignore
+                           state={emailError ? 'error' : 'active'}
+                           label="Email"
+                           value={email}
+                           onChange={(value) => {
+                              setEmail(value);
+                              setEmailError(false);
+                              setErrorMessage('');
+                           }}
+                        />
+                        <Inputs
+                           type="input"
+                           label="Password"
+                           state="active"
+                           isPassword={true}
+                           value={password}
+                           onChange={(value) => setPassword(value)}
+                        />
+                     </section>
+                  </form>
+                  {errorMessage && (
+                     <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
+                  )}
+               </section>
+               <section className="text-center space-y-6">
+                  <Buttons
+                     type="primary"
+                     size="large"
+                     onClick={() => onSubmit({ email, password, username })}
+                  >
+                     Create my account
+                  </Buttons>
+                  <p>
+                     By continuing you accept our standard{' '}
+                     <a className="underline" href="">
+                        terms and conditions
+                     </a>{' '}
+                     and{' '}
+                     <a className="underline" href="">
+                        our privacy policy
+                     </a>
+                     .
+                  </p>
+                  <p>
+                     Already have an account?{' '}
+                     <a className="underline" href="/auth-sign-in">
+                        Sign in
+                     </a>
+                  </p>
+               </section>
+            </div>
+         )}
       </main>
-         
    );
 }
 

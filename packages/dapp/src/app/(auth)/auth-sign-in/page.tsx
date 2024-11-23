@@ -62,89 +62,90 @@ function Page() {
          {isLoading ? (
             <LoadingDots />
          ) : (
+            <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
+               <nav className="w-full flex flex-row justify-end items-center">
+                  <Link href="/">Exit</Link>
+               </nav>
 
-         <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
-            <nav className="w-full flex flex-row justify-end items-center">
-               <Link href="/">Exit</Link>
-            </nav>
+               <section className="space-y-6">
+                  <header className="text-center space-y-2">
+                     <div className="relative mx-auto h-12 w-12">
+                        <Image
+                           src="https://summitshare3.s3.eu-north-1.amazonaws.com/IMG_3157.PNG"
+                           alt="Logo"
+                           fill
+                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                           style={{ objectFit: 'contain' }}
+                        />
+                     </div>
+                     <h2>Sign in</h2>
+                     <p>Learn about the history you love!</p>
+                  </header>
 
-            <section className="space-y-6">
-               <header className="text-center space-y-2">
-                  <div className="relative mx-auto h-12 w-12">
-                     <Image
-                        src="https://summitshare3.s3.eu-north-1.amazonaws.com/IMG_3157.PNG"
-                        alt="Logo"
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        style={{ objectFit: 'contain' }}
-                     />
+                  <form action="" className="space-y-[48px]">
+                     <section className="space-y-4">
+                        <Inputs
+                           type="input"
+                           state="active"
+                           label="Email"
+                           value={email}
+                           onChange={(value) => setEmail(value)}
+                        />
+                        <Inputs
+                           type="input"
+                           label="Password"
+                           state="active"
+                           isPassword={true}
+                           value={password}
+                           onChange={(value) => setPassword(value)}
+                        />
+                     </section>
+                     <a
+                        className="underline text-xs"
+                        href="/account/forgot-request"
+                     >
+                        forgot password?
+                     </a>
+                  </form>
+               </section>
+
+               <section className="relative text-center space-y-6">
+                  <div onClick={onSubmit} className="w-full">
+                     <Buttons type="primary" size="large">
+                        Sign into my account
+                     </Buttons>
                   </div>
-                  <h2>Sign in</h2>
-                  <p>Learn about the history you love!</p>
-               </header>
-
-               <form action="" className="space-y-[48px]">
-                  <section className="space-y-4">
-                     <Inputs
-                        type="input"
-                        state="active"
-                        label="Email"
-                        value={email}
-                        onChange={(value) => setEmail(value)}
-                     />
-                     <Inputs
-                        type="input"
-                        label="Password"
-                        state="active"
-                        isPassword={true}
-                        value={password}
-                        onChange={(value) => setPassword(value)}
-                     />
-                  </section>
-                  <a className="underline text-xs" href="/account/forgot-request" >
-                  forgot password? 
-                  </a>
-               </form>
-            </section>
-
-            <section className="relative text-center space-y-6">
-               <div onClick={onSubmit} className="w-full">
-                  <Buttons type="primary" size="large">
-                     Sign into my account
-                  </Buttons>
-               </div>
-               <p>
-                  By continuing you accept our standard{' '}
-                  <a className="underline" href="">
-                     terms and conditions
-                  </a>{' '}
-                  and{' '}
-                  <a className="underline" href="">
-                     our privacy policy
-                  </a>
-                  .
-               </p>
-               <p>
-                  I don&apos;t have an account{' '}
-                  <a className="underline" href="/auth-register">
-                     Register
-                  </a>
-               </p>
-               <div
-                  className={`bg-red-500 border w-[90%] rounded-md p-3 absolute right-5 z-10 transition-transform duration-500 border-red-300 text-center ${
-                     isVisible
-                        ? 'translate-y-0 bottom-5'
-                        : 'translate-y-full -bottom-20'
-                  }`}
-               >
-                  <p className="text-sm text-white font-semibold">
-                     {errorMessage}
+                  <p>
+                     By continuing you accept our standard{' '}
+                     <a className="underline" href="">
+                        terms and conditions
+                     </a>{' '}
+                     and{' '}
+                     <a className="underline" href="">
+                        our privacy policy
+                     </a>
+                     .
                   </p>
-               </div>
-            </section>
-         </div>
-         )
-      }
+                  <p>
+                     I don&apos;t have an account{' '}
+                     <a className="underline" href="/auth-register">
+                        Register
+                     </a>
+                  </p>
+                  <div
+                     className={`bg-red-500 border w-[90%] rounded-md p-3 absolute right-5 z-10 transition-transform duration-500 border-red-300 text-center ${
+                        isVisible
+                           ? 'translate-y-0 bottom-5'
+                           : 'translate-y-full -bottom-20'
+                     }`}
+                  >
+                     <p className="text-sm text-white font-semibold">
+                        {errorMessage}
+                     </p>
+                  </div>
+               </section>
+            </div>
+         )}
       </main>
    );
 }

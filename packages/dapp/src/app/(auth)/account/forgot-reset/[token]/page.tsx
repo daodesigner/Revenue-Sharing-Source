@@ -20,7 +20,6 @@ function ResetPassword({ params }: { params: { token: string } }) {
    const [successMessage, setSuccessMessage] = useState('');
    const [isLoading, setIsLoading] = useState(false);
    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-   
 
    const resetPassword = async () => {
       // Validate passwords
@@ -69,7 +68,7 @@ function ResetPassword({ params }: { params: { token: string } }) {
       } catch (error) {
          console.error('Password reset failed:', error);
          setErrorMessage('Please try again.');
-      } finally{
+      } finally {
          setIsLoading(false);
       }
    };
@@ -79,82 +78,77 @@ function ResetPassword({ params }: { params: { token: string } }) {
          <div className="bg-gray-950/35 fixed inset-0"></div>
 
          {isLoading ? (
-            <LoadingDots /> 
+            <LoadingDots />
          ) : (
+            <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
+               <nav className="w-full flex flex-row justify-between items-center">
+                  <p className="text-p2-m">Reset Password</p>
+                  <Link href="/">Exit</Link>
+               </nav>
 
-         <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
-            <nav className="w-full flex flex-row justify-between items-center">
-               <p className="text-p2-m">Reset Password</p>
-               <Link href="/">Exit</Link>
-            </nav>
+               <section className="space-y-4">
+                  <header className="text-center space-y-2">
+                     <div className="relative mx-auto h-12 w-12">
+                        <Image
+                           src="https://summitshare3.s3.eu-north-1.amazonaws.com/IMG_3157.PNG"
+                           alt="Logo"
+                           fill
+                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                           style={{ objectFit: 'contain' }}
+                        />
+                     </div>
 
-            <section className="space-y-4">
-               <header className="text-center space-y-2">
-                  <div className="relative mx-auto h-12 w-12">
-                     <Image
-                        src="https://summitshare3.s3.eu-north-1.amazonaws.com/IMG_3157.PNG"
-                        alt="Logo"
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        style={{ objectFit: 'contain' }}
-                     />
-                  </div>
+                     <h2>Create New Password</h2>
+                     <p>Enter a strong, unique password</p>
+                  </header>
 
-                  <h2>Create New Password</h2>
-                  <p>Enter a strong, unique password</p>
-               </header>
+                  <form action="">
+                     <section className="space-y-4">
+                        <Inputs
+                           type="input"
+                           label="New Password"
+                           state={passwordError ? 'failure' : 'success'}
+                           isPassword={true}
+                           value={password}
+                           onChange={(value) => {
+                              setPassword(value);
+                              setPasswordError(false);
+                              setErrorMessage('');
+                           }}
+                        />
+                        <Inputs
+                           type="input"
+                           label="Confirm Password"
+                           state={confirmPasswordError ? 'failure' : 'success'}
+                           isPassword={true}
+                           value={confirmPassword}
+                           onChange={(value) => {
+                              setConfirmPassword(value);
+                              setConfirmPasswordError(false);
+                              setErrorMessage('');
+                           }}
+                        />
+                     </section>
+                  </form>
 
-               <form action="">
-                  <section className="space-y-4">
-                     <Inputs
-                        type="input"
-                        label="New Password"
-                        state={passwordError ? 'failure' : 'success'}
-                        isPassword={true}
-                        value={password}
-                        onChange={(value) => {
-                           setPassword(value);
-                           setPasswordError(false);
-                           setErrorMessage('');
-                        }}
-                     />
-                     <Inputs
-                        type="input"
-                        label="Confirm Password"
-                        state={confirmPasswordError ? 'failure' : 'success'}
-                        isPassword={true}
-                        value={confirmPassword}
-                        onChange={(value) => {
-                           setConfirmPassword(value);
-                           setConfirmPasswordError(false);
-                           setErrorMessage('');
-                        }}
-                     />
-                  </section>
-               </form>
-               
-               {errorMessage && (
-                  <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-               )}
-            </section>
-            
-            <section className="text-center space-y-6">
-               <Buttons
-                  type="primary"
-                  size="large"
-                  onClick={resetPassword}
-               >
-                  Reset Password
-               </Buttons>
-               
-               <p>
-                  Remember your password?{' '}
-                  <a className="underline" href="/auth-sign-in">
-                     Sign in
-                  </a>
-               </p>
-            </section>
-         </div>
+                  {errorMessage && (
+                     <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
+                  )}
+               </section>
+
+               <section className="text-center space-y-6">
+                  <Buttons type="primary" size="large" onClick={resetPassword}>
+                     Reset Password
+                  </Buttons>
+
+                  <p>
+                     Remember your password?{' '}
+                     <a className="underline" href="/auth-sign-in">
+                        Sign in
+                     </a>
+                  </p>
+               </section>
+            </div>
          )}
          {/* Success Popup */}
          {showSuccessPopup && (

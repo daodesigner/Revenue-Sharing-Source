@@ -13,7 +13,7 @@ function ForgotPasswordRequest() {
    const [emailError, setEmailError] = useState(false);
    const [errorMessage, setErrorMessage] = useState('');
    const [successMessage, setSuccessMessage] = useState('');
-   const [isLoading, setIsLoading] = useState(false) 
+   const [isLoading, setIsLoading] = useState(false);
 
    const sendPasswordResetRequest = async (email: string) => {
       const host = process.env.NEXT_PUBLIC_HOST;
@@ -76,7 +76,7 @@ function ForgotPasswordRequest() {
          ) : (
             <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
                <nav className="w-full flex flex-row justify-between items-center">
-                  <p className="text-p2-m">Change Password</p> 
+                  <p className="text-p2-m">Change Password</p>
                   <Link href="/">Exit</Link>
                </nav>
 
