@@ -13,7 +13,6 @@ const connectKitOptions = {
    initialChainId: optimism.id, // Set the initial target chain
 };
 
-
 const config = createConfig(
    getDefaultConfig({
       appName: 'SummitShare.',
@@ -33,12 +32,15 @@ const config = createConfig(
 
 const queryClient = new QueryClient();
 
-
 export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
    return (
       <WagmiProvider config={config}>
          <QueryClientProvider client={queryClient}>
-            <ConnectKitProvider customTheme={customTheme} debugMode options={connectKitOptions}>
+            <ConnectKitProvider
+               customTheme={customTheme}
+               debugMode
+               options={connectKitOptions}
+            >
                {children}
             </ConnectKitProvider>
          </QueryClientProvider>

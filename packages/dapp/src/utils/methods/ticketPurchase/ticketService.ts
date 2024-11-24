@@ -3,9 +3,8 @@
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import { useRouter } from 'next/router';
-import ConnectWalletPrompt from './connectModal';
 import React from 'react';
+import { useAccount } from 'wagmi';
 
 // Helper function to get userId from session
 const getUserIdFromSession = (
@@ -14,7 +13,7 @@ const getUserIdFromSession = (
    return session.data?.user?.id || null;
 };
 
-const ENABLE_VALIDATION = process.env.NEXT_PUBLIC_ENABLE_VALIDATION === 'true';
+const ENABLE_VALIDATION = true;
 
 export const validateTicket = async (
    userAddress: string | undefined,
@@ -34,6 +33,7 @@ export const validateTicket = async (
       setButtonText('Validation Disabled'); // Optional: Indicate disabled state
       return;
    }
+
    // Early return if no userAddress
    if (!userAddress) {
       setHasTicket(false);
@@ -69,31 +69,33 @@ export const validateTicket = async (
 export const validatePageAccess = async (
    userAddress: string | undefined,
    router: AppRouterInstance,
-   session: ReturnType<typeof useSession>,
-   redirectUrl: string = '/exhibit'
+   session: ReturnType<typeof useSession>
 ): Promise<{ isLoading: boolean; hasAccess: boolean }> => {
+   let isLoading = true;
 
    if (!ENABLE_VALIDATION) {
       console.log('Page access validation is currently disabled');
+      isLoading = false;
       return { isLoading: false, hasAccess: true }; // Grant access without validation
    }
    // Handle signed-out users
-   if ( session?.status === 'unauthenticated'
-   ) {
+   if (session?.status === 'unauthenticated') {
       console.warn('User is not signed in. Redirecting to login.');
       router.push('/auth-sign-in');
+      isLoading = false;
       return { isLoading: false, hasAccess: false };
    }
 
-   // Handle unconnected wallet
-   if (!userAddress) {
-      console.warn('Wallet is not connected. Redirecting to wallet connection page.');
-      router.push(`/connect-wallet?redirect=${redirectUrl}`);
-      return { isLoading: false, hasAccess: false };
-   }
-      
    // Get user_id from session
    const user_id = getUserIdFromSession(session);
+
+   // Check for missing eventId
+   if (!user_id) {
+      console.warn('User ID is missing. Redirecting.');
+      router.push('/auth-sign-in');
+      isLoading = false;
+      return { isLoading: false, hasAccess: false };
+   }
 
    console.log('Validating page access with:', {
       userAddress,

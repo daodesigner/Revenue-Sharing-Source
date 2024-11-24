@@ -2,17 +2,10 @@
 import React from 'react';
 import { ConnectKitButton, useModal } from 'connectkit';
 import { useAccount } from 'wagmi';
+import WalletStatus from '@/functonality/walletStatus';
 
 export default function ConnectWalletPrompt() {
    const { address } = useAccount(); // Get connected wallet address
-   const { open, setOpen } = useModal(); // Access ConnectKit modal state
-
-   // Show modal programmatically if no wallet is connected
-   React.useEffect(() => {
-      if (!address) {
-         setOpen(true); // Open ConnectKit modal
-      }
-   }, [address, setOpen]);
 
    return (
       <div>
@@ -32,7 +25,7 @@ export default function ConnectWalletPrompt() {
             </div>
          ) : (
             <p className="text-green-600 mt-4 text-center">
-               Wallet Connected: {address}
+             Your connected address: <WalletStatus />
             </p>
          )}
       </div>
