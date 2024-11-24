@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import Container from '@/app/components/Container';
 import Line from '@/app/components/Line';
-import Buttons from '@/app/components/button/Butons';
+import {Button} from '@/app/components/button/Button';
 import { Trash, XCircle } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
@@ -97,13 +97,12 @@ export default function ProfileSettings() {
                         <label className="block text-sm font-medium">
                            Password
                         </label>
-                        <Buttons
-                           type="secondary"
-                           size="small"
+                        <Button
+                         variant={"outline"}
                            onClick={() => router.push('/account/forgot-request')}
                         >
                            Change Password
-                        </Buttons>
+                        </Button>
                      </div>
                   </section>
                </div>
@@ -122,13 +121,13 @@ export default function ProfileSettings() {
                      </p>
                   </div>
                   <div className="w-fit">
-                     <Buttons
-                        type="secondary"
-                        size="small"
+                     <Button
+                  variant={"outline"}
+           
                         onClick={() => setIsDeleteDialogOpen(true)}
                      >
                         Delete my account
-                     </Buttons>
+                     </Button>
                   </div>
                </div>
             </div>

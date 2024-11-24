@@ -2,7 +2,7 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import React, { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import Buttons from '../button/Butons';
+import {Button} from '../button/Button';
 import { useAccount } from 'wagmi';
 import { ConnectKitButton } from 'connectkit';
 import Link from 'next/link';
@@ -33,6 +33,7 @@ const PrimaryNav: React.FC = () => {
    const items: { name: string; link: string }[] = [
       { name: 'Exhibit', link: '/exhibit' },
       { name: 'Blog', link: '/blog' },
+      // { name: 'Partners', link: '/partners' },
       { name: 'Support Us', link: '/donate' },
       { name: 'Insights', link: '/distribution' },
       { name: 'Help', link: '/help' },
@@ -85,9 +86,9 @@ const PrimaryNav: React.FC = () => {
          <ul className="fixed top-0 inset-x-0 px-6 py-4 lg:px-28 lg:py-6 flex flex-row justify-between items-center border-b border-primary-900-5 text-primary-900 z-10 bg-white">
             <li>
                <Link href="/">
-                  <h2>
-                     <span className="text-primary-400">Summit</span>Share
-                  </h2>
+                  <h1>
+                     <span className="text-orange-500">Summit</span>Share
+                  </h1>
                </Link>
             </li>
             <li className="sm:block hidden md:hidden lg:block">
@@ -95,9 +96,9 @@ const PrimaryNav: React.FC = () => {
                   {items.map((item, index) => (
                      <li
                         key={index}
-                        className={`hover:text-primary-600 hover:underline underline-offset-[0.625rem] cursor-pointer ${
+                        className={`hover:text-primary-600  hover:underline underline-offset-[0.625rem] cursor-pointer ${
                            pathname === item.link &&
-                           'text-primary-600 underline underline-offset-[0.625rem]'
+                           'text-primary-600 underline underline-offset-[0.625rem] '
                         }`}
                      >
                         <a href={item.link}>{item.name}</a>
@@ -112,11 +113,11 @@ const PrimaryNav: React.FC = () => {
                   </li>
                   <li>
                      <div onClick={handleAuthClick}>
-                        <Buttons type="secondary" size="small">
+                        <Button variant={"outline"}>
                            {session.status === 'authenticated'
                               ? 'Sign Out'
                               : 'Sign In'}
-                        </Buttons>
+                        </Button>
                      </div>
                   </li>
                </ul>

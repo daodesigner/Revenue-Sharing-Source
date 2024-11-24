@@ -1,6 +1,6 @@
 'use client';
 
-import Buttons from '@/app/components/button/Butons';
+import {Button} from '@/app/components/button/Button';
 import Inputs from '@/app/components/inputs/Inputs';
 import React, { useState, useRef, useEffect } from 'react';
 import QRCode from 'qrcode.react';
@@ -110,13 +110,12 @@ function Page() {
                      //@ts-ignore
                      readOnly
                   />
-                  <Buttons
-                     type="primary"
+                  <Button
                      onClick={handleCopy}
                      {...({ onClick: handleCopy } as any)}
                   >
                      {copySuccess ? 'Copied!' : 'Copy wallet address'}
-                  </Buttons>
+                  </Button>
                </div>
             </section>
             <div

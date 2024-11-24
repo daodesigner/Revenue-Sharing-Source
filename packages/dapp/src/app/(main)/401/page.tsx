@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Buttons from '@/app/components/button/Butons';
+import Buttons from '@/app/components/button/Button';
 import { useState } from 'react';
 
 const Unauthorized401 = () => {

@@ -1,4 +1,4 @@
-import Buttons from '@/app/components/button/Butons';
+import {Button} from '@/app/components/button/Button';
 import { fetchAllTeamNotes } from '@/lib/hackMD';
 import { Note } from '@/utils/dev/frontEndInterfaces';
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
@@ -67,3 +67,8 @@ const BlogList = async () => {
 };
 
 export default BlogList;
+
+
+
+
+

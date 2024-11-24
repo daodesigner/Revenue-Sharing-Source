@@ -1,5 +1,5 @@
 'use client';
-import Buttons from '@/app/components/button/Butons';
+import {Button} from '@/app/components/button/Button';
 import Inputs from '@/app/components/inputs/Inputs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -141,13 +141,12 @@ function Page() {
                   )}
                </section>
                <section className="text-center space-y-6">
-                  <Buttons
-                     type="primary"
-                     size="large"
+                  <Button
+                   
                      onClick={() => onSubmit({ email, password, username })}
                   >
                      Create my account
-                  </Buttons>
+                  </Button>
                   <p>
                      By continuing you accept our standard{' '}
                      <a className="underline" href="">

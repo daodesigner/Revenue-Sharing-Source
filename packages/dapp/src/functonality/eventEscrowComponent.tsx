@@ -8,7 +8,7 @@ import {
 import { handleContractError } from '@/utils/dev/handleContractError';
 import { EventEscrowComponentProps } from '@/utils/dev/typeInit';
 import useExhibit from '@/lib/useGetExhibitById';
-import Buttons from '@/app/components/button/Butons';
+import Buttons from '@/app/components/button/Button';
 import { Transition } from '@headlessui/react';
 
 const EventEscrowComponent = ({ userAddress }: any) => {

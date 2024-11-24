@@ -1,5 +1,5 @@
 'use client';
-import Buttons from '@/app/components/button/Butons';
+import {Button} from '@/app/components/button/Button';
 import Inputs from '@/app/components/inputs/Inputs';
 import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
@@ -111,9 +111,9 @@ function Page() {
 
                <section className="relative text-center space-y-6">
                   <div onClick={onSubmit} className="w-full">
-                     <Buttons type="primary" size="large">
+                     <Button >
                         Sign into my account
-                     </Buttons>
+                     </Button>
                   </div>
                   <p>
                      By continuing you accept our standard{' '}
