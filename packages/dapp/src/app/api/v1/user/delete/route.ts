@@ -23,9 +23,9 @@ async function sendDeletionConfirmationEmail(email: string, token: string) {
       );
 
       // Read the file
-    
-      console.log(`dir ${process.cwd()}`)
-      console.log(`dir ${filePath}`)
+
+      console.log(`dir ${process.cwd()}`);
+      console.log(`dir ${filePath}`);
       let htmlTemplate = await readHtmlTemplate(filePath);
 
       // Replace template placeholders
@@ -60,7 +60,7 @@ async function sendDeletionConfirmationEmail(email: string, token: string) {
       await transporter.sendMail(mailOptions);
    } catch (error) {
       console.error('Error sending deletion confirmation email:', error);
-      throw (error)
+      throw error;
    }
 }
 

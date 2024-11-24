@@ -25,7 +25,7 @@ export default function ConnectWalletPrompt() {
             </div>
          ) : (
             <p className="text-green-600 mt-4 text-center">
-             Your connected address: <WalletStatus />
+               Your connected address: <WalletStatus />
             </p>
          )}
       </div>

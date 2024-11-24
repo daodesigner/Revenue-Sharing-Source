@@ -15,24 +15,23 @@ const metadata: Metadata = {
 };
 
 export default function Home() {
-
-const partners = [
-   {
-      name: "Women's History Museum of Zambia",
-      logo: 'https://s3.tebi.io/summitshare-images/whmzacc.png',
-      website: 'https://www.whmzambia.org/',
-   },
-   {
-      name: 'Ethereum Foundation',
-      logo: 'https://s3.tebi.io/summitshare-images/EF.png',
-      website: 'https://ethereum.foundation/',
-   },
-   {
-      name: 'Octant',
-      logo: 'https://s3.tebi.io/summitshare-images/octant.png',
-      website: 'https://octant.app/',
-   },
-];
+   const partners = [
+      {
+         name: "Women's History Museum of Zambia",
+         logo: 'https://s3.tebi.io/summitshare-images/whmzacc.png',
+         website: 'https://www.whmzambia.org/',
+      },
+      {
+         name: 'Ethereum Foundation',
+         logo: 'https://s3.tebi.io/summitshare-images/EF.png',
+         website: 'https://ethereum.foundation/',
+      },
+      {
+         name: 'Octant',
+         logo: 'https://s3.tebi.io/summitshare-images/octant.png',
+         website: 'https://octant.app/',
+      },
+   ];
 
    return (
       <div className=" space-y-24 mx-6 my-28 lg:mx-[15%]">
@@ -96,7 +95,8 @@ const partners = [
             <div className="space-y-2 text-center">
                <h2>Our Partners</h2>
                <p>
-                  Explore the incredible organizations supporting SummitShare's mission to reclaim and celebrate African heritage.
+                  Explore the incredible organizations supporting SummitShare&apos;s
+                  mission to reclaim and celebrate African heritage.
                </p>
             </div>
             <div className="flex justify-center space-x-8 mb-12">
@@ -138,33 +138,30 @@ const partners = [
                   </div>
                ))}
             </div>
-             {/* "See All" Button */}
-             <div className="flex justify-center">
-             <Link
-   href="/partners"
-   className="flex items-center text-blue-500 font-bold text-base bg-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all"
->
-   See All
-   <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-4 w-4 ml-2"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-   >
-      <path
-         strokeLinecap="round"
-         strokeLinejoin="round"
-         strokeWidth={2}
-         d="M14 5l7 7m0 0l-7 7m7-7H3"
-      />
-   </svg>
-</Link>
-
+            {/* "See All" Button */}
+            <div className="flex justify-center">
+               <Link
+                  href="/partners"
+                  className="flex items-center text-blue-500 font-bold text-base bg-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all"
+               >
+                  See All
+                  <svg
+                     xmlns="http://www.w3.org/2000/svg"
+                     className="h-4 w-4 ml-2"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                  >
+                     <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                     />
+                  </svg>
+               </Link>
             </div>
          </section>
-
-
 
          <section className="bg-primary-400 rounded-[0.5rem] w-full h-[21.375rem] flex flex-col items-center px-[2.813rem] justify-center space-y-12 ">
             <div className="space-y-2 text-center">

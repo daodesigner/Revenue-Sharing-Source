@@ -25,7 +25,6 @@ export const validateTicket = async (
    >,
    setButtonText: React.Dispatch<React.SetStateAction<string>>
 ) => {
-
    if (!ENABLE_VALIDATION) {
       console.log('Ticket validation is currently disabled');
       setHasTicket(false);

@@ -57,7 +57,7 @@ export async function GET(req: Request, res: NextResponse) {
 
       await prisma.users.delete({
          where: { id: verificationRecord.user_id! },
-      })
+      });
 
       return NextResponse.json(
          { message: 'Email user deleted' },

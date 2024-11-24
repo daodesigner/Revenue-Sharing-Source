@@ -1,13 +1,12 @@
 'use client';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
 
 import Container from '@/app/components/Container';
 import Line from '@/app/components/Line';
 import Buttons from '@/app/components/button/Butons';
 import { Trash, XCircle } from 'lucide-react';
-import { useSession , signOut} from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 
 export default function ProfileSettings() {
@@ -40,7 +39,7 @@ export default function ProfileSettings() {
          }
 
          toast.success('Check your email to confirm');
-        
+
          await signOut();
          router.push('/');
       } catch (error) {

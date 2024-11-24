@@ -29,17 +29,17 @@ export default function RootLayout({
       <html lang="en">
          <body className={``}>
             <metadata>
-            <SessionProvider>
-               <ApolloWrapper>
-                  <Web3Provider>
-                     <Providers>
-                        <PrimaryNav />
-                        <div className="">{children} </div>
-                        <Footer />
-                     </Providers>
-                  </Web3Provider>
-               </ApolloWrapper>
-            </SessionProvider>
+               <SessionProvider>
+                  <ApolloWrapper>
+                     <Web3Provider>
+                        <Providers>
+                           <PrimaryNav />
+                           <div className="">{children} </div>
+                           <Footer />
+                        </Providers>
+                     </Web3Provider>
+                  </ApolloWrapper>
+               </SessionProvider>
             </metadata>
          </body>
       </html>
