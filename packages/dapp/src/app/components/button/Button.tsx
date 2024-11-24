@@ -7,7 +7,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-900/95 focus:ring-neutral-600',
+        default: 'border border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-900/95 focus:ring-neutral-900',
         outline: 'border border-neutral-300 bg-transparent text-neutral-900 hover:bg-neutral-50/60 focus:ring-neutral-100',
         danger: 'border border-red-500 bg-red-100 text-red-500 hover:bg-red-500 hover:text-neutral-50 focus:ring-red-500',
         success: 'border border-green-500 bg-green-100 text-ge-500 hover:bg-green-500 hover:text-neutral-50 focus:ring-green-500',

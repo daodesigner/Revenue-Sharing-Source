@@ -8,8 +8,8 @@ import {
 import { handleContractError } from '@/utils/dev/handleContractError';
 import { EventEscrowComponentProps } from '@/utils/dev/typeInit';
 import useExhibit from '@/lib/useGetExhibitById';
-import Buttons from '@/app/components/button/Button';
 import { Transition } from '@headlessui/react';
+import Buttons from '@/app/components/button/Butons';
 
 const EventEscrowComponent = ({ userAddress }: any) => {
    // Hardcoded exhibit ID for demo
