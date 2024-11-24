@@ -27,6 +27,13 @@ export default function Home() {
          // Set loading to true when starting validation
          setIsLoading(true);
 
+         // Check if wallet is connected
+         if (!userAddress) {
+            console.warn('No wallet connected. Redirecting to /connect-wallet');
+            router.push('/connect-wallet');
+            return; // Exit validation if no wallet is connected
+         }
+
          // Validate access
          const { hasAccess } = await validatePageAccess(
             userAddress,

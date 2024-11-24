@@ -5,14 +5,14 @@ import { useRouter } from 'next/navigation';
 import ConnectWalletPrompt from '@/utils/methods/ticketPurchase/connectModal';
 
 export default function ConnectWallet() {
-   const { address } = useAccount(); 
-   const router = useRouter(); // 
-   const [redirectUrl, setRedirectUrl] = useState('/exhibit'); 
+   const { address } = useAccount();
+   const router = useRouter(); //
+   const [redirectUrl, setRedirectUrl] = useState('/');
 
    useEffect(() => {
       // Extract the redirect URL from query parameters
       const params = new URLSearchParams(window.location.search);
-      setRedirectUrl(params.get('redirect') || '/');
+      setRedirectUrl(params.get('redirect') || '/exhibit');
    }, []);
 
    useEffect(() => {

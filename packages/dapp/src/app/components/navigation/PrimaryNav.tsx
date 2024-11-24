@@ -31,8 +31,8 @@ const PrimaryNav: React.FC = () => {
 
    // Navigation items for the main nav bar
    const items: { name: string; link: string }[] = [
+      { name: 'Exhibit', link: '/exhibit' },
       { name: 'Blog', link: '/blog' },
-      { name: 'Partners', link: '/partners' },
       { name: 'Support Us', link: '/donate' },
       { name: 'Insights', link: '/distribution' },
       { name: 'Help', link: '/help' },
@@ -46,8 +46,8 @@ const PrimaryNav: React.FC = () => {
       {
          title: 'Pages',
          items: [
+            { name: 'Exhibit', link: '/exhibit' },
             { name: 'Blog', link: '/blog' },
-            { name: 'Partners', link: '/partners' },
             { name: 'Support Us', link: '/donate' },
          ],
       },
@@ -77,7 +77,6 @@ const PrimaryNav: React.FC = () => {
    // State to manage the open/close state of the responsive menu
    const [openMenu, setOpenMenu] = useState<boolean>(false);
 
-   // Get the current pathname to highlight the active link
    const pathname = usePathname();
    const { address } = useAccount();
 
