@@ -1,8 +1,9 @@
 import Buttons from '../components/button/Butons';
 import BlogList from '../(test)/test/page';
 import Link from 'next/link';
-import { StarIcon } from '@radix-ui/react-icons';
+import Image from 'next/image';
 import { Metadata } from 'next';
+import { useRouter } from 'next/navigation';
 
 const metadata: Metadata = {
    title: 'SummitShare',
@@ -14,65 +15,24 @@ const metadata: Metadata = {
 };
 
 export default function Home() {
-   // const [count, setCount] = useState({
-   //   artifact: 0,
-   //   donations: 0,
-   //   visitors: 0,
-   // });
 
-   // const thresholds = {
-   //   artifact: 10,
-   //   donations: 20.5,
-   //   visitors: 30,
-   // };
-
-   // useEffect(() => {
-   //   const intervalId = setInterval(() => {
-   //     setCount((prevCount) => {
-   //       const newCount = {
-   //         artifact:
-   //           prevCount.artifact >= thresholds.artifact
-   //             ? prevCount.artifact
-   //             : prevCount.artifact + 0.1,
-   //         donations:
-   //           prevCount.donations >= thresholds.donations
-   //             ? prevCount.donations
-   //             : prevCount.donations + 0.1,
-   //         visitors:
-   //           prevCount.visitors >= thresholds.visitors
-   //             ? prevCount.visitors
-   //             : prevCount.visitors + 0.1,
-   //       };
-
-   //       if (
-   //         newCount.artifact >= thresholds.artifact &&
-   //         newCount.donations >= thresholds.donations &&
-   //         newCount.visitors >= thresholds.visitors
-   //       ) {
-   //         clearInterval(intervalId);
-   //       }
-   //       return newCount;
-   //     });
-   //   }, 10);
-
-   //   return () => clearInterval(intervalId);
-   // }, []);
-
-   // const counter =
-   //   <ul className="w-[70%] flex justify-center gap-6  md:w-full md:gap-0 md:justify-start font-black ">
-   //     <li className="space-y-3 text-center w-[1/3] md:w-fit md:mr-3 ">
-   //       <h3>Artifact</h3>
-   //       <h2>{count.artifact.toFixed()}</h2>
-   //     </li>
-   //     <li className="space-y-3 text-center w-1/3 md:w-[20%]">
-   //       <h3>Visitors</h3>
-   //       <h2>{count.visitors.toFixed(1)}k</h2>
-   //     </li>
-   //     <li className="space-y-3 text-center w-1/3 md:w-[20%]">
-   //       <h3>Donations</h3>
-   //       <h2>{count.donations.toFixed(1)}k</h2>
-   //     </li>
-   //   </ul>
+const partners = [
+   {
+      name: "Women's History Museum of Zambia",
+      logo: 'https://s3.tebi.io/summitshare-images/whmzacc.png',
+      website: 'https://www.whmzambia.org/',
+   },
+   {
+      name: 'Ethereum Foundation',
+      logo: 'https://s3.tebi.io/summitshare-images/EF.png',
+      website: 'https://ethereum.foundation/',
+   },
+   {
+      name: 'Octant',
+      logo: 'https://s3.tebi.io/summitshare-images/octant.png',
+      website: 'https://octant.app/',
+   },
+];
 
    return (
       <div className=" space-y-24 mx-6 my-28 lg:mx-[15%]">
@@ -131,6 +91,80 @@ export default function Home() {
                </div>
             </div>
          </section>
+
+         <section className="space-y-8">
+            <div className="space-y-2 text-center">
+               <h2>Our Partners</h2>
+               <p>
+                  Explore the incredible organizations supporting SummitShare's mission to reclaim and celebrate African heritage.
+               </p>
+            </div>
+            <div className="flex justify-center space-x-8 mb-12">
+               {partners.map((partner, index) => (
+                  <div key={index} className="relative group">
+                     <div className="w-32 h-32 rounded-full overflow-hidden">
+                        <Image
+                           src={partner.logo}
+                           alt={partner.name}
+                           width={128}
+                           height={128}
+                           className="object-cover"
+                        />
+                     </div>
+                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Link
+                           href={partner.website}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className="bg-white px-3 py-1 rounded-full text-sm flex items-center"
+                        >
+                           Go to website
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-4 w-4 ml-1"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                           >
+                              <path
+                                 strokeLinecap="round"
+                                 strokeLinejoin="round"
+                                 strokeWidth={2}
+                                 d="M14 5l7 7m0 0l-7 7m7-7H3"
+                              />
+                           </svg>
+                        </Link>
+                     </div>
+                  </div>
+               ))}
+            </div>
+             {/* "See All" Button */}
+             <div className="flex justify-center">
+             <Link
+   href="/partners"
+   className="flex items-center text-blue-500 font-bold text-base bg-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all"
+>
+   See All
+   <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-4 w-4 ml-2"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+   >
+      <path
+         strokeLinecap="round"
+         strokeLinejoin="round"
+         strokeWidth={2}
+         d="M14 5l7 7m0 0l-7 7m7-7H3"
+      />
+   </svg>
+</Link>
+
+            </div>
+         </section>
+
+
 
          <section className="bg-primary-400 rounded-[0.5rem] w-full h-[21.375rem] flex flex-col items-center px-[2.813rem] justify-center space-y-12 ">
             <div className="space-y-2 text-center">
