@@ -8,7 +8,6 @@ import { SessionProvider } from 'next-auth/react';
 import Footer from '../components/navigation/footer';
 import PrimaryNav from '../components/navigation/PrimaryNav';
 import { Web3Provider } from '@/functonality/Web3Provider';
-import { ConnectKitProvider } from 'connectkit';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,6 +28,7 @@ export default function RootLayout({
    return (
       <html lang="en">
          <body className={``}>
+            <metadata>
             <SessionProvider>
                <ApolloWrapper>
                   <Web3Provider>
@@ -40,6 +40,7 @@ export default function RootLayout({
                   </Web3Provider>
                </ApolloWrapper>
             </SessionProvider>
+            </metadata>
          </body>
       </html>
    );
