@@ -23,13 +23,18 @@ function Page() {
          password,
          redirect: false,
       });
+      setIsLoading(false);
 
       if (response) {
          if (response.error) {
+            setIsLoading(false);
+
             // Handle different error types
             if (response.status === 401) {
+               setIsLoading(false);
                setErrorMessage('Username or email incorrect');
             } else {
+               setIsLoading(false);
                setErrorMessage('An error occurred. Please try again.');
             }
             setIsVisible(true);
@@ -56,18 +61,18 @@ function Page() {
    }, [email, password, router]);
 
    return (
-      <main className="h-screen flex flex-col justify-end items-center bg-[url('https://images.unsplash.com/photo-1606885118474-c8baf907e998?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWZyaWNhbiUyMGFydHxlbnwwfHwwfHx8MA%3D%3D')] bg-cover bg-center md:flex-row">
+      <main className="h-screen flex flex-col justify-end items-center bg-[url('https://images.unsplash.com/photo-1621419203897-20b66b98d495?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center md:flex-row">
          <div className="bg-gray-950/35 fixed inset-0"></div>
 
          {isLoading ? (
             <LoadingDots />
          ) : (
             <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
-               <nav className="w-full flex flex-row justify-end items-center">
+               <nav className="w-full flex flex-row justify-between items-center">
                   <Link href="/">Exit</Link>
                </nav>
 
-               <section className="space-y-6">
+               <section className="space-y-4">
                   <header className="text-center space-y-2">
                      <div className="relative mx-auto h-12 w-12">
                         <Image
