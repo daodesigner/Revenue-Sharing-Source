@@ -39,7 +39,7 @@ async function sendDeletionConfirmationEmail(email: string, token: string) {
       );
 
       const host = process.env.HOST;
-      const verificationLink = `${host}/verification/email/${token}`;
+      const verificationLink = `${host}/account/delete-account/${token}`;
       htmlTemplate = htmlTemplate.replace(
          '{{message}}',
          `
@@ -69,12 +69,17 @@ export async function DELETE(req: Request) {
       const body = await req.json();
       const { userId, email } = body;
 
+      
       if (!userId || !email) {
          return NextResponse.json(
             { message: 'User ID and email are required' },
             { status: 400 }
          );
       }
+
+      console.log(`user id ${userId}
+         ----`)
+
       const token = crypto.randomUUID(); // Generate a token
       const now = new Date();
       const expires = new Date(now.getTime() + 60 * 60 * 1000); // adds 1 hour to the current time
@@ -101,7 +106,7 @@ export async function DELETE(req: Request) {
          { status: 200 }
       );
    } catch (error) {
-      console.error('delete account error:', error);
+      console.error('delete account error:',);
       return NextResponse.json(
          { message: 'Failed to delete account' },
          { status: 500 }

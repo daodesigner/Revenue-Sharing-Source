@@ -10,7 +10,7 @@ export async function GET(req: Request, res: NextResponse) {
 
    if (!token) {
       //console.log("Token not sent");
-      return NextResponse.json({ message: 'token not sent' }, { status: 403 });
+      return NextResponse.json({ message: 'token not sent' }, { status: 400 });
    }
 
    try {

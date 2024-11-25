@@ -8,13 +8,14 @@ import {Button} from '@/app/components/button/Button';
 import { Trash, XCircle } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
+import { TextInput } from '@/app/components/inputs/TextInput';
 
 export default function ProfileSettings() {
    const router = useRouter();
    const { data: session } = useSession();
    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
    const [isDeleting, setIsDeleting] = useState(false);
-
+const [response,setResponse] = useState<string | null>()
    const userId = session?.user?.id || '';
    const userEmail = session?.user?.email || '';
    const user_name = session?.user?.username || '';
@@ -38,10 +39,13 @@ export default function ProfileSettings() {
             throw new Error('Failed to send email account');
          }
 
-         toast.success('Check your email to confirm');
 
-         await signOut();
-         router.push('/');
+         if(response.status <= 200){
+            router.push('/account/delete-account');
+         }
+         else if(response.status >200){
+            setResponse("Faild to delete Contact Support")
+         }
       } catch (error) {
          console.error('Error deleting account:', error);
          toast.error('Failed to delete account');
@@ -52,74 +56,77 @@ export default function ProfileSettings() {
    };
 
    return (
-         <div className=" mb-20 flex flex-col items-center">
-       
-         
-
-            <div className="space-y-8 w-full max-w-3xl px-6">
-               {/* Profile Section */}
-               <div className="space-y-4">
-                  <section className="space-y-6 bg-white p-6 rounded-md shadow-md">
-                     <div className="space-y-1">
-                        <h3 className="font-inter text-xl font-medium">
-                           Your Profile
+         <>
+            <div className="space-y-8 w-full mb-20 mt-28">  
+                  <section className="space-y-6 ">
+                     <div className="space-y-2">
+                     <h3 >
+                          Hi {user_name.charAt(0).toUpperCase() + user_name.slice(1)}
                         </h3>
-                        <p className="text-gray-600">
-                           Manage your account settings.
+                        <p>
+                           Lets Manage your account settings.
                         </p>
                      </div>
-
-                     {/* Email Display */}
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium">
-                           Account Email
-                        </label>
-                        <div className="p-2 bg-gray-50 rounded-md text-gray-600">
-                           {userEmail}
-                        </div>
+                     <div className="space-y-4">
+                        <TextInput
+                      
+                        label='Username'
+                        value={user_name}
+                        disabled={true}
+                        type='text'
+                        className='text-neutral-950 cursor-not-allowed md:w-[30%]'
+                        
+                        ></TextInput>
+                        <TextInput 
+                        label='Email'
+                        value={userEmail}
+                        disabled={true}
+                        type='email'
+                         className='text-neutral-950 cursor-not-allowed md:w-[40%] '
+                        ></TextInput>
                      </div>
-
-                     {/* Username Display */}
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium">
-                           Username
-                        </label>
-                        <div className="p-2 bg-gray-50 rounded-md text-gray-600">
-                           {user_name}
-                        </div>
-                     </div>
-
                      {/* Password Change Button */}
-                     <div className="space-y-2">
-                        <label className="block text-sm font-medium">
+                  
+                  </section>
+              
+
+               <Line/>
+
+               <div className="space-y-4">
+                        <div className='space-y-2'>
+                        <h4>
                            Password
-                        </label>
+                        </h4>
+                        <p>
+                        Change your Password using the button below.
+                     </p>
+                        </div>
+                     
                         <Button
-                         variant={"outline"}
+                        
                            onClick={() => router.push('/account/forgot-request')}
                         >
                            Change Password
                         </Button>
                      </div>
-                  </section>
-               </div>
 
-               <Line />
+           <Line/>
 
                {/* Danger Zone */}
-               <div className="space-y-4 bg-white p-6 rounded-md shadow-md">
-                  <div className="space-y-1">
-                     <h3 className="text-xl font-medium text-red-600">
-                        Danger Zone
-                     </h3>
-                     <p className="text-gray-600">
+               <div className="space-y-4 ">
+                  <div className="space-y-2">
+                  <h4 className=" text-red-500">
+                  Delete account
+                        </h4>
+                   
+                     <p>
                         Once you delete your account, there is no going back.
                         Please be certain.
                      </p>
                   </div>
                   <div className="w-fit">
                      <Button
-                  variant={"outline"}
+                  variant={"danger"}
            
                         onClick={() => setIsDeleteDialogOpen(true)}
                      >
@@ -132,48 +139,48 @@ export default function ProfileSettings() {
             {/* Custom Modal */}
             {isDeleteDialogOpen && (
                <div className="fixed inset-0 bg-gray-800/50 flex items-center justify-center z-50">
-                  <div className="bg-white rounded-md p-6 space-y-4 shadow-lg max-w-md w-full mx-4">
+                  <div className="bg-white rounded-md p-6 space-y-4 shadow-lg ring-1 ring-neutral-300 max-w-md w-full mx-4">
                      {/* Modal Header */}
-                     <div className="flex items-center justify-between">
-                        <h3 className="text-lg font-semibold text-red-600 flex items-center gap-2">
-                           <Trash className="w-5 h-5" />
+                     <div className="flex items-centerx">
+                        <h3 className=" text-red-500 flex items-center gap-2">
+                           
                            Delete Account
+                           <Trash className="w-5 h-5" />
                         </h3>
-                        <button
-                           onClick={() => setIsDeleteDialogOpen(false)}
-                           className="text-gray-600 hover:text-gray-900 transition"
-                        >
-                           <XCircle className="w-6 h-6" />
-                        </button>
+                      
                      </div>
 
                      {/* Modal Content */}
-                     <p className="text-gray-600">
-                        This action cannot be undone. This will permanently delete
+                     <p >
+                        This will permanently delete
                         your account and remove all associated data from our
                         servers.
                      </p>
 
                      {/* Modal Footer */}
-                     <div className="flex justify-end gap-4">
-                        <button
-                           onClick={() => setIsDeleteDialogOpen(false)}
-                           className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition disabled:opacity-50"
-                           disabled={isDeleting}
-                        >
-                           No, keep my account
-                        </button>
-                        <button
+                     <div className="flex gap-2">
+                    
+                        <Button
+                        variant={"danger"}
                            onClick={handleDeleteAccount}
-                           className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition disabled:opacity-50"
                            disabled={isDeleting}
                         >
-                           {isDeleting ? 'Deleting...' : 'Yes, delete my account'}
-                        </button>
+                           {isDeleting ? 'Confirming...' : 'Confirme'}
+                        </Button>
+                        <Button
+                        variant={"outline"}
+                           onClick={() => setIsDeleteDialogOpen(false)}
+                           disabled={isDeleting}
+                        >
+                         Keep
+                        </Button>
+                       
                      </div>
+{response&& <p className='text-red-500'>{response}</p>}
+                     
                   </div>
                </div>
             )}
-         </div>
+         </>
    );
 }
