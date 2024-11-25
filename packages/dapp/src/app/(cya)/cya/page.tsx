@@ -15,6 +15,7 @@ import {
    ButtonConfig,
    TicketPurchaseUIProps,
 } from '@/utils/dev/frontEndInterfaces';
+import { Button } from '@/app/components/button/Button';
 
 const ResponsiveVideo: React.FC = () => {
    const [isMobile, setIsMobile] = useState(false);
@@ -92,7 +93,7 @@ export default function Cya() {
    };
 
    return (
-      <main className="relative h-screen overflow-hidden mt-12 mb-20 z-0">
+      <main className="relative h-screen overflow-hidden z-0">
          {/* YouTube Video Background */}
          <ResponsiveVideo />
 
@@ -102,13 +103,12 @@ export default function Cya() {
                {' '}
                {/* Added margin top for mobile */}
                <h1 className="text-4xl md:text-5xl font-extrabold mb-4 md:mb-6 text-brown tracking-wide text-center text-white">
-                  {isComplete ? 'Coming Soon...' : 'Welcome!'}
+                  {/* {isComplete ? 'Coming Soon...' : 'Welcome!'} */}
+                  The Leading Ladies
                </h1>
                <div className="text-center max-w-2xl mb-8 md:mb-12 px-4">
-                  <p className=" md:text-xl text-white mb-2 leading-relaxed">
-                     Prepare to experience the &ldquo;Leading Ladies&ldquo;. An
-                     educational and interactive experience, one of the first of
-                     its kind...
+                  <p className="text-white/60">
+                  Take a virtual journey through history, exploring iconic figures and their artifacts, digitally restored and revealed in stunning detail.
                   </p>
                </div>
             </div>
@@ -178,84 +178,53 @@ export default function Cya() {
             )}
 
             {/* Ticket Purchase Section */}
-            <div className="z-10 relative mb-8">
+            <div className="z-10 relative mb-8 flex gap-2">
                {session?.status === 'authenticated' ? (
                   <TicketPurchaseComponent userAddress={''} user_id={''} />
                ) : (
-                  <Buttons
-                     type={buttonConfig.type}
-                     size="large"
-                     onClick={buttonConfig.action}
-                     disabled={false}
-                     //@ts-ignore
-                     style={{
-                        border: '2px solid white', // White edges
-                        backgroundColor: 'transparent', // Optional: make the background transparent
-                        color: 'white', // Text color
-                        padding: '16px 32px', // Increased padding for a bigger button
-                        fontSize: '1.5rem', // Increased font size for better visibility
-                        borderRadius: '8px', // Rounded corners
-                        transition: 'background-color 0.3s, transform 0.3s', // Smooth transitions
-                        cursor: 'pointer', // Pointer cursor on hover
-                        display: 'flex', // Use flexbox to align text
-                        justifyContent: 'center', // Center horizontally
-                        alignItems: 'center', // Center vertically
-                        textAlign: 'center', // Center text
-                     }}
-                     onMouseEnter={(e: {
-                        currentTarget: {
-                           style: { backgroundColor: string; transform: string };
-                        };
-                     }) => {
-                        e.currentTarget.style.backgroundColor =
-                           'rgba(255, 255, 255, 0.2)'; // Change background on hover
-                        e.currentTarget.style.transform = 'scale(1.05)'; // Slightly enlarge button on hover
-                     }}
-                     onMouseLeave={(e: {
-                        currentTarget: {
-                           style: { backgroundColor: string; transform: string };
-                        };
-                     }) => {
-                        e.currentTarget.style.backgroundColor = 'transparent'; // Reset background
-                        e.currentTarget.style.transform = 'scale(1)'; // Reset size
-                     }}
+                  <Button
+                  variant={"white"}
+                  size={"medium"}
+                     onClick={()=> !timeLeft && buttonConfig.action}
                   >
-                     Purchase
-                  </Buttons>
+                     {isComplete ? 'Coming Soon' : 'Purchase'}
+                  </Button>
+                  
                )}
+            
             </div>
 
-            <div className="flex flex-col items-center mt-12">
-               <div className="grid grid-cols-3 gap-8 text-center">
+            {/* <div className="flex flex-col items-center mt-12"> */}
+               {/* <div className="grid grid-cols-3 gap-8 text-center"> */}
                   {/* First section: 6 Unique Stories and Artifacts Preserved */}
-                  <div className="flex flex-col items-center">
+                  {/* <div className="flex flex-col items-center">
                      <div className="text-6xl font-bold">6</div>
                      <div className="text-lg text-gray-300">Stories</div>
-                  </div>
+                  </div> */}
 
                   {/* Second section: Incrementing Tickets Sold */}
-                  <div className="flex flex-col items-center">
+                  {/* <div className="flex flex-col items-center">
                      <div className="text-6xl font-bold">{ticketCount}</div>
                      <div className="text-lg text-gray-300">Tickets Sold</div>
-                  </div>
+                  </div> */}
 
                   {/* Third section: 1 Collective Legacy */}
-                  <div className="flex flex-col items-center">
+                  {/* <div className="flex flex-col items-center">
                      <div className="text-6xl font-bold">1</div>
                      <div className="text-lg text-gray-300">Legacy</div>
                   </div>
-               </div>
-            </div>
+               </div> */}
+            {/* </div> */}
 
             {/*  Different color */}
-            <Link
+            {/* <Link
                href="https://summitshare.co/blog/SJZH2lwwA"
                className="text-lg text-white underline hover:text-gray-300 transition-colors mt-10 md:mt-6"
                target="_blank"
                rel="noopener noreferrer"
             >
                learn more here
-            </Link>
+            </Link> */}
          </div>
       </main>
    );

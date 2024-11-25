@@ -1,5 +1,4 @@
 import {Button} from '../components/button/Button';
-import BlogList from '../(test)/test/page';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -7,6 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import HeroSection from '../components/heroSection';
 import Partners from './partners/page';
 import { useRouter } from 'next/navigation';
+import BlogList from '../components/BlogList';
 
 const metadata: Metadata = {
    title: 'SummitShare',

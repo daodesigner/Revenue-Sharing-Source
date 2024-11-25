@@ -52,12 +52,9 @@ export default function ProfileSettings() {
    };
 
    return (
-      <Container>
-         <div className="relative min-h-screen pb-20 flex flex-col items-center">
-            {/* Sticky Header */}
-            <div className="sticky top-0 bg-white/80 backdrop-blur-sm z-10 py-4 mb-6 w-full px-4">
-               <h2 className="text-2xl font-semibold">Account Settings</h2>
-            </div>
+         <div className=" mb-20 flex flex-col items-center">
+       
+         
 
             <div className="space-y-8 w-full max-w-3xl px-6">
                {/* Profile Section */}
@@ -178,6 +175,5 @@ export default function ProfileSettings() {
                </div>
             )}
          </div>
-      </Container>
    );
 }

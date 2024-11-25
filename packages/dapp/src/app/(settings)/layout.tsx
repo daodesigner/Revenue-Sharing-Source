@@ -22,11 +22,10 @@ export default function RootLayout({
 }>) {
    return (
       <html lang="en">
-         <body className={``}>
+         <body className={`flex flex-col justify-between h-screen mb-10`}>
             <SessionProvider>
                <Web3Provider>
                   <PrimaryNav />
-                  <SecondaryNavBar />
                   {children}
                </Web3Provider>
             </SessionProvider>

@@ -4,6 +4,7 @@ import {Button} from '@/app/components/button/Button';
 import Inputs from '@/app/components/inputs/Inputs';
 import React, { useState, useRef, useEffect } from 'react';
 import QRCode from 'qrcode.react';
+import Banner from '@/app/components/banners/banner';
 
 type WalletAddresses = {
    Ethereum: string;
@@ -24,7 +25,6 @@ function Page() {
    const [copySuccess, setCopySuccess] = useState(false);
    const mobileQrContainerRef = useRef<HTMLDivElement>(null);
    const desktopQrContainerRef = useRef<HTMLDivElement>(null);
-
    useEffect(() => {
       const updateQRSize = () => {
          const mobileContainer = mobileQrContainerRef.current;
@@ -71,7 +71,7 @@ function Page() {
 
    return (
       <div className="space-y-10 mx-6 my-28 lg:mx-[15%] ">
-         <header className="text-left space-y-2">
+         {/* <header className="text-left space-y-2">
             <h2>Support Our Multidisciplinary Project</h2>
             <p>
                Our project is a vibrant fusion of art, science, and community
@@ -80,7 +80,8 @@ function Page() {
                become an essential part of our creative ecosystem, enabling us to
                continue pushing boundaries and inspiring change.
             </p>
-         </header>
+         </header> */}
+         <Banner header={"Support the Project"} text={" We strive to create meaningful change and experiences. Your generous contribution fuels our mission. By donating, you become a part of our creative ecosystem, enabling us to pushing boundaries and inspiring change."} color={"blue"}/>
          <div className="md:grid md:grid-cols-2 gap-4">
             <section className="space-y-6 md:flex md:flex-col md:justify-between md:h-full">
                <div className="space-y-6">
