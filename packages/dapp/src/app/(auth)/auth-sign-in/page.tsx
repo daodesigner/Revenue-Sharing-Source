@@ -1,5 +1,5 @@
 'use client';
-import {Button} from '@/app/components/button/Button';
+import { Button } from '@/app/components/button/Button';
 import Inputs from '@/app/components/inputs/Inputs';
 import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
@@ -23,7 +23,6 @@ function Page() {
          password,
          redirect: false,
       });
-      setIsLoading(false);
 
       if (response) {
          if (response.error) {
@@ -40,6 +39,7 @@ function Page() {
 
             return () => clearTimeout(timer);
          } else {
+            setIsLoading(false);
             // Successful login
             router.push('/');
          }
@@ -111,9 +111,7 @@ function Page() {
 
                <section className="relative text-center space-y-6">
                   <div onClick={onSubmit} className="w-full">
-                     <Button >
-                        Sign into my account
-                     </Button>
+                     <Button>Sign into my account</Button>
                   </div>
                   <p>
                      By continuing you accept our standard{' '}
