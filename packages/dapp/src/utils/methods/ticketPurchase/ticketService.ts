@@ -1,4 +1,3 @@
-
 // ticketService.ts
 
 import axios from 'axios';
@@ -31,13 +30,6 @@ export const validateTicket = async (
       setHasTicket(false);
       setButtonType('primary');
       setButtonText('Validation Disabled'); // Optional: Indicate disabled state
-      return;
-   }
-
-   // Early return if no userAddress
-   if (!userAddress) {
-      setHasTicket(false);
-      setButtonType('primary');
       return;
    }
 
