@@ -108,7 +108,9 @@ export default function Cya() {
                </h1>
                <div className="text-center max-w-2xl mb-8 md:mb-12 px-4">
                   <p className="text-white/60">
-                  Take a virtual journey through history, exploring iconic figures and their artifacts, digitally restored and revealed in stunning detail.
+                     Take a virtual journey through history, exploring iconic
+                     figures and their artifacts, digitally restored and revealed
+                     in stunning detail.
                   </p>
                </div>
             </div>
@@ -183,33 +185,31 @@ export default function Cya() {
                   <TicketPurchaseComponent userAddress={''} user_id={''} />
                ) : (
                   <Button
-                  variant={"white"}
-                  size={"medium"}
-                     onClick={()=> !timeLeft && buttonConfig.action}
+                     variant={'white'}
+                     size={'medium'}
+                     onClick={() => !timeLeft && buttonConfig.action}
                   >
                      {isComplete ? 'Coming Soon' : 'Purchase'}
                   </Button>
-                  
                )}
-            
             </div>
 
             {/* <div className="flex flex-col items-center mt-12"> */}
-               {/* <div className="grid grid-cols-3 gap-8 text-center"> */}
-                  {/* First section: 6 Unique Stories and Artifacts Preserved */}
-                  {/* <div className="flex flex-col items-center">
+            {/* <div className="grid grid-cols-3 gap-8 text-center"> */}
+            {/* First section: 6 Unique Stories and Artifacts Preserved */}
+            {/* <div className="flex flex-col items-center">
                      <div className="text-6xl font-bold">6</div>
                      <div className="text-lg text-gray-300">Stories</div>
                   </div> */}
 
-                  {/* Second section: Incrementing Tickets Sold */}
-                  {/* <div className="flex flex-col items-center">
+            {/* Second section: Incrementing Tickets Sold */}
+            {/* <div className="flex flex-col items-center">
                      <div className="text-6xl font-bold">{ticketCount}</div>
                      <div className="text-lg text-gray-300">Tickets Sold</div>
                   </div> */}
 
-                  {/* Third section: 1 Collective Legacy */}
-                  {/* <div className="flex flex-col items-center">
+            {/* Third section: 1 Collective Legacy */}
+            {/* <div className="flex flex-col items-center">
                      <div className="text-6xl font-bold">1</div>
                      <div className="text-lg text-gray-300">Legacy</div>
                   </div>

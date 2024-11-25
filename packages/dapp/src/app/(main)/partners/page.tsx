@@ -76,7 +76,9 @@ const Partners: React.FC = () => {
             ))}
          </div>
          <p className="text-center max-w-3xl">
-         SummitShare is a collaborative initiative focused on reshaping the narrative around repatriation and reclaiming history, with the support of dedicated partners who help bring its vision to life.
+            SummitShare is a collaborative initiative focused on reshaping the
+            narrative around repatriation and reclaiming history, with the support
+            of dedicated partners who help bring its vision to life.
          </p>
          <div className="mb-12"></div>
          <div className="flex items-center">
@@ -86,7 +88,7 @@ const Partners: React.FC = () => {
                rel="noopener noreferrer"
                className="flex items-center  text-blue-500 font-bold font-size:16px bg-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all"
             >
-               Read more about our partners and supporters 
+               Read more about our partners and supporters
                <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4 ml-2"

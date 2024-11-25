@@ -33,9 +33,7 @@ export default function RootLayout({
                   <ApolloWrapper>
                      <Web3Provider>
                         <Providers>
-                       
                            <div className="">{children} </div>
-                      
                         </Providers>
                      </Web3Provider>
                   </ApolloWrapper>

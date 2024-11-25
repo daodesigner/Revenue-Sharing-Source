@@ -1,7 +1,7 @@
 'use client';
 import SummitShareCanvas from '@/app/components/3DCanvas/3dCanvas';
 import { data } from './data';
-import {Button} from '@/app/components/button/Button';
+import { Button } from '@/app/components/button/Button';
 import { X } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -134,27 +134,20 @@ const Page = ({ params }: { params: { slug: string } }) => {
 
             <div className="flex flex-row gap-4">
                <div className="w-[73px]">
-                  <Button >
-                     Yes
-                  </Button>
+                  <Button>Yes</Button>
                </div>
                <div className="w-[73px]">
-                  <Button >
-                     No
-                  </Button>
+                  <Button>No</Button>
                </div>
             </div>
          </div>
 
          <div className="space-y-4 md:flex md:flex-row md:gap-4 md:space-y-0">
-            <Button
-               onClick={handleBack}
-               disabled={currentIndex < 0}
-            >
+            <Button onClick={handleBack} disabled={currentIndex < 0}>
                Back
             </Button>
             <Button
-               disabled={currentIndex > data.length -1 }
+               disabled={currentIndex > data.length - 1}
                onClick={handleNext}
             >
                Next

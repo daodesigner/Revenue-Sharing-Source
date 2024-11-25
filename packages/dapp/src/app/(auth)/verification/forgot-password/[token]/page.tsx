@@ -1,5 +1,5 @@
 'use client';
-import {Button} from '@/app/components/button/Button';
+import { Button } from '@/app/components/button/Button';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -125,7 +125,9 @@ function Page({ params }: { params: { token: string } }) {
             <div className="w-full">
                <Button
                   onClick={
-                     verificationStatus === 200? () => router.push('/auth-sign-in'): ()=> router.push('/forgot-request')
+                     verificationStatus === 200
+                        ? () => router.push('/auth-sign-in')
+                        : () => router.push('/forgot-request')
                   }
                >
                   {verificationStatus === 200 ? 'Continue' : 'Resend'}

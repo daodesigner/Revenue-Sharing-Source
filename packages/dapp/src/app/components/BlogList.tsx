@@ -65,9 +65,3 @@ const BlogList = async () => {
 };
 
 export default BlogList;
-
-
-
-
-
-

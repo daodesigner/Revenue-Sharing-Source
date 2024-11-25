@@ -1,4 +1,3 @@
-
 'use client';
 import React from 'react';
 import {
@@ -121,10 +120,10 @@ const InsightsPage = () => {
                </div>
                <p className="text-stone-600 leading-relaxed">
                   Our goal is to create a new value addition cycle through the
-                  exhibits on our platform. Through the Women&apos;s History Museum of
-                  Zambia, we connected with the Gwembe Valley community in the
-                  Southern Province of Zambia. Proceeds support community-voted
-                  SDG development projects.
+                  exhibits on our platform. Through the Women&apos;s History
+                  Museum of Zambia, we connected with the Gwembe Valley community
+                  in the Southern Province of Zambia. Proceeds support
+                  community-voted SDG development projects.
                </p>
             </div>
 

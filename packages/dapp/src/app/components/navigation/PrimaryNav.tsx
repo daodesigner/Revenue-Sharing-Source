@@ -2,7 +2,7 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import React, { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import {Button} from '../button/Button';
+import { Button } from '../button/Button';
 import { useAccount } from 'wagmi';
 import { ConnectKitButton } from 'connectkit';
 import Link from 'next/link';
@@ -113,7 +113,7 @@ const PrimaryNav: React.FC = () => {
                   </li>
                   <li>
                      <div onClick={handleAuthClick}>
-                        <Button variant={"outline"}>
+                        <Button variant={'outline'}>
                            {session.status === 'authenticated'
                               ? 'Sign Out'
                               : 'Sign In'}

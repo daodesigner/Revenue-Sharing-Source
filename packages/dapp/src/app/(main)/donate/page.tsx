@@ -1,6 +1,6 @@
 'use client';
 
-import {Button} from '@/app/components/button/Button';
+import { Button } from '@/app/components/button/Button';
 import Inputs from '@/app/components/inputs/Inputs';
 import React, { useState, useRef, useEffect } from 'react';
 import QRCode from 'qrcode.react';
@@ -81,7 +81,13 @@ function Page() {
                continue pushing boundaries and inspiring change.
             </p>
          </header> */}
-         <Banner header={"Support the Project"} text={" We strive to create meaningful change and experiences. Your generous contribution fuels our mission. By donating, you become a part of our creative ecosystem, enabling us to pushing boundaries and inspiring change."} color={"blue"}/>
+         <Banner
+            header={'Support the Project'}
+            text={
+               ' We strive to create meaningful change and experiences. Your generous contribution fuels our mission. By donating, you become a part of our creative ecosystem, enabling us to pushing boundaries and inspiring change.'
+            }
+            color={'blue'}
+         />
          <div className="md:grid md:grid-cols-2 gap-4">
             <section className="space-y-6 md:flex md:flex-col md:justify-between md:h-full">
                <div className="space-y-6">

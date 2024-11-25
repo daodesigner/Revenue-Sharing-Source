@@ -28,17 +28,17 @@ export default function RootLayout({
    return (
       <html lang="en">
          <body className={`flex flex-col justify-between min-h-screen `}>
-               <SessionProvider>
-                  <ApolloWrapper>
-                     <Web3Provider>
-                        <Providers>
-                           <PrimaryNav />
-                           <div className="">{children} </div>
-                           <Footer />
-                        </Providers>
-                     </Web3Provider>
-                  </ApolloWrapper>
-               </SessionProvider>
+            <SessionProvider>
+               <ApolloWrapper>
+                  <Web3Provider>
+                     <Providers>
+                        <PrimaryNav />
+                        <div className="">{children} </div>
+                        <Footer />
+                     </Providers>
+                  </Web3Provider>
+               </ApolloWrapper>
+            </SessionProvider>
          </body>
       </html>
    );

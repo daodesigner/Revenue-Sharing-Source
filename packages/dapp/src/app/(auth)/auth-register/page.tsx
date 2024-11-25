@@ -1,5 +1,5 @@
 'use client';
-import {Button} from '@/app/components/button/Button';
+import { Button } from '@/app/components/button/Button';
 import Inputs from '@/app/components/inputs/Inputs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -141,10 +141,7 @@ function Page() {
                   )}
                </section>
                <section className="text-center space-y-6">
-                  <Button
-                   
-                     onClick={() => onSubmit({ email, password, username })}
-                  >
+                  <Button onClick={() => onSubmit({ email, password, username })}>
                      Create my account
                   </Button>
                   <p>

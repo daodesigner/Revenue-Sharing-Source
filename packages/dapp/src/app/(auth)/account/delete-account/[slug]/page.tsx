@@ -1,5 +1,5 @@
 'use client';
-import {Button} from '@/app/components/button/Button';
+import { Button } from '@/app/components/button/Button';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -37,13 +37,11 @@ function Page({ params }: { params: { slug: string } }) {
             );
             const { status } = response;
             const { message } = await response.json();
-            if (status === 200){
-                setTimeout(function() {
-                    signOut();
-                    router.push("/")
-                  }, 3000)
-
-              
+            if (status === 200) {
+               setTimeout(function () {
+                  signOut();
+                  router.push('/');
+               }, 3000);
             }
             // ////console.log(`status ${status}`)
             // ////console.log(`message ${message}`)
@@ -75,7 +73,6 @@ function Page({ params }: { params: { slug: string } }) {
 
          <div className=" relative flex flex-col items-center justify-center px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
             <nav className=" absolute top-5 right-5">
-              
                <Link href="/">Exit</Link>
             </nav>
             <div className="text-center space-y-2">
@@ -88,7 +85,6 @@ function Page({ params }: { params: { slug: string } }) {
                   </>
                )}
             </div>
-
          </div>
       </main>
    );

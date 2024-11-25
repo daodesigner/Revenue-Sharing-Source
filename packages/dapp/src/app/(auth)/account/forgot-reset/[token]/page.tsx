@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Inputs from '@/app/components/inputs/Inputs';
-import {Button} from '@/app/components/button/Button';
+import { Button } from '@/app/components/button/Button';
 import Image from 'next/image';
 import { Eye, EyeOff } from 'lucide-react';
 import LoadingDots from '@/app/(main)/exhibit/loadingDots';
@@ -137,9 +137,7 @@ function ResetPassword({ params }: { params: { token: string } }) {
                </section>
 
                <section className="text-center space-y-6">
-                  <Button  onClick={resetPassword}>
-                     Reset Password
-                  </Button >
+                  <Button onClick={resetPassword}>Reset Password</Button>
 
                   <p>
                      Remember your password?{' '}

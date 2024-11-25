@@ -69,7 +69,6 @@ export async function DELETE(req: Request) {
       const body = await req.json();
       const { userId, email } = body;
 
-      
       if (!userId || !email) {
          return NextResponse.json(
             { message: 'User ID and email are required' },
@@ -78,7 +77,7 @@ export async function DELETE(req: Request) {
       }
 
       console.log(`user id ${userId}
-         ----`)
+         ----`);
 
       const token = crypto.randomUUID(); // Generate a token
       const now = new Date();
@@ -106,7 +105,7 @@ export async function DELETE(req: Request) {
          { status: 200 }
       );
    } catch (error) {
-      console.error('delete account error:',);
+      console.error('delete account error:');
       return NextResponse.json(
          { message: 'Failed to delete account' },
          { status: 500 }

@@ -2,10 +2,9 @@
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
-
 function Page({ params }: { params: { token: string } }) {
    const { data: session } = useSession();
-   const userEmail = session?.user?.email
+   const userEmail = session?.user?.email;
    const user_name = session?.user?.username || '';
 
    return (
@@ -15,7 +14,11 @@ function Page({ params }: { params: { token: string } }) {
          </nav>
          <div className="text-center space-y-2">
             <h1>Verify delete acction</h1>
-            <p>An email has been sent to <span className='text-blue-700 underline'>{userEmail}</span>  to confirm that the action was performed by {user_name} </p>
+            <p>
+               An email has been sent to{' '}
+               <span className="text-blue-700 underline">{userEmail}</span> to
+               confirm that the action was performed by {user_name}{' '}
+            </p>
          </div>
       </div>
    );
