@@ -8,7 +8,7 @@ const USDT_AMOUNT = ethers.utils.parseUnits('5', 6); // 5 USDT (6 decimals)
 const ETH_AMOUNT = ethers.utils.parseEther('0.00000606'); // 0.00000606 ETH (assuming 1 ETH = $3300)
 
 // API Handler
-export async function distributeHandler(req: Request, res: NextResponse) {
+export default async function handler(req: Request) {
    if (req.method !== 'POST') {
       return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
    }
@@ -78,7 +78,7 @@ export async function distributeHandler(req: Request, res: NextResponse) {
             error: 'Distribution failed',
             details: error.message,
          },
-         { status: 200 }
+         { status: 500 }
       );
    }
 }
