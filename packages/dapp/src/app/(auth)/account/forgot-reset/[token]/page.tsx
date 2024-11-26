@@ -7,6 +7,7 @@ import { Button } from '@/app/components/button/Button';
 import Image from 'next/image';
 import { Eye, EyeOff } from 'lucide-react';
 import LoadingDots from '@/app/(main)/exhibit/loadingDots';
+import { TextInput } from '@/app/components/inputs/TextInput';
 
 function ResetPassword({ params }: { params: { token: string } }) {
    const router = useRouter();
@@ -74,93 +75,82 @@ function ResetPassword({ params }: { params: { token: string } }) {
    };
 
    return (
-      <main className="h-screen flex flex-col justify-end items-center bg-[url('https://images.unsplash.com/photo-1621419203897-20b66b98d495?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center md:flex-row">
-         <div className="bg-gray-950/35 fixed inset-0"></div>
+  
 
-         {isLoading ? (
-            <LoadingDots />
-         ) : (
-            <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
-               <nav className="w-full flex flex-row justify-between items-center">
-                  <p className="text-p2-m">Reset Password</p>
-                  <Link href="/">Exit</Link>
-               </nav>
+      
+      <div className="relative flex flex-col items-center justify-center px-6 py-10 bg-white h-screen md:w-[50%] md:float-right">
+                <nav className="absolute top-5 w-full flex justify-end items-center px-5">
+            <Link href="/">Exit</Link>
+         </nav>
 
-               <section className="space-y-4">
-                  <header className="text-center space-y-2">
-                     <div className="relative mx-auto h-12 w-12">
-                        <Image
-                           src="https://summitshare3.s3.eu-north-1.amazonaws.com/IMG_3157.PNG"
-                           alt="Logo"
-                           fill
-                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                           style={{ objectFit: 'contain' }}
-                        />
-                     </div>
+         <section className="space-y-4 md:w-[70%]">                  
+            <header className="text-center space-y-2">
+                
 
-                     <h2>Create New Password</h2>
+                     <h1 className='text-orange-500'>Create New Password</h1>
                      <p>Enter a strong, unique password</p>
                   </header>
 
                   <form action="">
                      <section className="space-y-4">
-                        <Inputs
-                           type="input"
+                        <TextInput
+                           type="password"
                            label="New Password"
-                           state={passwordError ? 'failure' : 'success'}
-                           isPassword={true}
+                          
+                     
                            value={password}
-                           onChange={(value) => {
-                              setPassword(value);
+                           onChange={(e) => {
+                              setPassword(e.target.value);
                               setPasswordError(false);
                               setErrorMessage('');
                            }}
                         />
-                        <Inputs
-                           type="input"
+                        <TextInput
+                           type="password"
                            label="Confirm Password"
-                           state={confirmPasswordError ? 'failure' : 'success'}
-                           isPassword={true}
+                       
                            value={confirmPassword}
-                           onChange={(value) => {
-                              setConfirmPassword(value);
+                           onChange={(e) => {
+                              setConfirmPassword(e.target.value);
                               setConfirmPasswordError(false);
                               setErrorMessage('');
                            }}
                         />
                      </section>
                   </form>
+                  <section className="text-center space-y-6">
+                  <Button className='w-full' onClick={resetPassword}>Reset Password</Button>
 
+                  <p>
+                     Remember your password?{' '}
+                     <a className="underline text-orange-500" href="/auth-sign-in">
+                        Sign in
+                     </a>
+                  </p>
+               </section>
                   {errorMessage && (
                      <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
                   )}
                </section>
 
-               <section className="text-center space-y-6">
-                  <Button onClick={resetPassword}>Reset Password</Button>
-
-                  <p>
-                     Remember your password?{' '}
-                     <a className="underline" href="/auth-sign-in">
-                        Sign in
-                     </a>
-                  </p>
-               </section>
+             
+               
             </div>
-         )}
-         {/* Success Popup */}
-         {showSuccessPopup && (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-800/50 z-50">
-               <div className="bg-white p-6 rounded-md shadow-md text-center space-y-4">
-                  <h3 className="text-xl font-semibold text-green-600">
-                     {successMessage}
-                  </h3>
-                  <p>You will be redirected to the sign-in page shortly.</p>
-               </div>
-            </div>
-         )}
-      </main>
+         
+   
+    
    );
 }
 
 export default ResetPassword;
+      {/* Success Popup */}
+         // {showSuccessPopup && (
+         //    <div className="fixed inset-0 flex items-center justify-center bg-gray-800/50 z-50">
+         //       <div className="bg-white p-6 rounded-md shadow-md text-center space-y-4">
+         //          <h3 className="text-xl font-semibold text-green-600">
+         //             {successMessage}
+         //          </h3>
+         //          <p>You will be redirected to the sign-in page shortly.</p>
+         //       </div>
+         //    </div>
+         // )}

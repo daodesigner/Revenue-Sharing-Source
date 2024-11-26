@@ -4,39 +4,40 @@ import Inputs from '@/app/components/inputs/Inputs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import Image from 'next/image';
-import { Eye, EyeOff } from 'lucide-react';
-import LoadingDots from '@/app/(main)/exhibit/loadingDots';
+import { TextInput } from '@/app/components/inputs/TextInput';
 
 function Page() {
    const router = useRouter();
 
-   const [username, setUsername] = useState('');
-   const [password, setPassword] = useState('');
-   const [email, setEmail] = useState('');
-   const [status, setStatus] = useState<number>();
-   const [usernameError, setUsernameError] = useState(false);
-   const [emailError, setEmailError] = useState(false);
-   const [errorMessage, setErrorMessage] = useState('');
-   const [showPassword, setShowPassword] = useState(false);
-   const [isLoading, setIsLoading] = useState(false);
+   // State management
+   const [formData, setFormData] = useState({
+      username: '',
+      email: '',
+      password: '',
+   });
+   const [status, setStatus] = useState<number | undefined>();
+   const [errorMessage, setErrorMessage] = useState<string>('');
+   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-   const createUser = async ({ email, password, username }: any) => {
+   // Handle form input changes
+   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData({
+         ...formData,
+         [e.target.name]: e.target.value,
+      });
+      setErrorMessage(''); // Clear error messages on change
+   };
+
+   // Create user function
+   const createUser = async (userData: typeof formData) => {
       const host = process.env.NEXT_PUBLIC_HOST;
       const url = `${host}/api/v1/signup`;
 
       try {
          const response = await fetch(url, {
             method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-               email,
-               password,
-               username,
-               type: 'visitor',
-            }),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...userData, type: 'visitor' }),
          });
 
          setStatus(response.status);
@@ -47,126 +48,114 @@ function Page() {
       }
    };
 
-   const onSubmit = async (data: any) => {
+   // Form submission
+   const onSubmit = async () => {
+      if (isLoading) return; // Prevent multiple submissions
+      setIsLoading(true);
       try {
-         setIsLoading(true);
-         const response = await createUser(data);
-         if (response.status === 409) {
-            setIsLoading(false);
-            const errorData = await response.json();
-            setErrorMessage('Username or email already exists');
-            setUsernameError(true);
-            setEmailError(true);
-         } else if (response.ok) {
-            setIsLoading(false);
-            router.push('/verification/email');
-         } else {
-            setIsLoading(false);
-            setErrorMessage('An error occurred. Please try again.');
-         }
+         const response = await createUser(formData);
+         responseHandler(response.status);
       } catch (error) {
-         console.error('Error during submission:', error);
          setErrorMessage('An error occurred. Please try again.');
+      } finally {
+         setIsLoading(false); // Reset loading state
+      }
+   };
+
+   // Handle API responses
+   const responseHandler = (response: number) => {
+      switch (response) {
+         case 400:
+            setErrorMessage('No email or password sent');
+            break;
+         case 409:
+            setErrorMessage('User already exists');
+            break;
+         case 201:
+            router.push('/verification/email');
+            break;
+         default:
+            setErrorMessage('Unhandled response code');
       }
    };
 
    return (
-      <main className="h-screen flex flex-col justify-end items-center bg-[url('https://images.unsplash.com/photo-1621419203897-20b66b98d495?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center md:flex-row">
-         <div className="bg-gray-950/35 fixed inset-0"></div>
+      <div className="relative flex flex-col items-center justify-center px-6 py-10 bg-white h-screen md:w-[50%] md:float-right">
+         <nav className="absolute top-5 w-full flex flex-row justify-between items-center px-5">
+            <p className="">
+               Step 1<span> of 2</span>
+            </p>
+            <Link href="/">Exit</Link>
+         </nav>
 
-         {isLoading ? (
-            <LoadingDots />
-         ) : (
-            <div className="flex flex-col justify-between px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
-               <nav className="w-full flex flex-row justify-between items-center">
-                  <p className="text-p2-m">
-                     Step 1<span> of 2</span>
-                  </p>
-                  <Link href="/">Exit</Link>
-               </nav>
+         <section className="space-y-4 md:w-[70%]">
+            <header className="text-center space-y-2">
+               <h1 className="text-orange-500">Create account</h1>
+               <p>Learn more about the history you love</p>
+            </header>
 
+            <form
+               onSubmit={(e) => {
+                  e.preventDefault();
+                  onSubmit();
+               }}
+               className="space-y-6"
+            >
                <section className="space-y-4">
-                  <header className="text-center space-y-2">
-                     <div className="relative mx-auto h-12 w-12">
-                        <Image
-                           src="https://summitshare3.s3.eu-north-1.amazonaws.com/IMG_3157.PNG"
-                           alt="Logo"
-                           fill
-                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                           style={{ objectFit: 'contain' }}
-                        />
-                     </div>
-
-                     <h2>Create account</h2>
-
-                     <p>Learn about the history you love!</p>
-                  </header>
-
-                  <form action="">
-                     <section className="space-y-4">
-                        <Inputs
-                           type="input"
-                           //@ts-ignore
-                           state={usernameError ? 'error' : 'active'}
-                           label="Username"
-                           value={username}
-                           onChange={(value) => {
-                              setUsername(value);
-                              setUsernameError(false);
-                              setErrorMessage('');
-                           }}
-                        />
-                        <Inputs
-                           type="input"
-                           //@ts-ignore
-                           state={emailError ? 'error' : 'active'}
-                           label="Email"
-                           value={email}
-                           onChange={(value) => {
-                              setEmail(value);
-                              setEmailError(false);
-                              setErrorMessage('');
-                           }}
-                        />
-                        <Inputs
-                           type="input"
-                           label="Password"
-                           state="active"
-                           isPassword={true}
-                           value={password}
-                           onChange={(value) => setPassword(value)}
-                        />
-                     </section>
-                  </form>
-                  {errorMessage && (
-                     <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-                  )}
+                  <TextInput
+                     type="text"
+                     label="Username"
+                     name="username"
+                     value={formData.username}
+                     onChange={handleChange}
+                  />
+                  <TextInput
+                     type="email"
+                     label="Email"
+                     name="email"
+                     value={formData.email}
+                     onChange={handleChange}
+                  />
+                  <TextInput
+                     type="password"
+                     label="Password"
+                     name="password"
+                     value={formData.password}
+                     onChange={handleChange}
+                  />
+                  {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
                </section>
+
                <section className="text-center space-y-6">
-                  <Button onClick={() => onSubmit({ email, password, username })}>
-                     Create my account
+                  <Button
+                     size="medium"
+                     className="w-full"
+                     type="submit"
+                     disabled={isLoading} // Disable button when loading
+                  >
+                     {isLoading ? 'Creating account...' : 'Create my account'}
                   </Button>
                   <p>
                      By continuing you accept our standard{' '}
-                     <a className="underline" href="">
+                     <a className="underline text-blue-700" href="">
                         terms and conditions
                      </a>{' '}
                      and{' '}
-                     <a className="underline" href="">
+                     <a className="underline text-blue-700" href="">
                         our privacy policy
                      </a>
                      .
                   </p>
                   <p>
                      Already have an account?{' '}
-                     <a className="underline" href="/auth-sign-in">
+                     <a className="underline text-orange-600" href="/auth-sign-in">
                         Sign in
                      </a>
                   </p>
                </section>
-            </div>
-         )}
-      </main>
+            </form>
+         </section>
+      </div>
    );
 }
 
