@@ -21,7 +21,7 @@ function HeroSection() {
                <Link href={'/cya'}>
                   <Button>Enter Exhibiit </Button>
                </Link>
-               <Link href={'/cya'}>
+               <Link href={'/distribution'}>
                   <Button variant="white">Learn more</Button>
                </Link>
             </div>

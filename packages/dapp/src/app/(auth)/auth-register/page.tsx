@@ -52,14 +52,16 @@ function Page() {
          setIsLoading(true);
          const response = await createUser(data);
          if (response.status === 409) {
+            setIsLoading(false);
             const errorData = await response.json();
             setErrorMessage('Username or email already exists');
             setUsernameError(true);
             setEmailError(true);
-            setIsLoading(false);
          } else if (response.ok) {
+            setIsLoading(false);
             router.push('/verification/email');
          } else {
+            setIsLoading(false);
             setErrorMessage('An error occurred. Please try again.');
          }
       } catch (error) {
