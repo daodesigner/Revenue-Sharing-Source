@@ -67,7 +67,7 @@ export default function Home() {
          name: 'Julia Chikamoneka',
          img: '/women/julia.png',
          link: '/exhibit/julia-chikamoneka',
-         artifact: 'Headrest'
+         artifact: 'Headrest',
       },
 
       {
@@ -76,33 +76,33 @@ export default function Home() {
          link: '/exhibit/mwenya-mukulu',
          artifact: 'Double Sided Drum',
       },
-      { 
+      {
          name: 'Mwape',
          img: '/women/mwape.png',
          link: '/exhibit/mwape',
-         artifact: 'Cowry Beads' 
+         artifact: 'Cowry Beads',
       },
 
       {
          name: 'lueji wa nkonde',
          img: '/women/lueji.png',
          link: '/exhibit/lueji-wa-nkonde',
-         artifact: 'Snuff Cup'
+         artifact: 'Snuff Cup',
       },
 
-      { 
-        name: 'Mukwae',
-        img: '/women/mukwae.png',
-        link: '/exhibit/mukwae',
-        artifact: "Calabash" },
+      {
+         name: 'Mukwae',
+         img: '/women/mukwae.png',
+         link: '/exhibit/mukwae',
+         artifact: 'Calabash',
+      },
 
-      { 
+      {
          name: 'Loongo',
          img: '/women/loongo.png',
          link: '/exhibit/loongo',
-         artifact: 'Luvale Mask'
+         artifact: 'Luvale Mask',
       },
-
    ];
 
    return (

@@ -37,39 +37,6 @@ const Headrest = dynamic(
 import { ObjectDescription } from '@/utils/dev/frontEndInterfaces';
 
 export const data: ObjectDescription[] = [
-   // Double Sided Drum - Mwenya Mukulu
-   {
-      title: 'Mwenya Mukulu',
-      object_URL: <Drum />,
-      object_name: 'Double Sided Drum',
-      object_address:
-         'https://optimistic.etherscan.io/nft/0xe3f9cb6608fefb78fdb2fd5496d62dc547236aaa/0',
-      Object_description: [
-         [
-            'A royal drum made out of wood, fibres, and python skin and decorated in black colour.',
-         ],
-         ['It was used when the chief is coming to or leaving a meeting.'],
-      ],
-      Figure_artifact_details:
-         'Mwenya Mukulu was the leader of the Lungu, Azamba, Azao or Sao people. The Lungu or Azamba people came down the lake in canoes from the eastern side of Lake Tanganyika at the end of the 17th century. They put to shore on the south end of the lake and Mwenya Mukulu became their Queen. She consolidated her leadership and the power among her people and the people of the new land. She then divided this area amongst her four sisters and made them rulers over the people they found there, founding the Lungu nation in the present day Mbala/Mpulungu areas of Zambia.',
-      figure_details: [['Known as the 17th century Diplomat'], ['(1910 - 1986)']],
-      figure_biography: [
-         [
-            'Mwenya Mukulu was the leader of the Lungu, Azamba, Azao or Sao people. The Lungu or Azamba people came down the lake in canoes from the eastern side of Lake Tanganyika at the end of the 17th century.',
-         ],
-         [
-            'They put to shore on the south end of the lake and Mwenya Mukulu became their Queen. She consolidated her leadership and the power among her people and the people of the new land.',
-         ],
-         [
-            'She then divided this area amongst her four sisters and made them rulers over the people they found there, founding the Lungu nation in the present day Mbala/Mpulungu areas of Zambia.',
-         ],
-      ],
-      figure_references: [
-         ['https://collections.smvk.se/carlotta-em/web/object/1996946'],
-         ['https://youtu.be/xzCoP4NEbTg'],
-      ],
-   },
-
    // Headrest - Julia Chikamoneka
    {
       title: 'Julia Chikamoneka',
@@ -112,6 +79,161 @@ export const data: ObjectDescription[] = [
       figure_references: [
          ['https://collections.smvk.se/carlotta-em/web/object/1261202'],
          ['https://youtu.be/Ytc_wKNzows'],
+      ],
+   },
+
+   // Double Sided Drum - Mwenya Mukulu
+   {
+      title: 'Mwenya Mukulu',
+      object_URL: <Drum />,
+      object_name: 'Double Sided Drum',
+      object_address:
+         'https://optimistic.etherscan.io/nft/0xe3f9cb6608fefb78fdb2fd5496d62dc547236aaa/0',
+      Object_description: [
+         [
+            'A royal drum made out of wood, fibres, and python skin and decorated in black colour.',
+         ],
+         ['It was used when the chief is coming to or leaving a meeting.'],
+      ],
+      Figure_artifact_details:
+         'Mwenya Mukulu was the leader of the Lungu, Azamba, Azao or Sao people. The Lungu or Azamba people came down the lake in canoes from the eastern side of Lake Tanganyika at the end of the 17th century. They put to shore on the south end of the lake and Mwenya Mukulu became their Queen. She consolidated her leadership and the power among her people and the people of the new land. She then divided this area amongst her four sisters and made them rulers over the people they found there, founding the Lungu nation in the present day Mbala/Mpulungu areas of Zambia.',
+      figure_details: [['Known as the 17th century Diplomat'], ['(1910 - 1986)']],
+      figure_biography: [
+         [
+            'Mwenya Mukulu was the leader of the Lungu, Azamba, Azao or Sao people. The Lungu or Azamba people came down the lake in canoes from the eastern side of Lake Tanganyika at the end of the 17th century.',
+         ],
+         [
+            'They put to shore on the south end of the lake and Mwenya Mukulu became their Queen. She consolidated her leadership and the power among her people and the people of the new land.',
+         ],
+         [
+            'She then divided this area amongst her four sisters and made them rulers over the people they found there, founding the Lungu nation in the present day Mbala/Mpulungu areas of Zambia.',
+         ],
+      ],
+      figure_references: [
+         ['https://collections.smvk.se/carlotta-em/web/object/1996946'],
+         ['https://youtu.be/xzCoP4NEbTg'],
+      ],
+   },
+
+   //Cowry Beads - Mwape
+   {
+      title: 'Mwape',
+      object_URL: <Cowry />,
+      object_name: 'Cowry Beads',
+      object_address:
+         'https://optimistic.etherscan.io/nft/0xe3f9cb6608fefb78fdb2fd5496d62dc547236aaa/3',
+      Object_description: [
+         [
+            'A belt made of leather and cowry shells. Cowries were expensive in places far away from the sea like Zambia and could only be acquired by people of influence.',
+         ],
+         [
+            'To possess such an item with such a large number of cowries meant the person that owned this belt was very wealthy.',
+         ],
+         [
+            'The shells were also used as a medium of exchange and are also an indicator of the presence of long distance trade in the interior of Zambia.',
+         ],
+      ],
+      Figure_artifact_details:
+         'She was a ruler of a Kingdom that comprised the middle Luangwa and the Chuambira valley and further east, Mulilo, and Chisenga respectively at Chinshumbu and Kaundi who owed her allegiance.',
+      figure_details: [
+         ['A fearless warrior and ruler of middle Luangwa and Chuambira valley'],
+         ['(1910 - 1986)'],
+      ],
+      figure_biography: [
+         [
+            'Being a fierce warrior, Mwape fought battles with the Chikunda slave traders and other Chiefs, extended her influence, protected her people, and imposed control over the trade routes in her land.',
+         ],
+      ],
+      figure_references: [
+         ['https://collections.smvk.se/carlotta-em/web/object/1600518'],
+         ['https://youtu.be/VjXktuYSgfQ'],
+      ],
+   },
+
+   // Snuff Cup - Lueji Wa Nkonde
+   {
+      title: 'Lueji Wa Nkonde',
+      object_URL: <Snuff levelOfDetail="high" />,
+      object_name: 'Snuff Cup',
+      object_address:
+         'https://optimistic.etherscan.io/nft/0xe3f9cb6608fefb78fdb2fd5496d62dc547236aaa/2',
+      Object_description: [
+         ['Used to store and carry snuff (Tobacco).'],
+         ['It has three openings: on both ends for loading the snuff.'],
+         ['On one end it is closed with a wood stopper.'],
+         [
+            'Another small opening on the side of the container, for pouring out the snuff when one wants to use it. It is closed with an elaborate wood lid.',
+         ],
+         [
+            'The wood is burnt black and oiled (Traditional way of treating wood) and decorated with engravings.',
+         ],
+      ],
+      Figure_artifact_details:
+         'Lueji was the daughter of Mwata Iyala Mwaku, a descendant of Queen Kenga Naweji. Mwata Iyala Mwaku appointed Lueji wa Konde as his successor, or Nswana Mu Luunda. He then gave her the Lukano bracelet, a sign of authority over all the Luunda tu buungo. She ruled the Lunda federation of Tubungo in the 1650s. Lueji’s reign resulted in the migration of various groups who became the Lunda, Luchazi, Luwena, Luvale and Chokwe, the Ndembu, Mbwela, Samba, Munungu, and the Mbunda people in today’s North-Western Province of Zambia. The migration also spread to adjacent areas in The Democratic Republic of Congo, Namibia, and Angola. Which has now become most of the population of Northwestern Province.',
+      figure_details: [
+         ['The 17th Century Political Negotiator'],
+         ['(1910 - 1986)'],
+      ],
+      figure_biography: [
+         [
+            'Lueji was the daughter of Mwata Iyala Mwaku, a descendant of Queen Kenga Naweji. Mwata Iyala Mwaku appointed Lueji wa Konde as his successor, or Nswana Mu Luunda.',
+         ],
+         [
+            'He then gave her the Lukano bracelet, a sign of authority over all the Luunda tu buungo. She ruled the Lunda federation of Tubungo in the 1650s.',
+         ],
+         [
+            'Lueji’s reign resulted in the migration of various groups who became the Lunda, Luchazi, Luwena, Luvale and Chokwe, the Ndembu, Mbwela, Samba, Munungu, and the Mbunda people in today’s North-Western Province of Zambia.',
+         ],
+         [
+            'The migration also spread to adjacent areas in The Democratic Republic of Congo, Namibia, and Angola. Which has now become most of the population of Northwestern Province.',
+         ],
+      ],
+      figure_references: [
+         ['https://collections.smvk.se/carlotta-em/web/object/1304494'],
+         ['https://youtu.be/A1HEPtkt8P4'],
+      ],
+   },
+
+   // Calabash - Mukwae
+   {
+      title: 'Mukwae',
+      object_URL: <Calabash />,
+      object_name: 'Calabash',
+      object_address:
+         'https://optimistic.etherscan.io/nft/0xe3f9cb6608fefb78fdb2fd5496d62dc547236aaa/4',
+      Object_description: [
+         [
+            'Made from gourd, upper part decorated with engravings, braising, and chip offs darkened by burning.',
+         ],
+         ['Lower part knitted with fibres.'],
+         [
+            'The fibres are used for carrying as a handle but also a grip for the slippery nature of the gourd.',
+         ],
+      ],
+      Figure_artifact_details:
+         'The Mukwae Nalolo governed a province of the Barotse Kingdom of Nalolo. She also maintained a dignity second only to the Litunga, who was the King. After the scramble for Africa of 1884 to 1888, the Italians were given charge of delineating boundaries into new nations and many previous tribal boundaries were affected. The Mukwae wrote to the Italian Government and demanded that her land be clearly delineated from that of the Portuguese and stop them from infringing on her people’s rights. The Italians were forced to demarcate the boundary of her province along the 38th parallel of Longitude, which is the boundary line of Zambia that still stands today.',
+
+      figure_details: [
+         ['The secretary of state for the Nalolo western province'],
+         ['(1910 - 1986)'],
+      ],
+      figure_biography: [
+         [
+            'The Mukwae Nalolo governed a province of the Barotse Kingdom of Nalolo. She also maintained a dignity second only to the Litunga, who was the King.',
+         ],
+         [
+            'After the scramble for Africa of 1884 to 1888, the Italians were given charge of delineating boundaries into new nations and many previous tribal boundaries were affected.',
+         ],
+         [
+            'The Mukwae wrote to the Italian Government and demanded that her land be clearly delineated from that of the Portuguese and stop them from infringing on her people’s rights.',
+         ],
+         [
+            'The Italians were forced to demarcate the boundary of her province along the 38th parallel of Longitude, which is the boundary line of Zambia that still stands today.',
+         ],
+      ],
+      figure_references: [
+         ['https://collections.smvk.se/carlotta-em/web/object/1996935'],
+         ['https://www.youtube.com/watch?v=VwOAMAnLJQw'],
       ],
    },
 
@@ -160,128 +282,6 @@ export const data: ObjectDescription[] = [
       figure_references: [
          ['https://collections.smvk.se/carlotta-em/web/object/2042752'],
          ['https://youtu.be/_wQ21pmFYZY'],
-      ],
-   },
-
-   // Calabash - Mukwae
-   {
-      title: 'Mukwae',
-      object_URL: <Calabash />,
-      object_name: 'Calabash',
-      object_address:
-         'https://optimistic.etherscan.io/nft/0xe3f9cb6608fefb78fdb2fd5496d62dc547236aaa/4',
-      Object_description: [
-         [
-            'Made from gourd, upper part decorated with engravings, braising, and chip offs darkened by burning.',
-         ],
-         ['Lower part knitted with fibres.'],
-         [
-            'The fibres are used for carrying as a handle but also a grip for the slippery nature of the gourd.',
-         ],
-      ],
-      Figure_artifact_details:
-         'The Mukwae Nalolo governed a province of the Barotse Kingdom of Nalolo. She also maintained a dignity second only to the Litunga, who was the King. After the scramble for Africa of 1884 to 1888, the Italians were given charge of delineating boundaries into new nations and many previous tribal boundaries were affected. The Mukwae wrote to the Italian Government and demanded that her land be clearly delineated from that of the Portuguese and stop them from infringing on her people’s rights. The Italians were forced to demarcate the boundary of her province along the 38th parallel of Longitude, which is the boundary line of Zambia that still stands today.',
-
-      figure_details: [
-         ['The secretary of state for the Nalolo western province'],
-         ['(1910 - 1986)'],
-      ],
-      figure_biography: [
-         [
-            'The Mukwae Nalolo governed a province of the Barotse Kingdom of Nalolo. She also maintained a dignity second only to the Litunga, who was the King.',
-         ],
-         [
-            'After the scramble for Africa of 1884 to 1888, the Italians were given charge of delineating boundaries into new nations and many previous tribal boundaries were affected.',
-         ],
-         [
-            'The Mukwae wrote to the Italian Government and demanded that her land be clearly delineated from that of the Portuguese and stop them from infringing on her people’s rights.',
-         ],
-         [
-            'The Italians were forced to demarcate the boundary of her province along the 38th parallel of Longitude, which is the boundary line of Zambia that still stands today.',
-         ],
-      ],
-      figure_references: [
-         ['https://collections.smvk.se/carlotta-em/web/object/1996935'],
-         ['https://www.youtube.com/watch?v=VwOAMAnLJQw'],
-      ],
-   },
-
-   // Snuff Cup - Lueji Wa Nkonde
-   {
-      title: 'Lueji Wa Nkonde',
-      object_URL: <Snuff levelOfDetail="high" />,
-      object_name: 'Snuff Cup',
-      object_address:
-         'https://optimistic.etherscan.io/nft/0xe3f9cb6608fefb78fdb2fd5496d62dc547236aaa/2',
-      Object_description: [
-         ['Used to store and carry snuff (Tobacco).'],
-         ['It has three openings: on both ends for loading the snuff.'],
-         ['On one end it is closed with a wood stopper.'],
-         [
-            'Another small opening on the side of the container, for pouring out the snuff when one wants to use it. It is closed with an elaborate wood lid.',
-         ],
-         [
-            'The wood is burnt black and oiled (Traditional way of treating wood) and decorated with engravings.',
-         ],
-      ],
-      Figure_artifact_details:
-         'Lueji was the daughter of Mwata Iyala Mwaku, a descendant of Queen Kenga Naweji. Mwata Iyala Mwaku appointed Lueji wa Konde as his successor, or Nswana Mu Luunda. He then gave her the Lukano bracelet, a sign of authority over all the Luunda tu buungo. She ruled the Lunda federation of Tubungo in the 1650s. Lueji’s reign resulted in the migration of various groups who became the Lunda, Luchazi, Luwena, Luvale and Chokwe, the Ndembu, Mbwela, Samba, Munungu, and the Mbunda people in today’s North-Western Province of Zambia. The migration also spread to adjacent areas in The Democratic Republic of Congo, Namibia, and Angola. Which has now become most of the population of Northwestern Province.',
-      figure_details: [
-         ['The 17th Century Political Negotiator'],
-         ['(1910 - 1986)'],
-      ],
-      figure_biography: [
-         [
-            'Lueji was the daughter of Mwata Iyala Mwaku, a descendant of Queen Kenga Naweji. Mwata Iyala Mwaku appointed Lueji wa Konde as his successor, or Nswana Mu Luunda.',
-         ],
-         [
-            'He then gave her the Lukano bracelet, a sign of authority over all the Luunda tu buungo. She ruled the Lunda federation of Tubungo in the 1650s.',
-         ],
-         [
-            'Lueji’s reign resulted in the migration of various groups who became the Lunda, Luchazi, Luwena, Luvale and Chokwe, the Ndembu, Mbwela, Samba, Munungu, and the Mbunda people in today’s North-Western Province of Zambia.',
-         ],
-         [
-            'The migration also spread to adjacent areas in The Democratic Republic of Congo, Namibia, and Angola. Which has now become most of the population of Northwestern Province.',
-         ],
-      ],
-      figure_references: [
-         ['https://collections.smvk.se/carlotta-em/web/object/1304494'],
-         ['https://youtu.be/A1HEPtkt8P4'],
-      ],
-   },
-
-   //Cowry Beads - Mwape
-   {
-      title: 'Mwape',
-      object_URL: <Cowry />,
-      object_name: 'Cowry Beads',
-      object_address:
-         'https://optimistic.etherscan.io/nft/0xe3f9cb6608fefb78fdb2fd5496d62dc547236aaa/3',
-      Object_description: [
-         [
-            'A belt made of leather and cowry shells. Cowries were expensive in places far away from the sea like Zambia and could only be acquired by people of influence.',
-         ],
-         [
-            'To possess such an item with such a large number of cowries meant the person that owned this belt was very wealthy.',
-         ],
-         [
-            'The shells were also used as a medium of exchange and are also an indicator of the presence of long distance trade in the interior of Zambia.',
-         ],
-      ],
-      Figure_artifact_details:
-         'She was a ruler of a Kingdom that comprised the middle Luangwa and the Chuambira valley and further east, Mulilo, and Chisenga respectively at Chinshumbu and Kaundi who owed her allegiance.',
-      figure_details: [
-         ['A fearless warrior and ruler of middle Luangwa and Chuambira valley'],
-         ['(1910 - 1986)'],
-      ],
-      figure_biography: [
-         [
-            'Being a fierce warrior, Mwape fought battles with the Chikunda slave traders and other Chiefs, extended her influence, protected her people, and imposed control over the trade routes in her land.',
-         ],
-      ],
-      figure_references: [
-         ['https://collections.smvk.se/carlotta-em/web/object/1600518'],
-         ['https://youtu.be/VjXktuYSgfQ'],
       ],
    },
 ];
