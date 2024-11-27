@@ -202,12 +202,15 @@ export async function POST(req: Request, res: NextResponse) {
          await req.json();
       // Check if user already exists
 
-      if (!email || email == ' ') {
-         return NextResponse.json({ failure: 'no email sent' }, { status: 400 });
+      if (!email  || email ==' ') {
+         return NextResponse.json(
+            { failure: 'Please input email' },
+            { status: 400 }
+         );
       }
       if (!password || password == ' ') {
          return NextResponse.json(
-            { failure: 'no password sent' },
+            { failure: 'please input password' },
             { status: 400 }
          );
       }
