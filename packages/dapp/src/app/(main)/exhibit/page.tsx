@@ -107,7 +107,7 @@ export default function Home() {
                </div>
                <div className="flex gap-2">
                   <Link href={'https://oncyber.io/spaces/89cp8FpYgF5hgrHk1i3N'}>
-                     <Button>Enter Vertual Exhibiit </Button>
+                     <Button>Enter Virtual Exhibit </Button>
                   </Link>
                   <Link href={'/cya'}>
                      <Button variant="white">Learn more</Button>
