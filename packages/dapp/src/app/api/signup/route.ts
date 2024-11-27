@@ -11,13 +11,10 @@ export async function POST(req: Request, res: NextResponse) {
       const { data } = await req.json();
       const { email, password } = await data;
 
-      if (!email  || email ==" ") {
-         return NextResponse.json(
-            { failure: 'no email sent' },
-            { status: 400 }
-         );
+      if (!email || email == ' ') {
+         return NextResponse.json({ failure: 'no email sent' }, { status: 400 });
       }
-      if (!password  || password ==" ") {
+      if (!password || password == ' ') {
          return NextResponse.json(
             { failure: 'no password sent' },
             { status: 400 }

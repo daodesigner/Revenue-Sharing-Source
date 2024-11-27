@@ -123,7 +123,9 @@ function Page() {
                      value={formData.password}
                      onChange={handleChange}
                   />
-                  {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
+                  {errorMessage && (
+                     <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
+                  )}
                </section>
 
                <section className="text-center space-y-6">
@@ -148,7 +150,10 @@ function Page() {
                   </p>
                   <p>
                      Already have an account?{' '}
-                     <a className="underline text-orange-600" href="/auth-sign-in">
+                     <a
+                        className="underline text-orange-600"
+                        href="/auth-sign-in"
+                     >
                         Sign in
                      </a>
                   </p>

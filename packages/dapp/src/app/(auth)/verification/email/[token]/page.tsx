@@ -6,9 +6,15 @@ import { useEffect, useRef, useState } from 'react';
 
 function Page({ params }: { params: { token: string } }) {
    const router = useRouter();
-   const [verificationStatus, setVerificationStatus] = useState<number | null>(null);
-   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
-   const [resendConfirmation, setResendConfirmation] = useState<string | null>(null);
+   const [verificationStatus, setVerificationStatus] = useState<number | null>(
+      null
+   );
+   const [verificationMessage, setVerificationMessage] = useState<string | null>(
+      null
+   );
+   const [resendConfirmation, setResendConfirmation] = useState<string | null>(
+      null
+   );
    const [loading, setLoading] = useState<boolean>(true);
    const hasFetched = useRef(false);
    const host = process.env.NEXT_PUBLIC_HOST;
@@ -56,7 +62,7 @@ function Page({ params }: { params: { token: string } }) {
 
          if (response.ok) {
             setVerificationMessage('Verification email has been resent!');
-            router.push("/verification/email")
+            router.push('/verification/email');
          } else {
             setVerificationMessage('Failed to resend email. Please try again.');
          }
@@ -81,11 +87,17 @@ function Page({ params }: { params: { token: string } }) {
 
          {/* Main Content */}
          <div className="text-center space-y-4">
-         {!loading &&
-            <h1 className={verificationStatus === 200 ? 'text-orange-500' : 'text-red-500'}>
-           { verificationStatus === 200 ? 'Woohoo!' : 'Whoops!'}
-               
-            </h1>}
+            {!loading && (
+               <h1
+                  className={
+                     verificationStatus === 200
+                        ? 'text-orange-500'
+                        : 'text-red-500'
+                  }
+               >
+                  {verificationStatus === 200 ? 'Woohoo!' : 'Whoops!'}
+               </h1>
+            )}
 
             {/* Display verification message */}
             <p>{loading ? 'Verifying your email...' : verificationMessage}</p>

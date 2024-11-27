@@ -90,40 +90,39 @@ function Page() {
                   Forgot password?
                </a>
                <Button
-               size="medium"
-               onClick={onSubmit}
-               className="w-full"
-               disabled={isLoading}
-            >
-               {isLoading ? 'Signing in...' : 'Sign into my account'}
-            </Button>
+                  size="medium"
+                  onClick={onSubmit}
+                  className="w-full"
+                  disabled={isLoading}
+               >
+                  {isLoading ? 'Signing in...' : 'Sign into my account'}
+               </Button>
             </form>
             <section className=" text-center space-y-6">
-          
-            <p>
-               By continuing you accept our standard{' '}
-               <a className="underline  text-blue-600" href="">
-                  terms and conditions
-               </a>{' '}
-               and{' '}
-               <a className="underline text-blue-600" href="">
-                  our privacy policy
-               </a>
-               .
-            </p>
-            <p>
-               I don&apos;t have an account{' '}
-               <Link className="underline text-orange-600" href="/auth-register">
-                  Register
-               </Link>
-            </p>
-          
-          </section>
-        
+               <p>
+                  By continuing you accept our standard{' '}
+                  <a className="underline  text-blue-600" href="">
+                     terms and conditions
+                  </a>{' '}
+                  and{' '}
+                  <a className="underline text-blue-600" href="">
+                     our privacy policy
+                  </a>
+                  .
+               </p>
+               <p>
+                  I don&apos;t have an account{' '}
+                  <Link
+                     className="underline text-orange-600"
+                     href="/auth-register"
+                  >
+                     Register
+                  </Link>
+               </p>
+            </section>
          </section>
 
          {/* Footer */}
-        
       </div>
    );
 }

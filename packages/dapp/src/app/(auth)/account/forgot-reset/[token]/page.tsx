@@ -75,82 +75,72 @@ function ResetPassword({ params }: { params: { token: string } }) {
    };
 
    return (
-  
-
-      
       <div className="relative flex flex-col items-center justify-center px-6 py-10 bg-white h-screen md:w-[50%] md:float-right">
-                <nav className="absolute top-5 w-full flex justify-end items-center px-5">
+         <nav className="absolute top-5 w-full flex justify-end items-center px-5">
             <Link href="/">Exit</Link>
          </nav>
 
-         <section className="space-y-4 md:w-[70%]">                  
+         <section className="space-y-4 md:w-[70%]">
             <header className="text-center space-y-2">
-                
+               <h1 className="text-orange-500">Create New Password</h1>
+               <p>Enter a strong, unique password</p>
+            </header>
 
-                     <h1 className='text-orange-500'>Create New Password</h1>
-                     <p>Enter a strong, unique password</p>
-                  </header>
-
-                  <form action="">
-                     <section className="space-y-4">
-                        <TextInput
-                           type="password"
-                           label="New Password"
-                          
-                     
-                           value={password}
-                           onChange={(e) => {
-                              setPassword(e.target.value);
-                              setPasswordError(false);
-                              setErrorMessage('');
-                           }}
-                        />
-                        <TextInput
-                           type="password"
-                           label="Confirm Password"
-                       
-                           value={confirmPassword}
-                           onChange={(e) => {
-                              setConfirmPassword(e.target.value);
-                              setConfirmPasswordError(false);
-                              setErrorMessage('');
-                           }}
-                        />
-                     </section>
-                  </form>
-                  <section className="text-center space-y-6">
-                  <Button className='w-full' onClick={resetPassword}>Reset Password</Button>
-
-                  <p>
-                     Remember your password?{' '}
-                     <a className="underline text-orange-500" href="/auth-sign-in">
-                        Sign in
-                     </a>
-                  </p>
+            <form action="">
+               <section className="space-y-4">
+                  <TextInput
+                     type="password"
+                     label="New Password"
+                     value={password}
+                     onChange={(e) => {
+                        setPassword(e.target.value);
+                        setPasswordError(false);
+                        setErrorMessage('');
+                     }}
+                  />
+                  <TextInput
+                     type="password"
+                     label="Confirm Password"
+                     value={confirmPassword}
+                     onChange={(e) => {
+                        setConfirmPassword(e.target.value);
+                        setConfirmPasswordError(false);
+                        setErrorMessage('');
+                     }}
+                  />
                </section>
-                  {errorMessage && (
-                     <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-                  )}
-               </section>
+            </form>
+            <section className="text-center space-y-6">
+               <Button className="w-full" onClick={resetPassword}>
+                  Reset Password
+               </Button>
 
-             
-               
-            </div>
-         
-   
-    
+               <p>
+                  Remember your password?{' '}
+                  <a className="underline text-orange-500" href="/auth-sign-in">
+                     Sign in
+                  </a>
+               </p>
+            </section>
+            {errorMessage && (
+               <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
+            )}
+         </section>
+      </div>
    );
 }
 
 export default ResetPassword;
-      {/* Success Popup */}
-         // {showSuccessPopup && (
-         //    <div className="fixed inset-0 flex items-center justify-center bg-gray-800/50 z-50">
-         //       <div className="bg-white p-6 rounded-md shadow-md text-center space-y-4">
-         //          <h3 className="text-xl font-semibold text-green-600">
-         //             {successMessage}
-         //          </h3>
-         //          <p>You will be redirected to the sign-in page shortly.</p>
-         //       </div>
-         //    </div>
-         // )}
+{
+   /* Success Popup */
+}
+// {showSuccessPopup && (
+//    <div className="fixed inset-0 flex items-center justify-center bg-gray-800/50 z-50">
+//       <div className="bg-white p-6 rounded-md shadow-md text-center space-y-4">
+//          <h3 className="text-xl font-semibold text-green-600">
+//             {successMessage}
+//          </h3>
+//          <p>You will be redirected to the sign-in page shortly.</p>
+//       </div>
+//    </div>
+// )}

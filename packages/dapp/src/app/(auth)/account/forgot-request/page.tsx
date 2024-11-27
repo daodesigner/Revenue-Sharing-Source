@@ -123,7 +123,10 @@ function ForgotPasswordRequest() {
                   </Button>
                   <p>
                      Remember your password?{' '}
-                     <Link className="underline text-orange-500" href="/auth-sign-in">
+                     <Link
+                        className="underline text-orange-500"
+                        href="/auth-sign-in"
+                     >
                         Sign in
                      </Link>
                   </p>

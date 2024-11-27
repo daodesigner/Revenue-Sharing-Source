@@ -202,19 +202,15 @@ export async function POST(req: Request, res: NextResponse) {
          await req.json();
       // Check if user already exists
 
-      if (!email  || email ==" ") {
-         return NextResponse.json(
-            { failure: 'no email sent' },
-            { status: 400 }
-         );
+      if (!email || email == ' ') {
+         return NextResponse.json({ failure: 'no email sent' }, { status: 400 });
       }
-      if (!password  || password ==" ") {
+      if (!password || password == ' ') {
          return NextResponse.json(
             { failure: 'no password sent' },
             { status: 400 }
          );
       }
-
 
       const existingUserName = await prisma.users.findUnique({
          where: { username },
