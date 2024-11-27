@@ -67,25 +67,42 @@ export default function Home() {
          name: 'Julia Chikamoneka',
          img: '/women/julia.png',
          link: '/exhibit/julia-chikamoneka',
+         artifact: 'Headrest'
       },
-
-      { name: 'Loongo', img: '/women/loongo.png', link: '/exhibit/loongo' },
-
-      {
-         name: 'lueji wa nkonde',
-         img: '/women/lueji.png',
-         link: '/exhibit/lueji-wa-nkonde',
-      },
-
-      { name: 'Mukwae', img: '/women/mukwae.png', link: '/exhibit/mukwae' },
-
-      { name: 'Mwape', img: '/women/mwape.png', link: '/exhibit/mwape' },
 
       {
          name: 'Mwenya',
          img: '/women/mwenya.png',
          link: '/exhibit/mwenya-mukulu',
+         artifact: 'Double Sided Drum',
       },
+      { 
+         name: 'Mwape',
+         img: '/women/mwape.png',
+         link: '/exhibit/mwape',
+         artifact: 'Cowry Beads' 
+      },
+
+      {
+         name: 'lueji wa nkonde',
+         img: '/women/lueji.png',
+         link: '/exhibit/lueji-wa-nkonde',
+         artifact: 'Snuff Cup'
+      },
+
+      { 
+        name: 'Mukwae',
+        img: '/women/mukwae.png',
+        link: '/exhibit/mukwae',
+        artifact: "Calabash" },
+
+      { 
+         name: 'Loongo',
+         img: '/women/loongo.png',
+         link: '/exhibit/loongo',
+         artifact: 'Luvale Mask'
+      },
+
    ];
 
    return (
@@ -167,7 +184,7 @@ export default function Home() {
                                     {item.name}
                                  </p>
                                  <p className="text-white/80 text-sm ">
-                                    Calabash
+                                    {item.artifact}
                                  </p>
                               </div>
 
