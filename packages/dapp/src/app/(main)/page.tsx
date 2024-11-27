@@ -1,11 +1,8 @@
 import { Button } from '../components/button/Button';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Metadata } from 'next';
-import { ArrowRight } from 'lucide-react';
 import HeroSection from '../components/heroSection';
 import Partners from './partners/page';
-import { useRouter } from 'next/navigation';
 import BlogList from '../components/BlogList';
 
 const metadata: Metadata = {
@@ -18,24 +15,6 @@ const metadata: Metadata = {
 };
 
 export default function Home() {
-   const partners = [
-      {
-         name: "Women's History Museum of Zambia",
-         logo: 'https://s3.tebi.io/summitshare-images/whmzacc.png',
-         website: 'https://www.whmzambia.org/',
-      },
-      {
-         name: 'Ethereum Foundation',
-         logo: 'https://s3.tebi.io/summitshare-images/EF.png',
-         website: 'https://ethereum.foundation/',
-      },
-      {
-         name: 'Octant',
-         logo: 'https://s3.tebi.io/summitshare-images/octant.png',
-         website: 'https://octant.app/',
-      },
-   ];
-
    return (
       <div className=" space-y-24 mx-6 my-28 lg:mx-[15%]">
          <HeroSection />
