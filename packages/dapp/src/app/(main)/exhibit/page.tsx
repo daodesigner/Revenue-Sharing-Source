@@ -126,7 +126,7 @@ export default function Home() {
                   <Link href={'https://oncyber.io/spaces/89cp8FpYgF5hgrHk1i3N'}>
                      <Button>Enter Virtual Exhibit </Button>
                   </Link>
-                  <Link href={'/cya'}>
+                  <Link href={'/distribution'}>
                      <Button variant="white">Learn more</Button>
                   </Link>
                </div>
