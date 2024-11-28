@@ -62,20 +62,19 @@ function Page({ params }: { params: { slug: string } }) {
    }, [params.slug, host]);
 
    return (
-   
-
       <div className=" flex flex-col items-center justify-center gap-[35%] px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right ">
-            <nav className=" absolute top-5 right-5">
-               <Link href="/">Exit</Link>
-            </nav>
-            <div className="text-center space-y-2">
-            
-                     <h1>{verificationStatus&& verificationStatus === 200? 'Sucsess' : 'Whoops!'}</h1>
-                     <p>{verificationMessage}</p>
-               
-            </div>
+         <nav className=" absolute top-5 right-5">
+            <Link href="/">Exit</Link>
+         </nav>
+         <div className="text-center space-y-2">
+            <h1>
+               {verificationStatus && verificationStatus === 200
+                  ? 'Sucsess'
+                  : 'Whoops!'}
+            </h1>
+            <p>{verificationMessage}</p>
          </div>
-    
+      </div>
    );
 }
 

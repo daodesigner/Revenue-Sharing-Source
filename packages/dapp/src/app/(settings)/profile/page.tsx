@@ -20,22 +20,16 @@ export default function ProfileSettings() {
    const userId = session?.user?.id || '';
    const userEmail = session?.user?.email || '';
    const user_name = session?.user?.username || '';
-   
+
    const sessions = useSession();
 
    useEffect(() => {
       if (sessions.status !== 'loading' && sessions.status !== 'authenticated') {
          router.push('/auth-register');
       }
-   }, [sessions.status , router]);
-   
-
+   }, [sessions.status, router]);
 
    const handleDeleteAccount = async () => {
-  
- 
-
-
       try {
          setIsDeleting(true);
          const response = await fetch('api/v1/user/delete', {

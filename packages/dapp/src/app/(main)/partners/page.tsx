@@ -29,11 +29,7 @@ const partners: Partner[] = [
 const Partners: React.FC = () => {
    return (
       <div className="flex flex-col items-center p-8 mt-24">
-        
-            <h1 className="text-3xl font-bold mb-12">
-               Our Partners and Supporters
-            </h1>
-    
+         <h1 className="text-3xl font-bold mb-12">Our Partners and Supporters</h1>
 
          {/* Staggered Grid */}
          <div className="grid gap-6 grid-cols-3">

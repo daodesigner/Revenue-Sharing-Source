@@ -19,7 +19,7 @@ function HeroSection() {
             </div>
             <div className="flex gap-2">
                <Link href={'/cya'}>
-                  <Button>Enter Exhibiit </Button>
+                  <Button>Enter Exhibit </Button>
                </Link>
                <Link href={'/distribution'}>
                   <Button variant="white">Learn more</Button>

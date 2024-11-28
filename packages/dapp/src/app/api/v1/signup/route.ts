@@ -202,7 +202,7 @@ export async function POST(req: Request, res: NextResponse) {
          await req.json();
       // Check if user already exists
 
-      if (!email  || email ==' ') {
+      if (!email || email == ' ') {
          return NextResponse.json(
             { failure: 'Please input email' },
             { status: 400 }

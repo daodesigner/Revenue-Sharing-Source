@@ -122,13 +122,14 @@ const PrimaryNav: React.FC = () => {
                      </div>
                   </li>
                   <li>
-
-                     {
-                        session.status === "authenticated"?<Link href={"/profile"}><UserCircle className='w-8 h-8 text-neutral-500 hover:text-orange-500'/></Link>:
+                     {session.status === 'authenticated' ? (
+                        <Link href={'/profile'}>
+                           <UserCircle className="w-8 h-8 text-neutral-500 hover:text-orange-500" />
+                        </Link>
+                     ) : (
                         <></>
-
-                     }
-                      </li>
+                     )}
+                  </li>
                </ul>
             </li>
             <li onClick={() => setOpenMenu(!openMenu)} className="lg:hidden">

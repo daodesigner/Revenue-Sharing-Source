@@ -23,7 +23,10 @@ export async function GET(req: Request, res: NextResponse) {
 
       if (!verificationRecord) {
          ////console.log("Invalid token v1: line 25");
-         return NextResponse.json({ message: 'Invalid token, Please retry' }, { status: 401 });
+         return NextResponse.json(
+            { message: 'Invalid token, Please retry' },
+            { status: 401 }
+         );
       }
 
       // Assuming verificationRecord.expires is in a consistent format, e.g., ISO 8601
@@ -66,7 +69,10 @@ export async function GET(req: Request, res: NextResponse) {
    } catch (error) {
       console.error(error);
       return NextResponse.json(
-         { message: 'something went wrong please contact summitshare.eth@gmail.com' },
+         {
+            message:
+               'something went wrong please contact summitshare.eth@gmail.com',
+         },
          { status: 500 }
       );
    }
