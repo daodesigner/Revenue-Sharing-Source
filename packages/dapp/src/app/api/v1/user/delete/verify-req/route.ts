@@ -63,7 +63,7 @@ export async function GET(req: Request, res: NextResponse) {
       });
 
       return NextResponse.json(
-         { message: 'Email user deleted' },
+         { message: 'successfully deleted' },
          { status: 200 }
       );
    } catch (error) {
