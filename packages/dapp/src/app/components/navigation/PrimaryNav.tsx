@@ -7,6 +7,7 @@ import { useAccount } from 'wagmi';
 import { ConnectKitButton } from 'connectkit';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
+import { UserCircle } from 'lucide-react';
 
 /**
  * PrimaryNav component represents the main navigation bar for the application.
@@ -107,7 +108,7 @@ const PrimaryNav: React.FC = () => {
                </ul>
             </li>
             <li className="sm:block hidden md:hidden lg:block w-fit">
-               <ul className="flex flex-row gap-4">
+               <ul className="flex flex-row gap-4 items-center">
                   <li>
                      <ConnectKitButton />
                   </li>
@@ -120,6 +121,14 @@ const PrimaryNav: React.FC = () => {
                         </Button>
                      </div>
                   </li>
+                  <li>
+
+                     {
+                        session.status === "authenticated"?<Link href={"/profile"}><UserCircle className='w-8 h-8 text-neutral-500 hover:text-orange-500'/></Link>:
+                        <></>
+
+                     }
+                      </li>
                </ul>
             </li>
             <li onClick={() => setOpenMenu(!openMenu)} className="lg:hidden">

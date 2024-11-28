@@ -29,11 +29,11 @@ const partners: Partner[] = [
 const Partners: React.FC = () => {
    return (
       <div className="flex flex-col items-center p-8 mt-24">
-         <div className="mb-2">
+        
             <h1 className="text-3xl font-bold mb-12">
                Our Partners and Supporters
             </h1>
-         </div>
+    
 
          {/* Staggered Grid */}
          <div className="grid gap-6 grid-cols-3">
@@ -110,7 +110,7 @@ const Partners: React.FC = () => {
                rel="noopener noreferrer"
                className="flex items-center text-blue-500 font-bold text-sm bg-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all"
             >
-               Read more about our partners and supporters
+               Read more about our them
                <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4 ml-2"

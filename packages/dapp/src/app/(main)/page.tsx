@@ -106,11 +106,11 @@ export default function Home() {
                   Learn more and contribute to shaping this narrative. Every voice
                   matters, every insight adds to our shared heritage.
                </p>
-               <div className="w-[164px] mt-4 z-[5]">
-                  <Link href="https://forms.gle/rXvQy25pqEagxHoq9">
+              
+                  <Link href="https://forms.gle/rXvQy25pqEagxHoq9" className="w-[164px] mt-4 z-[5]">
                      <Button variant={'white'}>Register today</Button>
                   </Link>
-               </div>
+          
             </div>
          </section>
 

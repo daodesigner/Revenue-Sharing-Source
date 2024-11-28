@@ -9,6 +9,7 @@ import { Trash, XCircle } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { TextInput } from '@/app/components/inputs/TextInput';
+import { setInterval } from 'timers';
 
 export default function ProfileSettings() {
    const router = useRouter();
@@ -19,9 +20,22 @@ export default function ProfileSettings() {
    const userId = session?.user?.id || '';
    const userEmail = session?.user?.email || '';
    const user_name = session?.user?.username || '';
+   
+   const sessions = useSession();
 
-   // Handle account deletion
+   useEffect(() => {
+      if (sessions.status !== 'loading' && sessions.status !== 'authenticated') {
+         router.push('/auth-register');
+      }
+   }, [sessions.status , router]);
+   
+
+
    const handleDeleteAccount = async () => {
+  
+ 
+
+
       try {
          setIsDeleting(true);
          const response = await fetch('api/v1/user/delete', {
@@ -143,7 +157,7 @@ export default function ProfileSettings() {
                         onClick={handleDeleteAccount}
                         disabled={isDeleting}
                      >
-                        {isDeleting ? 'Confirming...' : 'Confirme'}
+                        {isDeleting ? 'Confirming...' : 'Confirm'}
                      </Button>
                      <Button
                         variant={'outline'}

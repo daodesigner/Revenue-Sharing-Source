@@ -62,31 +62,20 @@ function Page({ params }: { params: { slug: string } }) {
    }, [params.slug, host]);
 
    return (
-      <main className="h-screen flex flex-col justify-end items-center relative">
-         <Image
-            src="https://images.unsplash.com/photo-1652383003064-102c52898ccf?q=80&w=2163&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Background Image"
-            layout="fill"
-            className="object-cover bg-center"
-         />
-         <div className="bg-gray-950/35 fixed inset-0"></div>
+   
 
-         <div className=" relative flex flex-col items-center justify-center px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right z-10">
+      <div className=" flex flex-col items-center justify-center gap-[35%] px-6 py-10 bg-white h-screen md:w-[50%] lg:w-[30%] md:float-right ">
             <nav className=" absolute top-5 right-5">
                <Link href="/">Exit</Link>
             </nav>
             <div className="text-center space-y-2">
-               {loading ? ( // Check if loading is true
-                  <LoadingDots /> // Show loading dots while waiting for the response
-               ) : (
-                  <>
-                     <h1>{verificationStatus === 200 ? 'Sucsess' : 'Whoops!'}</h1>
+            
+                     <h1>{verificationStatus&& verificationStatus === 200? 'Sucsess' : 'Whoops!'}</h1>
                      <p>{verificationMessage}</p>
-                  </>
-               )}
+               
             </div>
          </div>
-      </main>
+    
    );
 }
 
