@@ -2,12 +2,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import Inputs from '@/app/components/inputs/Inputs';
 import { Button } from '@/app/components/button/Button';
-import Image from 'next/image';
-import { Eye, EyeOff } from 'lucide-react';
-import LoadingDots from '@/app/(main)/exhibit/loadingDots';
 import { TextInput } from '@/app/components/inputs/TextInput';
+import { usePasswordVisibility } from '@/utils/methods/auth/usePasswordVisibility';
 
 function ResetPassword({ params }: { params: { token: string } }) {
    const router = useRouter();
@@ -21,6 +18,7 @@ function ResetPassword({ params }: { params: { token: string } }) {
    const [successMessage, setSuccessMessage] = useState('');
    const [isLoading, setIsLoading] = useState(false);
    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+   const { inputType, PasswordToggle } = usePasswordVisibility();
 
    const resetPassword = async () => {
       // Validate passwords
@@ -88,26 +86,32 @@ function ResetPassword({ params }: { params: { token: string } }) {
 
             <form action="">
                <section className="space-y-4">
-                  <TextInput
-                     type="password"
-                     label="New Password"
-                     value={password}
-                     onChange={(e) => {
-                        setPassword(e.target.value);
-                        setPasswordError(false);
-                        setErrorMessage('');
-                     }}
-                  />
-                  <TextInput
-                     type="password"
-                     label="Confirm Password"
-                     value={confirmPassword}
-                     onChange={(e) => {
-                        setConfirmPassword(e.target.value);
-                        setConfirmPasswordError(false);
-                        setErrorMessage('');
-                     }}
-                  />
+               <div className="relative">
+                     <TextInput
+                        type={inputType}
+                        label="Password"
+                        value={password}
+                        onChange={(e) => {
+                           setConfirmPassword(e.target.value);
+                           setConfirmPasswordError(false);
+                           setErrorMessage('');
+                        }}
+                     />
+                     <PasswordToggle />
+                  </div>
+                  <div className="relative">
+                     <TextInput
+                        type={inputType}
+                        label="Password"
+                        value={password}
+                        onChange={(e) => {
+                           setConfirmPassword(e.target.value);
+                           setConfirmPasswordError(false);
+                           setErrorMessage('');
+                        }}
+                     />
+                     <PasswordToggle />
+                  </div>
                </section>
             </form>
             <section className="text-center space-y-6">
