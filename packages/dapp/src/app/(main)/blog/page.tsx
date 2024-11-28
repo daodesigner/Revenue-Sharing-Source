@@ -1,4 +1,4 @@
-import BlogList from '@/app/(test)/test/page';
+import BlogList from "@/app/components/BlogList";
 
 const Blog = async () => {
    return (
