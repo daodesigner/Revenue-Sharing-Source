@@ -5,9 +5,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { TextInput } from '@/app/components/inputs/TextInput';
+import { usePasswordVisibility } from '@/utils/methods/auth/usePasswordVisibility';
 
 function Page() {
    const router = useRouter();
+
+   const { inputType, PasswordToggle } = usePasswordVisibility();
 
    // State management
    const [formData, setFormData] = useState({
@@ -116,13 +119,21 @@ function Page() {
                      value={formData.email}
                      onChange={handleChange}
                   />
-                  <TextInput
-                     type="password"
-                     label="Password"
-                     name="password"
-                     value={formData.password}
-                     onChange={handleChange}
-                  />
+                  <div className="relative">
+                     <TextInput
+                        type={inputType}
+                        label="Password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                     />
+                     <PasswordToggle />
+                     {errorMessage && (
+                        <p className="text-red-500 text-sm mt-2">
+                           {errorMessage}
+                        </p>
+                     )}
+                  </div>
                   {errorMessage && (
                      <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
                   )}

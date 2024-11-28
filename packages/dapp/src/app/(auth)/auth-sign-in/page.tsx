@@ -5,6 +5,7 @@ import React, { useState, useCallback } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { TextInput } from '@/app/components/inputs/TextInput';
+import { usePasswordVisibility } from '@/utils/methods/auth/usePasswordVisibility';
 
 function Page() {
    const [email, setEmail] = useState<string>('');
@@ -12,6 +13,7 @@ function Page() {
    const [errorMessage, setErrorMessage] = useState<string>('');
    const [isVisible, setIsVisible] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
+   const { inputType, PasswordToggle } = usePasswordVisibility();
    const router = useRouter();
 
    const onSubmit = useCallback(async () => {
@@ -70,15 +72,18 @@ function Page() {
                         setErrorMessage('');
                      }}
                   />
-                  <TextInput
-                     type="password"
-                     label="Password"
-                     value={password}
-                     onChange={(e) => {
-                        setPassword(e.target.value);
-                        setErrorMessage('');
-                     }}
-                  />
+                  <div className="relative">
+                     <TextInput
+                        type={inputType}
+                        label="Password"
+                        value={password}
+                        onChange={(e) => {
+                           setPassword(e.target.value);
+                           setErrorMessage('');
+                        }}
+                     />
+                     <PasswordToggle />
+                  </div>
                   {errorMessage && (
                      <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
                   )}
