@@ -86,8 +86,6 @@ export const contracts = {
    },
 };
 
-
-
 export async function estimateGas(
    contract: ethers.Contract,
    method: string,

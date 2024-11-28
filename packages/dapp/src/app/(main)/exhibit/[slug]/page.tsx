@@ -1,7 +1,7 @@
 'use client';
 import SummitShareCanvas from '@/app/components/3DCanvas/3dCanvas';
-import { data } from "./data"
-import Buttons from '@/app/components/button/Butons';
+import { data } from './data';
+import { Button } from '@/app/components/button/Button';
 import { X } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -63,7 +63,17 @@ const Page = ({ params }: { params: { slug: string } }) => {
          <h2>{figure.title}</h2>
          <article className="space-y-8 md:space-y-0 md:grid md:grid-cols-2 gap-6 w-full">
             <SummitShareCanvas>{figure.object_URL}</SummitShareCanvas>
-                  <div>{figure.object_address}</div>
+
+            <div className="absolute left-7 left-1/2 transform -translate-y-1/2">
+               <a
+                  href={figure.object_address}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-white text-gray-700 px-4 py-1 rounded-full text-xs border border-gray-200 shadow-md hover:bg-gray-50 transition-colors"
+               >
+                  Explorer
+               </a>
+            </div>
 
             <ul className="flex flex-col gap-3">
                <h2>About the {figure.object_name}</h2>
@@ -124,35 +134,24 @@ const Page = ({ params }: { params: { slug: string } }) => {
 
             <div className="flex flex-row gap-4">
                <div className="w-[73px]">
-                  <Buttons type="primary" size="small">
-                     Yes
-                  </Buttons>
+                  <Button>Yes</Button>
                </div>
                <div className="w-[73px]">
-                  <Buttons type="secondary" size="small">
-                     No
-                  </Buttons>
+                  <Button>No</Button>
                </div>
             </div>
          </div>
 
          <div className="space-y-4 md:flex md:flex-row md:gap-4 md:space-y-0">
-            <Buttons
-               type="secondary"
-               active={currentIndex > 0}
-               onClick={handleBack}
-               disabled={currentIndex === 0}
-            >
+            <Button onClick={handleBack} disabled={currentIndex < 0}>
                Back
-            </Buttons>
-            <Buttons
-               type="primary"
-               active={currentIndex < data.length - 1}
+            </Button>
+            <Button
+               disabled={currentIndex > data.length - 1}
                onClick={handleNext}
-               disabled={currentIndex === data.length - 1}
             >
                Next
-            </Buttons>
+            </Button>
          </div>
       </div>
    );

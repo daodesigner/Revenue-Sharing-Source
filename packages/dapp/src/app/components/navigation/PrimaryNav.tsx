@@ -2,15 +2,12 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import React, { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import Buttons from '../button/Butons';
+import { Button } from '../button/Button';
 import { useAccount } from 'wagmi';
 import { ConnectKitButton } from 'connectkit';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
-
-
-
-
+import { UserCircle } from 'lucide-react';
 
 /**
  * PrimaryNav component represents the main navigation bar for the application.
@@ -22,27 +19,24 @@ const PrimaryNav: React.FC = () => {
    const session = useSession();
 
    const handleAuthClick = async () => {
-
       if (session.status === 'authenticated') {
-         await signOut()
-         router.push('/auth-sign-in')
-         return
+         await signOut();
+         router.push('/auth-sign-in');
+         return;
       } else {
-         router.push('/auth-sign-in')
-         return
+         router.push('/auth-sign-in');
+         return;
       }
-      return 
-
-   }
-   
-
+      return;
+   };
 
    // Navigation items for the main nav bar
    const items: { name: string; link: string }[] = [
+      { name: 'Exhibit', link: '/exhibit' },
       { name: 'Blog', link: '/blog' },
-      { name: 'Partners', link: '/partners' },
+      // { name: 'Partners', link: '/partners' },
       { name: 'Support Us', link: '/donate' },
-      { name: 'Distributions', link: '/distribution' },
+      { name: 'Insights', link: '/distribution' },
       { name: 'Help', link: '/help' },
    ];
 
@@ -51,38 +45,40 @@ const PrimaryNav: React.FC = () => {
       title: string;
       items: { name: string; link: string }[];
    }[] = [
-         {
-            title: 'Pages',
-            items: [
-               { name: 'Blog', link: '/blog' },
-               { name: 'Partners', link: '/partners' },
-               { name: 'Support Us', link: '/donate' },
-            ],
-         },
-         {
-            title: 'Help',
-            items: [{ name: 'Help', link: '/help' }],
-         },
-         {
-            title: 'Dashboard',
-            items: [{ name: 'Distribution', link: '/distribution' }],
-         },
-         {
-            title: 'Settings',
-            items: [
-               { name: 'Profile', link: '/profile' },
-               {
-                  name: session?.status === 'authenticated' ? 'Log Out' : 'Log In',
-                  link: session?.status === 'authenticated' ? '/auth-sign-in' : '/auth-sign-in',
-               },
-            ],
-         },
-      ];
+      {
+         title: 'Pages',
+         items: [
+            { name: 'Exhibit', link: '/exhibit' },
+            { name: 'Blog', link: '/blog' },
+            { name: 'Support Us', link: '/donate' },
+         ],
+      },
+      {
+         title: 'Help',
+         items: [{ name: 'Help', link: '/help' }],
+      },
+      {
+         title: 'Dashboard',
+         items: [{ name: 'Insights', link: '/distribution' }],
+      },
+      {
+         title: 'Settings',
+         items: [
+            { name: 'Profile', link: '/profile' },
+            {
+               name: session?.status === 'authenticated' ? 'Log Out' : 'Log In',
+               link:
+                  session?.status === 'authenticated'
+                     ? '/auth-sign-in'
+                     : '/auth-sign-in',
+            },
+         ],
+      },
+   ];
 
    // State to manage the open/close state of the responsive menu
    const [openMenu, setOpenMenu] = useState<boolean>(false);
 
-   // Get the current pathname to highlight the active link
    const pathname = usePathname();
    const { address } = useAccount();
 
@@ -91,9 +87,9 @@ const PrimaryNav: React.FC = () => {
          <ul className="fixed top-0 inset-x-0 px-6 py-4 lg:px-28 lg:py-6 flex flex-row justify-between items-center border-b border-primary-900-5 text-primary-900 z-10 bg-white">
             <li>
                <Link href="/">
-                  <h2>
-                     <span className="text-primary-400">Summit</span>Share
-                  </h2>
+                  <h1>
+                     <span className="text-orange-500">Summit</span>Share
+                  </h1>
                </Link>
             </li>
             <li className="sm:block hidden md:hidden lg:block">
@@ -101,9 +97,10 @@ const PrimaryNav: React.FC = () => {
                   {items.map((item, index) => (
                      <li
                         key={index}
-                        className={`hover:text-primary-600 hover:underline underline-offset-[0.625rem] cursor-pointer ${pathname === item.link &&
-                           'text-primary-600 underline underline-offset-[0.625rem]'
-                           }`}
+                        className={`hover:text-primary-600  hover:underline underline-offset-[0.625rem] cursor-pointer ${
+                           pathname === item.link &&
+                           'text-primary-600 underline underline-offset-[0.625rem] '
+                        }`}
                      >
                         <a href={item.link}>{item.name}</a>
                      </li>
@@ -111,16 +108,27 @@ const PrimaryNav: React.FC = () => {
                </ul>
             </li>
             <li className="sm:block hidden md:hidden lg:block w-fit">
-               <ul className="flex flex-row gap-4">
+               <ul className="flex flex-row gap-4 items-center">
                   <li>
                      <ConnectKitButton />
                   </li>
                   <li>
                      <div onClick={handleAuthClick}>
-                        <Buttons type="secondary" size="small">
-                           {session.status === 'authenticated' ? 'Sign Out' : 'Sign In'}
-                        </Buttons>
+                        <Button variant={'outline'}>
+                           {session.status === 'authenticated'
+                              ? 'Sign Out'
+                              : 'Sign In'}
+                        </Button>
                      </div>
+                  </li>
+                  <li>
+                     {session.status === 'authenticated' ? (
+                        <Link href={'/profile'}>
+                           <UserCircle className="w-8 h-8 text-neutral-500 hover:text-orange-500" />
+                        </Link>
+                     ) : (
+                        <></>
+                     )}
                   </li>
                </ul>
             </li>
@@ -128,8 +136,9 @@ const PrimaryNav: React.FC = () => {
                <Bars3Icon className="w-4" />
             </li>
             <nav
-               className={`fixed inset-y-0 left-0 w-[70%] md:w-[40%] bg-white z-50 transform border-r border-primary-900-5 ${openMenu ? 'translate-x-0' : '-translate-x-full'
-                  } transition-transform duration-300 ease-in-out`}
+               className={`fixed inset-y-0 left-0 w-[70%] md:w-[40%] bg-white z-50 transform border-r border-primary-900-5 ${
+                  openMenu ? 'translate-x-0' : '-translate-x-full'
+               } transition-transform duration-300 ease-in-out`}
             >
                <div className="border-b border-primary-900-5 py-4">
                   <div className="px-6 flex flex-row justify-between text-primary-900">
@@ -144,10 +153,11 @@ const PrimaryNav: React.FC = () => {
                   {menuItems.map((menu, index) => (
                      <li
                         key={index}
-                        className={`space-y-4 py-2 ${index !== menuItems.length - 1
+                        className={`space-y-4 py-2 ${
+                           index !== menuItems.length - 1
                               ? 'border-b border-primary-900-5'
                               : ''
-                           }`}
+                        }`}
                      >
                         <h4 className="font-normal text-primary-100">
                            {menu.title}
@@ -156,9 +166,10 @@ const PrimaryNav: React.FC = () => {
                            {menu.items.map((subItem, subIndex) => (
                               <li
                                  key={subIndex}
-                                 className={`text-[1.25rem] text-primary-700 font-normal ${pathname === subItem.link &&
+                                 className={`text-[1.25rem] text-primary-700 font-normal ${
+                                    pathname === subItem.link &&
                                     'text-primary-400'
-                                    }`}
+                                 }`}
                               >
                                  <a href={subItem.link}>{subItem.name}</a>
                               </li>

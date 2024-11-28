@@ -155,7 +155,6 @@ export async function POST(req: Request, res: NextResponse) {
       );
       let htmlTemplate = await readHtmlTemplate(templatePath);
 
-      // Replace placeholders in the template with actual data
       const verificationLink = `${eventLink}`;
       htmlTemplate = htmlTemplate.replace(
          '{{title}}',
@@ -167,9 +166,17 @@ export async function POST(req: Request, res: NextResponse) {
       );
       htmlTemplate = htmlTemplate.replace(
          '{{message}}',
-         `You can view the exhibit by following this link: <a href="${verificationLink}">${verificationLink}</a> once the countdown is over.<br><br>After the countdown, please proceed to the exhibit and connect the wallet you used for your purchase.<br><br>Your purchase enables revenue distribution within our connected heritage community and creates lasting value for them through your engagement with this collection of tokenized artifacts. We are building a new cycle of value addition, directly benefiting the Gwembe Valley community in the Southern Province of Zambia.<br><br>View our <a href="https://summitshare.co/distribution">Distributions page</a> to keep track of our work with this exhibition.`
-       );
-       
+         `You can view the exhibit by following this link:
+  <br><br>
+  <a href="${verificationLink}" style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">View Exhibit</a>
+  <br><br>
+  Once the countdown is over, please proceed to the exhibit and connect the wallet you used for your purchase.
+  <br><br>
+  Your purchase enables revenue distribution within our connected heritage community and creates lasting value for them through your engagement with this collection of tokenized artifacts. We are building a new cycle of value addition, directly benefiting the Gwembe Valley community in the Southern Province of Zambia.
+  <br><br>
+  <a href="https://summitshare.co/distribution" style="display: inline-block; padding: 10px 20px; background-color: #28A745; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">View Insights Page</a>
+  `
+      );
 
       const mailOptions = {
          from: emailServer,

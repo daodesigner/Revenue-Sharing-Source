@@ -19,18 +19,18 @@ function SecondaryNav() {
          title: 'Pages',
          items: [
             { name: 'What Is SummitShare?', link: '/blog' },
-            { name: 'Our goal as SummitShare', link: '/help' },
-            { name: 'Where is all started', link: '/partners' },
+            { name: 'Need Something?', link: '/help' },
+            { name: 'The Leading Ladies', link: '/exhibit' },
          ],
       },
    ];
 
    const items: { name: string; link: string }[] = [
+      { name: 'Exhibit', link: '/exhibit' },
       { name: 'Blog', link: '/blog' },
-      { name: 'Partners', link: '/partners' },
       { name: 'Help', link: '/help' },
       { name: 'Profile', link: '/profile' },
-      { name: 'Distribution', link: '/distribution' },
+      { name: 'Insights', link: '/distribution' },
    ];
    const pathname = usePathname();
 

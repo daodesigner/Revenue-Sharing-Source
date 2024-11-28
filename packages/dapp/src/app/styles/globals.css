@@ -38,7 +38,7 @@ h5 {
 p,
 a,
 li {
-   font-family: 'Inter', sans-serif;
+   font-family: system-ui, 'Inter', sans-serif;
    line-height: 150%;
    color: #403b3a;
 }
@@ -79,7 +79,7 @@ li {
 .l1-m,
 .l2-m,
 .l3-m {
-   font-family: 'Inter', sans-serif;
+   font-family: system-ui, 'Inter', sans-serif;
    line-height: 125%;
    color: #1a0d08;
 }
@@ -113,36 +113,37 @@ li {
    font-size: 0.75rem;
    font-weight: 600;
 }
+
 .primary-50 {
-   color: #f6f3f2;
+   color: #fff7ed; /* Tailwind orange-50 */
 }
 
 .primary-100 {
-   color: #746d6a;
+   color: #ffedd5; /* Tailwind orange-100 */
 }
 
 .primary-400 {
-   color: #794228;
+   color: #fb923c; /* Tailwind orange-400 */
 }
 
 .primary-600 {
-   color: #352218;
+   color: #ea580c; /* Tailwind orange-600 */
 }
 
 .primary-700 {
-   color: #352218;
+   color: #c2410c; /* Tailwind orange-700 */
 }
 
 .primary-900 {
-   color: #1a0d08;
+   color: #7c2d12; /* Tailwind orange-900 */
 }
 
 .primary-900-75 {
-   color: rgb(26, 13, 8, 75%);
+   color: rgba(124, 45, 18, 0.75); /* Tailwind orange-900 with opacity 75% */
 }
 
 .primary-900-5 {
-   color: rgb(26, 13, 8, 5%);
+   color: rgba(124, 45, 18, 0.05); /* Tailwind orange-900 with opacity 5% */
 }
 
 re-100 {
@@ -169,4 +170,8 @@ p > img {
 
 .bg-women-image {
    background-image: url('/women/all-women.png');
+}
+
+.bg-purple-gradient {
+   background: linear-gradient(to right, #471d35, #8c497f);
 }

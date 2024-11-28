@@ -6,7 +6,7 @@ import {
    fetchNoteContent,
    parseNoteContent,
 } from '@/lib/hackMD';
-import Buttons from '@/app/components/button/Butons';
+import { Button } from '@/app/components/button/Button';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 const Note = async ({ params }: { params: { id: string } }) => {
@@ -41,24 +41,16 @@ const Note = async ({ params }: { params: { id: string } }) => {
 
                <div className="flex flex-row gap-4">
                   <div className="w-[73px]">
-                     <Buttons type="primary" size="small">
-                        Yes
-                     </Buttons>
+                     <Button>Yes</Button>
                   </div>
                   <div className="w-[73px]">
-                     <Buttons type="secondary" size="small">
-                        No
-                     </Buttons>
+                     <Button variant="outline">No</Button>
                   </div>
                </div>
             </div>
             <div className="space-y-4 md:flex md:flex-row md:gap-4 md:space-y-0">
-               <Buttons type="secondary" active={true}>
-                  Back
-               </Buttons>
-               <Buttons type="primary" active={true}>
-                  Next
-               </Buttons>
+               <Button variant="outline">Back</Button>
+               <Button>Next</Button>
             </div>
          </div>
       );
