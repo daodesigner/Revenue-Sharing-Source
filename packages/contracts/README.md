@@ -93,7 +93,7 @@ _GAS=true hardhat test",
 The following gas report provides insights into the gas efficiency of key contract functions. It reflects the results under Solc version 0.8.20 with optimization enabled. 
 
 For additional information please see contract [coverage](https://github.com/bicos-io01/Revenue-Sharing-Source/tree/Central/packages/contracts/coverage).
-If contract coverage or any part of this readme is not up to date with latest RVS-m create an issue with a PR to update coverage and send an email to **summitshare.eth@gmail.com** with *'Documentation Update!* in the subject.
+If contract coverage or any part of this readme is not up to date with latest RVS-m create an issue with a PR to update coverage and send an email to [**info@summitshare.co**](mailto:info@summitshare.co) with *'Documentation Update!* in the subject.
 
 ```
 .. code-block:: shell

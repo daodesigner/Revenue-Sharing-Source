@@ -71,7 +71,7 @@ export async function GET(req: Request, res: NextResponse) {
       return NextResponse.json(
          {
             message:
-               'something went wrong please contact summitshare.eth@gmail.com',
+               'something went wrong please contact support@summitshare.co',
          },
          { status: 500 }
       );

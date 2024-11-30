@@ -10,13 +10,13 @@ We're thrilled that you're interested in contributing to the SummitShare project
 
 3. **Pull Requests (PRs)**: Once you've completed your work, open a pull request against the main repository. Include a clear and detailed PR description outlining the changes and the issue it resolves.
 
-4. **Email the Building Team**: Optionally, you can email the building team at [summitshare.eth@gmail.com](mailto:summitshare.eth@gmail.com) with the issue name in the subject line and a link to your PR. This is especially useful for discussing larger changes or proposals not already listed as issues.
+4. **Email the Building Team**: Optionally, you can email the building team at [info@summitshare.co](mailto:info@summitshare.co) with the issue name in the subject line and a link to your PR. This is especially useful for discussing larger changes or proposals not already listed as issues.
 
 ## 📬 Proposing Changes
 
 If you have a suggestion that could improve the project but isn't currently listed as an issue, we welcome your initiative!
 
-- **Email Your Proposal**: Send your suggestion to [summitshare.eth@gmail.com](mailto:summitshare.eth@gmail.com), including a detailed explanation of the proposed change and its value to the project.
+- **Email Your Proposal**: Send your suggestion to [info@summitshare.co](mailto:info@summitshare.co), including a detailed explanation of the proposed change and its value to the project.
 - **Approval Process**: The building team will review your proposal. We may approve it, request modifications, or deny it based on its alignment with the project's goals. If approved, you're encouraged to proceed with implementing the change.
 
 ## 📝 Documentation Guidelines

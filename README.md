@@ -1,6 +1,6 @@
 # SummitShare: A Digital Repatriation Solution
 **Follow** [SummitShare](https://twitter.com/summitshare_zm) on X/Twitter for the latest updates and discussions.
-[**Email**](mailto:summitshare.eth@gmail.com) the building team for collaborations, PRs, issues, bugs, etc. 
+[**Email**](mailto:info@summitshare.co) the building team for collaborations, PRs, issues, bugs, etc. 
 
 ![summitsharep](https://github.com/bicos-io01/Revenue-Sharing-Source/assets/83420013/649df241-e29c-404f-aafb-409153cac786)
 
