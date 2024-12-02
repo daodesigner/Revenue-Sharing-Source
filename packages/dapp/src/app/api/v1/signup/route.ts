@@ -69,7 +69,7 @@ async function createSendTokens(user: users, email: string) {
       };
 
       const info = await transporter.sendMail(mailOptions);
-      return {verification, info,};
+      return verification;
    } catch (error) {
       console.log(error)
       throw error;
@@ -251,7 +251,7 @@ export async function POST(req: Request, res: NextResponse) {
                wallet_address
             );
             return NextResponse.json(
-               { success: 'User created and email sent', user: exhibitor },
+               { success: 'User created and email sent'},
                { status: 201 }
             );
          case 'visitor':
@@ -262,7 +262,7 @@ export async function POST(req: Request, res: NextResponse) {
                type
             );
             return NextResponse.json(
-               { success: 'User created and email sent', user: visitor },
+               { success: 'User created and email sent'},
                { status: 201 }
             );
          default:
