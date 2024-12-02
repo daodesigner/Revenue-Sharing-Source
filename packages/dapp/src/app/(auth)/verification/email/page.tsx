@@ -16,7 +16,7 @@ function Page({ params }: { params: { token: string } }) {
          </nav>
          <div className="text-center space-y-2">
             <h1 className="text-orange-500">Verify your email</h1>
-            <p>Open your mail SummitShare has sent you a verification link</p>
+            <p>Please check your email for a verification link from SummitShare. If you don’t see it in your inbox, be sure to check your spam or junk folder as well.</p>
          </div>
       </div>
    );

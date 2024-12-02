@@ -78,7 +78,7 @@ function Page() {
             router.push('/verification/email');
             break;
          default:
-            setErrorMessage('Unhandled response code');
+            setErrorMessage('Something went wrong please contact support@summitshare.co');
       }
    };
 
