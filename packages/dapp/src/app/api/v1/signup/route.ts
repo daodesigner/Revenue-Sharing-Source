@@ -68,8 +68,8 @@ async function createSendTokens(user: users, email: string) {
          html: htmlTemplate,
       };
 
-      await transporter.sendMail(mailOptions);
-      return verification;
+      const info = await transporter.sendMail(mailOptions);
+      return {verification, info,};
    } catch (error) {
       console.log(error)
       throw error;
