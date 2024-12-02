@@ -71,6 +71,7 @@ async function createSendTokens(user: users, email: string) {
       await transporter.sendMail(mailOptions);
       return verification;
    } catch (error) {
+      console.log(error)
       throw error;
    }
 }
