@@ -1,4 +1,4 @@
-import { passwordCompare } from '@/utils/methods/auth/passwordCompare';
+import { passwordCompare, getAirdropStatus } from '@/utils/methods/auth/passwordCompare';
 import NextAuth, { DefaultSession, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { JWT } from 'next-auth/jwt';
@@ -18,6 +18,10 @@ interface CustomUser {
    email_verified: boolean | null;
    type: string | null;
    user_wallets: UserWallet[];
+   airdrop: {
+      valid: boolean | null;
+      claimed: boolean | null; 
+   }
 }
 
 declare module 'next-auth' {
@@ -104,7 +108,13 @@ const handler = NextAuth({
                   throw new Error(message || 'Invalid credentials');
                }
 
-               const user: User = {
+               const ad  = await  getAirdropStatus(foundUser.id);
+
+               if (!foundUser || !compare) {
+                  throw new Error(message || 'Invalid credentials');
+               }
+
+               const user: CustomUser = {
                   id: foundUser.id,
                   email: foundUser.email,
                   username: foundUser.username || null,
@@ -112,8 +122,9 @@ const handler = NextAuth({
                   email_verified: foundUser.email_verified || null,
                   type: foundUser.type || null,
                   user_wallets: foundUser.user_wallets || [],
+                  airdrop :ad
                };
-
+               console.log (`use: ad ${JSON.stringify(user.airdrop)}`)
                return user;
             } catch (error) {
                console.error('Authorization error:', error);
