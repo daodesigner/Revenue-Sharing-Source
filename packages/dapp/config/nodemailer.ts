@@ -8,8 +8,9 @@ const port = process.env.EMAIL_PORT
 
 export const transporter = nodemailer.createTransport({
    // @ts-ignore
-   host: host, // Use the correct SMTP server
-   port: port,
+   //host: host, // Use the correct SMTP server
+  // port: port,
+  service:'gmail',
    secure: false, // Set to false for TLS
    auth: {
        user: emailServer, // Your email address

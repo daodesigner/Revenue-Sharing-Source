@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 import { initializeDevWallet } from '@/utils/prod/walletInit';
 import { contracts } from '@/utils/prod/contractInit';
+import prisma from '../../../../../../config/db';
 
 // Constants
 const USDT_AMOUNT = ethers.utils.parseUnits('5', 6); // 5 USDT (6 decimals)
@@ -80,5 +81,43 @@ export async function POST(req: Request) {
          },
          { status: 500 }
       );
+   }
+}
+
+
+export async function GET(req: Request) {
+   try {
+       // Extract query parameters from the request URL
+       const { searchParams } = new URL(req.url);
+       const userId = searchParams.get("user_id");
+       const code = searchParams.get("code");
+
+       // Validate query parameters
+       if (!userId) {
+           return NextResponse.json({ error: "Missing user_id parameter" }, { status: 400 });
+       }
+
+
+       // Query the database to find the user in the airdrops table
+       const airdrop = await prisma.airdrops.findFirst({
+           where: { user_id: userId },
+       });
+
+       // If user exists in the airdrops table, return their details
+       if (airdrop) {
+           return NextResponse.json({
+               id: airdrop.id,
+               user_id: airdrop.user_id,
+               wallet_address: airdrop.wallet_address,
+               claimed: airdrop.claimed,
+               claimed_at: airdrop.claimed_at,
+           }, { status: 200 });
+       }
+
+       // If the user is not found, return a 401 response
+       return NextResponse.json({ error: "User not found in airdrops table" }, { status: 401 });
+   } catch (error) {
+       console.error("Error processing request:", error);
+       return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
    }
 }
