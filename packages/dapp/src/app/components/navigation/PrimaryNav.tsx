@@ -17,6 +17,7 @@ import { UserCircle } from 'lucide-react';
 const PrimaryNav: React.FC = () => {
    const router = useRouter();
    const session = useSession();
+  
 
    const handleAuthClick = async () => {
       if (session.status === 'authenticated') {
@@ -81,7 +82,7 @@ const PrimaryNav: React.FC = () => {
 
    const pathname = usePathname();
    const { address } = useAccount();
-
+   const userAddress = address;
    return (
       <nav className="w-full">
          <ul className="fixed top-0 inset-x-0 px-6 py-4 lg:px-28 lg:py-6 flex flex-row justify-between items-center border-b border-primary-900-5 text-primary-900 z-10 bg-white">
@@ -113,7 +114,7 @@ const PrimaryNav: React.FC = () => {
                   <ConnectKitButton.Custom>
                         {({ show }) => (
                            <Button onClick={show}>
-                              Connect Wallet
+                               {!userAddress?"Connect Wallet":"Connected"}
                            </Button>
                         )}
                      </ConnectKitButton.Custom>
@@ -184,7 +185,13 @@ const PrimaryNav: React.FC = () => {
                      </li>
                   ))}
                   <li>
-                     <ConnectKitButton />
+                  <ConnectKitButton.Custom>
+                        {({ show }) => (
+                           <Button onClick={show}>
+                               {!userAddress?"Connect Wallet":"Connected"}
+                           </Button>
+                        )}
+                     </ConnectKitButton.Custom>
                   </li>
                </ul>
             </nav>
