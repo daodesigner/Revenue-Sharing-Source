@@ -1,9 +1,14 @@
 import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 import { initializeDevWallet } from '@/utils/dev/walletInit';
-import { contracts } from '@/utils/dev/contractInit';
+import { contracts } from '@/utils/dev/contractInit'
 
-const USDT_AMOUNT = ethers.utils.parseUnits('5', 18); // USDT decimals = 6
+// production values:
+// import { initializeDevWallet } from '@/utils/prod/walletInit';
+// import { contracts } from '@/utils/prod/contractInit';
+
+const USDT_AMOUNT = ethers.utils.parseUnits('5', 6); // USDT decimals = 6
+const MUSDC_AMOUNT = ethers.utils.parseUnits('5', 18) // MOCK decimals = 18
 const ETH_AMOUNT = ethers.utils.parseEther('0.00000606'); 
 
 export async function POST(req: Request) {
@@ -18,9 +23,15 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Invalid address' }, { status: 400 });
         }
 
+        // initialize dev wallet 
         const { provider, wallet } = initializeDevWallet();
+        // intialize dev mock USDC contract 
         const usdtContract = contracts.getMUSDC();
 
+        // initalize OP USDT contract
+        // const usdtContract = contracts.getUSDT();
+
+        // wallet balance check 
         const [usdtBalance, ethBalance, feeData] = await Promise.all([
             usdtContract.balanceOf(wallet.address),
             provider.getBalance(wallet.address),
@@ -30,10 +41,15 @@ export async function POST(req: Request) {
         if (!feeData.maxFeePerGas || !feeData.maxPriorityFeePerGas) {
             throw new Error('Could not estimate gas fees');
         }
+      //   PROD:
+      //   if (usdtBalance.lt(USDT_AMOUNT)) {
+      //       return NextResponse.json({ error: 'Insufficient USDT' }, { status: 400 });
+      //   }
 
-        if (usdtBalance.lt(USDT_AMOUNT)) {
-            return NextResponse.json({ error: 'Insufficient USDT' }, { status: 400 });
-        }
+      //   DEV:
+        if (usdtBalance.lt(MUSDC_AMOUNT)) {
+         return NextResponse.json({ error: 'Insufficient USDT' }, { status: 400 });
+     }
 
         if (ethBalance.lt(ETH_AMOUNT)) {
             return NextResponse.json({ error: 'Insufficient ETH' }, { status: 400 });
