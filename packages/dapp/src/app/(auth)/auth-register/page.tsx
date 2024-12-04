@@ -1,6 +1,5 @@
 'use client';
 import { Button } from '@/app/components/button/Button';
-import Inputs from '@/app/components/inputs/Inputs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -17,6 +16,7 @@ function Page() {
       username: '',
       email: '',
       password: '',
+  
    });
    const [status, setStatus] = useState<number | undefined>();
    const [errorMessage, setErrorMessage] = useState<string>('');

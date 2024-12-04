@@ -152,6 +152,7 @@ const handler = NextAuth({
             token.email_verified = user.email_verified;
             token.type = user.type;
             token.user_wallets = user.user_wallets;
+            token.airdrop = user.airdrop;
          }
          return token;
       },
@@ -165,6 +166,7 @@ const handler = NextAuth({
             email_verified: token.email_verified,
             type: token.type,
             user_wallets: token.user_wallets,
+            airdrop:token.airdrop
          };
 
          return session;

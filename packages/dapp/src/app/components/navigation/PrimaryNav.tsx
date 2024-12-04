@@ -110,7 +110,13 @@ const PrimaryNav: React.FC = () => {
             <li className="sm:block hidden md:hidden lg:block w-fit">
                <ul className="flex flex-row gap-4 items-center">
                   <li>
-                     <ConnectKitButton />
+                  <ConnectKitButton.Custom>
+                        {({ show }) => (
+                           <Button onClick={show}>
+                              Connect Wallet
+                           </Button>
+                        )}
+                     </ConnectKitButton.Custom>
                   </li>
                   <li>
                      <div onClick={handleAuthClick}>
