@@ -12,20 +12,36 @@ export const initializeUserWallet = () => {
    return { provider, signer };
 };
 
-const devPrivateKey = process.env.DEV_PRIVATE_KEY;
-const sepoliapcUrl = process.env.RPC_URL;
-
-// Initialize developer wallet (for server-side or admin operations)
 export const initializeDevWallet = () => {
-   const provider = new ethers.providers.JsonRpcProvider(sepoliapcUrl);
+   const devPrivateKey = process.env.DEV_PRIVATE_KEY;
+   const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || process.env.RPC_URL;
 
-   if (!devPrivateKey) {
-      throw new Error('dev key is not defined');
+   if (!devPrivateKey || !rpcUrl) {
+      throw new Error('Missing environment variables');
    }
+
+   const connection: Record<string, any> = {
+      url: rpcUrl,
+      skipFetchSetup: true,
+      fetchFunc: (body: string) => {
+         return fetch(rpcUrl, {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body
+         });
+      }
+   };
+
+   const provider = new ethers.providers.StaticJsonRpcProvider(connection, {
+      chainId: 11155420,
+      name: 'op-sepolia'
+   });
+
    const wallet = new ethers.Wallet(devPrivateKey, provider);
    return { provider, wallet };
 };
-
 // Test Wallets - Should have Sepolia/OP Sepolia
 export const testWallets = [
    process.env.araragi,
