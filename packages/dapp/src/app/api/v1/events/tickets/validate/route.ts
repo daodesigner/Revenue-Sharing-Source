@@ -27,7 +27,6 @@ export async function POST(req: Request, res: NextResponse) {
          );
       }
 
-
       const ticket = await prisma.tickets.findFirst({
          where: {
             wallet_address: userAddress,
@@ -37,16 +36,22 @@ export async function POST(req: Request, res: NextResponse) {
       });
 
       if (!ticket) {
-         return NextResponse.json({ 
-            message: 'no tickets found',
-            hasTicket: false 
-          }, { status: 401 });
+         return NextResponse.json(
+            {
+               message: 'no tickets found',
+               hasTicket: false,
+            },
+            { status: 401 }
+         );
       }
 
-      return NextResponse.json({ 
-         message: 'ticket validated',
-         hasTicket: true 
-       }, { status: 200 });
+      return NextResponse.json(
+         {
+            message: 'ticket validated',
+            hasTicket: true,
+         },
+         { status: 200 }
+      );
    } catch (error) {
       console.error('Full error:', error);
       return NextResponse.json({ message: error }, { status: 500 });

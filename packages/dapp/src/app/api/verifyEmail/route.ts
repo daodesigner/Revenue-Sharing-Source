@@ -1,8 +1,5 @@
-
 import { NextResponse } from 'next/server';
 import prisma from '../../../../config/db';
-
-
 
 export async function GET(req: Request, res: NextResponse) {
    const host = req.headers.get('host');

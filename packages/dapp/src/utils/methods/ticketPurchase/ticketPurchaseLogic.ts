@@ -37,10 +37,10 @@ export const handleTicketPurchase = async ({
 
       const balance = await usdtContract.balanceOf(userAddress);
       console.log({
-        userAddress,
-        balance: balance.toString(),
-        requiredAmount: ticketPrice,
-        network: (await provider.getNetwork()).name
+         userAddress,
+         balance: balance.toString(),
+         requiredAmount: ticketPrice,
+         network: (await provider.getNetwork()).name,
       });
 
       // Add balance check before approve
@@ -54,7 +54,7 @@ export const handleTicketPurchase = async ({
       // Token approval
       const gasLimitApprove = await estimateGas(usdtContract, 'approve', [
          CONTRACT_ADDRESSES.MuseumAdd,
-         ticketPrice ,
+         ticketPrice,
       ]);
       const approveTx = await usdtContract.approve(
          CONTRACT_ADDRESSES.MuseumAdd,
@@ -65,7 +65,6 @@ export const handleTicketPurchase = async ({
       );
       await approveTx.wait(1);
 
-
       // Purchase ticket
       setStatus('Purchasing ticket...');
       const gasLimitPurchase = await estimateGas(
@@ -74,7 +73,6 @@ export const handleTicketPurchase = async ({
          [eventId, ticketPrice]
       );
 
- 
       const purchaseTx = await museumContract.purchaseTicket(
          eventId,
          ticketPrice,

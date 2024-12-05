@@ -184,10 +184,10 @@ export default function Cya() {
             {/* Ticket Purchase Section */}
             <div className="z-10 relative mb-8 flex gap-2">
                {session?.status === 'authenticated' ? (
-                   <TicketPurchaseComponent 
-                   userAddress={address || ''} 
-                   user_id={session.data?.user?.id || ''}
-                 />
+                  <TicketPurchaseComponent
+                     userAddress={address || ''}
+                     user_id={session.data?.user?.id || ''}
+                  />
                ) : (
                   <Button
                      variant={'white'}

@@ -5,8 +5,6 @@ import bcrypt from 'bcryptjs';
 import crypto from 'node:crypto';
 import prisma from '../../../../config/db';
 
-
-
 export async function POST(req: Request, res: NextResponse) {
    try {
       const { data } = await req.json();

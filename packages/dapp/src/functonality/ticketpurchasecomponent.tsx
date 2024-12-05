@@ -27,7 +27,11 @@ const TicketPurchaseComponent = ({
       setButtonText,
       setButtonType,
       setHasTicket,
-   } = useTicketState(userAddress, '419a0b2d-dee9-4782-9cff-341c5f8343a6', user_id);
+   } = useTicketState(
+      userAddress,
+      '419a0b2d-dee9-4782-9cff-341c5f8343a6',
+      user_id
+   );
    const isCountdownOver = useCountdown();
 
    // UI State

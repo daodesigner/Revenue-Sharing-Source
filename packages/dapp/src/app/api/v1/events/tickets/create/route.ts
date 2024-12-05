@@ -111,7 +111,10 @@ export async function POST(req: Request, res: NextResponse) {
 
       if (!event) {
          console.log('No event found');
-         return NextResponse.json({ message: 'Something went wrong please try again' }, { status: 400 });
+         return NextResponse.json(
+            { message: 'Something went wrong please try again' },
+            { status: 400 }
+         );
       }
 
       const price = event.cost!;
