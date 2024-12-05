@@ -26,9 +26,9 @@ const InsightsPage = () => {
 
    const stats = [
       {
-         value: '10,000',
+         value: '10,280',
          label: 'FUNDS RAISED (USD)',
-         subtext: 'Comprises grants, donations & ticket sales',
+         subtext: 'Comprises grants, donations & ticket sales that are going to realizing the exhibit.',
          icon: <TrendingUp className="w-6 h-6" />,
       },
       {
