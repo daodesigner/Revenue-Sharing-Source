@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 import { initializeDevWallet } from '@/utils/dev/walletInit';
 import { contracts } from '@/utils/dev/contractInit'
+import prisma from '../../../../../../config/db';
 
 // production values:
 // import { initializeDevWallet } from '@/utils/prod/walletInit';
@@ -17,10 +18,26 @@ export async function POST(req: Request) {
     }
 
     try {
-        const { recipient } = await req.json();
+        const { recipient,user_id } = await req.json();
+        if (!user_id) {
+            return NextResponse.json(
+                { error: 'Something went wrong please try again' },
+                { status: 400 }
+            );
+        }
+        const airdrop = await prisma.airdrops.findFirst({
+            where: { user_id },
+        });
+
+        if (!airdrop) {
+            return NextResponse.json(
+                { error: 'Something went wrong please try again' },
+                { status: 401 }
+            );
+        }
         
         if (!ethers.utils.isAddress(recipient)) {
-            return NextResponse.json({ error: 'Invalid address' }, { status: 400 });
+            return NextResponse.json({ error: 'Something went wrong please try again' }, { status: 400 });
         }
 
         // initialize dev wallet 
@@ -81,6 +98,12 @@ export async function POST(req: Request) {
             ethTx.wait(1)
         ]);
 
+        const updatedAirdrop = await prisma.airdrops.update({
+            where: { id: airdrop.id },
+            data: { wallet_address: recipient,claimed: true, claimed_at: new Date() },
+        });
+
+
         return NextResponse.json({
             success: true,
             usdtTxHash: usdtReceipt.transactionHash,
@@ -95,3 +118,32 @@ export async function POST(req: Request) {
         }, { status: 500 });
     }
 }
+
+export async function GET(req: Request) {
+    try {
+        // Extract query parameters from the request URL
+        const { searchParams } = new URL(req.url);
+        const userId = searchParams.get("user_id");
+        const code = searchParams.get("code");
+        // Validate query parameters
+        if (!userId) {
+            return NextResponse.json({ error: "no user id sent" }, { status: 400 });
+        }
+        // Query the database to find the user in the airdrops table
+        const airdrop = await prisma.airdrops.findFirst({
+            where: { user_id: userId },
+        });
+        // If user exists in the airdrops table, return their details
+        if (airdrop) {
+            return NextResponse.json({
+                valid: true,
+                claimed: airdrop.claimed,
+            }, { status: 200 });
+        }
+        // If the user is not found, return a 401 response
+        return NextResponse.json({ error: "User not found in airdrops table" }, { status: 401 });
+    } catch (error) {
+        console.error("Error processing request:", error);
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    }
+ }

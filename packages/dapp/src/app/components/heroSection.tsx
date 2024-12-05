@@ -1,55 +1,97 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "./button/Button";
 import { useSession } from "next-auth/react";
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
+import { useRouter } from "next/navigation";
+
+interface Airdrop {
+  valid: boolean;
+  claimed: boolean;
+}
 
 function HeroSection() {
+  const router = useRouter();
   const { data: session } = useSession();
   const { address } = useAccount();
-  const userAddress = address;
+  const [airDropValues, setAirdropValues] = useState<Airdrop | null>(null);
   const [response, setResponse] = useState<number | null>(null);
   const [responseMessage, setResponseMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [render, setRender] = useState<boolean>(false);
+
+  const userAddress = address;
+  const userId = session?.user.id;
+
+  useEffect(() => {
+    if (!userId) return;
+
+    async function fetchAirdropPermissions() {
+      console.log(userId)
+      setLoading(true);
+      try {
+        const host = process.env.NEXT_PUBLIC_HOST;
+        const url = `${host}/api/v1/events/airdrop?user_id=${userId}`;
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error(`Failed to fetch airdrop data: ${res.statusText}`);
+        }
+
+        const data = (await res.json()) as Airdrop;
+        setAirdropValues(data);
+        console.log(airDropValues)
+
+      } catch (error: any) {
+        console.error("Error fetching airdrop data:", error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchAirdropPermissions();
+  }, [userId, render]);
 
   async function sendAirdropRequest(address: string) {
-    const host = process.env.NEXT_PUBLIC_HOST;
-    const url = `${host}/api/v1/events/airdrop`;
-
     try {
-      const response = await fetch(url, {
+      const host = process.env.NEXT_PUBLIC_HOST;
+      const url = `${host}/api/v1/events/airdrop`;
+      const res = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ recipient: address }),
+        body: JSON.stringify({ recipient: address , user_id: userId}),
       });
 
-      const responseData = await response.json();
+      const responseData = await res.json();
 
-      if (!response.ok) {
-        throw new Error(responseData.message || `HTTP Error: ${response.status}`);
+      if (!res.ok) {
+        throw new Error(responseData.message || `HTTP Error: ${res.status}`);
       }
 
-      
-      if (session && session.user.airdrop) {
-         session.user.airdrop.claimed = true;
-     }
-      setResponse(response.status);
+      setResponse(res.status);
       setResponseMessage("Air drop successfully claimed");
-      console.log("Response:", responseData);
+      console.log("Airdrop claimed successfully:", responseData);
+
+      setRender((prev) => !prev);
     } catch (error: any) {
       setResponseMessage(
         error.message || "An unexpected error occurred. Please try again."
       );
-      console.error("Error:", error);
+      console.error("Error claiming airdrop:", error);
     }
   }
 
-  const isAirdropValid =
-    session?.user?.airdrop?.valid === true &&
-    session?.user?.airdrop?.claimed === false;
+  const isAirdropValid = airDropValues?.valid === true && airDropValues?.claimed === false;
 
   return (
     <section className="bg-gradient-to-r from-orange-400 via-orange-600 to-orange-700 rounded-xl p-8 border-b md:border-b-0 border-primary-900-5 space-y-8 pb-10 md:flex md:flex-row md:gap-8">
@@ -69,8 +111,11 @@ function HeroSection() {
           <Link href={"/cya"}>
             <Button>Enter Exhibit</Button>
           </Link>
-
-          {isAirdropValid ? (
+          {loading ? (
+            <Button variant="white" disabled>
+              Loading...
+            </Button>
+          ) : isAirdropValid ? (
             !userAddress ? (
               <ConnectKitButton.Custom>
                 {({ show }) => (
