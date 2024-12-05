@@ -1,7 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server';
 
-const prisma = new PrismaClient();
+import { NextResponse } from 'next/server';
+import prisma from '../../../../config/db';
+
+
 
 export async function GET(req: Request, res: NextResponse) {
    const host = req.headers.get('host');
