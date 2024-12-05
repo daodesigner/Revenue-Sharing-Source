@@ -32,7 +32,7 @@ const PrimaryNav: React.FC = () => {
 
    // Navigation items for the main nav bar
    const items: { name: string; link: string }[] = [
-      { name: 'Exhibit', link: '/exhibit' },
+      // { name: 'Exhibit', link: '/exhibit' },
       { name: 'Blog', link: '/blog' },
       // { name: 'Partners', link: '/partners' },
       { name: 'Support Us', link: '/donate' },
@@ -48,7 +48,7 @@ const PrimaryNav: React.FC = () => {
       {
          title: 'Pages',
          items: [
-            { name: 'Exhibit', link: '/exhibit' },
+            // { name: 'Exhibit', link: '/exhibit' },
             { name: 'Blog', link: '/blog' },
             { name: 'Support Us', link: '/donate' },
          ],
