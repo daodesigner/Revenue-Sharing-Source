@@ -90,9 +90,9 @@ function ResetPassword({ params }: { params: { token: string } }) {
                      <TextInput
                         type={inputType}
                         label="Password"
-                        value={password} 
+                        value={password}
                         onChange={(e) => {
-                           setPassword(e.target.value); 
+                           setPassword(e.target.value);
                            setPasswordError(false);
                            setErrorMessage('');
                         }}
@@ -102,8 +102,8 @@ function ResetPassword({ params }: { params: { token: string } }) {
                   <div className="relative">
                      <TextInput
                         type={inputType}
-                        label="Confirm Password" 
-                        value={confirmPassword} 
+                        label="Confirm Password"
+                        value={confirmPassword}
                         onChange={(e) => {
                            setConfirmPassword(e.target.value);
                            setConfirmPasswordError(false);

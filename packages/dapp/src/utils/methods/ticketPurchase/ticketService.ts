@@ -25,6 +25,10 @@ export const validateTicket = async (
    >,
    setButtonText: React.Dispatch<React.SetStateAction<string>>
 ) => {
+   if (!userAddress || !eventId || !user_id) {
+      console.warn('Missing required parameters for ticket validation');
+      return;
+   }
    if (!ENABLE_VALIDATION) {
       console.log('Ticket validation is currently disabled');
       setHasTicket(false);
@@ -45,10 +49,12 @@ export const validateTicket = async (
          setHasTicket(true);
          setButtonType('secondary');
          setButtonText('View Exhibit');
+
+         // Store validation result
+         localStorage.setItem(`ticket_${eventId}_${userAddress}`, 'true');
       } else {
-         // Handle case where user doesn't have a ticket
          setHasTicket(false);
-         setButtonType('primary'); // Valid value
+         setButtonType('primary');
          setButtonText('Purchase Ticket');
       }
    } catch (error) {

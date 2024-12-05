@@ -1,5 +1,5 @@
 // TicketPurchaseComponent.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { TicketPurchaseProps } from '@/utils/dev/typeInit';
 import { CONTRACT_ADDRESSES, contracts } from '@/utils/prod/contractInit';
@@ -13,6 +13,7 @@ import { handleTicketPurchase } from '@/utils/methods/ticketPurchase/ticketPurch
 import TicketPurchaseUI from '@/utils/methods/ticketPurchase/ticketPurchaseUI';
 import { estimateGasFees } from '@/utils/methods/ticketPurchase/gasEstimator';
 import { ethers } from 'ethers';
+import { validateTicket } from '@/utils/methods/ticketPurchase/ticketService';
 
 const TicketPurchaseComponent = ({
    userAddress,
@@ -32,6 +33,7 @@ const TicketPurchaseComponent = ({
       '419a0b2d-dee9-4782-9cff-341c5f8343a6',
       user_id
    );
+
    const isCountdownOver = useCountdown();
 
    // UI State
@@ -43,9 +45,34 @@ const TicketPurchaseComponent = ({
    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
    const [purchaseSuccessful, setPurchaseSuccessful] = useState(false);
    const [isHovering, setIsHovering] = useState(false);
+   const [isValidating, setIsValidating] = useState(true);
 
    // Fetch exhibit data
    const exhibit = useExhibit(CONTRACT_ADDRESSES.exhibitId);
+   useEffect(() => {
+      if (purchaseSuccessful) {
+         setHasTicket(true);
+         setButtonType('secondary');
+         setButtonText(isCountdownOver ? 'View Exhibit' : 'Ticket Purchased ✓');
+      }
+   }, [purchaseSuccessful, isCountdownOver]);
+
+   useEffect(() => {
+      if (userAddress && user_id) {
+         setIsValidating(true);
+         validateTicket(
+            userAddress,
+            '419a0b2d-dee9-4782-9cff-341c5f8343a6',
+            user_id,
+            setHasTicket,
+            setButtonType,
+            setButtonText
+         ).finally(() => {
+            setIsValidating(false);
+         });
+      }
+   }, [userAddress, user_id, purchaseSuccessful]);
+
    if (!exhibit) return <div>Loading Exhibit</div>;
 
    // Price calculations
@@ -93,22 +120,26 @@ const TicketPurchaseComponent = ({
          setButtonText,
          setPurchaseSuccessful,
          setShowSuccessMessage,
+         setHasTicket,
+         setButtonType,
       });
    };
 
    const getButtonConfig = () => ({
-      text: purchaseSuccessful
+      text: isValidating
+         ? 'Loading...'
+         : hasTicket
          ? isCountdownOver
             ? 'View Exhibit'
             : 'Ticket Purchased ✓'
          : 'Purchase',
-      action:
-         purchaseSuccessful && isCountdownOver
-            ? () => window.open('https://summitshare.co/exhibit', '_blank')
-            : togglePopup,
-      type: purchaseSuccessful ? ('secondary' as const) : ('primary' as const),
+      action: isValidating
+         ? () => {}
+         : hasTicket && isCountdownOver
+         ? () => window.open('https://summitshare.co/exhibit', '_blank')
+         : togglePopup,
+      type: hasTicket ? ('secondary' as const) : ('primary' as const),
    });
-
    // Props for UI component
    const uiProps = {
       userAddress,
@@ -132,6 +163,7 @@ const TicketPurchaseComponent = ({
       ticketPriceFormatted,
       togglePopup,
       purchaseTicket,
+      isValidating,
       buttonConfig: getButtonConfig(),
       closeSuccessMessage: () => setShowSuccessMessage(false),
       calculateTotalPrice: () => {

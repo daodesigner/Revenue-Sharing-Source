@@ -281,6 +281,7 @@ export interface TicketPurchaseUIProps {
    buttonText: string;
    buttonConfig: ButtonConfig;
    isProcessing: boolean;
+   isValidating: boolean;
 
    // Status and Messages
    status: string;
@@ -366,8 +367,12 @@ export interface PurchaseHandlerProps {
    user_id: string;
    address: string;
    setStatus: (status: string) => void;
-   setIsProcessing: (isProcessing: boolean) => void;
-   setButtonText: (text: string) => void;
-   setPurchaseSuccessful: (success: boolean) => void;
-   setShowSuccessMessage: (show: boolean) => void;
+   setIsProcessing: React.Dispatch<React.SetStateAction<boolean>>;
+   setButtonText: React.Dispatch<React.SetStateAction<string>>;
+   setButtonType: React.Dispatch<
+      React.SetStateAction<'primary' | 'secondary' | 'tartary' | 'subTartary'>
+   >;
+   setPurchaseSuccessful: React.Dispatch<React.SetStateAction<boolean>>;
+   setShowSuccessMessage: React.Dispatch<React.SetStateAction<boolean>>;
+   setHasTicket: React.Dispatch<React.SetStateAction<boolean>>;
 }

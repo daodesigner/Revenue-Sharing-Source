@@ -7,6 +7,7 @@ import {
 import { PurchaseHandlerProps } from '@/utils/dev/frontEndInterfaces';
 import { handleContractError } from '@/utils/dev/handleContractError';
 import axios from 'axios';
+import { validateTicket } from './ticketService';
 
 export const handleTicketPurchase = async ({
    provider,
@@ -19,6 +20,8 @@ export const handleTicketPurchase = async ({
    setButtonText,
    setPurchaseSuccessful,
    setShowSuccessMessage,
+   setHasTicket,
+   setButtonType,
 }: PurchaseHandlerProps) => {
    if (!provider) {
       setStatus('Web3 provider is not initialized.');
@@ -88,7 +91,25 @@ export const handleTicketPurchase = async ({
       setShowSuccessMessage(true);
       setStatus('Ticket purchased successfully!');
       setIsProcessing(false);
-      setButtonText('Pay');
+
+      // Update ticket state
+      setHasTicket(true);
+      setButtonType('secondary');
+      setButtonText('Ticket Purchased ✓');
+
+      try {
+         await validateTicket(
+            address,
+            eventId,
+            user_id,
+            setHasTicket,
+            setButtonType,
+            setButtonText
+         );
+      } catch (error) {
+         console.error('Validation error:', error);
+         // Don't change success state even if validation fails
+      }
    } catch (error: any) {
       console.error('Smart Contract Interaction Failed:', error);
       const friendlyMessage = handleContractError(error);
