@@ -43,6 +43,14 @@ export const handleTicketPurchase = async ({
         network: (await provider.getNetwork()).name
       });
 
+      // Add balance check before approve
+      if (balance < BigInt(ticketPrice)) {
+         setStatus('Insufficient USDT balance');
+         setButtonText('Insufficient USDT balance');
+         setIsProcessing(false);
+         return;
+      }
+
       // Token approval
       const gasLimitApprove = await estimateGas(usdtContract, 'approve', [
          CONTRACT_ADDRESSES.MuseumAdd,
