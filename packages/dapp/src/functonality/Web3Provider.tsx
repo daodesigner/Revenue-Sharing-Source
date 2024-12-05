@@ -20,7 +20,7 @@ const config = createConfig(
       chains: [optimism],
       transports: {
          [optimism.id]: http(
-            `https://opt-mainnet.g.alchemy.com/v2/_I5FVfPvQLRwoSBy0H8RFigtTPMcA0cA`
+            `process.env.PROD_RPC_URL!`
          ),
       },
       // Optional App Info
