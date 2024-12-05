@@ -189,7 +189,7 @@ export default function Cya() {
                      size={'medium'}
                      onClick={() => !timeLeft && buttonConfig.action}
                   >
-                     {isComplete ? 'Coming Soon' : 'Purchase'}
+                     Purchase
                   </Button>
                )}
             </div>
