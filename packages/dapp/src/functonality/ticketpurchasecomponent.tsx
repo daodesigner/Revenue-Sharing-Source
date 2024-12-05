@@ -49,12 +49,18 @@ const TicketPurchaseComponent = ({
    const ticketPriceFormatted = ethers.utils.formatUnits(ticketPriceWei, 6);
    const ticketPriceWithToken = `${ticketPriceFormatted} USDT`;
 
+   // console.log({
+   //    rawPrice: exhibit.exhibitDetails[0]?.ticketPrice,
+   //    asBigInt: ticketPriceWei,
+   //    formatted: ticketPriceFormatted
+   //  });
+
    // Handlers
    const handleEstimateGas = async () => {
       await estimateGasFees(
          provider,
          contracts,
-         ticketPriceWei.toString(),
+         ticketPriceWei,
          CONTRACT_ADDRESSES.eventId,
          setStatus,
          setEstimatedGasFees,
@@ -74,9 +80,10 @@ const TicketPurchaseComponent = ({
       }
       handleTicketPurchase({
          provider,
-         ticketPrice: ticketPriceWei.toString(),
+         ticketPrice: ticketPriceWei,
          eventId: CONTRACT_ADDRESSES.eventId,
          user_id: session?.user?.id || '',
+         address: userAddress || '',
          setStatus,
          setIsProcessing,
          setButtonText,

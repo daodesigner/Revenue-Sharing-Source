@@ -13,6 +13,7 @@ export const handleTicketPurchase = async ({
    ticketPrice,
    eventId,
    user_id,
+   address,
    setStatus,
    setIsProcessing,
    setButtonText,
@@ -25,6 +26,8 @@ export const handleTicketPurchase = async ({
    }
 
    try {
+      const signer = provider.getSigner();
+      const userAddress = await signer.getAddress();
       const usdtContract = contracts.getUSDT();
       const museumContract = contracts.getMuseum();
 
@@ -32,10 +35,18 @@ export const handleTicketPurchase = async ({
       setIsProcessing(true);
       setButtonText('processing...');
 
+      const balance = await usdtContract.balanceOf(userAddress);
+      console.log({
+        userAddress,
+        balance: balance.toString(),
+        requiredAmount: ticketPrice,
+        network: (await provider.getNetwork()).name
+      });
+
       // Token approval
       const gasLimitApprove = await estimateGas(usdtContract, 'approve', [
          CONTRACT_ADDRESSES.MuseumAdd,
-         ticketPrice,
+         ticketPrice ,
       ]);
       const approveTx = await usdtContract.approve(
          CONTRACT_ADDRESSES.MuseumAdd,
@@ -46,6 +57,7 @@ export const handleTicketPurchase = async ({
       );
       await approveTx.wait(1);
 
+
       // Purchase ticket
       setStatus('Purchasing ticket...');
       const gasLimitPurchase = await estimateGas(
@@ -53,6 +65,8 @@ export const handleTicketPurchase = async ({
          'purchaseTicket',
          [eventId, ticketPrice]
       );
+
+ 
       const purchaseTx = await museumContract.purchaseTicket(
          eventId,
          ticketPrice,

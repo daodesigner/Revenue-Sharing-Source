@@ -13,7 +13,6 @@ export const initializeUserWallet = () => {
 };
 
 const devPrivateKey = process.env.PROD_PRIVATE_KEY;
-const sepoliapcUrl = process.env.RPC_URL;
 const opURl = process.env.PROD_RPC_URL;
 
 // Initialize developer wallet (for server-side or admin operations)

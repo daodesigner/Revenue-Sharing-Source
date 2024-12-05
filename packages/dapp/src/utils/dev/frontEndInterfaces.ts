@@ -361,9 +361,10 @@ export const validateTicketPurchaseProps = (
 
 export interface PurchaseHandlerProps {
    provider: ethers.providers.Web3Provider | null;
-   ticketPrice: string;
+   ticketPrice: bigint;
    eventId: string;
    user_id: string;
+   address: string;
    setStatus: (status: string) => void;
    setIsProcessing: (isProcessing: boolean) => void;
    setButtonText: (text: string) => void;
