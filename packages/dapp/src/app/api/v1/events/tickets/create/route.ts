@@ -47,21 +47,21 @@ export async function POST(req: Request, res: NextResponse) {
       if (!wallet_address) {
          console.log('No wallet address sent');
          return NextResponse.json(
-            { message: 'no wallet address sent' },
+            { message: 'Something went wrong please try again' },
             { status: 400 }
          );
       }
       if (!event_id) {
          console.log('No event ID sent');
          return NextResponse.json(
-            { message: 'no event id sent' },
+            { message: 'Something went wrong please try again' },
             { status: 400 }
          );
       }
       if (!user_id) {
          console.log('No user ID sent');
          return NextResponse.json(
-            { message: 'no user id sent or email' },
+            { message: 'Something went wrong please try again' },
             { status: 400 }
          );
       }
@@ -81,7 +81,7 @@ export async function POST(req: Request, res: NextResponse) {
       if (!ticket) {
          console.log('Failed to create ticket');
          return NextResponse.json(
-            { message: 'failed to create ticket' },
+            { message: 'Something went wrong please try again' },
             { status: 400 }
          );
       }
@@ -96,7 +96,7 @@ export async function POST(req: Request, res: NextResponse) {
       if (!user) {
          console.log('No user created');
          return NextResponse.json(
-            { message: 'no user created' },
+            { message: 'Something went wrong please try again' },
             { status: 400 }
          );
       }
@@ -111,7 +111,7 @@ export async function POST(req: Request, res: NextResponse) {
 
       if (!event) {
          console.log('No event found');
-         return NextResponse.json({ message: 'no event found' }, { status: 400 });
+         return NextResponse.json({ message: 'Something went wrong please try again' }, { status: 400 });
       }
 
       const price = event.cost!;
@@ -120,7 +120,7 @@ export async function POST(req: Request, res: NextResponse) {
       if (!user_id) {
          console.log('No user ID sent');
          return NextResponse.json(
-            { message: 'no user id sent' },
+            { message: 'Something went wrong please try again' },
             { status: 400 }
          );
       }
@@ -143,7 +143,7 @@ export async function POST(req: Request, res: NextResponse) {
       if (!ticketTransaction) {
          console.log('Transaction not recorded');
          return NextResponse.json(
-            { message: 'transaction not recorded' },
+            { message: 'Something went wrong please try again' },
             { status: 500 }
          );
       }
@@ -191,13 +191,13 @@ export async function POST(req: Request, res: NextResponse) {
       if (!MailSent) {
          console.log('Failed to send email');
          return NextResponse.json(
-            { message: 'failed to send email' },
+            { message: 'Something went wrong please try again' },
             { status: 500 }
          );
       }
 
       console.log('Ticket created successfully');
-      return NextResponse.json({ message: 'ticket created' }, { status: 200 });
+      return NextResponse.json({ message: 'Success' }, { status: 200 });
    } catch (error) {
       console.error('Error occurred:', error);
       return NextResponse.json({ message: error }, { status: 500 });
