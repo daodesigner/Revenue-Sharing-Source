@@ -39,9 +39,11 @@ export const validateTicket = async (
          eventId,
          user_id,
       });
+
+     // console.log('Validate response:', response.data); 
       if (response.data.hasTicket) {
          setHasTicket(true);
-         setButtonType('secondary'); // Valid value
+         setButtonType('secondary'); 
          setButtonText('View Exhibit');
       } else {
          // Handle case where user doesn't have a ticket

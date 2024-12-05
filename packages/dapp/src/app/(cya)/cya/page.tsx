@@ -192,7 +192,7 @@ export default function Cya() {
                   <Button
                      variant={'white'}
                      size={'medium'}
-                     onClick={() => !timeLeft && buttonConfig.action}
+                     onClick={handleTicketPurchase}
                   >
                      Purchase
                   </Button>
