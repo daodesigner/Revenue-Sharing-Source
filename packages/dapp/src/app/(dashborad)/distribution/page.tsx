@@ -58,7 +58,7 @@ const InsightsPage = () => {
       },
       {
          id_no: 2,
-         date: '06-12-2024',
+         date: '13-12-2024',
          goal: 'Physical Exhibit/Launch',
          tooltip:
             'Live exhibition event in Lusaka, Zambia featuring physical artifacts and community engagement',
