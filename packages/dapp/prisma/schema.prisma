@@ -94,6 +94,7 @@ model users {
   bio                                                                         String?
   email_verified                                                              Boolean?                  @default(false)
   type                                                                        String?
+  airdrops                                                                    airdrops[]
   email_verification                                                          email_verification[]
   events                                                                      events[]
   exhibitor_account_users_exhibitor_account_users_exhibitor_account_idTousers exhibitor_account_users[] @relation("exhibitor_account_users_exhibitor_account_idTousers")
@@ -284,6 +285,15 @@ model password_reset_tokens {
   user_id    String    @db.Uuid
   created_at DateTime? @default(now()) @db.Timestamptz(6)
   users      users     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model airdrops {
+  id             Int       @id @default(autoincrement())
+  user_id        String?   @db.Uuid
+  wallet_address String?   @db.VarChar(255)
+  claimed        Boolean?  @default(false)
+  claimed_at     DateTime? @db.Timestamp(6)
+  users          users?    @relation(fields: [user_id], references: [id])
 }
 
 enum decision {
