@@ -27,6 +27,7 @@ export async function POST(req: Request, res: NextResponse) {
          );
       }
 
+
       const ticket = await prisma.tickets.findFirst({
          where: {
             wallet_address: userAddress,
@@ -44,6 +45,7 @@ export async function POST(req: Request, res: NextResponse) {
 
       return NextResponse.json({ message: 'ticket validated' }, { status: 200 });
    } catch (error) {
+      console.error('Full error:', error);
       return NextResponse.json({ message: error }, { status: 500 });
    }
 }
