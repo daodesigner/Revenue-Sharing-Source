@@ -189,7 +189,6 @@ export default function Cya() {
                      size={'medium'}
                      onClick={() => !timeLeft && buttonConfig.action}
                   >
-                     Purchase
                   </Button>
                )}
             </div>
