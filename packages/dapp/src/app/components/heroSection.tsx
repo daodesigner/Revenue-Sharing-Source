@@ -15,7 +15,7 @@ function HeroSection() {
 
   async function sendAirdropRequest(address: string) {
     const host = process.env.NEXT_PUBLIC_HOST;
-    const url = `${host}/api/v1/events/airdrop?user_id=c410e413-2873-49b0-a118-d4b782099eff`;
+    const url = `${host}/api/v1/events/airdrop`;
 
     try {
       const response = await fetch(url, {
@@ -31,9 +31,13 @@ function HeroSection() {
       if (!response.ok) {
         throw new Error(responseData.message || `HTTP Error: ${response.status}`);
       }
-      session?.user?.airdrop?.claimed === true;
+
+      
+      if (session && session.user.airdrop) {
+         session.user.airdrop.claimed = true;
+     }
       setResponse(response.status);
-      setResponseMessage("Airdrop claimed successfully!");
+      setResponseMessage("Air drop successfully claimed");
       console.log("Response:", responseData);
     } catch (error: any) {
       setResponseMessage(
