@@ -78,7 +78,9 @@ function Page() {
             router.push('/verification/email');
             break;
          default:
-            setErrorMessage('Something went wrong please contact support@summitshare.co');
+            setErrorMessage(
+               'Something went wrong please contact support@summitshare.co'
+            );
       }
    };
 
