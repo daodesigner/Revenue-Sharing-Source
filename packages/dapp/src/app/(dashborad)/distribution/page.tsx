@@ -21,14 +21,26 @@ import {
 import useTicketCount from '@/lib/getTickets';
 import * as Tooltip from '@radix-ui/react-tooltip';
 
-const InsightsPage = () => {
-   const ticketCount = useTicketCount;
+type StatItem = {
+   value: string | number;
+   label: string;
+   subtext: string;
+   icon: React.ReactNode;
+};
 
-   const stats = [
+const InsightsPage = () => {
+   const ticketCount = useTicketCount();
+
+   const BASE_FUNDS = 10240;
+   const TICKET_PRICE = 5;
+   const totalFunds = BASE_FUNDS + ticketCount * TICKET_PRICE;
+
+   const stats: StatItem[] = [
       {
-         value: '10,000',
+         value: totalFunds.toLocaleString(),
          label: 'FUNDS RAISED (USD)',
-         subtext: 'Comprises grants, donations & ticket sales',
+         subtext:
+            'Total from grants towards exhibit facilitation, donations, and ticket sales',
          icon: <TrendingUp className="w-6 h-6" />,
       },
       {
@@ -58,7 +70,7 @@ const InsightsPage = () => {
       },
       {
          id_no: 2,
-         date: '06-12-2024',
+         date: '13-12-2024',
          goal: 'Physical Exhibit/Launch',
          tooltip:
             'Live exhibition event in Lusaka, Zambia featuring physical artifacts and community engagement',
@@ -140,9 +152,7 @@ const InsightsPage = () => {
                         </div>
                         <div className="space-y-2">
                            <p className="text-4xl font-bold text-stone-800">
-                              {typeof stat.value === 'function'
-                                 ? stat.value()
-                                 : stat.value}
+                              {stat.value}
                            </p>
                            <p className="text-sm font-medium text-stone-600">
                               {stat.label}

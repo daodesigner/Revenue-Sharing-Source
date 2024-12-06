@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../../../../config/db';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: Request, res: NextResponse) {
    try {
-      const host = req.headers.get('host');
-      const url = new URL(req.url!, `http://${host}`);
-      const queryParams = new URLSearchParams(url.search);
-      const user_id = queryParams.get('userId');
+      const { searchParams } = new URL(req.url);
+      const user_id = searchParams.get('userId');
 
       if (!user_id) {
          return NextResponse.json(
@@ -28,7 +28,7 @@ export async function GET(req: Request, res: NextResponse) {
          );
       }
 
-      return NextResponse.json({ tickets: tickets }, { status: 200 });
+      return NextResponse.json({ tickets }, { status: 200 });
    } catch (error) {
       console.error(error);
       return NextResponse.json({ failure: error }, { status: 500 });

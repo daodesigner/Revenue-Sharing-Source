@@ -3,8 +3,7 @@ import { transporter, emailServer } from '../../../../config/nodemailer';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import crypto from 'node:crypto';
-
-const prisma = new PrismaClient();
+import prisma from '../../../../config/db';
 
 export async function POST(req: Request, res: NextResponse) {
    try {

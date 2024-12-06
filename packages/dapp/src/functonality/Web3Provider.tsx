@@ -19,9 +19,7 @@ const config = createConfig(
       walletConnectProjectId: process.env.WC_ID ?? 'd',
       chains: [optimism],
       transports: {
-         [optimism.id]: http(
-            `https://opt-mainnet.g.alchemy.com/v2/_I5FVfPvQLRwoSBy0H8RFigtTPMcA0cA`
-         ),
+         [optimism.id]: http(`process.env.PROD_RPC_URL!`),
       },
       // Optional App Info
       appDescription: 'Pan-African Mission.',

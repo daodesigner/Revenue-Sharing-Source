@@ -20,13 +20,13 @@ function SecondaryNav() {
          items: [
             { name: 'What Is SummitShare?', link: '/blog' },
             { name: 'Need Something?', link: '/help' },
-            { name: 'The Leading Ladies', link: '/exhibit' },
+            // { name: 'The Leading Ladies', link: '/exhibit' },
          ],
       },
    ];
 
    const items: { name: string; link: string }[] = [
-      { name: 'Exhibit', link: '/exhibit' },
+      // { name: 'Exhibit', link: '/exhibit' },
       { name: 'Blog', link: '/blog' },
       { name: 'Help', link: '/help' },
       { name: 'Profile', link: '/profile' },

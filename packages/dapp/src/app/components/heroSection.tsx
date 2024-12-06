@@ -54,7 +54,6 @@ function HeroSection() {
       } finally {
         setLoading(false);
       }
-    }
 
       fetchAirdropPermissions();
    }, [userId, render]);
