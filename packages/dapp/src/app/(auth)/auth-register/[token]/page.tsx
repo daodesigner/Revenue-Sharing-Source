@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-function page({ params }: { params: { token: string } }) {
+function Page({ params }: { params: { token: string } }) {
    const router = useRouter();
 
    const { inputType, PasswordToggle } = usePasswordVisibility();
@@ -178,4 +178,4 @@ function page({ params }: { params: { token: string } }) {
    );
 }
 
-export default page;
+export default Page;
