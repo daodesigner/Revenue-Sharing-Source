@@ -12,65 +12,157 @@
 
 import { ethers } from 'ethers';
 
-export const handleContractError = (error: any): string => {
-   let message = 'An unexpected error occurred. Please try again.';
+export interface ErrorCategory {
+   message: string;
+   isUserActionable: boolean;
+   action?: string;
+}
 
-   // Checking for insufficient funds
-   if (error.code === ethers.errors.INSUFFICIENT_FUNDS) {
-      message = 'You have insufficient funds to complete this transaction.';
+// Predefined error messages for common scenarios
+export const ERROR_MESSAGES = {
+   // Wallet and Connection Errors
+   NO_PROVIDER: {
+      message: 'Wallet connection required.',
+      isUserActionable: true,
+      action: 'Please connect your wallet to continue.',
+   },
+
+   // Balance Errors
+   INSUFFICIENT_BALANCE: {
+      message: 'Insufficient USDT balance.',
+      isUserActionable: true,
+      action: 'Please ensure you have enough USDT tokens to purchase the ticket.',
+   },
+
+   // Ticket-Related Errors
+   TICKET_VALIDATION_FAILED: {
+      message: 'Ticket validation failed.',
+      isUserActionable: false,
+      action: 'Please contact support@summitshare.co. Error code: VAL_001',
+   },
+   TICKET_RECORD_FAILED: {
+      message: 'Ticket purchase completed but record creation failed.',
+      isUserActionable: false,
+      action:
+         'Please contact support@summitshare.co with your transaction hash. Error code: REC_001',
+   },
+
+   // System Errors
+   SYSTEM_ERROR: {
+      message: 'System configuration error.',
+      isUserActionable: false,
+      action: 'Please contact support@summitshare.co. Error code: SYS_001',
+   },
+} as const;
+
+export const handleContractError = (error: any): ErrorCategory => {
+   // Default error with support contact
+   const defaultError: ErrorCategory = {
+      message: 'An unexpected error occurred.',
+      isUserActionable: false,
+      action: 'Please contact support@summitshare.co for assistance.',
+   };
+
+   // Environment Variables Error
+   if (error.message?.includes('Missing environment variables')) {
+      return {
+         message: 'System configuration error.',
+         isUserActionable: false,
+         action: 'Please contact support@summitshare.co. Error code: ENV_001',
+      };
    }
-   // Gas estimation failed
-   else if (
+
+   // User-actionable errors
+   if (error.code === ethers.errors.INSUFFICIENT_FUNDS) {
+      return {
+         message: 'Insufficient funds to complete this transaction.',
+         isUserActionable: true,
+         action: 'Please ensure you have enough USDT and ETH for gas fees.',
+      };
+   }
+
+   if (
+      error.code === 4001 ||
+      error.message?.includes('user rejected transaction')
+   ) {
+      return {
+         message: 'Transaction rejected.',
+         isUserActionable: true,
+         action: 'Please try the transaction again if you would like to proceed.',
+      };
+   }
+
+   // Network-related errors
+   if (
+      error.code === ethers.errors.NETWORK_ERROR ||
+      error.message?.includes('wallet not connected')
+   ) {
+      return {
+         message: 'Network connection issue detected.',
+         isUserActionable: true,
+         action: 'Please check your wallet connection and network status.',
+      };
+   }
+
+   // Gas-related errors
+   if (
       error.code === 'UNPREDICTABLE_GAS_LIMIT' ||
       error.code === ethers.errors.CALL_EXCEPTION
    ) {
-      message =
-         'Cannot estimate gas for this transaction. Please adjust the gas limit.';
-   }
-   // User rejected the transaction
-   else if (
-      error.code === 4001 ||
-      (error.message && error.message.includes('user rejected transaction'))
-   ) {
-      message = 'Transaction was rejected by the user.';
-   }
-   // Network error or wallet not connected
-   else if (
-      error.code === ethers.errors.NETWORK_ERROR ||
-      (error.message && error.message.includes('wallet not connected'))
-   ) {
-      message =
-         'Network error or wallet not connected. Please check your connection and try again.';
-   }
-   // Contract not deployed to network
-   else if (error.message && error.message.includes('contract not deployed')) {
-      message =
-         'The contract is not deployed on the current network. Please switch networks or contact support.';
-   }
-   // Transaction underpriced
-   else if (error.message && error.message.includes('transaction underpriced')) {
-      message =
-         'Transaction underpriced. Increase your gas price or gas limit and try again.';
-   }
-   // Transaction replacement underpriced
-   else if (
-      error.message &&
-      error.message.includes('replacement transaction underpriced')
-   ) {
-      message =
-         'Replacement transaction underpriced. Increase the gas price for speeding up or cancelling the transaction.';
-   }
-   // Nonce too high
-   else if (error.message && error.message.includes('nonce too high')) {
-      message =
-         'Nonce too high. Please reset your account nonce or contact support.';
-   }
-   // Nonce too low
-   else if (error.message && error.message.includes('nonce too low')) {
-      message =
-         'Nonce too low. This transaction may replace or cancel a previous one. Please increase the nonce or wait for confirmation.';
+      return {
+         message: 'Transaction execution failed.',
+         isUserActionable: true,
+         action:
+            'Please try again with a higher gas limit or contact support@summitshare.co if the issue persists.',
+      };
    }
 
-   // Add more error checks if needed
-   return message;
+   // Contract deployment errors
+   if (error.message?.includes('contract not deployed')) {
+      return {
+         message: 'Contract not available on current network.',
+         isUserActionable: true,
+         action:
+            'Please switch to Optimism network or contact support@summitshare.co.',
+      };
+   }
+
+   // Transaction pricing errors
+   if (error.message?.includes('transaction underpriced')) {
+      return {
+         message: 'Transaction fee too low.',
+         isUserActionable: true,
+         action: 'Please increase your gas price and try again.',
+      };
+   }
+
+   // Nonce errors
+   if (error.message?.includes('nonce too high')) {
+      return {
+         message: 'Transaction sequence error (high nonce).',
+         isUserActionable: false,
+         action: 'Please contact support@summitshare.co. Error code: NONCE_001',
+      };
+   }
+
+   if (error.message?.includes('nonce too low')) {
+      return {
+         message: 'Transaction sequence error (low nonce).',
+         isUserActionable: true,
+         action:
+            'Please wait for your previous transaction to complete or reset your wallet.',
+      };
+   }
+
+   // Token approval errors
+   if (error.message?.includes('ERC20: insufficient allowance')) {
+      return {
+         message: 'Token approval required.',
+         isUserActionable: true,
+         action: 'Please approve the token spending and try again.',
+      };
+   }
+
+   // Return default error if no specific case matches
+   return defaultError;
 };

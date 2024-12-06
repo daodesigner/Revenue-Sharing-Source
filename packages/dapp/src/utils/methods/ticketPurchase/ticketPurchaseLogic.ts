@@ -112,9 +112,16 @@ export const handleTicketPurchase = async ({
       }
    } catch (error: any) {
       console.error('Smart Contract Interaction Failed:', error);
-      const friendlyMessage = handleContractError(error);
-      setStatus(friendlyMessage);
-      setButtonText('Pay');
+      const errorInfo = handleContractError(error);
+
+      // Set status to combined message and action
+      setStatus(`${errorInfo.message} ${errorInfo.action || ''}`);
+
+      // Set button text based on error type
+      setButtonText(
+         errorInfo.isUserActionable ? 'Purchase Ticket' : 'Contact Support'
+      );
+      setIsProcessing(false);
    }
 };
 
