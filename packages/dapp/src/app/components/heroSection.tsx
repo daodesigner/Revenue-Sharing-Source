@@ -30,7 +30,6 @@ function HeroSection() {
     if (!userId) return;
 
     async function fetchAirdropPermissions() {
-      console.log(userId)
       setLoading(true);
       try {
         const host = process.env.NEXT_PUBLIC_HOST;
@@ -48,7 +47,6 @@ function HeroSection() {
 
         const data = (await res.json()) as Airdrop;
         setAirdropValues(data);
-        console.log(airDropValues)
 
       } catch (error: any) {
         console.error("Error fetching airdrop data:", error.message);

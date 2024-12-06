@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
-function page({ params }: { params: { token: string } }) {
+function Page({ params }: { params: { token: string } }) {
 
     const router = useRouter();
 
@@ -20,7 +20,6 @@ function page({ params }: { params: { token: string } }) {
        type:"visitor",
        code: params.token
     });
-    const [status, setStatus] = useState<number | undefined>();
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
  
@@ -45,7 +44,6 @@ function page({ params }: { params: { token: string } }) {
              body: JSON.stringify({ ...userData, type: 'visitor' }),
           });
  
-          setStatus(response.status);
           return response;
        } catch (error) {
           console.error('Failed to create user:', error);
@@ -178,4 +176,4 @@ function page({ params }: { params: { token: string } }) {
   
 }
 
-export default page
+export default Page
