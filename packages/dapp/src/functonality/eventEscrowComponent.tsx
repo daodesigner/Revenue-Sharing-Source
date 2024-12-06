@@ -83,8 +83,8 @@ const EventEscrowComponent = ({ userAddress }: any) => {
          } else if (error.code === 4001) {
             setStatus('Transaction cancelled by user.');
          } else {
-            const friendlyMessage = handleContractError(error);
-            setStatus(friendlyMessage);
+            const errorInfo = handleContractError(error);
+            setStatus(`${errorInfo.message} ${errorInfo.action || ''}`);
          }
          setDistributionFailed(true);
       }
