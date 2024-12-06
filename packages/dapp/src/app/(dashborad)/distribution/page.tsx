@@ -26,20 +26,21 @@ type StatItem = {
    label: string;
    subtext: string;
    icon: React.ReactNode;
- };
+};
 
 const InsightsPage = () => {
    const ticketCount = useTicketCount();
 
    const BASE_FUNDS = 10240;
    const TICKET_PRICE = 5;
-   const totalFunds = BASE_FUNDS + (ticketCount * TICKET_PRICE);
+   const totalFunds = BASE_FUNDS + ticketCount * TICKET_PRICE;
 
    const stats: StatItem[] = [
       {
          value: totalFunds.toLocaleString(),
          label: 'FUNDS RAISED (USD)',
-         subtext: 'Total from grants towards exhibit facilitation, donations, and ticket sales',
+         subtext:
+            'Total from grants towards exhibit facilitation, donations, and ticket sales',
          icon: <TrendingUp className="w-6 h-6" />,
       },
       {
@@ -151,7 +152,7 @@ const InsightsPage = () => {
                         </div>
                         <div className="space-y-2">
                            <p className="text-4xl font-bold text-stone-800">
-                           {stat.value}
+                              {stat.value}
                            </p>
                            <p className="text-sm font-medium text-stone-600">
                               {stat.label}
