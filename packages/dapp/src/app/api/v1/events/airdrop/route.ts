@@ -100,7 +100,7 @@ export async function POST(req: Request) {
 
         const updatedAirdrop = await prisma.airdrops.update({
             where: { id: airdrop.id },
-            data: { wallet_address: recipient,claimed: true, claimed_at: new Date() },
+            data: { wallet_address: recipient,claimed: true, claimed_at: new Date(), user_id: user_id },
         });
 
 
