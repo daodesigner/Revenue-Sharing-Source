@@ -22,7 +22,6 @@ function Page({ params }: { params: { token: string } }) {
        code: params.token
     });
     const [errorMessage, setErrorMessage] = useState<string>('');
-    const [throws, setThrows] = useState()
     const [isLoading, setIsLoading] = useState<boolean>(false);
  
     // Handle form input changes
@@ -48,7 +47,6 @@ function Page({ params }: { params: { token: string } }) {
  
           return response;
        } catch (error:any) {
-         setThrows(error)
           console.error('Failed to create user:', error);
 
           throw error;
@@ -138,7 +136,6 @@ function Page({ params }: { params: { token: string } }) {
                          <p className="text-red-500 text-sm mt-2">
                             {errorMessage}
                          </p>
-                         <p> {throws}</p>
                          </>
                       )}
                      
