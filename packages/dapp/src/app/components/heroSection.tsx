@@ -22,6 +22,7 @@ function HeroSection() {
   const [responseMessage, setResponseMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [render, setRender] = useState<boolean>(false);
+  const [dropping,setDropping] = useState<boolean>(false)
 
   const userAddress = address;
   const userId = session?.user.id;
@@ -60,6 +61,7 @@ function HeroSection() {
 
   async function sendAirdropRequest(address: string) {
     try {
+      setDropping(true);
       const host = process.env.NEXT_PUBLIC_HOST;
       const url = `${host}/api/v1/events/airdrop`;
       const res = await fetch(url, {
@@ -81,6 +83,7 @@ function HeroSection() {
       console.log("Airdrop claimed successfully:", responseData);
 
       setRender((prev) => !prev);
+      setDropping(false);
     } catch (error: any) {
       setResponseMessage(
         error.message || "An unexpected error occurred. Please try again."
@@ -126,10 +129,10 @@ function HeroSection() {
               <Button
                 onClick={() => sendAirdropRequest(userAddress)}
                 variant="white"
-              >
-                {response && response === 200
-                  ? responseMessage
-                  : "Claim Air Drop"}
+              > { dropping? "Sending Funds":  response && response === 200
+                ? responseMessage
+                : "Claim Air Drop" }
+           
               </Button>
             )
           ) : (
