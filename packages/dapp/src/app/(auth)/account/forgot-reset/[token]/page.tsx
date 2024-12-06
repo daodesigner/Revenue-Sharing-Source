@@ -112,6 +112,9 @@ function ResetPassword({ params }: { params: { token: string } }) {
                      />
                      <PasswordToggle />
                   </div>
+                  {errorMessage && (
+               <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
+            )}
                </section>
             </form>
             <section className="text-center space-y-6">
@@ -126,9 +129,7 @@ function ResetPassword({ params }: { params: { token: string } }) {
                   </a>
                </p>
             </section>
-            {errorMessage && (
-               <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-            )}
+           
          </section>
       </div>
    );

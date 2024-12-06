@@ -4,134 +4,137 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/app/components/button/Button';
 import { TextInput } from '@/app/components/inputs/TextInput';
-import { usePasswordVisibility } from '@/utils/methods/auth/usePasswordVisibility';
 
-function ResetPassword({ params }: { params: { token: string } }) {
+function ForgotPasswordRequest() {
    const router = useRouter();
-   const [password, setPassword] = useState('');
-   const [confirmPassword, setConfirmPassword] = useState('');
-   const [passwordError, setPasswordError] = useState(false);
-   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
-   const [errorMessage, setErrorMessage] = useState('');
-   const [showPassword, setShowPassword] = useState(false);
-   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-   const [successMessage, setSuccessMessage] = useState('');
+   const [email, setEmail] = useState('');
+   const [feedbackMessage, setFeedbackMessage] = useState<{
+      message: string;
+      type: 'error' | 'success' | null;
+   }>({ message: '', type: null });
    const [isLoading, setIsLoading] = useState(false);
-   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-   const { inputType, PasswordToggle } = usePasswordVisibility();
 
-   const resetPassword = async () => {
-      // Validate passwords
-      if (password !== confirmPassword) {
-         setPasswordError(true);
-         setConfirmPasswordError(true);
-         setErrorMessage('Passwords do not match');
-         return;
-      }
-
-      if (password.length < 8) {
-         setPasswordError(true);
-         setErrorMessage('Password must be at least 8 characters');
-         return;
-      }
-
+   const sendPasswordResetRequest = async (email: string) => {
       const host = process.env.NEXT_PUBLIC_HOST;
-      const url = `${host}/api/v1/user/password/verifyToken?token=${params.token}`;
+      const url = `${host}/api/v1/user/password/requestToken`;
 
-      setIsLoading(true);
       try {
          const response = await fetch(url, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-               token: params.token,
-               password: password,
-            }),
+            body: JSON.stringify({ email }),
          });
 
          if (response.ok) {
-            // Redirect to sign in or show success message
-            setSuccessMessage('Password reset successful!');
-            setShowSuccessPopup(true);
-
-            // Delay and redirect to sign-in page
-            setTimeout(() => {
-               router.push('/auth-sign-in');
-            }, 3000); // duration of redirect
-         } else {
-            const errorData = await response.json();
-            setErrorMessage(errorData.message || 'Failed to reset password');
+            setFeedbackMessage({
+               message: 'Password reset link sent to your email.',
+               type: 'success',
+            });
+            return true;
          }
+
+         if (response.status === 404) {
+            setFeedbackMessage({
+               message: 'No account associated with this email.',
+               type: 'error',
+            });
+            return false;
+         }
+
+         setFeedbackMessage({
+            message: 'An error occurred. Please try again.',
+            type: 'error',
+         });
+         return false;
       } catch (error) {
-         console.error('Password reset failed:', error);
-         setErrorMessage('Please try again.');
-      } finally {
-         setIsLoading(false);
+         console.error('Failed to send password reset request:', error);
+         setFeedbackMessage({
+            message: 'Network error. Please try again.',
+            type: 'error',
+         });
+         return false;
+      }
+   };
+
+   const handleSubmit = async () => {
+      if (!email) {
+         setFeedbackMessage({
+            message: 'Please enter your email.',
+            type: 'error',
+         });
+         return;
+      }
+
+      setIsLoading(true);
+      const success = await sendPasswordResetRequest(email);
+      setIsLoading(false);
+
+      if (success) {
+         setTimeout(() => {
+            router.push('/verification/forgot-password');
+         }, 2000);
       }
    };
 
    return (
       <div className="relative flex flex-col items-center justify-center px-6 py-10 bg-white h-screen md:w-[50%] md:float-right">
+         {/* Navigation */}
          <nav className="absolute top-5 w-full flex justify-end items-center px-5">
             <Link href="/">Exit</Link>
          </nav>
 
+         {/* Content */}
          <section className="space-y-4 md:w-[70%]">
             <header className="text-center space-y-2">
-               <h1 className="text-orange-500">Create New Password</h1>
-               <p>Enter a strong, unique password</p>
+               <h1 className="text-orange-500">Reset Password</h1>
+               <p>Enter the email associated with your account</p>
             </header>
 
-            <form action="">
-               <section className="space-y-4">
-                  <div className="relative">
-                     <TextInput
-                        type={inputType}
-                        label="Password"
-                        value={password}
-                        onChange={(e) => {
-                           setPassword(e.target.value);
-                           setPasswordError(false);
-                           setErrorMessage('');
-                        }}
-                     />
-                     <PasswordToggle />
-                  </div>
-                  <div className="relative">
-                     <TextInput
-                        type={inputType}
-                        label="Confirm Password"
-                        value={confirmPassword}
-                        onChange={(e) => {
-                           setConfirmPassword(e.target.value);
-                           setConfirmPasswordError(false);
-                           setErrorMessage('');
-                        }}
-                     />
-                     <PasswordToggle />
-                  </div>
-               </section>
-            </form>
-            <section className="text-center space-y-6">
-               <Button className="w-full" onClick={resetPassword}>
-                  Reset Password
-               </Button>
+            <form className="space-y-6">
+               <TextInput
+                  type="email"
+                  label="Email"
+                  value={email}
+                  onChange={(e) => {
+                     setEmail(e.target.value);
+                     setFeedbackMessage({ message: '', type: null });
+                  }}
+               />
 
-               <p>
-                  Remember your password?{' '}
-                  <a className="underline text-orange-500" href="/auth-sign-in">
-                     Sign in
-                  </a>
-               </p>
-            </section>
-            {errorMessage && (
-               <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-            )}
+               {/* Feedback Messages */}
+               {/* {feedbackMessage.message && (
+                  <div
+                     className={`text-sm px-4 py-2 rounded-md mt-2 ${
+                        feedbackMessage.type === 'error'
+                           ? 'bg-red-100 text-red-700'
+                           : 'bg-green-100 text-green-700'
+                     }`}
+                  >
+                     {feedbackMessage.message}
+                  </div>
+               )} */}
+
+               {/* Action Buttons */}
+               <div className="flex flex-col gap-4 items-center">
+                  <Button onClick={handleSubmit} disabled={isLoading}>
+                     {isLoading ? 'Sending...' : 'Send Reset Link'}
+                  </Button>
+                  <p>
+                     Remember your password?{' '}
+                     <Link
+                        className="underline text-orange-500"
+                        href="/auth-sign-in"
+                     >
+                        Sign in
+                     </Link>
+                  </p>
+               </div>
+            </form>
          </section>
       </div>
    );
 }
 
-export default ResetPassword;
+export default ForgotPasswordRequest;
