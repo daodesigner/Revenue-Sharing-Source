@@ -1,10 +1,12 @@
 'use client';
 import { Button } from '@/app/components/button/Button';
 import { TextInput } from '@/app/components/inputs/TextInput';
+import { TableRow } from '@/components/ui/table';
 import { usePasswordVisibility } from '@/utils/methods/auth/usePasswordVisibility';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { set } from 'react-hook-form';
 
 function Page({ params }: { params: { token: string } }) {
    const router = useRouter();
@@ -20,6 +22,7 @@ function Page({ params }: { params: { token: string } }) {
        code: params.token
     });
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [throws, setThrows] = useState()
     const [isLoading, setIsLoading] = useState<boolean>(false);
  
     // Handle form input changes
@@ -44,8 +47,10 @@ function Page({ params }: { params: { token: string } }) {
           });
  
           return response;
-       } catch (error) {
+       } catch (error:any) {
+         setThrows(error)
           console.error('Failed to create user:', error);
+
           throw error;
        }
     };
@@ -127,11 +132,17 @@ function Page({ params }: { params: { token: string } }) {
                          onChange={handleChange}
                       />
                       <PasswordToggle />
+                     
                       {errorMessage && (
+                         <>
                          <p className="text-red-500 text-sm mt-2">
                             {errorMessage}
                          </p>
+                         <p> {throws}</p>
+                         </>
                       )}
+                     
+                     
                    </div>
                  
                 </section>
