@@ -9,7 +9,7 @@ interface JsonRpcConnectionInfo {
    url: string;
    skipFetchSetup?: boolean;
    headers?: Record<string, string>;
- }
+}
 
 // Initialize provider and signer from user's wallet
 export const initializeUserWallet = () => {
@@ -19,10 +19,9 @@ export const initializeUserWallet = () => {
 };
 
 export const initializeDevWallet = () => {
-    // initialization requirements
+   // initialization requirements
    const devPrivateKey = process.env.PROD_PRIVATE_KEY;
    const rpcUrl = process.env.PROD_RPC_URL;
-   
 
    if (!devPrivateKey || !rpcUrl) {
       throw new Error('Missing environment variables');
@@ -33,12 +32,12 @@ export const initializeDevWallet = () => {
       skipFetchSetup: true,
       headers: {
          'Content-Type': 'application/json',
-      }
+      },
    };
 
    const provider = new ethers.providers.StaticJsonRpcProvider(connection, {
       chainId: 10,
-      name: 'optimism'
+      name: 'optimism',
    });
 
    const wallet = new ethers.Wallet(devPrivateKey, provider);
@@ -51,4 +50,3 @@ export const testWallets = [
    process.env.hanekawa,
    process.env.oshino,
 ];
-

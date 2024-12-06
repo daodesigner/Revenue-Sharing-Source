@@ -16,8 +16,7 @@ function page({ params }: { params: { token: string } }) {
       username: '',
       email: '',
       password: '',
-      type: 'visitor',
-      code: params.token,
+      airdropToken: params.token,
    });
    const [status, setStatus] = useState<number | undefined>();
    const [errorMessage, setErrorMessage] = useState<string>('');

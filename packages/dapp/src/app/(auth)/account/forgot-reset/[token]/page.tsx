@@ -86,7 +86,7 @@ function ResetPassword({ params }: { params: { token: string } }) {
 
             <form action="">
                <section className="space-y-4">
-               <div className="relative">
+                  <div className="relative">
                      <TextInput
                         type={inputType}
                         label="Password"

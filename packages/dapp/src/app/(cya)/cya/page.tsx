@@ -16,6 +16,7 @@ import {
    TicketPurchaseUIProps,
 } from '@/utils/dev/frontEndInterfaces';
 import { Button } from '@/app/components/button/Button';
+import { useAccount } from 'wagmi';
 
 const ResponsiveVideo: React.FC = () => {
    const [isMobile, setIsMobile] = useState(false);
@@ -65,6 +66,7 @@ export default function Cya() {
    const [isComplete, setIsComplete] = useState(false);
    const ticketCount = useTicketCount();
    const router = useRouter();
+   const { address } = useAccount();
    const session = useSession();
 
    // Check if we are running in the browser
@@ -182,49 +184,20 @@ export default function Cya() {
             {/* Ticket Purchase Section */}
             <div className="z-10 relative mb-8 flex gap-2">
                {session?.status === 'authenticated' ? (
-                  <TicketPurchaseComponent userAddress={''} user_id={''} />
+                  <TicketPurchaseComponent
+                     userAddress={address || ''}
+                     user_id={session.data?.user?.id || ''}
+                  />
                ) : (
                   <Button
                      variant={'white'}
                      size={'medium'}
-                     onClick={() => !timeLeft && buttonConfig.action}
+                     onClick={handleTicketPurchase}
                   >
-                     {isComplete ? 'Coming Soon' : 'Purchase'}
+                     Purchase
                   </Button>
                )}
             </div>
-
-            {/* <div className="flex flex-col items-center mt-12"> */}
-            {/* <div className="grid grid-cols-3 gap-8 text-center"> */}
-            {/* First section: 6 Unique Stories and Artifacts Preserved */}
-            {/* <div className="flex flex-col items-center">
-                     <div className="text-6xl font-bold">6</div>
-                     <div className="text-lg text-gray-300">Stories</div>
-                  </div> */}
-
-            {/* Second section: Incrementing Tickets Sold */}
-            {/* <div className="flex flex-col items-center">
-                     <div className="text-6xl font-bold">{ticketCount}</div>
-                     <div className="text-lg text-gray-300">Tickets Sold</div>
-                  </div> */}
-
-            {/* Third section: 1 Collective Legacy */}
-            {/* <div className="flex flex-col items-center">
-                     <div className="text-6xl font-bold">1</div>
-                     <div className="text-lg text-gray-300">Legacy</div>
-                  </div>
-               </div> */}
-            {/* </div> */}
-
-            {/*  Different color */}
-            {/* <Link
-               href="https://summitshare.co/blog/SJZH2lwwA"
-               className="text-lg text-white underline hover:text-gray-300 transition-colors mt-10 md:mt-6"
-               target="_blank"
-               rel="noopener noreferrer"
-            >
-               learn more here
-            </Link> */}
          </div>
       </main>
    );

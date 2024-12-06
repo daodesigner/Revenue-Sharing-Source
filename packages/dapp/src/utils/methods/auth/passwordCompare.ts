@@ -55,13 +55,14 @@ export async function passwordCompare(email: string, password: string) {
    }
 }
 
-
 /**
  * Fetches airdrop details for a user and returns a status object.
  * @param userId - The ID of the user to search in the airdrops table.
  * @returns { valid: boolean | null, claimed: boolean | null }
  */
-export async function getAirdropStatus(userId: string): Promise<{ valid: boolean | null; claimed: boolean | null }> {
+export async function getAirdropStatus(
+   userId: string
+): Promise<{ valid: boolean | null; claimed: boolean | null }> {
    try {
       // Validate the userId parameter
       if (!userId) {

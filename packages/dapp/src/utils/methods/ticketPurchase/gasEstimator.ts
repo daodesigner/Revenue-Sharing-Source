@@ -7,7 +7,7 @@ import { CONTRACT_ADDRESSES, estimateGas } from '@/utils/prod/contractInit';
 export const estimateGasFees = async (
    provider: any,
    contracts: any,
-   ticketPrice: string,
+   ticketPrice: bigint,
    eventId: string,
    setStatus: React.Dispatch<React.SetStateAction<string>>,
    setEstimatedGasFees: React.Dispatch<React.SetStateAction<string>>,

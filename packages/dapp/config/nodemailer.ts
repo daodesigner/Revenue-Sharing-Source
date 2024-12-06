@@ -1,4 +1,3 @@
-
 import nodemailer from 'nodemailer';
 
 export const emailServer = process.env.PROD_SEMAIL;

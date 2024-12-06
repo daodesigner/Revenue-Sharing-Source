@@ -9,7 +9,7 @@ interface JsonRpcConnectionInfo {
    url: string;
    skipFetchSetup?: boolean;
    headers?: Record<string, string>;
- }
+}
 
 // Initialize provider and signer from user's wallet
 export const initializeUserWallet = () => {
@@ -32,12 +32,12 @@ export const initializeDevWallet = () => {
       skipFetchSetup: true,
       headers: {
          'Content-Type': 'application/json',
-      }
+      },
    };
 
    const provider = new ethers.providers.StaticJsonRpcProvider(connection, {
       chainId: 11155420,
-      name: 'op-sepolia'
+      name: 'op-sepolia',
    });
 
    const wallet = new ethers.Wallet(devPrivateKey, provider);

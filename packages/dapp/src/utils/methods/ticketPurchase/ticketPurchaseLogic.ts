@@ -7,17 +7,21 @@ import {
 import { PurchaseHandlerProps } from '@/utils/dev/frontEndInterfaces';
 import { handleContractError } from '@/utils/dev/handleContractError';
 import axios from 'axios';
+import { validateTicket } from './ticketService';
 
 export const handleTicketPurchase = async ({
    provider,
    ticketPrice,
    eventId,
    user_id,
+   address,
    setStatus,
    setIsProcessing,
    setButtonText,
    setPurchaseSuccessful,
    setShowSuccessMessage,
+   setHasTicket,
+   setButtonType,
 }: PurchaseHandlerProps) => {
    if (!provider) {
       setStatus('Web3 provider is not initialized.');
@@ -25,12 +29,30 @@ export const handleTicketPurchase = async ({
    }
 
    try {
+      const signer = provider.getSigner();
+      const userAddress = await signer.getAddress();
       const usdtContract = contracts.getUSDT();
       const museumContract = contracts.getMuseum();
 
       setStatus('Approving token transfer...');
       setIsProcessing(true);
       setButtonText('processing...');
+
+      const balance = await usdtContract.balanceOf(userAddress);
+      console.log({
+         userAddress,
+         balance: balance.toString(),
+         requiredAmount: ticketPrice,
+         network: (await provider.getNetwork()).name,
+      });
+
+      // Add balance check before approve
+      if (balance < BigInt(ticketPrice)) {
+         setStatus('Insufficient USDT balance');
+         setButtonText('Insufficient USDT balance');
+         setIsProcessing(false);
+         return;
+      }
 
       // Token approval
       const gasLimitApprove = await estimateGas(usdtContract, 'approve', [
@@ -53,6 +75,7 @@ export const handleTicketPurchase = async ({
          'purchaseTicket',
          [eventId, ticketPrice]
       );
+
       const purchaseTx = await museumContract.purchaseTicket(
          eventId,
          ticketPrice,
@@ -68,7 +91,25 @@ export const handleTicketPurchase = async ({
       setShowSuccessMessage(true);
       setStatus('Ticket purchased successfully!');
       setIsProcessing(false);
-      setButtonText('Pay');
+
+      // Update ticket state
+      setHasTicket(true);
+      setButtonType('secondary');
+      setButtonText('Ticket Purchased ✓');
+
+      try {
+         await validateTicket(
+            address,
+            eventId,
+            user_id,
+            setHasTicket,
+            setButtonType,
+            setButtonText
+         );
+      } catch (error) {
+         console.error('Validation error:', error);
+         // Don't change success state even if validation fails
+      }
    } catch (error: any) {
       console.error('Smart Contract Interaction Failed:', error);
       const friendlyMessage = handleContractError(error);

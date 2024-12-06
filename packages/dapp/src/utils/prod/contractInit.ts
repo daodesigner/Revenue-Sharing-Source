@@ -78,7 +78,7 @@ export const contracts = {
       if (typeof window === 'undefined') {
          throw new Error('initializeUserWallet cannot be used server-side');
       }
-      
+
       const { signer } = initializeUserWallet();
       return new ethers.Contract(CONTRACT_ADDRESSES.MuseumAdd, MuseumABI, signer);
    },

@@ -71,7 +71,7 @@ async function createSendTokens(user: users, email: string) {
       const info = await transporter.sendMail(mailOptions);
       return verification;
    } catch (error) {
-      console.log(error)
+      console.log(error);
       throw error;
    }
 }
@@ -186,12 +186,10 @@ async function createVisitor(
          },
       });
 
-
-
       if (code == process.env.AD_CODE) {
          const ad = await prisma.airdrops.create({
             data: {
-              user_id: user.id
+               user_id: user.id,
             },
          });
       }
@@ -210,12 +208,12 @@ export async function POST(req: Request, res: NextResponse) {
       // if (!req.body || Object.keys(req.body).length === 0) {
       //   return NextResponse.json({ error: 'No data provided' }, { status: 400 });
       // }
-      const { email, password, username, type, wallet_address,code } =
+      const { email, password, username, type, wallet_address, code } =
          await req.json();
       // Check if user already exists
 
-      console.log(`sent ${code}`)
-      console.log(`code ${ process.env.AD_CODE}`)
+      console.log(`sent ${code}`);
+      console.log(`code ${process.env.AD_CODE}`);
 
       if (!email || email == ' ') {
          return NextResponse.json(
@@ -265,7 +263,7 @@ export async function POST(req: Request, res: NextResponse) {
                wallet_address
             );
             return NextResponse.json(
-               { success: 'User created and email sent'},
+               { success: 'User created and email sent' },
                { status: 201 }
             );
          case 'visitor':
@@ -273,10 +271,11 @@ export async function POST(req: Request, res: NextResponse) {
                email,
                hashedPassword,
                username,
-               type,code
+               type,
+               code
             );
             return NextResponse.json(
-               { success: 'User created and email sent'},
+               { success: 'User created and email sent' },
                { status: 201 }
             );
          default:
