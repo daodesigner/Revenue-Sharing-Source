@@ -152,11 +152,18 @@ function Page() {
                   </Button>
                   <p>
                      By continuing you accept our standard{' '}
-                     <a className="underline text-blue-700" href="">
+                     <a
+                        className="underline text-blue-700"
+                        href="https://hackmd.io/@summitshare-eth/BygXfsxEJl"
+                     >
                         terms and conditions
-                     </a>{' '}
+                     </a>
+                     {''}
                      and{' '}
-                     <a className="underline text-blue-700" href="">
+                     <a
+                        className="underline text-blue-700"
+                        href="https://hackmd.io/@summitshare-eth/BygXfsxEJl"
+                     >
                         our privacy policy
                      </a>
                      .
