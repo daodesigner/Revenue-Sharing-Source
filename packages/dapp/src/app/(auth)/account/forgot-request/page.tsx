@@ -74,7 +74,7 @@ function ForgotPasswordRequest() {
       if (success) {
          setTimeout(() => {
             router.push('/verification/forgot-password');
-         }, 2000);
+         }, 3000);
       }
    };
 
@@ -104,7 +104,7 @@ function ForgotPasswordRequest() {
                />
 
                {/* Feedback Messages */}
-               {/* {feedbackMessage.message && (
+               {feedbackMessage.message && (
                   <div
                      className={`text-sm px-4 py-2 rounded-md mt-2 ${
                         feedbackMessage.type === 'error'
@@ -114,7 +114,7 @@ function ForgotPasswordRequest() {
                   >
                      {feedbackMessage.message}
                   </div>
-               )} */}
+               )}
 
                {/* Action Buttons */}
                <div className="flex flex-col gap-4 items-center">

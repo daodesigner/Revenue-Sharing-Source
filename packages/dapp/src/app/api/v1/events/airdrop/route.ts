@@ -3,6 +3,9 @@ import { ethers } from 'ethers';
 import { initializeDevWallet } from '@/utils/dev/walletInit';
 import { contracts } from '@/utils/dev/contractInit';
 import prisma from '../../../../../../config/db';
+import path from 'path';
+import * as fs from 'fs/promises';
+import { emailServer, transporter } from '../../../../../../config/nodemailer';
 
 // production values:
 // import { initializeDevWallet } from '@/utils/prod/walletInit';
@@ -25,6 +28,18 @@ export async function POST(req: Request) {
             { status: 400 }
          );
       }
+
+      const user = await prisma.users.findFirst({
+         where: { id: user_id }
+      });
+
+      if (!user_id) {
+         return NextResponse.json(
+            { error: 'Something went wrong please try again' },
+            { status: 401 }
+         );
+      }
+
       const airdrop = await prisma.airdrops.findFirst({
          where: { user_id },
       });
@@ -113,6 +128,47 @@ export async function POST(req: Request) {
          },
       });
 
+
+
+
+      const link = "https://summitshare.co/cya";
+
+      // Define the receipt message
+      const receiptMessage = ` ${link}`;
+
+      const templatePath = path.join(
+         process.cwd(),
+         'src/functonality/emailNewsletter/main.html'
+      );
+
+      let htmlContent = await fs.readFile(templatePath, 'utf-8');
+
+      // const host = req.headers.get('host');
+      const host = process.env.HOST;
+
+      const divisor = 1000000;
+
+      // Perform division using the `.div()` method
+      const result = USDT_AMOUNT.div(divisor);
+
+
+      // Replace placeholders in the template with actual data
+      htmlContent = htmlContent.replace('{{title}}', 'Airdrop claimed');
+      htmlContent = htmlContent.replace('{{subtitle}}', 'Receipt for airdrop');
+      htmlContent = htmlContent.replace(
+         '{{message}}',
+         `You have just claimed an airdrop of ${result} USDT using wallet address ${recipient}.Please proceed to purchase a ticket at the following link:  <a href="${link}">Exhibit</a>`
+      );
+
+      const mailOptions = {
+         from: emailServer,
+         to: user?.email,
+         subject: 'Airdrop Claimed',
+         html: htmlContent,
+      };
+
+      const info = await transporter.sendMail(mailOptions);
+
       return NextResponse.json({
          success: true,
          usdtTxHash: usdtReceipt.transactionHash,
@@ -160,7 +216,7 @@ export async function GET(req: Request) {
          { status: 401 }
       );
    } catch (error) {
-      console.error('Error processing request:', error);
+      console.error('Error processing airdrop:', error);
       return NextResponse.json(
          { error: 'Internal Server Error' },
          { status: 500 }

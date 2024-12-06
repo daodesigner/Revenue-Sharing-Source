@@ -35,7 +35,7 @@ async function sendDeletionConfirmationEmail(email: string, token: string) {
       );
       htmlTemplate = htmlTemplate.replace(
          '{{subtitle}}',
-         'Your account has been successfully deleted'
+         'Account Deletion'
       );
 
       const host = process.env.HOST;
