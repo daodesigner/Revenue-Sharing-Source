@@ -35,7 +35,7 @@ async function sendDeletionConfirmationEmail(email: string, token: string) {
       );
       htmlTemplate = htmlTemplate.replace(
          '{{subtitle}}',
-         'Your account has been successfully deleted'
+         'Account Deletion'
       );
 
       const host = process.env.HOST;
@@ -105,7 +105,7 @@ export async function DELETE(req: Request) {
          { status: 200 }
       );
    } catch (error) {
-      console.error('delete account error:');
+      console.error(`delete account error: ${error}`);
       return NextResponse.json(
          { message: 'Failed to delete account' },
          { status: 500 }

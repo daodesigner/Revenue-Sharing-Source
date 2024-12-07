@@ -55,6 +55,10 @@ export const contracts = {
    },
 
    getEventEscrow: () => {
+      if (typeof window === 'undefined') {
+         throw new Error('initializeUserWallet cannot be used server-side');
+      }
+
       const { signer } = initializeUserWallet();
       return new ethers.Contract(
          CONTRACT_ADDRESSES.EscrowAdd,
@@ -64,15 +68,19 @@ export const contracts = {
    },
 
    getMUSDC: () => {
-      const { signer } = initializeUserWallet();
+      const { wallet } = initializeDevWallet();
       return new ethers.Contract(
          CONTRACT_ADDRESSES.MUSDCAdd,
          MUSDCABI as ethers.ContractInterface,
-         signer
+         wallet
       );
    },
 
    getMuseum: () => {
+      if (typeof window === 'undefined') {
+         throw new Error('initializeUserWallet cannot be used server-side');
+      }
+
       const { signer } = initializeUserWallet();
       return new ethers.Contract(CONTRACT_ADDRESSES.MuseumAdd, MuseumABI, signer);
    },

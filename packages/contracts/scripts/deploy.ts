@@ -37,7 +37,7 @@ async function main() {
   console.log("Deployed ArtifactNFT 1", receipt0.status)
 
   console.log("Events from ArtifactNFT 1 deployment:");
-  receipt0.logs.forEach((log, index) => {
+  receipt0.logs.forEach((log: { eventName: any; args: any; }, index: any) => {
     console.log(`Event ${index}:`, log.eventName, log.args);
   });
 

@@ -1,6 +1,5 @@
 'use client';
 import { Button } from '@/app/components/button/Button';
-import Inputs from '@/app/components/inputs/Inputs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -136,9 +135,7 @@ function Page() {
                         </p>
                      )}
                   </div>
-                  {errorMessage && (
-                     <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-                  )}
+               
                </section>
 
                <section className="text-center space-y-6">

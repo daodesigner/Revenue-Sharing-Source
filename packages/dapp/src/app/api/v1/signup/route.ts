@@ -169,7 +169,8 @@ async function createVisitor(
    email: string,
    hashedPassword: string,
    username: string,
-   type: string
+   type: string,
+   code: string
 ) {
    try {
       if (!username) {
@@ -185,6 +186,14 @@ async function createVisitor(
          },
       });
 
+      if (code == process.env.AD_CODE) {
+         const ad = await prisma.airdrops.create({
+            data: {
+               user_id: user.id,
+            },
+         });
+      }
+
       const verification = await createSendTokens(user, email);
 
       return { user, verification };
@@ -199,9 +208,12 @@ export async function POST(req: Request, res: NextResponse) {
       // if (!req.body || Object.keys(req.body).length === 0) {
       //   return NextResponse.json({ error: 'No data provided' }, { status: 400 });
       // }
-      const { email, password, username, type, wallet_address } =
+      const { email, password, username, type, wallet_address, code } =
          await req.json();
       // Check if user already exists
+
+      console.log(`sent ${code}`);
+      console.log(`code ${process.env.AD_CODE}`);
 
       if (!email || email == ' ') {
          return NextResponse.json(
@@ -259,7 +271,8 @@ export async function POST(req: Request, res: NextResponse) {
                email,
                hashedPassword,
                username,
-               type
+               type,
+               code
             );
             return NextResponse.json(
                { success: 'User created and email sent' },

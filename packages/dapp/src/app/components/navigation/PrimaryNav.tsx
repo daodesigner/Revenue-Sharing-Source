@@ -81,7 +81,7 @@ const PrimaryNav: React.FC = () => {
 
    const pathname = usePathname();
    const { address } = useAccount();
-
+   const userAddress = address;
    return (
       <nav className="w-full">
          <ul className="fixed top-0 inset-x-0 px-6 py-4 lg:px-28 lg:py-6 flex flex-row justify-between items-center border-b border-primary-900-5 text-primary-900 z-10 bg-white">
@@ -110,7 +110,13 @@ const PrimaryNav: React.FC = () => {
             <li className="sm:block hidden md:hidden lg:block w-fit">
                <ul className="flex flex-row gap-4 items-center">
                   <li>
-                     <ConnectKitButton />
+                     <ConnectKitButton.Custom>
+                        {({ show }) => (
+                           <Button onClick={show}>
+                              {!userAddress ? 'Connect Wallet' : 'Connected'}
+                           </Button>
+                        )}
+                     </ConnectKitButton.Custom>
                   </li>
                   <li>
                      <div onClick={handleAuthClick}>
@@ -203,7 +209,13 @@ const PrimaryNav: React.FC = () => {
                      </li>
                   ))}
                   <li>
-                     <ConnectKitButton />
+                     <ConnectKitButton.Custom>
+                        {({ show }) => (
+                           <Button onClick={show}>
+                              {!userAddress ? 'Connect Wallet' : 'Connected'}
+                           </Button>
+                        )}
+                     </ConnectKitButton.Custom>
                   </li>
                </ul>
             </nav>
