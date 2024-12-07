@@ -42,17 +42,26 @@ const ResponsiveVideo: React.FC = () => {
          {isMobile ? (
             <iframe
                className="w-full h-full"
-               src="https://www.youtube.com/embed/Tbfj5gDttxA?autoplay=1&mute=1&loop=1&playlist=Tbfj5gDttxA&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+               src="https://www.youtube.com/embed/Tbfj5gDttxA?autoplay=1&mute=1&loop=1&playlist=Tbfj5gDttxA&controls=0&modestbranding=1&rel=0&disablekb=1&autohide=1&iv_load_policy=3"
                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                allowFullScreen
             ></iframe>
          ) : (
-            <iframe
-               className="w-full h-full"
-               src="https://www.youtube.com/embed/yEPtzznNCN0?autoplay=1&mute=1&loop=1&playlist=yEPtzznNCN0&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
-               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-               allowFullScreen
-            ></iframe>
+            <video
+               className="w-full h-full object-cover"
+               src="https://s3.tebi.io/summitshare-media/LL_Artifacts%20%281%29.mp4"
+               autoPlay
+               loop
+               muted
+               playsInline
+               preload="metadata"
+               style={{
+                  objectFit: 'cover',
+                  pointerEvents: 'none',
+                  outline: 'none',
+               }}
+               poster="/all-women.png"
+            />
          )}
          {/* Overlay to make text more readable */}
          <div className="absolute inset-0 bg-black/50"></div>

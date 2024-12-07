@@ -163,17 +163,42 @@ const PrimaryNav: React.FC = () => {
                            {menu.title}
                         </h4>
                         <ul className="space-y-1">
-                           {menu.items.map((subItem, subIndex) => (
-                              <li
-                                 key={subIndex}
-                                 className={`text-[1.25rem] text-primary-700 font-normal ${
-                                    pathname === subItem.link &&
-                                    'text-primary-400'
-                                 }`}
-                              >
-                                 <a href={subItem.link}>{subItem.name}</a>
-                              </li>
-                           ))}
+                           {menu.items.map((subItem, subIndex) => {
+                              // Dynamically update the "Log In" / "Log Out" menu item
+                              const dynamicName =
+                                 subItem.name === 'Log In' ||
+                                 subItem.name === 'Log Out'
+                                    ? session.status === 'authenticated'
+                                       ? 'Log Out'
+                                       : 'Log In'
+                                    : subItem.name;
+                              const dynamicLink =
+                                 subItem.name === 'Log In' ||
+                                 subItem.name === 'Log Out'
+                                    ? '/auth-sign-in'
+                                    : subItem.link;
+
+                              return (
+                                 <li
+                                    key={subIndex}
+                                    className={`text-[1.25rem] text-primary-700 font-normal ${
+                                       pathname === subItem.link &&
+                                       'text-primary-400'
+                                    }`}
+                                 >
+                                    <a
+                                       href={dynamicLink}
+                                       onClick={
+                                          dynamicName === 'Log Out'
+                                             ? async () => await signOut()
+                                             : undefined
+                                       }
+                                    >
+                                       {dynamicName}
+                                    </a>
+                                 </li>
+                              );
+                           })}
                         </ul>
                      </li>
                   ))}
