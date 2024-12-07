@@ -20,7 +20,7 @@ export const estimateGasFees = async (
 
    setIsEstimating(true);
    try {
-      const usdtContract = contracts.getUSDT();
+      const usdtContract = contracts.getUSDTU();
       const museumContract = contracts.getMuseum();
 
       // Estimate gas for approval
