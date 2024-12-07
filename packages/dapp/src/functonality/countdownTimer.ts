@@ -24,7 +24,7 @@ export const calculateTimeLeft = (): TimeLeft | null => {
 };
 
 export const isCountdownComplete = (): boolean => {
-   const targetDate = new Date('2023-11-01T00:00:00Z');
+   const targetDate = new Date('2024-11-13T00:00:00Z');
    const currentDate = new Date();
    return currentDate >= targetDate;
 };

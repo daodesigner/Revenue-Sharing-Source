@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
-import { initializeDevWallet } from '@/utils/dev/walletInit';
-import { contracts } from '@/utils/dev/contractInit';
+// import { initializeDevWallet } from '@/utils/dev/walletInit';
+// import { contracts } from '@/utils/dev/contractInit';
 import prisma from '../../../../../../config/db';
 import path from 'path';
 import * as fs from 'fs/promises';
 import { emailServer, transporter } from '../../../../../../config/nodemailer';
 
 // production values:
-// import { initializeDevWallet } from '@/utils/prod/walletInit';
-// import { contracts } from '@/utils/prod/contractInit';
+import { initializeDevWallet } from '@/utils/prod/walletInit';
+import { contracts } from '@/utils/prod/contractInit';
 
 const USDT_AMOUNT = ethers.utils.parseUnits('5', 6); // USDT decimals = 6
 const MUSDC_AMOUNT = ethers.utils.parseUnits('5', 18); // MOCK decimals = 18
@@ -23,9 +23,10 @@ export async function POST(req: Request) {
    try {
       const { recipient, user_id } = await req.json();
       if (!user_id) {
+         console.log("no user sent")
          return NextResponse.json(
             { error: 'Something went wrong please try again' },
-            { status: 400 }
+            { status: 401 }
          );
       }
 
@@ -34,6 +35,7 @@ export async function POST(req: Request) {
       });
 
       if (!user_id) {
+         console.log("no user found")
          return NextResponse.json(
             { error: 'Something went wrong please try again' },
             { status: 401 }
@@ -45,6 +47,7 @@ export async function POST(req: Request) {
       });
 
       if (!airdrop) {
+         console.log("no airdrop")
          return NextResponse.json(
             { error: 'Something went wrong please try again' },
             { status: 401 }
@@ -52,19 +55,21 @@ export async function POST(req: Request) {
       }
 
       if (!ethers.utils.isAddress(recipient)) {
+         console.log("address error")
          return NextResponse.json(
-            { error: 'Something went wrong please try again' },
-            { status: 400 }
+            { error: 'ADDRESS' },
+            { status: 500 }
          );
       }
 
       // initialize dev wallet
       const { provider, wallet } = initializeDevWallet();
+
       // intialize dev mock USDC contract
-      const usdtContract = contracts.getMUSDC();
+      // const usdtContract = contracts.getMUSDC();
 
       // initalize OP USDT contract
-      // const usdtContract = contracts.getUSDT();
+      const usdtContract = contracts.getUSDT();
 
       // wallet balance check
       const [usdtBalance, ethBalance, feeData] = await Promise.all([
@@ -76,20 +81,22 @@ export async function POST(req: Request) {
       if (!feeData.maxFeePerGas || !feeData.maxPriorityFeePerGas) {
          throw new Error('Could not estimate gas fees');
       }
-      //   PROD:
-      //   if (usdtBalance.lt(USDT_AMOUNT)) {
-      //       return NextResponse.json({ error: 'Insufficient USDT' }, { status: 400 });
-      //   }
+        PROD:
+        if (usdtBalance.lt(USDT_AMOUNT)) {
+         console.log("Insufficient USDT")
+            return NextResponse.json({ error: 'Insufficient USDT' }, { status: 400 });
+        }
 
-      //   DEV:
-      if (usdtBalance.lt(MUSDC_AMOUNT)) {
-         return NextResponse.json(
-            { error: 'Insufficient USDT' },
-            { status: 400 }
-         );
-      }
+      // //   DEV:
+      // if (usdtBalance.lt(MUSDC_AMOUNT)) {
+      //    return NextResponse.json(
+      //       { error: 'Insufficient USDT' },
+      //       { status: 400 }
+      //    );
+      // }
 
       if (ethBalance.lt(ETH_AMOUNT)) {
+         console.log("insufficient eth ")
          return NextResponse.json({ error: 'Insufficient ETH' }, { status: 400 });
       }
 

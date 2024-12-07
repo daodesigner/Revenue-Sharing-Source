@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
 import { useRouter } from "next/navigation";
+import { isCountdownComplete } from "@/functonality/countdownTimer";
 
 interface Airdrop {
   valid: boolean;
@@ -22,7 +23,7 @@ function HeroSection() {
   const [responseMessage, setResponseMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [render, setRender] = useState<boolean>(false);
-  const [dropping,setDropping] = useState<boolean>(false)
+  const [dropping, setDropping] = useState<boolean>(false)
 
   const userAddress = address;
   const userId = session?.user.id;
@@ -69,22 +70,27 @@ function HeroSection() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ recipient: address , user_id: userId}),
+        body: JSON.stringify({ recipient: address, user_id: userId }),
       });
 
       const responseData = await res.json();
 
       if (!res.ok) {
+        setDropping(false);
         throw new Error(responseData.message || `HTTP Error: ${res.status}`);
+
+      } else {
+        setResponse(res.status);
+        setResponseMessage("Air drop successfully claimed");
+        console.log("Airdrop claimed successfully:", responseData);
+        setRender((prev) => !prev);
+        setDropping(false);
       }
 
-      setResponse(res.status);
-      setResponseMessage("Air drop successfully claimed");
-      console.log("Airdrop claimed successfully:", responseData);
 
-      setRender((prev) => !prev);
-      setDropping(false);
+
     } catch (error: any) {
+      setDropping(false);
       setResponseMessage(
         error.message || "An unexpected error occurred. Please try again."
       );
@@ -108,39 +114,41 @@ function HeroSection() {
             drum.
           </p>
         </div>
-        <div className="flex gap-2">
-          <Link href={"/cya"}>
-            <Button>Enter Exhibit</Button>
-          </Link>
-          {loading ? (
-            <Button variant="white" disabled>
-              Loading...
-            </Button>
-          ) : isAirdropValid ? (
-            !userAddress ? (
-              <ConnectKitButton.Custom>
-                {({ show }) => (
-                  <Button onClick={show} variant="white">
-                    Connect Wallet
-                  </Button>
-                )}
-              </ConnectKitButton.Custom>
-            ) : (
+        {!userAddress ? (
+          <ConnectKitButton.Custom>
+            {({ show }) => (
+              <Button onClick={show} variant="white" className="w-fit">
+                Connect Wallet
+              </Button>
+            )}
+          </ConnectKitButton.Custom>) :
+          (<div className="flex gap-2">
+            <Link href={"/cya"}>
+              <Button>Purchase Ticket</Button>
+            </Link>
+            {loading ? (
+              <Button variant="white" disabled>
+                Loading...
+              </Button>
+            ) : isAirdropValid && isCountdownComplete() === true ? (
               <Button
                 onClick={() => sendAirdropRequest(userAddress)}
                 variant="white"
-              > { dropping? "Sending Funds":  response && response === 200
+              > {dropping ? "Sending Funds" : response && response === 200
                 ? responseMessage
-                : "Claim Air Drop" }
-           
+                : "Claim Air Drop"}
+
               </Button>
             )
-          ) : (
-            <Link href={"/distribution"}>
-              <Button variant="white">Learn More</Button>
-            </Link>
-          )}
-        </div>
+              : (
+                <Link href={"/distribution"}>
+                  <Button variant="white">Learn More</Button>
+                </Link>
+              )}
+          </div>)
+
+        }
+
       </div>
     </section>
   );
