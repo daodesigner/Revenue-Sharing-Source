@@ -8,6 +8,7 @@ import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
 import { useRouter } from "next/navigation";
 import { isCountdownComplete } from "@/functonality/countdownTimer";
+import { desableButton } from "../(test)/functions/disable";
 
 interface Airdrop {
   valid: boolean;
@@ -19,7 +20,7 @@ function HeroSection() {
   const { data: session } = useSession();
   const { address } = useAccount();
   const [airDropValues, setAirdropValues] = useState<Airdrop | null>(null);
-  const [response, setResponse] = useState<number | null>(null);
+  const [response, setResponse] = useState<number>();
   const [responseMessage, setResponseMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [render, setRender] = useState<boolean>(false);
@@ -118,7 +119,7 @@ function HeroSection() {
           <ConnectKitButton.Custom>
             {({ show }) => (
               <Button onClick={show} variant="white" className="w-fit">
-                Connect Wallet
+               Purchase Ticket
               </Button>
             )}
           </ConnectKitButton.Custom>) :
@@ -132,6 +133,8 @@ function HeroSection() {
               </Button>
             ) : isAirdropValid && isCountdownComplete() === true ? (
               <Button
+              disabled={desableButton(response,loading)}
+              className={`${loading && "cursor-wait"} ${response === 200 && "cursor-not-allowed"}`}
                 onClick={() => sendAirdropRequest(userAddress)}
                 variant="white"
               > {dropping ? "Sending Funds" : response && response === 200

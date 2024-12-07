@@ -6,6 +6,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { TextInput } from '@/app/components/inputs/TextInput';
 import { usePasswordVisibility } from '@/utils/methods/auth/usePasswordVisibility';
+import { desableButton } from '@/app/(test)/functions/disable';
 
 function Page() {
    const [email, setEmail] = useState<string>('');
@@ -14,6 +15,7 @@ function Page() {
    const [isVisible, setIsVisible] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
    const { inputType, PasswordToggle } = usePasswordVisibility();
+   const [status,setStatus] = useState<number>()
    const router = useRouter();
 
    const onSubmit = useCallback(async () => {
@@ -37,6 +39,7 @@ function Page() {
          } else {
             // Successful login
             router.push('/');
+            setStatus(await response.status)
          }
       } else {
          setErrorMessage('An error occurred. Please try again.');
@@ -97,8 +100,8 @@ function Page() {
                <Button
                   size="medium"
                   onClick={onSubmit}
-                  className="w-full"
-                  disabled={isLoading}
+                  className={`w-full ${isLoading && "cursor-wait"} ${status === 200 && "cursor-not-allowed"}`}
+                  disabled={desableButton(status,isLoading)}
                >
                   {isLoading ? 'Signing in...' : 'Sign into my account'}
                </Button>

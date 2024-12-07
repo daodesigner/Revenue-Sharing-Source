@@ -43,7 +43,7 @@ export async function POST(req: Request) {
       }
 
       const airdrop = await prisma.airdrops.findFirst({
-         where: { user_id },
+         where: { user_id ,  claimed:false},
       });
 
       if (!airdrop) {

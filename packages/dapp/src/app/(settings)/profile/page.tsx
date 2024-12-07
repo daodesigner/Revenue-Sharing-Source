@@ -10,6 +10,7 @@ import { useSession, signOut } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { TextInput } from '@/app/components/inputs/TextInput';
 import { setInterval } from 'timers';
+import { desableButton } from '@/app/(test)/functions/disable';
 
 export default function ProfileSettings() {
    const router = useRouter();
@@ -17,6 +18,8 @@ export default function ProfileSettings() {
    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
    const [isDeleting, setIsDeleting] = useState(false);
    const [response, setResponse] = useState<string | null>();
+   const [status,setStatus] = useState<number>()
+
    const userId = session?.user?.id || '';
    const userEmail = session?.user?.email || '';
    const user_name = session?.user?.username || '';
@@ -47,7 +50,8 @@ export default function ProfileSettings() {
             throw new Error('Failed to send email account');
          }
 
-         if (response.status <= 200) {
+         if (response.status <= 299) {
+            setStatus(await response.status)
             router.push('/account/delete-account');
          } else if (response.status > 200) {
             setResponse('Faild to delete Contact Support');
@@ -149,7 +153,8 @@ export default function ProfileSettings() {
                      <Button
                         variant={'danger'}
                         onClick={handleDeleteAccount}
-                        disabled={isDeleting}
+                        disabled={desableButton(status,isDeleting) }
+                        className={` ${isDeleting && "cursor-wait"} ${status === 200 && "cursor-not-allowed"}`}
                      >
                         {isDeleting ? 'Confirming...' : 'Confirm'}
                      </Button>

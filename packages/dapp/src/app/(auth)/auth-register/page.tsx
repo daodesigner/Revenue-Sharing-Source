@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { TextInput } from '@/app/components/inputs/TextInput';
 import { usePasswordVisibility } from '@/utils/methods/auth/usePasswordVisibility';
+import { desableButton } from '@/app/(test)/functions/disable';
 
 function Page() {
    const router = useRouter();
@@ -17,9 +18,9 @@ function Page() {
       email: '',
       password: '',
    });
-   const [status, setStatus] = useState<number | undefined>();
    const [errorMessage, setErrorMessage] = useState<string>('');
    const [isLoading, setIsLoading] = useState<boolean>(false);
+   const [status,setStatus] = useState<number>()
 
    // Handle form input changes
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +53,6 @@ function Page() {
 
    // Form submission
    const onSubmit = async () => {
-      if (isLoading) return; // Prevent multiple submissions
       setIsLoading(true);
       try {
          const response = await createUser(formData);
@@ -141,9 +141,9 @@ function Page() {
                <section className="text-center space-y-6">
                   <Button
                      size="medium"
-                     className="w-full"
                      type="submit"
-                     disabled={isLoading} // Disable button when loading
+                     className={`w-full ${isLoading && "cursor-wait"} ${status === 200 && "cursor-not-allowed"}`}
+                     disabled={desableButton(status,isLoading)} // Disable button when loading
                   >
                      {isLoading ? 'Creating account...' : 'Create my account'}
                   </Button>

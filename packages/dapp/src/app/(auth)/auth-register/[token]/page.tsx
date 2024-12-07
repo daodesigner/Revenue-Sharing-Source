@@ -1,15 +1,19 @@
 'use client';
+import { desableButton } from '@/app/(test)/functions/disable';
 import { Button } from '@/app/components/button/Button';
 import { TextInput } from '@/app/components/inputs/TextInput';
 import { TableRow } from '@/components/ui/table';
 import { usePasswordVisibility } from '@/utils/methods/auth/usePasswordVisibility';
+import { stat } from 'fs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { resolve } from 'path';
 import React, { useState } from 'react';
 import { set } from 'react-hook-form';
 
 function Page({ params }: { params: { token: string } }) {
    const router = useRouter();
+   const [status,setStatus] = useState<number>()
 
     const { inputType, PasswordToggle } = usePasswordVisibility();
  
@@ -44,7 +48,7 @@ function Page({ params }: { params: { token: string } }) {
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({ ...userData, type: 'visitor' }),
           });
- 
+         setStatus(await response.status)
           return response;
        } catch (error:any) {
           console.error('Failed to create user:', error);
@@ -55,7 +59,6 @@ function Page({ params }: { params: { token: string } }) {
  
     // Form submission
     const onSubmit = async () => {
-       if (isLoading) return; // Prevent multiple submissions
        setIsLoading(true);
        try {
           const response = await createUser(formData);
@@ -63,7 +66,7 @@ function Page({ params }: { params: { token: string } }) {
        } catch (error) {
           setErrorMessage('An error occurred. Please try again.');
        } finally {
-          setIsLoading(false); // Reset loading state
+          setIsLoading(false); 
        }
     };
  
@@ -147,9 +150,10 @@ function Page({ params }: { params: { token: string } }) {
                 <section className="text-center space-y-6">
                    <Button
                       size="medium"
-                      className="w-full"
+                     
                       type="submit"
-                      disabled={isLoading} // Disable button when loading
+                      className={`full ${isLoading && "cursor-wait"} ${status === 200 && "cursor-not-allowed"}`}
+                      disabled={desableButton(status,isLoading)} // Disable button when loading
                    >
                       {isLoading ? 'Creating account...' : 'Create my account'}
                    </Button>

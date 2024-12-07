@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/app/components/button/Button';
 import { TextInput } from '@/app/components/inputs/TextInput';
+import { NoUndefined } from 'viem/_types/types/utils';
+import { desableButton } from '@/app/(test)/functions/disable';
 
 function ForgotPasswordRequest() {
    const router = useRouter();
    const [email, setEmail] = useState('');
+   const [status,setStatus] = useState<number>()
    const [feedbackMessage, setFeedbackMessage] = useState<{
       message: string;
       type: 'error' | 'success' | null;
@@ -27,11 +30,14 @@ function ForgotPasswordRequest() {
             body: JSON.stringify({ email }),
          });
 
+         setStatus(await response.status)
+
          if (response.ok) {
             setFeedbackMessage({
                message: 'Password reset link sent to your email.',
                type: 'success',
-            });
+            })
+            
             return true;
          }
 
@@ -78,6 +84,8 @@ function ForgotPasswordRequest() {
       }
    };
 
+
+
    return (
       <div className="relative flex flex-col items-center justify-center px-6 py-10 bg-white h-screen md:w-[50%] md:float-right">
          {/* Navigation */}
@@ -118,12 +126,13 @@ function ForgotPasswordRequest() {
 
                {/* Action Buttons */}
                <div className="flex flex-col gap-4 items-center">
-                  <Button onClick={handleSubmit} disabled={isLoading}>
+                  <Button disabled={desableButton(status,isLoading)} onClick={handleSubmit} className={`${isLoading && "cursor-wait"} ${status === 200 && "cursor-not-allowed"}`} >
+                 
                      {isLoading ? 'Sending...' : 'Send Reset Link'}
                   </Button>
                   <p>
                      Remember your password?{' '}
-                     <Link
+                     <Link 
                         className="underline text-orange-500"
                         href="/auth-sign-in"
                      >
