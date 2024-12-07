@@ -85,6 +85,7 @@ export async function GET(req: Request, res: NextResponse) {
       });
 
       if (!verificationRecord) {
+         console.log(`wrong token ${token}`)
          return NextResponse.json(
             {
                message:
@@ -93,10 +94,10 @@ export async function GET(req: Request, res: NextResponse) {
             { status: 400 }
          );
       }
-      //delete old verification
-      await prisma.email_verification.delete({
-         where: { id: verificationRecord.id! },
-      });
+      // //delete old verification
+      // await prisma.email_verification.delete({
+      //    where: { id: verificationRecord.id! },
+      // });
 
       const user = await prisma.users.findUnique({
          where: { id: verificationRecord.user_id! },

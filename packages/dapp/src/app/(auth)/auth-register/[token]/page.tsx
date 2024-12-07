@@ -77,7 +77,7 @@ function Page({ params }: { params: { token: string } }) {
              setErrorMessage('No email or password sent');
              break;
           case 409:
-             setErrorMessage('User already exists');
+             setErrorMessage('User or username already exists');
              break;
           case 201:
              router.push('/verification/email');
