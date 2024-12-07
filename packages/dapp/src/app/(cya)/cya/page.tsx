@@ -40,12 +40,21 @@ const ResponsiveVideo: React.FC = () => {
    return (
       <div className="absolute inset-0 pointer-events-none">
          {isMobile ? (
-            <iframe
-               className="w-full h-full"
-               src="https://www.youtube.com/embed/Tbfj5gDttxA?autoplay=1&mute=1&loop=1&playlist=Tbfj5gDttxA&controls=0&modestbranding=1&rel=0&disablekb=1&autohide=1&iv_load_policy=3"
-               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-               allowFullScreen
-            ></iframe>
+            <video
+            className="w-full h-full object-cover"
+            src="https://s3.tebi.io/summitshare-media/LL_Artifacts_Mobile%20%281%29.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            style={{
+               objectFit: 'cover',
+               pointerEvents: 'none',
+               outline: 'none',
+            }}
+            poster="/all-women.png"
+         />
          ) : (
             <video
                className="w-full h-full object-cover"
