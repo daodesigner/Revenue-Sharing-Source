@@ -21,10 +21,6 @@ interface CustomUser {
    email_verified: boolean | null;
    type: string | null;
    user_wallets: UserWallet[];
-   airdrop: {
-      valid: boolean | null;
-      claimed: boolean | null;
-   };
 }
 
 declare module 'next-auth' {
@@ -111,12 +107,6 @@ const handler = NextAuth({
                   throw new Error(message || 'Invalid credentials');
                }
 
-               const ad = await getAirdropStatus(foundUser.id);
-
-               if (!foundUser || !compare) {
-                  throw new Error(message || 'Invalid credentials');
-               }
-
                const user: CustomUser = {
                   id: foundUser.id,
                   email: foundUser.email,
@@ -125,9 +115,9 @@ const handler = NextAuth({
                   email_verified: foundUser.email_verified || null,
                   type: foundUser.type || null,
                   user_wallets: foundUser.user_wallets || [],
-                  airdrop: ad,
+                 
                };
-               console.log(`use: ad ${JSON.stringify(user.airdrop)}`);
+               
                return user;
             } catch (error) {
                console.error('Authorization error:', error);
@@ -155,7 +145,7 @@ const handler = NextAuth({
             token.email_verified = user.email_verified;
             token.type = user.type;
             token.user_wallets = user.user_wallets;
-            token.airdrop = user.airdrop;
+
          }
          return token;
       },
@@ -169,7 +159,7 @@ const handler = NextAuth({
             email_verified: token.email_verified,
             type: token.type,
             user_wallets: token.user_wallets,
-            airdrop: token.airdrop,
+
          };
 
          return session;
