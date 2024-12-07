@@ -311,12 +311,24 @@ const TicketPurchaseUI: React.FC<TicketPurchaseUIProps> = ({
 
                      {/* Action Button */}
                      <div className="mt-8">
-                        <button
-                           onClick={closeSuccessMessage}
-                           className="w-full bg-primary text-white rounded-lg px-4 py-2 hover:bg-primary-dark transition-colors"
-                        >
-                           Got it, thanks!
-                        </button>
+                        {isCountdownOver ? (
+                           <button
+                              onClick={closeSuccessMessage}
+                              className="w-full bg-primary text-white rounded-lg px-4 py-2 hover:bg-primary-dark transition-colors"
+                           >
+                              View Exhibit
+                           </button>
+                        ) : (
+                           <button
+                              onClick={() => {
+                                 closeSuccessMessage();
+                                 window.location.href = '/distribution';
+                              }}
+                              className="w-full bg-primary text-white rounded-lg px-4 py-2 hover:bg-primary-dark transition-colors"
+                           >
+                              Read Insights
+                           </button>
+                        )}
                      </div>
                   </div>
                </div>
@@ -337,12 +349,11 @@ const TicketPurchaseUI: React.FC<TicketPurchaseUIProps> = ({
                      </Buttons>
                   </a>
                ) : (
-                  <div className="bg-white p-4 rounded-lg shadow-lg">
-                     <p className="text-sm text-gray-700">
-                        Thank you for your purchase! The exhibit will be available
-                        when the countdown ends.
-                     </p>
-                  </div>
+                  <Link href="/distribution">
+                     <Buttons type="secondary" size="large">
+                        Read Insights
+                     </Buttons>
+                  </Link>
                )}
             </div>
          )}
@@ -361,7 +372,8 @@ const TicketPurchaseUI: React.FC<TicketPurchaseUIProps> = ({
                   {purchaseSuccessful && !isCountdownOver && (
                      <span>
                         {' '}
-                        The exhibit will be available when the countdown ends.
+                        Visit the distribution page to see how funds are being
+                        allocated.
                      </span>
                   )}
                </p>

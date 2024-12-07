@@ -53,7 +53,7 @@ const TicketPurchaseComponent = ({
       if (purchaseSuccessful) {
          setHasTicket(true);
          setButtonType('secondary');
-         setButtonText(isCountdownOver ? 'View Exhibit' : 'Ticket Purchased ✓');
+         setButtonText(isCountdownOver ? 'View Exhibit' : 'Read Insights');
       }
    }, [purchaseSuccessful, isCountdownOver]);
 
@@ -131,15 +131,18 @@ const TicketPurchaseComponent = ({
          : hasTicket
          ? isCountdownOver
             ? 'View Exhibit'
-            : 'Ticket Purchased ✓'
+            : 'Read Insights'
          : 'Purchase',
       action: isValidating
          ? () => {}
-         : hasTicket && isCountdownOver
-         ? () => window.open('https://summitshare.co/exhibit', '_blank')
+         : hasTicket
+         ? isCountdownOver
+            ? () => window.open('https://summitshare.co/exhibit', '_blank')
+            : () => (window.location.href = '/distribution')
          : togglePopup,
       type: hasTicket ? ('secondary' as const) : ('primary' as const),
    });
+
    // Props for UI component
    const uiProps = {
       userAddress,

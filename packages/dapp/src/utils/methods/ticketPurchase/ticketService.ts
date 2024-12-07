@@ -1,5 +1,6 @@
 // ticketService.ts
 
+import { calculateTimeLeft } from '@/functonality/countdownTimer';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
@@ -48,7 +49,10 @@ export const validateTicket = async (
       if (response.data.hasTicket) {
          setHasTicket(true);
          setButtonType('secondary');
-         setButtonText('View Exhibit');
+
+         // countdown check
+         const isCountdownOver = calculateTimeLeft();
+         setButtonText(isCountdownOver ? 'View Exhibit' : 'Read Insights');
 
          // Store validation result
          localStorage.setItem(`ticket_${eventId}_${userAddress}`, 'true');
