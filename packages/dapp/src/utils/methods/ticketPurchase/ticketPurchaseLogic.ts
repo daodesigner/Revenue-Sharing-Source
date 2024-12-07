@@ -31,7 +31,7 @@ export const handleTicketPurchase = async ({
    try {
       const signer = provider.getSigner();
       const userAddress = await signer.getAddress();
-      const usdtContract = contracts.getUSDT();
+      const usdtContract = contracts.getUSDTU();
       const museumContract = contracts.getMuseum();
 
       setStatus('Approving token transfer...');

@@ -74,6 +74,20 @@ export const contracts = {
       );
    },
 
+   getUSDTU: () => {
+      if (typeof window === 'undefined') {
+         throw new Error('initializeUserWallet cannot be used server-side');
+      }
+      
+      const { signer } = initializeUserWallet();
+      return new ethers.Contract(
+         CONTRACT_ADDRESSES.USDTAdd,
+         USDTABI as ethers.ContractInterface,
+         signer
+      );
+   },
+
+
    getMuseum: () => {
       if (typeof window === 'undefined') {
          throw new Error('initializeUserWallet cannot be used server-side');
