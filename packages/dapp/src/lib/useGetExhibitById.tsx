@@ -1,5 +1,4 @@
 'use client';
-import { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 interface Collection {
@@ -23,7 +22,6 @@ interface Exhibit {
 }
 
 const useExhibit = (id: string): Exhibit | null => {
-   const [exhibit, setExhibit] = useState<Exhibit | null>(null);
 
    const EXHIBIT_QUERY = gql`
       query GetExhibit($id: ID!) {
@@ -45,18 +43,15 @@ const useExhibit = (id: string): Exhibit | null => {
       }
    `;
 
-   const { data } = useQuery<{ exhibit: Exhibit }>(EXHIBIT_QUERY, {
+   const { data, loading } = useQuery<{ exhibit: Exhibit }>(EXHIBIT_QUERY, {
       variables: { id },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'cache-first',
+      nextFetchPolicy: 'cache-only',
+      // Only refetch if cache is empty
+      skip: false,
    });
 
-   useEffect(() => {
-      if (data && data.exhibit) {
-         setExhibit(data.exhibit);
-      }
-   }, [data]);
-
-   return exhibit;
+   return data?.exhibit || null;
 };
 
 export default useExhibit;

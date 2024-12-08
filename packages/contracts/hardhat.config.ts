@@ -5,6 +5,7 @@ import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "@openzeppelin/hardhat-upgrades";
+import "@nomicfoundation/hardhat-verify";
 dotenv.config();
 
 // You should replace these values with your own node URL and private keys
@@ -41,6 +42,13 @@ const config: HardhatUserConfig = {
       gasPrice: "auto",
     }
   },
+
+  etherscan: {
+    apiKey: {
+      optimisticEthereum: process.env.OPTIMISM_API_KEY || "",
+    },
+  },
+
 
   gasReporter: {
     currency: "USD",
