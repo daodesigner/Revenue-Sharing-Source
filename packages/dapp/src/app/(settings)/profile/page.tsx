@@ -79,7 +79,7 @@ export default function ProfileSettings() {
 
    return (
       <>
-         <div className="space-y-8 w-full mb-20 mt-28">
+         <div className="space-y-8 w-full mt-28">
             <section className="space-y-6 ">
                <div className="space-y-2">
                   <h3>
@@ -173,7 +173,7 @@ export default function ProfileSettings() {
                   </p>
 
                   {/* Modal Footer */}
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 mb-20">
                      <Button
                         variant={'danger'}
                         onClick={handleDeleteAccount}

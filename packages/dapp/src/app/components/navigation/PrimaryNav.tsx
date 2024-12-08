@@ -144,7 +144,7 @@ const NeutralNav: React.FC = () => {
                   />
                </div>
             </div>
-            <ul className="px-6 py-4 mt-12 max-h-[80%] flex flex-col gap-12 justify-between overflow-y-auto">
+            <ul className="px-6 mt-6 max-h-[80%] flex flex-col gap-6 justify-between overflow-y-auto">
                {menuItems.map((menu, index) => (
                   <li
                      key={index}

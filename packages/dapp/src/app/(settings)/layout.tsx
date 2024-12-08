@@ -23,7 +23,7 @@ export default function RootLayout({
    return (
       <html lang="en">
          <body
-            className={`flex flex-col lg:justify-between h-screen mx-10 lg:mx-[15%] `}
+            className={`flex flex-col lg:justify-between mb-20 mx-10 lg:mx-[15%] `}
          >
             <SessionProvider>
                <Web3Provider>
