@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import React, { useState } from 'react';
 import { ChevronRight, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -42,7 +42,34 @@ const steps = [
                <li>Secure your wallet by safely storing your recovery phrase.</li>
                <li>Fund your wallet with USDT stablecoins on Optimism.</li>
             </ol>
-            <div className="mt-2">
+            <div className="mt-4 p-3 bg-orange-50 rounded-lg">
+               <strong className="text-orange-700">Mobile Users:</strong>
+               <ul className="mt-2 space-y-1">
+                  <li>• Android: We recommend using{' '}
+                     <a
+                        href="https://play.google.com/store/apps/details?id=org.toshi"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-orange-600 hover:underline"
+                     >
+                        Coinbase Wallet
+                     </a>{' '}
+                     for the best experience
+                  </li>
+                  <li>• iOS: {' '}
+                     <a
+                        href="https://apps.apple.com/us/app/rainbow-ethereum-wallet/id1457119021"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-orange-600 hover:underline"
+                     >
+                        Rainbow Wallet
+                     </a>{' '}
+                     is our recommended choice
+                  </li>
+               </ul>
+            </div>
+            <div className="mt-4">
                SummitShare uses on-chain transactions with stablecoins for speed,
                transparency, regional preference and price stability.
             </div>
@@ -58,7 +85,15 @@ const steps = [
                Click on the <strong>&#39;Connect Wallet&#39;</strong> button on
                the SummitShare platform to link your wallet. Ensure that your
                wallet is <strong>unlocked</strong> and you are connected to the{' '}
-               <strong>correct network</strong> (e.g., Optimism Mainnet).
+               <strong>correct network</strong> (e.g., Optimism Mainnet). Learn more about{' '}
+               <a
+                  href="https://support.metamask.io/hc/en-us/articles/360015489871-What-are-gas-fees-"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-orange-600 hover:underline"
+               >
+                  network fees
+               </a>.
             </div>
          </>
       ),
@@ -80,7 +115,7 @@ const steps = [
                   rel="noopener noreferrer"
                   className="text-orange-600 hover:underline"
                >
-                  learn more about gas fees
+                  understand the gas fees
                </a>
                .
             </div>
@@ -108,6 +143,38 @@ const steps = [
                   Optimism Block Scanner
                </a>
                .
+            </div>
+         </>
+      ),
+   },
+   {
+      id: 5,
+      title: 'Need Help?',
+      description: (
+         <>
+            <div className="p-6 rounded-lg bg-gradient-to-r from-orange-50 via-orange-50/70 to-white border border-orange-100">
+               <div className="space-y-4">
+                  <p className="text-lg font-medium text-orange-800">
+                     If you experience any challenges during the process, our support team is here to help.
+                  </p>
+                  <p className="text-orange-700">
+                     Contact us at:{' '}
+                     <a
+                        href="mailto:support@summitshare.co?subject=HELP REQUEST"
+                        className="text-orange-600 font-semibold hover:underline"
+                     >
+                        support@summitshare.co
+                     </a>
+                  </p>
+                  <div className="mt-4 bg-white/80 p-4 rounded-lg shadow-sm">
+                     <p className="font-medium text-orange-800 mb-2">Please include:</p>
+                     <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                        <li>Your registered email address</li>
+                        <li>Your wallet address</li>
+                        <li>A detailed description of the issue you&apos;re experiencing</li>
+                     </ul>
+                  </div>
+               </div>
             </div>
          </>
       ),
@@ -170,9 +237,9 @@ const HelpPage = () => {
                </CardTitle>
             </CardHeader>
             <CardContent>
-               <p className="text-gray-700 leading-relaxed">
+               <div className="text-gray-700 leading-relaxed">
                   {steps[currentStep - 1].description}
-               </p>
+               </div>
             </CardContent>
          </Card>
       </div>
