@@ -3,37 +3,35 @@ import { ArrowRightCircleIcon } from '@heroicons/react/24/outline';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import Input from '../inputs/Inputs';
 import Link from 'next/link';
+import { Button } from '../button/Button';
 
 function Footer() {
-   // Capitalized for React component naming convention
    return (
-      <footer className="w-full bg-stone-50">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <footer className="w-full bg-neutral-50">
+         <div className="w-full px-4 sm:px-6 lg:px-[15%] py-12">
             {/* Main Footer Content */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-8 w-full text-center sm:text-left sm:items-start">
                {/* Newsletter Section */}
                <div className="lg:col-span-5">
                   <h3 className="text-xl font-semibold text-stone-800 mb-3">
-                     Newsletter
+                     Contact Support
                   </h3>
                   <p className="text-stone-600 mb-4">
-                     Join our newsletter and get the latest updates
+                     Click the button below to email support
                   </p>
-                  <div className="max-w-md">
-                     <Input
-                        placeholder="example@email.com"
-                        type="input"
-                        state="active"
-                        rightIcon={
-                           <ArrowRightCircleIcon className="w-5 h-5 text-stone-500 hover:text-stone-700 transition-colors" />
-                        }
-                     />
+                  <div className="max-w-md mx-auto sm:mx-0">
+                     <Link
+                        href="mailto:support@summitshare.co?subject=Inquiry%20About%20SummitShare&body=Dear%20SummitShare%20Team,%0D%0A%0D%0AI'm%20reaching%20out%20regarding%20[provide%20details%20about%20your%20inquiry].%20Could%20you%20please%20assist%20me%20with%20[add%20specific%20details%20or%20questions]?%0D%0A%0D%0AThank%20you%20for%20your%20support.%20Looking%20forward%20to%20hearing%20from%20you.%0D%0A%0D%0ABest%20regards,%0D%0A[Your%20Name]"
+                        target="_blank"
+                     >
+                        <Button>Email</Button>
+                     </Link>
                   </div>
                </div>
 
                {/* Links Section */}
                <div className="lg:col-span-7">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
                      {/* Quick Links */}
                      <div>
                         <h3 className="text-lg font-semibold text-stone-800 mb-4">
