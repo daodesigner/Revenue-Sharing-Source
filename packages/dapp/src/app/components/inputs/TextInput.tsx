@@ -15,9 +15,9 @@ const inputVariants = cva(
             success: 'border-ge-500 bg-ge-100 text-ge-500 focus:ring-ge-500',
          },
          size: {
-            default: 'px-4 py-2 text-sm',
-            small: 'px-3 py-1 text-xs',
-            medium: 'px-5 py-3 text-base',
+            default: 'px-4 py-2',
+            small: 'px-3 py-1',
+            medium: 'px-5 py-3',
             large: 'px-6 py-4 text-lg',
          },
       },

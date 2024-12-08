@@ -71,7 +71,7 @@ function Page() {
             setErrorMessage('No email or password sent');
             break;
          case 409:
-            setErrorMessage('User already exists');
+            setErrorMessage('User already exists or username in use');
             break;
          case 201:
             router.push('/verification/email');
