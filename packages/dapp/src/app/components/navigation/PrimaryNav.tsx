@@ -109,13 +109,15 @@ const NeutralNav: React.FC = () => {
                         </Button>
                      )}
                   </li>
+                  {session.status === 'authenticated' && (
                   <li className="group bg-gradient-to-br from-neutral-50 to-neutral-100 w-10 h-10 rounded-full flex items-center justify-center transition-all">
-                     {session.status === 'authenticated' && (
+                    
                         <Link href={'/profile'}>
                            <UserCircle className="w-8 h-8 text-neutral-600 group-hover:text-neutral-900/80 transition-all" />
                         </Link>
-                     )}
+                 
                   </li>
+                      )}
                </ul>
             </li>
             <li onClick={() => setOpenMenu(!openMenu)} className="lg:hidden">
