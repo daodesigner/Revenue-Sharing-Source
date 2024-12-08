@@ -26,6 +26,19 @@ export default function ProfileSettings() {
 
    const sessions = useSession();
 
+   const handleAuthClick = async () => {
+      if (sessions.status === 'authenticated') {
+         await signOut();
+         router.push('/auth-sign-in');
+         return;
+      } else {
+         router.push('/auth-sign-in');
+         return;
+      }
+   };
+
+
+
    useEffect(() => {
       if (sessions.status !== 'loading' && sessions.status !== 'authenticated') {
          router.push('/auth-register');
@@ -104,6 +117,18 @@ export default function ProfileSettings() {
 
                <Button onClick={() => router.push('/account/forgot-request')}>
                   Change Password
+               </Button>
+            </div>
+
+            <Line />
+            <div className="space-y-4">
+               <div className="space-y-2">
+                  <h4>Sign Out</h4>
+                  <p>Sign out of your account with the button.</p>
+               </div>
+
+               <Button variant={"outline"} onClick={() => handleAuthClick()} >
+                  Sign Out 
                </Button>
             </div>
 
