@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { UserCircle } from 'lucide-react';
 
-const neutralNav: React.FC = () => {
+const NeutralNav: React.FC = () => {
    const router = useRouter();
    const session = useSession();
 
@@ -215,4 +215,4 @@ const neutralNav: React.FC = () => {
    );
 };
 
-export default neutralNav;
+export default NeutralNav;

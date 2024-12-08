@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
 import Container from '@/app/components/Container';
 import Line from '@/app/components/Line';
 import { Button } from '@/app/components/button/Button';
