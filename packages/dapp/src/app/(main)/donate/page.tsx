@@ -70,24 +70,23 @@ function Page() {
    };
 
    return (
-      <div className="space-y-10 mx-6 my-28 lg:mx-[15%] ">
-         {/* <header className="text-left space-y-2">
-            <h2>Support Our Multidisciplinary Project</h2>
+      <div className="space-y-10 mx-6 pt-20 sm:pt-24 lg:mx-[15%]">
+         <header className="text-left space-y-2">
+            <h2>Support The Project</h2>
             <p>
-               Our project is a vibrant fusion of art, science, and community
-               engagement. We strive to create meaningful change and experiences.
+               We strive to create meaningful change and experiences.
                Your generous contribution fuels our mission. By donating, you
                become an essential part of our creative ecosystem, enabling us to
                continue pushing boundaries and inspiring change.
             </p>
-         </header> */}
-         <Banner
+         </header> 
+         {/* <Banner
             header={'Support the Project'}
             text={
                ' We strive to create meaningful change and experiences. Your generous contribution fuels our mission. By donating, you become a part of our creative ecosystem, enabling us to pushing boundaries and inspiring change.'
             }
             color={'blue'}
-         />
+         /> */}
          <div className="md:grid md:grid-cols-2 gap-4">
             <section className="space-y-6 md:flex md:flex-col md:justify-between md:h-full">
                <div className="space-y-6">
