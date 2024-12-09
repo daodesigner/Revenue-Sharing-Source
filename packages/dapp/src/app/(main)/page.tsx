@@ -22,7 +22,7 @@ const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col overflow-hidden">
       {/* Hero - Full width */}
       <HeroSection />
       
