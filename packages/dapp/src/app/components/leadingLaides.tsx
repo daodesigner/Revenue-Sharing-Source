@@ -118,7 +118,7 @@ function LeadingLaides() {
           
           <div className="space-y-4">
             <p className="text-lg text-white/90 leading-relaxed">
-              The "Leading Ladies of Zambia" virtual exhibit showcases the extraordinary 
+              The Leading Ladies of Zambia virtual exhibit showcases the extraordinary 
               achievements of Women who have shaped history, culture, and progress. 
           
               Through these curated artifacts, personal narratives, and immersive 
