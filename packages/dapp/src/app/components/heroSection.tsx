@@ -9,6 +9,7 @@ import { ConnectKitButton } from "connectkit";
 import { useRouter } from "next/navigation";
 import { isCountdownComplete } from "@/functonality/countdownTimer";
 import { desableButton } from "../(test)/functions/disable";
+import Image from "next/image";
 
 interface Airdrop {
   valid: boolean;
@@ -100,61 +101,102 @@ function HeroSection() {
   }
 
   const isAirdropValid = airDropValues?.valid === true && airDropValues?.claimed === false;
-
   return (
-    <section className="bg-gradient-to-r from-orange-400 via-orange-600 to-orange-700 rounded-xl p-8 border-b md:border-b-0 border-primary-900-5 space-y-8 pb-10 md:flex md:flex-row md:gap-8">
-      <div className="w-full md:w-1/2 h-[342px] rounded-lg overflow-hidden bg-[url('/all-women.png')] bg-cover bg-center bg-primary-50/25"></div>
-      <div className="space-y-6 md:w-1/2 flex flex-col justify-between">
-        <div className="space-y-4">
-          <h1 className="text-primary-50 font-bold">The Leading Ladies</h1>
-          <p className="text-primary-50/80 leading-relaxed">
-            Those who walked before us and those to come. Those who wore red
-            clay masks and rested their heads on bended knees. Those who washed
-            the cowry bead and swung the snuff cup. Those who weaved the baskets
-            and wrapped the cloth. Those who fought for peace and danced to the
-            drum.
-          </p>
+    <section className="relative w-full h-screen overflow-hidden">
+      <Image
+        src="https://s3.tebi.io/summitshare-images/WHM%20Baskets.jpeg"
+        alt="WHM Baskets"
+        fill
+        className="object-cover object-center"
+        sizes="(max-width: 768px) 100vw, 100vw"
+        priority
+        quality={90}
+      />
+      
+      {/* Enhanced gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+      
+      <div className="relative h-full z-[3] container px-4 md:px-[15%]">
+        <div className="h-full flex items-end md:items-center pb-16 md:pb-0">
+          <div className="w-full md:max-w-2xl">
+            {/* Content box */}
+            <div className="backdrop-blur-sm bg-white/95 p-8 md:p-10 
+                          rounded-xl shadow-2xl border border-white/20">
+              <div className="space-y-8">
+                {/* Text content */}
+                <div className="space-y-6">
+                  <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 
+                               tracking-tight leading-tight">
+                    The Leading Ladies of Zambia
+                  </h1>
+                  
+                  <p className="text-neutral-700 text-lg md:text-xl leading-relaxed">
+                    Those who walked before us and those to come. Those who wore red 
+                    clay masks and rested their heads on bended knees. Those who 
+                    washed the cowry bead and swung the snuff cup. Those who weaved 
+                    the baskets and wrapped the cloth. Those who fought for peace 
+                    and danced to the drum.
+                  </p>
+                </div>
+
+                {/* Buttons - keeping original functionality */}
+                <div>
+                  {!userAddress ? (
+                    <ConnectKitButton.Custom>
+                      {({ show }) => (
+                        <Button 
+                          onClick={show} 
+                          className="transition-all duration-300 ease-in-out
+                                   transform hover:-translate-y-0.5"
+                        >
+                          Purchase Ticket
+                        </Button>
+                      )}
+                    </ConnectKitButton.Custom>
+                  ) : (
+                    <div className="flex flex-wrap gap-4">
+                      <Link href="/cya">
+                        <Button className="transition-all duration-300 ease-in-out
+                                         transform hover:-translate-y-0.5">
+                          Purchase Ticket
+                        </Button>
+                      </Link>
+                      
+                      {loading ? (
+                        <Button variant="white" disabled className="text-base">
+                          Loading...
+                        </Button>
+                      ) : isAirdropValid && isCountdownComplete() === true ? (
+                        <Button
+                          disabled={desableButton(response, loading)}
+                          className={`transition-all duration-300 ease-in-out
+                                    transform hover:-translate-y-0.5
+                                    ${loading && "cursor-wait"} 
+                                    ${response === 200 && "cursor-not-allowed"}`}
+                          onClick={() => sendAirdropRequest(userAddress)}
+                          variant="white"
+                        >
+                          {dropping ? "Sending Funds" : response && response === 200
+                            ? responseMessage
+                            : "Claim Air Drop"}
+                        </Button>
+                      ) : (
+                        <Link href="/distribution">
+                          <Button variant="white" className="transition-all duration-300 ease-in-out
+                                                         transform hover:-translate-y-0.5">
+                            Learn More
+                          </Button>
+                        </Link>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        {!userAddress ? (
-          <ConnectKitButton.Custom>
-            {({ show }) => (
-              <Button onClick={show} variant="white" className="w-fit">
-               Purchase Ticket
-              </Button>
-            )}
-          </ConnectKitButton.Custom>) :
-          (<div className="flex gap-2">
-            <Link href={"/cya"}>
-              <Button>Purchase Ticket</Button>
-            </Link>
-            {loading ? (
-              <Button variant="white" disabled>
-                Loading...
-              </Button>
-            ) : isAirdropValid && isCountdownComplete() === true ? (
-              <Button
-              disabled={desableButton(response,loading)}
-              className={`${loading && "cursor-wait"} ${response === 200 && "cursor-not-allowed"}`}
-                onClick={() => sendAirdropRequest(userAddress)}
-                variant="white"
-              > {dropping ? "Sending Funds" : response && response === 200
-                ? responseMessage
-                : "Claim Air Drop"}
-
-              </Button>
-            )
-              : (
-                <Link href={"/distribution"}>
-                  <Button variant="white">Learn More</Button>
-                </Link>
-              )}
-          </div>)
-
-        }
-
       </div>
     </section>
   );
 }
-
 export default HeroSection;
