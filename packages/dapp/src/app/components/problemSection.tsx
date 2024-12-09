@@ -3,11 +3,11 @@ import React from 'react'
 function ProblemSection() {
   return (
     <section className="py-16 md:py-24 md:mx-[15%] mx-[5%]">
-      <div className="grid md:grid-cols-2 gap-14 md:gap-16">
+      <div className="grid md:grid-cols-2 gap-14 md:gap-16 ">
         {/* Title Column */}
-        <div className="relative h-[300px] md:h-[400px]">
+        <div className="relative h-[300px] w-full md:h-[400px]">
         <h2 className="text-6xl font-bold ">
-        <span className='absolute top-0 left-0 md:w-[400px] w-[360px] h-[50px] bg-blue-300'></span>
+        <span className='absolute top-0 left-0 md:w-[400px] w-[320px] h-[50px] bg-blue-300'></span>
         <span className="absolute -top-4 left-0 text-neutral-900">Challenges</span>
         <span className="absolute top-8 left-12 text-orange-500">in</span>
         <span className="absolute top-16 left-8 text-neutral-900">Cultural</span>
@@ -17,7 +17,7 @@ function ProblemSection() {
         </div>
 
         {/* Content Column */}
-        <div>
+        <div className='w-full'>
           <div className="bg-neutral-900 p-8 md:p-10 relative shadow-xl">
             {/* Decorative corners */}
             <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-orange-500"></div>

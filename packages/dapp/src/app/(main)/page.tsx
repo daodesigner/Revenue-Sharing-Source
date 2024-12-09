@@ -34,7 +34,7 @@ export default function Home() {
         </div>
 
         {/* Problem Statement */}
-        <div>
+        <div className='w-full'>
           <ProblemSection />
         </div>
 
