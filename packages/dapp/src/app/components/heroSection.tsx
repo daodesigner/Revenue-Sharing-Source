@@ -104,18 +104,18 @@ function HeroSection() {
   return (
     <section className="relative w-full h-screen overflow-hidden">
       <Image
-        src="https://s3.tebi.io/summitshare-images/WHM%20Baskets.jpeg"
+        src="https://s3.tebi.io/summitshare-images/WHM%20Baskets.jpg"
         alt="WHM Baskets"
         fill
-        className="object-cover object-center"
+        className="object-cover object-left-top"
         sizes="(max-width: 768px) 100vw, 100vw"
         priority
         quality={90}
       />
-      
+
       {/* Enhanced gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
-      
+
       <div className="relative h-full z-[3] container px-4 md:px-[15%]">
         <div className="h-full flex items-end md:items-center pb-16 md:pb-0">
           <div className="w-full md:max-w-2xl">
@@ -129,12 +129,12 @@ function HeroSection() {
                                tracking-tight leading-tight">
                     The Leading Ladies of Zambia
                   </h1>
-                  
+
                   <p className="text-neutral-700 text-lg md:text-xl leading-relaxed">
-                    Those who walked before us and those to come. Those who wore red 
-                    clay masks and rested their heads on bended knees. Those who 
-                    washed the cowry bead and swung the snuff cup. Those who weaved 
-                    the baskets and wrapped the cloth. Those who fought for peace 
+                    Those who walked before us and those to come. Those who wore red
+                    clay masks and rested their heads on bended knees. Those who
+                    washed the cowry bead and swung the snuff cup. Those who weaved
+                    the baskets and wrapped the cloth. Those who fought for peace
                     and danced to the drum.
                   </p>
                 </div>
@@ -144,8 +144,9 @@ function HeroSection() {
                   {!userAddress ? (
                     <ConnectKitButton.Custom>
                       {({ show }) => (
-                        <Button 
-                          onClick={show} 
+                        <Button
+                          size={"medium"}
+                          onClick={show}
                           className="transition-all duration-300 ease-in-out
                                    transform hover:-translate-y-0.5"
                         >
@@ -156,18 +157,24 @@ function HeroSection() {
                   ) : (
                     <div className="flex flex-wrap gap-4">
                       <Link href="/cya">
-                        <Button className="transition-all duration-300 ease-in-out
+                        <Button
+                          size={"medium"}
+                          className="transition-all duration-300 ease-in-out
                                          transform hover:-translate-y-0.5">
                           Purchase Ticket
                         </Button>
                       </Link>
-                      
+
                       {loading ? (
-                        <Button variant="white" disabled className="text-base">
+                        <Button
+                          size={"medium"}
+                          variant="white" disabled className="text-base">
                           Loading...
                         </Button>
                       ) : isAirdropValid && isCountdownComplete() === true ? (
                         <Button
+                          size={"medium"}
+
                           disabled={desableButton(response, loading)}
                           className={`transition-all duration-300 ease-in-out
                                     transform hover:-translate-y-0.5
@@ -182,7 +189,8 @@ function HeroSection() {
                         </Button>
                       ) : (
                         <Link href="/distribution">
-                          <Button variant="white" className="transition-all duration-300 ease-in-out
+                          <Button size={"medium"}
+                            variant="white" className="transition-all duration-300 ease-in-out
                                                          transform hover:-translate-y-0.5">
                             Learn More
                           </Button>
