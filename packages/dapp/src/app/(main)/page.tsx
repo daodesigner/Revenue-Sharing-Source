@@ -23,27 +23,28 @@ const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="flex flex-col">
-      {/* Hero - Full width, no top margin */}
+      {/* Hero - Full width */}
       <HeroSection />
       
-      {/* Main content sections with consistent spacing */}
-      <div className="flex flex-col space-y-32 md:space-y-48">
-        {/* Container sections */}
-        <div className="mt-16 md:mt-24">
+      {/* Main content sections with tighter spacing */}
+      <div className="flex flex-col ">
+        {/* What is SummitShare */}
+        <div className="mt-16 mb-24">
           <WhatIsSummitShare />
         </div>
 
+        {/* Problem Statement */}
         <div>
           <ProblemSection />
         </div>
 
         {/* Solutions section */}
-        <div className="bg-neutral-50 py-16 md:py-24 w-full">
+        <div className="bg-neutral-50 w-full py-20 ">
           <InfoGrid />
         </div>
 
         {/* Implementation section */}
-        <div>
+        <div className="bg-neutral-900 mb-24"> {/* Negative margin to pull closer to previous section */}
           <IntegrationGrid />
         </div>
 
@@ -52,13 +53,13 @@ export default function Home() {
           <BlogList />
         </div>
 
-        {/* Partners section - different background */}
-        <div className=" py-16 md:py-24 w-full">
+        {/* Partners section */}
+        <div className="w-full py-20 mb-24">
           <Partners />
         </div>
 
-        {/* Call to action - more compact spacing */}
-        <div className="mb-16 md:mb-24">
+        {/* Call to action */}
+        <div>
           <CollaborateWithUs />
         </div>
       </div>

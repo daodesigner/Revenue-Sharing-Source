@@ -39,7 +39,7 @@ const IntegrationCard = ({ imageUrl, subTitle, title, body, buttonText, comingSo
             src={imageUrl}
             alt={title}
             fill
-            className={`object-cover transition-all duration-700 
+            className={`object-cover transition-all duration-700 bg-orange-200/80
                        group-hover:scale-105 
                        ${comingSoon ? 'grayscale hover:grayscale-0' : ''}`}
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -98,18 +98,18 @@ const IntegrationGrid = () => {
           {/* Left side - Text content */}
           <div className="w-full md:w-1/2 space-y-8">
             <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 tracking-tight relative
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight relative
                             after:content-[''] after:block after:w-24 after:h-1 
                             after:bg-orange-500 after:mt-4">
                 Virtual Exhibits and Immersive Experiences
               </h2>
               <div className="space-y-4">
-                <p className="text-lg md:text-xl text-neutral-700 leading-relaxed">
+                <p className="text-lg md:text-xl text-white/80 leading-relaxed">
                   Our interactive exhibits leverage 3D technologies and virtual reality 
                   to create engaging cultural experiences. Each exhibit transforms digital 
                   spaces into rich, contextual narratives.
                 </p>
-                <p className="text-lg md:text-xl text-neutral-700 leading-relaxed">
+                <p className="text-lg md:text-xl text-white/80 leading-relaxed">
                   Our ticketing and revenue-sharing systems not only provide access but 
                   also generate direct financial support for cultural preservation and 
                   ensure sustainable development of heritage communities.

@@ -102,9 +102,7 @@ const Partners: React.FC = () => {
          </div>
          <div className="  text-center space-y-8">
 <p className=" text-lg md:text-xl leading-relaxed text-neutral-700  max-w-2xl">
-   SummitShare is a collaborative initiative focused on reshaping the
-   narrative around repatriation and reclaiming history, with the support
-   of dedicated partners who help bring its vision to life.
+  A big Thank you to our dedicated partners who have helped bring our vision to life.
 </p>
 
 <Link

@@ -6,13 +6,14 @@ function ProblemSection() {
       <div className="grid md:grid-cols-2 gap-14 md:gap-16">
         {/* Title Column */}
         <div className="relative h-[300px] md:h-[400px]">
-          <h2 className="text-6xl font-bold">
-            <span className="absolute top-0 left-0 text-neutral-900">Challenges</span>
-            <span className="absolute  top-16 left-12 text-orange-500/90">in</span>
-            <span className="absolute  top-32 left-8 text-neutral-900">Cultural</span>
-            <span className="absolute  top-48 left-16 text-orange-500/90">Heritage</span>
-            <span className="absolute  top-64 left-0 text-neutral-900">Repatriation</span>
-          </h2>
+        <h2 className="text-6xl font-bold ">
+        <span className='absolute top-0 left-0 md:w-[400px] w-[360px] h-[50px] bg-blue-300'></span>
+        <span className="absolute -top-4 left-0 text-neutral-900">Challenges</span>
+        <span className="absolute top-8 left-12 text-orange-500">in</span>
+        <span className="absolute top-16 left-8 text-neutral-900">Cultural</span>
+        <span className="absolute top-28 left-16 text-orange-500">Heritage</span>
+        <span className="absolute top-40 left-0 text-neutral-900">Repatriation</span>
+      </h2>
         </div>
 
         {/* Content Column */}

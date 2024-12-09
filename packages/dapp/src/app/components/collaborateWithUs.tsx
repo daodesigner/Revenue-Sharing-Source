@@ -16,11 +16,10 @@ function CollaborateWithUs() {
           </div>
           
           {/* Description */}
-          <div className="max-w-2xl mx-auto">
+          <div className="">
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Learn more and contribute to shaping this narrative. Every voice matters, 
-              every insight adds to our shared heritage in building a future where 
-              cultural artifacts find their way home.
+             contribute to shaping this narrative. Every voice matters, 
+              every insight adds to our shared heritage.
             </p>
           </div>
 

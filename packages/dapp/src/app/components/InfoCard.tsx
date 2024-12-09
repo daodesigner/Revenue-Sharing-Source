@@ -53,17 +53,17 @@ const InfoGrid = () => {
   const cards = [
     {
       title: "Digital Accessibility",
-      body: "We transcend geographical barriers by creating immersive digital experiences that bring African artifacts to a global audience. Our platform ensures that cultural treasures are no longer confined by physical limitations, making heritage accessible to all.",
+      body: "We transcend geographical barriers by creating immersive digital experiences.",
       bgColor: "bg-orange-600"
     },
     {
       title: "Restoring \n Context",
-      body: "Our exhibits meticulously restore the historical and cultural context of artifacts. By providing rich narratives, historical backgrounds, and cultural insights, we reconnect artifacts with their original meanings, helping audiences understand their profound significance.",
+      body: "Our exhibits restore the historical and cultural context of artifacts.",
       bgColor: "bg-orange-500"
     },
     {
       title: "Community Empowerment",
-      body: "We generate direct financial support for cultural preservation and heritage communities through interactive exhibits and our revenue-sharing models. This approach enables heritage communities to renew traditional practices and support their sustainable development goals.",
+      body: "We generate direct financial support for cultural preservation and heritage communities.",
       bgColor: "bg-orange-400"
     }
   ];
