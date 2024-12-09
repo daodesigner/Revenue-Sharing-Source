@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/* Category: Smart Contract
+   Purpose: Manages Non-Fungible Tokens (NFTs) representing individual exhibits, ensuring ownership and access rights for event participants. */
+
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./EventEscrow.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -64,9 +67,8 @@ contract ExhibitNFT is ERC721, Ownable {
     }
 
     function mintTicket(address to) external onlyOwner returns (uint256) {
-        uint256 tokenId = totalMinted;
-        totalMinted++;
-        _safeMint(to, tokenId);
+        uint256 tokenId = totalMinted++;
+        _mint(to, tokenId);
         emit TicketMinted(address(this), to, tokenId);
         return tokenId;
     }

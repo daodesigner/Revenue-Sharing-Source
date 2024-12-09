@@ -1,13 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/* Category: Smart Contract
+   Purpose: Manages the organization and deployment of exhibits for events, integrating with the Museum contract and handling ArtifactNFTs. */
+   
 import "./Museum.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./ArtifactNFT.sol";
 
 contract EventOrganizerService is Ownable {
     Museum public museum;
-    IERC20 public usdcToken;
+    IERC20 public usdtToken;
     mapping(string => address) public exhibits;
 
     event ExhibitNFTDeployed(
@@ -24,9 +27,9 @@ contract EventOrganizerService is Ownable {
         string baseURI
     );
 
-    constructor(Museum _museum, IERC20 _usdcToken) Ownable(msg.sender) {
+    constructor(Museum _museum, IERC20 _usdtToken) Ownable(msg.sender) {
         museum = _museum;
-        usdcToken = _usdcToken;
+        usdtToken = _usdtToken;
     }
 
     /**
@@ -87,7 +90,7 @@ contract EventOrganizerService is Ownable {
 
         // Create a new escrow contract for the exhibit
         EventEscrow newEscrow = new EventEscrow(
-            usdcToken,
+            usdtToken,
             beneficiaries,
             shares
         );

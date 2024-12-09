@@ -1,0 +1,12 @@
+{
+  "optimism-sepolia": {
+    "EventOrganizerService": {
+      "address": "0xc88aFEcC1b0DcB107fe837E05273537F6D2d1b06",
+      "startBlock": 19717436
+    },
+    "Museum": {
+      "address": "0xA23Cd2AD1966b17cae9442410eE13A01f58358FF",
+      "startBlock": 19717431
+    }
+  }
+}
