@@ -20,7 +20,7 @@ function WhatIsSummitShare() {
             repatriation of African cultural artifacts. Bridging the past and present, 
             it serves as a beacon of hope and a testament to the resilience of African 
             heritage, utilizing technology to reclaim, celebrate, and share the rich 
-            tapestry of Africa's history with the world.
+            tapestry of Africas history with the world.
           </p>
         </div>
   

@@ -24,7 +24,7 @@ const BlogList = async () => {
            Get updates
          </h2>
          <p className=" text-lg md:text-xl leading-relaxed text-neutral-700  max-w-2xl">
-           Read more about the project and the core team's updates - stay informed about our latest exhibitions, community initiatives, and technological innovations.
+           Read more about the project and the core teams updates - stay informed about our latest exhibitions, community initiatives, and technological innovations.
          </p>
        </div>
     
