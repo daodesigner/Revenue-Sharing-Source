@@ -124,7 +124,7 @@ const Page = ({ params }: PageProps) => {
 
    {/* Image Section - Right on desktop, top on mobile */}
    <div className="order-1 md:order-2">
-      <div className="relative md:h-[600px] h-[300px] py-4 w-full">
+      <div className="relative md:h-[600px] h-[365px] py-4 w-full">
          <Image
             src={figure.image}
             alt={figure.title}
