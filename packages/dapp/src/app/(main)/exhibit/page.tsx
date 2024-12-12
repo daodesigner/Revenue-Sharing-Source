@@ -100,25 +100,25 @@ export default function Home(): JSX.Element {
       name: 'Lueji Wa Nkonde',
       image: "https://s3.tebi.io/summitshare-previews/3.png",
       video: 'https://s3.tebi.io/summitshare-videos/03_Snuff%20Box_Preview.mp4',
-      link: '/exhibit/Mwape',
+      link: '/exhibit/mwape',
       artifact: 'Snuff Cup',
    }, {
       name: 'Julia Chikamoneka',
       image: "https://s3.tebi.io/summitshare-previews/4.png",
       video: 'https://s3.tebi.io/summitshare-videos/04_Headrest_Preview%20%281%29.mp4',
-      link: '/exhibit/Lueji-Wa-Nkonde',
+      link: '/exhibit/lueji-wa-nkonde',
       artifact: 'Headrest',
    }, {
       name: 'Mukwae',
       image: "https://s3.tebi.io/summitshare-previews/5.png",
       video: 'https://s3.tebi.io/summitshare-videos/05_Calabash_Preview.mp4',
-      link: '/exhibit/Mukwae',
+      link: '/exhibit/mukwae',
       artifact: 'Calabash',
    }, {
       name: 'Loongo',
       image: "https://s3.tebi.io/summitshare-previews/6.png",
       video: 'https://s3.tebi.io/summitshare-videos/06_Mask__Preview%20%281%29.mp4',
-      link: '/exhibit/Loongo',
+      link: '/exhibit/loongo',
       artifact: 'Luvale Mask',
    }];
 
