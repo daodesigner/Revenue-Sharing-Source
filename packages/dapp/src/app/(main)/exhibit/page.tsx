@@ -90,35 +90,35 @@ export default function Home(): JSX.Element {
       video: 'https://s3.tebi.io/summitshare-videos/01_Drum_Preview.mp4',
       link: '/exhibit/julia-chikamoneka',
       artifact: 'Double Sided Drum',
-   },{
+   }, {
       name: 'Mwape',
       image: "https://s3.tebi.io/summitshare-previews/2.png",
       video: 'https://s3.tebi.io/summitshare-videos/02_Girdle_Belt_Preview.mp4',
-      link: '/exhibit/julia-chikamoneka',
+      link: '/exhibit/mwenya-mukulu',
       artifact: 'Cowry Beads',
-   },{
+   }, {
       name: 'Lueji Wa Nkonde',
       image: "https://s3.tebi.io/summitshare-previews/3.png",
       video: 'https://s3.tebi.io/summitshare-videos/03_Snuff%20Box_Preview.mp4',
-      link: '/exhibit/julia-chikamoneka',
+      link: '/exhibit/Mwape',
       artifact: 'Snuff Cup',
-   },{
+   }, {
       name: 'Julia Chikamoneka',
       image: "https://s3.tebi.io/summitshare-previews/4.png",
       video: 'https://s3.tebi.io/summitshare-videos/04_Headrest_Preview%20%281%29.mp4',
-      link: '/exhibit/julia-chikamoneka',
+      link: '/exhibit/Lueji-Wa-Nkonde',
       artifact: 'Headrest',
-   },{
+   }, {
       name: 'Mukwae',
       image: "https://s3.tebi.io/summitshare-previews/5.png",
       video: 'https://s3.tebi.io/summitshare-videos/05_Calabash_Preview.mp4',
-      link: '/exhibit/julia-chikamoneka',
+      link: '/exhibit/Mukwae',
       artifact: 'Calabash',
-   },{
+   }, {
       name: 'Loongo',
       image: "https://s3.tebi.io/summitshare-previews/6.png",
       video: 'https://s3.tebi.io/summitshare-videos/06_Mask__Preview%20%281%29.mp4',
-      link: '/exhibit/julia-chikamoneka',
+      link: '/exhibit/Loongo',
       artifact: 'Luvale Mask',
    }];
 
@@ -198,30 +198,30 @@ export default function Home(): JSX.Element {
                   >
                      {loadingItem === item.name ? (
                         <div className="absolute inset-0 flex items-center justify-center bg-neutral-100 z-30">
-                          Loading...
+                           Loading...
                         </div>
                      ) : (
                         <>
                            <div className="absolute inset-0 bg-primary-900/35 z-[4] rounded-lg" />
-                           
+
                            <Image
                               src={item.image}
                               alt={item.name}
                               fill
                               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                              className="object-cover transition-opacity duration-300 group-hover:opacity-0 z-[2]"
+                              className="object-cover z-[2] md:transition-opacity md:duration-300 md:group-hover:opacity-0"
                            />
-                           
+
                            <video
                               ref={setVideoRef}
                               data-name={item.name}
-                              className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[1]"
+                              className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[1] hidden md:block"
                               src={item.video}
                               muted
                               playsInline
                               loop
                            />
-                           
+
                            <div className="z-[5] space-y-2 relative">
                               <div className="space-y-1">
                                  <p className="text-white text-lg font-medium">{item.artifact}</p>
