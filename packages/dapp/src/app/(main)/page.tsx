@@ -29,7 +29,7 @@ export default function Home() {
       {/* Main content sections with tighter spacing */}
       <div className="flex flex-col ">
         {/* What is SummitShare */}
-        <div className="mt-16 mb-24">
+        <div className="mt-16 md:mb-24 mb-32">
           <WhatIsSummitShare />
         </div>
 
@@ -44,7 +44,7 @@ export default function Home() {
         </div>
 
         {/* Implementation section */}
-        <div className="bg-neutral-900 mb-24"> {/* Negative margin to pull closer to previous section */}
+        <div className="bg-neutral-900 md:mb-24 mb-32"> {/* Negative margin to pull closer to previous section */}
           <IntegrationGrid />
         </div>
 
@@ -54,7 +54,7 @@ export default function Home() {
         </div>
 
         {/* Partners section */}
-        <div className="w-full py-20 mb-24">
+        <div className="w-full py-20 md:mb-24 mb-32">
           <Partners />
         </div>
 
