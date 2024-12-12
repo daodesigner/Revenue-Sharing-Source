@@ -163,7 +163,7 @@ export default function Home(): JSX.Element {
                            </div>
                            <div className="flex gap-2">
                               <Link href="https://oncyber.io/spaces/89cp8FpYgF5hgrHk1i3N">
-                                 <Button>Enter Virtual Exhibit</Button>
+                                 <Button>Enter Exhibit</Button>
                               </Link>
                               <Link href="/distribution">
                                  <Button variant="white">Learn more</Button>
@@ -187,7 +187,7 @@ export default function Home(): JSX.Element {
                </p>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 auto-rows-fr">
+            <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 auto-rows-fr">
                {women.map((item) => (
                   <div
                      key={item.name}
