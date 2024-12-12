@@ -51,16 +51,19 @@ const Page = ({ params }: { params: { slug: string } }) => {
    };
 
    return (
-      <div className="space-y-12 mx-6 my-28 lg:mx-[15%] relative">
-         <button
+      <div className="space-y-12 mx-6 my-28 lg:mx-[15%] relative mt-40">
+        
+<div className='w-full flex justify-between items-center'>
+<h2>{figure.title}</h2>
+<button
             onClick={handleClose}
-            className="absolute top-[-20px] right-0 text-brown-500 hover:text-brown-700"
+            className=" "
             aria-label="Close and return to exhibit"
          >
-            <X size={24} />
+           <p className='text-neutral-900 hover:text-orange-600 hover:underline'>Close</p>
          </button>
-
-         <h2>{figure.title}</h2>
+</div>
+      
          <article className="space-y-8 md:space-y-0 md:grid md:grid-cols-2 gap-6 w-full">
             <SummitShareCanvas>{figure.object_URL}</SummitShareCanvas>
 
@@ -77,6 +80,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
 
             <ul className="flex flex-col gap-3">
                <h2>About the {figure.object_name}</h2>
+               <div className="h-1 w-24 bg-orange-500 mt-3" />
                {figure.Object_description.map((desc, index) => (
                   <li key={index}>
                      <p>{desc}</p>
@@ -87,6 +91,8 @@ const Page = ({ params }: { params: { slug: string } }) => {
 
          <ul className="space-y-3">
             <h2>Biography</h2>
+            <div className="h-1 w-24 bg-orange-500 mt-3" />
+
             <ul className="space-y-3">
                <li>
                   <ul className="space-y-4 ">
@@ -126,33 +132,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
             </ul>
          </div>
 
-         <div className="w-full rounded-[8px] bg-primary-50 space-y-4 px-[45px] py-6">
-            <div className="space-y-2">
-               <h3>Was this page informative?</h3>
-               <p>Those who walked before us and those to come.</p>
-            </div>
 
-            <div className="flex flex-row gap-4">
-               <div className="w-[73px]">
-                  <Button>Yes</Button>
-               </div>
-               <div className="w-[73px]">
-                  <Button>No</Button>
-               </div>
-            </div>
-         </div>
-
-         <div className="space-y-4 md:flex md:flex-row md:gap-4 md:space-y-0">
-            <Button onClick={handleBack} disabled={currentIndex < 0}>
-               Back
-            </Button>
-            <Button
-               disabled={currentIndex > data.length - 1}
-               onClick={handleNext}
-            >
-               Next
-            </Button>
-         </div>
       </div>
    );
 };

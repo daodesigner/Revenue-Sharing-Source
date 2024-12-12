@@ -1,271 +1,244 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, RefCallback } from 'react';
 import Image from 'next/image';
 import { validatePageAccess } from '@/utils/methods/ticketPurchase/ticketService';
-
 import { useAccount } from 'wagmi';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import LoadingDots from './loadingDots';
 import { Button } from '@/app/components/button/Button';
+import CollaborateWithUs from '@/app/components/collaborateWithUs';
 
-export default function Home() {
-   const [open, setOpen] = useState(false);
-   const [isLoading, setIsLoading] = useState(true);
+interface WomanData {
+   name: string;
+   image: string;
+   video: string;
+   link: string;
+   artifact: string;
+}
+
+interface VideoRefs {
+   [key: string]: HTMLVideoElement | null;
+}
+
+export default function Home(): JSX.Element {
+   const [isLoading, setIsLoading] = useState<boolean>(true);
    const [loadingItem, setLoadingItem] = useState<string | null>(null);
+   const videoRefs = useRef<VideoRefs>({});
 
    const { address } = useAccount();
-   const userAddress = address;
-
    const router = useRouter();
    const session = useSession();
 
-   useEffect(() => {
-      const validateAccess = async () => {
-         // Set loading to true when starting validation
-         setIsLoading(true);
+   const setVideoRef: RefCallback<HTMLVideoElement> = (element) => {
+      if (element) {
+         const name = element.getAttribute('data-name');
+         if (name) {
+            videoRefs.current[name] = element;
+         }
+      }
+   };
 
-         // Check if wallet is connected
-         if (!userAddress) {
-            console.warn('No wallet connected. Redirecting to /connect-wallet');
+   useEffect(() => {
+      const validateAccess = async (): Promise<void> => {
+         setIsLoading(true);
+         if (!address) {
             router.push('/connect-wallet');
-            return; // Exit validation if no wallet is connected
+            return;
          }
 
-         // Validate access
-         const { hasAccess } = await validatePageAccess(
-            userAddress,
-            router,
-            session
-         );
-
-         // Once validation is complete, update loading state
-         setIsLoading(false);
-
-         // If the user does not have access, redirect is handled in `validatePageAccess`
-         if (!hasAccess) {
-            return;
+         try {
+            const { hasAccess } = await validatePageAccess(address, router, session);
+            if (!hasAccess) {
+               // Handle no access case if needed
+            }
+         } catch (error) {
+            console.error('Access validation error:', error);
+         } finally {
+            setIsLoading(false);
          }
       };
 
-      // Call the validation function
-      if (session) {
-         validateAccess();
-      } else {
-         setIsLoading(false);
+      session.status === 'authenticated' ? validateAccess() : setIsLoading(false);
+   }, [address, router, session]);
+
+   const handleMouseEnter = (name: string): void => {
+      const video = videoRefs.current[name];
+      if (video) {
+         video.play().catch((err: Error) => console.log("Autoplay prevented:", err));
       }
-   }, [userAddress, router, session]);
+   };
+
+   const handleMouseLeave = (name: string): void => {
+      const video = videoRefs.current[name];
+      if (video) {
+         video.pause();
+         video.currentTime = 0;
+      }
+   };
+
+   const handleCardClick = (name: string, link: string): void => {
+      setLoadingItem(name);
+      router.push(link);
+   };
+
+   const women: WomanData[] = [{
+      name: 'Mwenye',
+      image: "https://s3.tebi.io/summitshare-previews/1.png",
+      video: 'https://s3.tebi.io/summitshare-videos/01_Drum_Preview.mp4',
+      link: '/exhibit/julia-chikamoneka',
+      artifact: 'Double Sided Drum',
+   },{
+      name: 'Mwape',
+      image: "https://s3.tebi.io/summitshare-previews/2.png",
+      video: 'https://s3.tebi.io/summitshare-videos/02_Girdle_Belt_Preview.mp4',
+      link: '/exhibit/julia-chikamoneka',
+      artifact: 'Cowry Beads',
+   },{
+      name: 'Lueji Wa Nkonde',
+      image: "https://s3.tebi.io/summitshare-previews/3.png",
+      video: 'https://s3.tebi.io/summitshare-videos/03_Snuff%20Box_Preview.mp4',
+      link: '/exhibit/julia-chikamoneka',
+      artifact: 'Snuff Cup',
+   },{
+      name: 'Julia Chikamoneka',
+      image: "https://s3.tebi.io/summitshare-previews/4.png",
+      video: 'https://s3.tebi.io/summitshare-videos/04_Headrest_Preview%20%281%29.mp4',
+      link: '/exhibit/julia-chikamoneka',
+      artifact: 'Headrest',
+   },{
+      name: 'Mukwae',
+      image: "https://s3.tebi.io/summitshare-previews/5.png",
+      video: 'https://s3.tebi.io/summitshare-videos/05_Calabash_Preview.mp4',
+      link: '/exhibit/julia-chikamoneka',
+      artifact: 'Calabash',
+   },{
+      name: 'Loongo',
+      image: "https://s3.tebi.io/summitshare-previews/6.png",
+      video: 'https://s3.tebi.io/summitshare-videos/06_Mask__Preview%20%281%29.mp4',
+      link: '/exhibit/julia-chikamoneka',
+      artifact: 'Luvale Mask',
+   }];
 
    if (isLoading) {
-      return <LoadingDots />;
+      return (
+         <div className="h-screen w-full flex items-center justify-center">
+            <p>Loading...</p>
+         </div>
+      );
    }
 
-   const women = [
-      {
-         name: 'Julia Chikamoneka',
-         img: '/women/julia.png',
-         link: '/exhibit/julia-chikamoneka',
-         artifact: 'Headrest',
-      },
-
-      {
-         name: 'Mwenya',
-         img: '/women/mwenya.png',
-         link: '/exhibit/mwenya-mukulu',
-         artifact: 'Double Sided Drum',
-      },
-      {
-         name: 'Mwape',
-         img: '/women/mwape.png',
-         link: '/exhibit/mwape',
-         artifact: 'Cowry Beads',
-      },
-
-      {
-         name: 'lueji wa nkonde',
-         img: '/women/lueji.png',
-         link: '/exhibit/lueji-wa-nkonde',
-         artifact: 'Snuff Cup',
-      },
-
-      {
-         name: 'Mukwae',
-         img: '/women/mukwae.png',
-         link: '/exhibit/mukwae',
-         artifact: 'Calabash',
-      },
-
-      {
-         name: 'Loongo',
-         img: '/women/loongo.png',
-         link: '/exhibit/loongo',
-         artifact: 'Luvale Mask',
-      },
-   ];
-
    return (
-      <div className="space-y-10 mx-6 my-28 lg:mx-[15%]">
-         <section className="bg-gradient-to-r from-orange-400 via-orange-600 to-orange-700 rounded-xl p-8 border-b md:border-b-0 border-primary-900-5 space-y-8 pb-10 md:flex md:flex-row md:gap-8">
-            <div className="w-full md:w-1/2 h-[342px] rounded-lg overflow-hidden bg-[url('/all-women.png')] bg-cover bg-center bg-primary-50/25 "></div>
-            <div className="space-y-6 md:w-1/2 flex flex-col justify-between">
-               <div className="space-y-4">
-                  <h1 className="text-primary-50  font-bold">
-                     The Leading Ladies
-                  </h1>
-                  <p className="text-primary-50/80 leading-relaxed">
-                     Those who walked before us and those to come. Those who wore
-                     red clay masks and rested their heads on bended knees. Those
-                     who washed the cowry bead and swung the snuff cup. Those who
-                     weaved the baskets and wrapped the cloth. Those who fought
-                     for peace and danced to the drum.
-                  </p>
-               </div>
-               <div className="flex gap-2">
-                  <Link href={'https://oncyber.io/spaces/89cp8FpYgF5hgrHk1i3N'}>
-                     <Button>Enter Virtual Exhibit </Button>
-                  </Link>
-                  <Link href={'/distribution'}>
-                     <Button variant="white">Learn more</Button>
-                  </Link>
+      <div className="min-h-screen">
+         <section className="relative w-full h-screen overflow-hidden">
+            <Image
+               src="https://s3.tebi.io/summitshare-images/WHM%20Baskets.jpg"
+               alt="WHM Baskets"
+               fill
+               className="object-cover object-left-top"
+               sizes="(max-width: 768px) 100vw, 100vw"
+               priority
+               quality={90}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+
+            <div className="relative h-full z-[3] container px-4 md:px-[15%]">
+               <div className="h-full flex items-end md:items-center pb-16 md:pb-0">
+                  <div className="w-full md:max-w-2xl">
+                     <div className="backdrop-blur-sm bg-white/75 p-8 md:p-10 rounded-xl shadow-2xl border border-white/20">
+                        <div className="space-y-8">
+                           <div className="space-y-6">
+                              <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 tracking-tight leading-tight">
+                                 The Leading Ladies of Zambia
+                              </h1>
+                              <p className="text-neutral-700 md:text-xl leading-relaxed">
+                                 Those who walked before us and those to come. Those who wore red
+                                 clay masks and rested their heads on bended knees. Those who
+                                 washed the cowry bead and swung the snuff cup. Those who weaved
+                                 the baskets and wrapped the cloth. Those who fought for peace
+                                 and danced to the drum.
+                              </p>
+                           </div>
+                           <div className="flex gap-2">
+                              <Link href="https://oncyber.io/spaces/89cp8FpYgF5hgrHk1i3N">
+                                 <Button>Enter Virtual Exhibit</Button>
+                              </Link>
+                              <Link href="/distribution">
+                                 <Button variant="white">Learn more</Button>
+                              </Link>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
                </div>
             </div>
          </section>
-         <section className="w-full space-y-6">
-            <div className="space-y-2">
-               <h2 className="font-bold">Artifacts</h2>
-               <p>
+
+         <section className="w-full px-6 md:px-[15%] py-24 max-w-[1920px] mx-auto">
+            <div className="space-y-4 mb-10">
+               <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 tracking-tight relative after:content-[''] after:block after:w-24 after:h-1 after:bg-orange-500 after:mt-4">
+                  Artifacts
+               </h2>
+               <p className="text-lg md:text-xl leading-relaxed text-neutral-700 max-w-2xl">
                   Explore the lives of the leading ladies through their cherished
-                  artifacts, digitally restored and viewable
-                  <br /> in stunning detail from all angles.
+                  artifacts, digitally restored and viewable in stunning detail from all angles.
                </p>
             </div>
 
-            <section className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 auto-rows-fr">
                {women.map((item) => (
                   <div
                      key={item.name}
-                     onClick={() => {
-                        setLoadingItem(item.name); // Set the loading item
-                        router.push(item.link); // Navigate to the dynamic page
-                     }}
-                     className="bg-gradient-to-b from-orange-100 to-orange-50 relative flex flex-col gap-6 justify-end h-[16rem] rounded-[0.5rem] px-4 py-6 overflow-hidden cursor-pointer"
-                     style={{
-                        transition: 'all 0.3s ease',
-                        boxShadow:
-                           '0 6px 8px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                     }}
-                     onMouseEnter={(e) => {
-                        e.currentTarget.style.boxShadow =
-                           '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
-                        e.currentTarget.style.transform = 'scale(1.05)';
-                     }}
-                     onMouseLeave={(e) => {
-                        e.currentTarget.style.boxShadow = 'none';
-                        e.currentTarget.style.transform = 'scale(1)';
-                     }}
+                     onClick={() => handleCardClick(item.name, item.link)}
+                     className="group bg-nutral-100 relative flex flex-col gap-6 justify-end h-64 rounded-lg p-4 overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105"
+                     onMouseEnter={() => handleMouseEnter(item.name)}
+                     onMouseLeave={() => handleMouseLeave(item.name)}
                   >
                      {loadingItem === item.name ? (
-                        <LoadingDots /> // Show the loading dots if this item is clicked
+                        <div className="absolute inset-0 flex items-center justify-center bg-neutral-100 z-30">
+                          Loading...
+                        </div>
                      ) : (
                         <>
-                           <div className="absolute inset-0 bg-primary-900/35 z-[4] rounded-[0.5rem]"></div>
+                           <div className="absolute inset-0 bg-primary-900/35 z-[4] rounded-lg" />
+                           
                            <Image
-                              className="absolute -bottom-10 inset-x-0 w-full h-full object-cover"
-                              src={item.img}
+                              src={item.image}
                               alt={item.name}
                               fill
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                              className="object-cover transition-opacity duration-300 group-hover:opacity-0 z-[2]"
                            />
-                           <div className="z-[5] space-y-2">
-                              <div className="sapce-y-1">
-                                 <p className="text-white text-lg font-medium">
-                                    {item.name}
-                                 </p>
-                                 <p className="text-white/80 text-sm ">
-                                    {item.artifact}
-                                 </p>
+                           
+                           <video
+                              ref={setVideoRef}
+                              data-name={item.name}
+                              className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[1]"
+                              src={item.video}
+                              muted
+                              playsInline
+                              loop
+                           />
+                           
+                           <div className="z-[5] space-y-2 relative">
+                              <div className="space-y-1">
+                                 <p className="text-white text-lg font-medium">{item.artifact}</p>
+                                 <p className="text-white/80 text-sm">{item.name}</p>
                               </div>
-
                               <div className="w-[66px]">
-                                 <Button variant={'white'} size={'small'}>
-                                    View
-                                 </Button>
+                                 <Button variant="white" size="small">View</Button>
                               </div>
                            </div>
                         </>
                      )}
                   </div>
                ))}
-            </section>
-         </section>
-         <section className="relative bg-gradient-to-br from-red-400 via-red-600 to-red-700  rounded-[0.5rem] w-full h-[21.375rem] flex flex-col items-center px-[2.813rem] justify-center space-y-12 overflow-hidden">
-            {/* SVG Background */}
-            <svg
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 800 800"
-               className="absolute inset-0 w-full h-full"
-               preserveAspectRatio="xMidYMid slice"
-            >
-               <defs>
-                  <linearGradient id="waveGradient" x1="0" y1="0" x2="1" y2="0">
-                     <stop offset="0%" stopColor="#F1F1F1" stopOpacity="0.2" />
-                     <stop offset="50%" stopColor="#F1F1F1" stopOpacity="0.3" />
-                     <stop offset="100%" stopColor="#F1F1F1" stopOpacity="0.2" />
-                  </linearGradient>
-               </defs>
-
-               {/* Large Circles */}
-               <circle cx="650" cy="150" r="300" fill="#F1F1F1" opacity="0.1" />
-               <circle cx="150" cy="650" r="250" fill="#F1F1F1" opacity="0.1" />
-
-               {/* Waves */}
-               <path
-                  d="M-100 300 C 100 250, 300 350, 500 300 S 700 250, 900 300"
-                  stroke="url(#waveGradient)"
-                  fill="none"
-                  strokeWidth="3"
-                  opacity="0.4"
-               />
-               <path
-                  d="M-100 400 C 100 350, 300 450, 500 400 S 700 350, 900 400"
-                  stroke="url(#waveGradient)"
-                  fill="none"
-                  strokeWidth="3"
-                  opacity="0.3"
-               />
-               <path
-                  d="M-100 500 C 100 450, 300 550, 500 500 S 700 450, 900 500"
-                  stroke="url(#waveGradient)"
-                  fill="none"
-                  strokeWidth="3"
-                  opacity="0.2"
-               />
-
-               {/* Small Accent Circles */}
-               <circle cx="200" cy="200" r="20" fill="#F1F1F1" opacity="0.2" />
-               <circle cx="600" cy="600" r="15" fill="#F1F1F1" opacity="0.2" />
-               <circle cx="700" cy="200" r="25" fill="#F1F1F1" opacity="0.2" />
-               <circle cx="150" cy="450" r="18" fill="#F1F1F1" opacity="0.2" />
-            </svg>
-
-            {/* Content */}
-            <div className="flex flex-col gap-2 items-center justify-center z-[5]">
-               <h3 className="text-white text-2xl font-bold">
-                  Collaborate With Us
-               </h3>
-               <p className="text-center text-white/80 ">
-                  Learn more and contribute to shaping this narrative. Every voice
-                  matters, every insight adds to our shared heritage.
-               </p>
-               <div className="w-[164px] mt-4 z-[5]">
-                  <Link href="https://forms.gle/rXvQy25pqEagxHoq9">
-                     <Button variant={'white'}>Register today</Button>
-                  </Link>
-               </div>
             </div>
          </section>
+
+         <CollaborateWithUs />
       </div>
    );
 }
