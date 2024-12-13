@@ -14,7 +14,7 @@ const getUserIdFromSession = (
    return session.data?.user?.id || null;
 };
 
-const ENABLE_VALIDATION = false;
+const ENABLE_VALIDATION = true;
 
 export const validateTicket = async (
    userAddress: string | undefined,
