@@ -26,6 +26,7 @@ const NeutralNav: React.FC = () => {
 
    const items: { name: string; link: string }[] = [
       { name: 'Home', link: '/' },
+      { name: 'Exhibit', link:'/exhibit'},
       { name: 'Blog', link: '/blog' },
       { name: 'Support Us', link: '/donate' },
       { name: 'Insights', link: '/distribution' },
@@ -37,6 +38,7 @@ const NeutralNav: React.FC = () => {
          title: 'Pages',
          items: [
             { name: 'Home', link: '/' },
+            { name: 'Exhibit', link:'/exhibit'},
             { name: 'Blog', link: '/blog' },
             { name: 'Support Us', link: '/donate' },
             { name: 'Insights', link: '/distribution' },
