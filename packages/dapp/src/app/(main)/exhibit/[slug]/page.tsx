@@ -53,7 +53,9 @@ const Page = ({ params }: PageProps) => {
 
    const handleBack = () => {
       if (currentIndex > 0) {
-         const prevSlug = data[currentIndex - 1].title.toLowerCase().replace(/ /g, '-');
+         const prevSlug = data[currentIndex - 1].title
+            .toLowerCase()
+            .replace(/ /g, '-');
          router.push(`/exhibit/${prevSlug}`);
          window.scrollTo(0, 0);
       }
@@ -61,7 +63,9 @@ const Page = ({ params }: PageProps) => {
 
    const handleNext = () => {
       if (currentIndex < data.length - 1) {
-         const nextSlug = data[currentIndex + 1].title.toLowerCase().replace(/ /g, '-');
+         const nextSlug = data[currentIndex + 1].title
+            .toLowerCase()
+            .replace(/ /g, '-');
          router.push(`/exhibit/${nextSlug}`);
          window.scrollTo(0, 0);
       }
