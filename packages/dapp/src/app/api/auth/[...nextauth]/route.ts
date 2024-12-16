@@ -115,9 +115,8 @@ const handler = NextAuth({
                   email_verified: foundUser.email_verified || null,
                   type: foundUser.type || null,
                   user_wallets: foundUser.user_wallets || [],
-                 
                };
-               
+
                return user;
             } catch (error) {
                console.error('Authorization error:', error);
@@ -145,7 +144,6 @@ const handler = NextAuth({
             token.email_verified = user.email_verified;
             token.type = user.type;
             token.user_wallets = user.user_wallets;
-
          }
          return token;
       },
@@ -159,7 +157,6 @@ const handler = NextAuth({
             email_verified: token.email_verified,
             type: token.type,
             user_wallets: token.user_wallets,
-
          };
 
          return session;

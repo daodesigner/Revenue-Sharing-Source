@@ -22,7 +22,6 @@ interface Exhibit {
 }
 
 const useExhibit = (id: string): Exhibit | null => {
-
    const EXHIBIT_QUERY = gql`
       query GetExhibit($id: ID!) {
          exhibit(id: $id) {

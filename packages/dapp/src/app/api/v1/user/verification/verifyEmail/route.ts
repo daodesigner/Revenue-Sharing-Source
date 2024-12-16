@@ -22,13 +22,13 @@ export async function GET(req: Request, res: NextResponse) {
       ////console.log(`vrecord ${verificationRecord}`)
 
       if (!verificationRecord) {
-      console.log("no roken: line 25");
+         console.log('no roken: line 25');
          return NextResponse.json({ message: 'Invalid token' }, { status: 400 });
       }
 
       // Assuming verificationRecord.expires is in a consistent format, e.g., ISO 8601
       if (!verificationRecord.expires) {
-         console.log("expired");
+         console.log('expired');
          // Handle cases where expires data might be missing or invalid
          return NextResponse.json(
             { message: 'Invalid token data, cannot verify expiration.' },
@@ -41,7 +41,6 @@ export async function GET(req: Request, res: NextResponse) {
       if (Number.isNaN(expirationDate.getTime())) {
          // Check if the date parsed is valid
          return NextResponse.json(
-
             { message: 'Invalid expiration date, request a new token.' },
             { status: 500 }
          );
@@ -50,9 +49,12 @@ export async function GET(req: Request, res: NextResponse) {
       // ////console.log(`new date ${JSON.stringify(new Date().getTime())}`)
       // Compare the current date (in UTC) to the expiration date
       if (new Date() > expirationDate) {
-         console.log("expired");
+         console.log('expired');
          return NextResponse.json(
-            { message: 'Token expired, request a new one and ensure you click the link in the last email we send you' },
+            {
+               message:
+                  'Token expired, request a new one and ensure you click the link in the last email we send you',
+            },
             { status: 401 }
          );
       }

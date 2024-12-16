@@ -23,7 +23,7 @@ export async function POST(req: Request) {
    try {
       const { recipient, user_id } = await req.json();
       if (!user_id) {
-         console.log("no user sent")
+         console.log('no user sent');
          return NextResponse.json(
             { error: 'Something went wrong please try again' },
             { status: 401 }
@@ -31,11 +31,11 @@ export async function POST(req: Request) {
       }
 
       const user = await prisma.users.findFirst({
-         where: { id: user_id }
+         where: { id: user_id },
       });
 
       if (!user_id) {
-         console.log("no user found")
+         console.log('no user found');
          return NextResponse.json(
             { error: 'Something went wrong please try again' },
             { status: 401 }
@@ -43,11 +43,11 @@ export async function POST(req: Request) {
       }
 
       const airdrop = await prisma.airdrops.findFirst({
-         where: { user_id ,  claimed:false},
+         where: { user_id, claimed: false },
       });
 
       if (!airdrop) {
-         console.log("no airdrop")
+         console.log('no airdrop');
          return NextResponse.json(
             { error: 'Something went wrong please try again' },
             { status: 401 }
@@ -55,11 +55,8 @@ export async function POST(req: Request) {
       }
 
       if (!ethers.utils.isAddress(recipient)) {
-         console.log("address error")
-         return NextResponse.json(
-            { error: 'ADDRESS' },
-            { status: 500 }
-         );
+         console.log('address error');
+         return NextResponse.json({ error: 'ADDRESS' }, { status: 500 });
       }
 
       // initialize dev wallet
@@ -81,11 +78,13 @@ export async function POST(req: Request) {
       if (!feeData.maxFeePerGas || !feeData.maxPriorityFeePerGas) {
          throw new Error('Could not estimate gas fees');
       }
-        PROD:
-        if (usdtBalance.lt(USDT_AMOUNT)) {
-         console.log("Insufficient USDT")
-            return NextResponse.json({ error: 'Insufficient USDT' }, { status: 400 });
-        }
+      PROD: if (usdtBalance.lt(USDT_AMOUNT)) {
+         console.log('Insufficient USDT');
+         return NextResponse.json(
+            { error: 'Insufficient USDT' },
+            { status: 400 }
+         );
+      }
 
       // //   DEV:
       // if (usdtBalance.lt(MUSDC_AMOUNT)) {
@@ -96,7 +95,7 @@ export async function POST(req: Request) {
       // }
 
       if (ethBalance.lt(ETH_AMOUNT)) {
-         console.log("insufficient eth ")
+         console.log('insufficient eth ');
          return NextResponse.json({ error: 'Insufficient ETH' }, { status: 400 });
       }
 
@@ -135,10 +134,7 @@ export async function POST(req: Request) {
          },
       });
 
-
-
-
-      const link = "https://summitshare.co/cya";
+      const link = 'https://summitshare.co/cya';
 
       // Define the receipt message
       const receiptMessage = ` ${link}`;
@@ -157,7 +153,6 @@ export async function POST(req: Request) {
 
       // Perform division using the `.div()` method
       const result = USDT_AMOUNT.div(divisor);
-
 
       // Replace placeholders in the template with actual data
       htmlContent = htmlContent.replace('{{title}}', 'Airdrop claimed');

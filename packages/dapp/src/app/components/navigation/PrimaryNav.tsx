@@ -26,7 +26,7 @@ const NeutralNav: React.FC = () => {
 
    const items: { name: string; link: string }[] = [
       { name: 'Home', link: '/' },
-      { name: 'Exhibit', link:'/exhibit'},
+      { name: 'Exhibit', link: '/exhibit' },
       { name: 'Blog', link: '/blog' },
       { name: 'Support Us', link: '/donate' },
       { name: 'Insights', link: '/distribution' },
@@ -38,7 +38,7 @@ const NeutralNav: React.FC = () => {
          title: 'Pages',
          items: [
             { name: 'Home', link: '/' },
-            { name: 'Exhibit', link:'/exhibit'},
+            { name: 'Exhibit', link: '/exhibit' },
             { name: 'Blog', link: '/blog' },
             { name: 'Support Us', link: '/donate' },
             { name: 'Insights', link: '/distribution' },
@@ -112,14 +112,12 @@ const NeutralNav: React.FC = () => {
                      )}
                   </li>
                   {session.status === 'authenticated' && (
-                  <li className="group bg-gradient-to-br from-neutral-50 to-neutral-100 w-10 h-10 rounded-full flex items-center justify-center transition-all">
-                    
+                     <li className="group bg-gradient-to-br from-neutral-50 to-neutral-100 w-10 h-10 rounded-full flex items-center justify-center transition-all">
                         <Link href={'/profile'}>
                            <UserCircle className="w-8 h-8 text-neutral-600 group-hover:text-neutral-900/80 transition-all" />
                         </Link>
-                 
-                  </li>
-                      )}
+                     </li>
+                  )}
                </ul>
             </li>
             <li onClick={() => setOpenMenu(!openMenu)} className="lg:hidden">
@@ -203,11 +201,7 @@ const NeutralNav: React.FC = () => {
                <li>
                   <ConnectKitButton.Custom>
                      {({ show }) => (
-                        <Button
-                           onClick={show}
-                           size={'medium'}
-                           className="w-full"
-                        >
+                        <Button onClick={show} size={'medium'} className="w-full">
                            {!userAddress ? 'Connect Wallet' : 'Connected'}
                         </Button>
                      )}

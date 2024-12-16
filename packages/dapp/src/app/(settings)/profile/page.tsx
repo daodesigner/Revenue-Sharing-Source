@@ -17,7 +17,7 @@ export default function ProfileSettings() {
    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
    const [isDeleting, setIsDeleting] = useState(false);
    const [response, setResponse] = useState<string | null>();
-   const [status,setStatus] = useState<number>()
+   const [status, setStatus] = useState<number>();
 
    const userId = session?.user?.id || '';
    const userEmail = session?.user?.email || '';
@@ -35,8 +35,6 @@ export default function ProfileSettings() {
          return;
       }
    };
-
-
 
    useEffect(() => {
       if (sessions.status !== 'loading' && sessions.status !== 'authenticated') {
@@ -63,7 +61,7 @@ export default function ProfileSettings() {
          }
 
          if (response.status <= 299) {
-            setStatus(await response.status)
+            setStatus(await response.status);
             router.push('/account/delete-account');
          } else if (response.status > 200) {
             setResponse('Faild to delete Contact Support');
@@ -126,8 +124,8 @@ export default function ProfileSettings() {
                   <p>Sign out of your account with the button.</p>
                </div>
 
-               <Button variant={"outline"} onClick={() => handleAuthClick()} >
-                  Sign Out 
+               <Button variant={'outline'} onClick={() => handleAuthClick()}>
+                  Sign Out
                </Button>
             </div>
 
@@ -177,8 +175,10 @@ export default function ProfileSettings() {
                      <Button
                         variant={'danger'}
                         onClick={handleDeleteAccount}
-                        disabled={desableButton(status,isDeleting) }
-                        className={` ${isDeleting && "cursor-wait"} ${status === 200 && "cursor-not-allowed"}`}
+                        disabled={desableButton(status, isDeleting)}
+                        className={` ${isDeleting && 'cursor-wait'} ${
+                           status === 200 && 'cursor-not-allowed'
+                        }`}
                      >
                         {isDeleting ? 'Confirming...' : 'Confirm'}
                      </Button>

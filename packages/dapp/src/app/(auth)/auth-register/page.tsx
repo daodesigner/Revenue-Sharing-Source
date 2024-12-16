@@ -20,7 +20,7 @@ function Page() {
    });
    const [errorMessage, setErrorMessage] = useState<string>('');
    const [isLoading, setIsLoading] = useState<boolean>(false);
-   const [status,setStatus] = useState<number>()
+   const [status, setStatus] = useState<number>();
 
    // Handle form input changes
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,15 +135,16 @@ function Page() {
                         </p>
                      )}
                   </div>
-               
                </section>
 
                <section className="text-center space-y-6">
                   <Button
                      size="medium"
                      type="submit"
-                     className={`w-full ${isLoading && "cursor-wait"} ${status === 200 && "cursor-not-allowed"}`}
-                     disabled={desableButton(status,isLoading)} // Disable button when loading
+                     className={`w-full ${isLoading && 'cursor-wait'} ${
+                        status === 200 && 'cursor-not-allowed'
+                     }`}
+                     disabled={desableButton(status, isLoading)} // Disable button when loading
                   >
                      {isLoading ? 'Creating account...' : 'Create my account'}
                   </Button>

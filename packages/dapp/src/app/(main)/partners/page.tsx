@@ -30,14 +30,12 @@ const partners: Partner[] = [
 const Partners: React.FC = () => {
    return (
       <div className="flex flex-col items-center md:mx-[15%] mx-[5%]">
-        
-<div className="text-center space-y-6 mb-16">
-   <h2 className="text-3xl md:text-4xl font-bold text-neutral-900">
-      Our Partners and Supporters
-   </h2>
-   <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
-</div>
-
+         <div className="text-center space-y-6 mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900">
+               Our Partners and Supporters
+            </h2>
+            <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
+         </div>
 
          {/* Staggered Grid */}
          <div className="grid gap-6 grid-cols-3">
@@ -101,27 +99,27 @@ const Partners: React.FC = () => {
             ))}
          </div>
          <div className="  text-center space-y-8">
-<p className=" text-lg md:text-xl leading-relaxed text-neutral-700  max-w-2xl">
-  A big Thank you to our dedicated partners who have helped bring our vision to life.
-</p>
+            <p className=" text-lg md:text-xl leading-relaxed text-neutral-700  max-w-2xl">
+               A big Thank you to our dedicated partners who have helped bring our
+               vision to life.
+            </p>
 
-<Link
-   href="https://summitshare.co/blog/BkntmFS8R"
-   target="_blank"
-   rel="noopener noreferrer"
-   className="inline-flex items-center gap-2 px-6 py-3 
+            <Link
+               href="https://summitshare.co/blog/BkntmFS8R"
+               target="_blank"
+               rel="noopener noreferrer"
+               className="inline-flex items-center gap-2 px-6 py-3 
              bg-orange-500 text-white rounded-full 
              shadow-lg hover:shadow-xl
              transform transition-all duration-300 
              hover:-translate-y-1 hover:bg-orange-600"
->
-   Read more about our partners
-   <ArrowRight className="w-4 h-4" />
-</Link>
+            >
+               Read more about our partners
+               <ArrowRight className="w-4 h-4" />
+            </Link>
          </div>
       </div>
    );
 };
 
 export default Partners;
-
