@@ -151,7 +151,7 @@ export default function Home(): JSX.Element {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 auto-rows-fr">
-               {women.map((item) => (
+               {women.map((item, index) => (
                   <VideoCard
                      key={item.name}
                      item={item}
@@ -160,6 +160,7 @@ export default function Home(): JSX.Element {
                      setVideoRef={setVideoRef}
                      onMouseEnter={handleMouseEnter}
                      onMouseLeave={handleMouseLeave}
+                     priority={index < 3} // Prioritize loading for first 3 cards
                   />
                ))}
             </div>

@@ -1,12 +1,10 @@
 'use client';
-import SummitShareCanvas from '@/app/components/3DCanvas/3dCanvas';
 import DynamicCanvas from '@/app/components/3DCanvas/3dCanvas';
 import { data } from './data';
 import { Button } from '@/app/components/button/Button';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Buttons from '@/app/components/button/Butons';
 
 interface PageProps {
    params: { slug: string };
@@ -15,26 +13,29 @@ interface PageProps {
 const Page = ({ params }: PageProps) => {
    const router = useRouter();
    const [currentIndex, setCurrentIndex] = useState<number>(-1);
+   const [isImageLoading, setIsImageLoading] = useState(true);
 
-   // Initialize and find the correct figure based on URL slug
    useEffect(() => {
       const index = data.findIndex(
          (item) => item.title.toLowerCase().replace(/ /g, '-') === params.slug
       );
 
       if (index === -1) {
-         router.push('/exhibit'); // Redirect if figure not found
+         router.push('/exhibit');
          return;
       }
 
       setCurrentIndex(index);
+      // Reset image loading state when changing figures
+      setIsImageLoading(true);
    }, [params.slug, router]);
 
-   // Handle loading state
    if (currentIndex === -1) {
       return (
          <div className="w-full h-full flex items-center justify-center">
-            Loading...
+            <div className="animate-pulse text-lg font-medium text-gray-700">
+               Loading...
+            </div>
          </div>
       );
    }
@@ -43,16 +44,16 @@ const Page = ({ params }: PageProps) => {
    if (!figure) {
       return (
          <div className="w-full h-full flex items-center justify-center">
-            Figure not found
+            <div className="text-lg font-medium text-gray-700">
+               Figure not found
+            </div>
          </div>
       );
    }
 
    const handleBack = () => {
       if (currentIndex > 0) {
-         const prevSlug = data[currentIndex - 1].title
-            .toLowerCase()
-            .replace(/ /g, '-');
+         const prevSlug = data[currentIndex - 1].title.toLowerCase().replace(/ /g, '-');
          router.push(`/exhibit/${prevSlug}`);
          window.scrollTo(0, 0);
       }
@@ -60,9 +61,7 @@ const Page = ({ params }: PageProps) => {
 
    const handleNext = () => {
       if (currentIndex < data.length - 1) {
-         const nextSlug = data[currentIndex + 1].title
-            .toLowerCase()
-            .replace(/ /g, '-');
+         const nextSlug = data[currentIndex + 1].title.toLowerCase().replace(/ /g, '-');
          router.push(`/exhibit/${nextSlug}`);
          window.scrollTo(0, 0);
       }
@@ -78,12 +77,10 @@ const Page = ({ params }: PageProps) => {
             <h2>{figure.title}</h2>
             <button
                onClick={handleClose}
-               className=" "
+               className="text-neutral-900 hover:text-orange-600 hover:underline"
                aria-label="Close and return to exhibit"
             >
-               <p className="text-neutral-900 hover:text-orange-600 hover:underline">
-                  Close
-               </p>
+               Close
             </button>
          </div>
 
@@ -117,7 +114,6 @@ const Page = ({ params }: PageProps) => {
             <div className="h-1 w-24 bg-orange-500 mt-3" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
-               {/* Biography Text Section - Left on desktop, bottom on mobile */}
                <div className="order-2 md:order-1 space-y-6">
                   <ul className="space-y-4">
                      {figure.figure_details.map((desc, index) => (
@@ -131,14 +127,22 @@ const Page = ({ params }: PageProps) => {
                   ))}
                </div>
 
-               {/* Image Section - Right on desktop, top on mobile */}
                <div className="order-1 md:order-2">
                   <div className="relative md:h-[600px] h-[365px] py-4 w-full">
+                     {isImageLoading && (
+                        <div className="absolute inset-0 bg-gray-100 animate-pulse rounded-lg" />
+                     )}
                      <Image
                         src={figure.image}
                         alt={figure.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover rounded-lg"
+                        priority={true}
+                        quality={90}
+                        onLoad={() => setIsImageLoading(false)}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx0FFRUVHSIeHhUVHiIYGBUVFRUYGBUWFhoaIRwUJCoeJCQqLCwsGiYzOi0uOiouLCz/2wBDAREVFRgYGBwgHBwsLCYqLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                      />
                   </div>
                </div>
@@ -167,10 +171,10 @@ const Page = ({ params }: PageProps) => {
          </div>
 
          <div className="flex gap-2">
-            <Button onClick={() => handleBack()} variant={'outline'}>
+            <Button onClick={handleBack} variant={'outline'}>
                Previous Artifact
             </Button>
-            <Button onClick={() => handleNext()}>Next Artifact</Button>
+            <Button onClick={handleNext}>Next Artifact</Button>
          </div>
       </div>
    );
