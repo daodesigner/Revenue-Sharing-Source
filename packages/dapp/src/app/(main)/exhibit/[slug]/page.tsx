@@ -161,7 +161,7 @@ const Page = ({ params }: PageProps) => {
          </div>
 
 <div className='flex gap-2'>
-   <Button onClick={()=>handleBack()} variant={"outline"}>Priveous Artifcat</Button>
+   <Button onClick={()=>handleBack()} variant={"outline"}>Previous Artifact</Button>
    <Button onClick={()=> handleNext()}>Next Artifact</Button>
 </div>
       </div>
