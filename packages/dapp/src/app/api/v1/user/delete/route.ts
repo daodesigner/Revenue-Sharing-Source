@@ -33,10 +33,7 @@ async function sendDeletionConfirmationEmail(email: string, token: string) {
          '{{title}}',
          'Account Deletion Confirmation'
       );
-      htmlTemplate = htmlTemplate.replace(
-         '{{subtitle}}',
-         'Account Deletion'
-      );
+      htmlTemplate = htmlTemplate.replace('{{subtitle}}', 'Account Deletion');
 
       const host = process.env.HOST;
       const verificationLink = `${host}/account/delete-account/${token}`;

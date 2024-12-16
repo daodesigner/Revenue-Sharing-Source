@@ -14,7 +14,7 @@ function ResetPassword({ params }: { params: { token: string } }) {
    const [passwordError, setPasswordError] = useState(false);
    const [confirmPasswordError, setConfirmPasswordError] = useState(false);
    const [errorMessage, setErrorMessage] = useState('');
-   const [status,setStatus] = useState<number>()
+   const [status, setStatus] = useState<number>();
    const [showPassword, setShowPassword] = useState(false);
    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
    const [successMessage, setSuccessMessage] = useState('');
@@ -57,7 +57,7 @@ function ResetPassword({ params }: { params: { token: string } }) {
             // Redirect to sign in or show success message
             setSuccessMessage('Password reset successful!');
             setShowSuccessPopup(true);
-setStatus(await response.status)
+            setStatus(await response.status);
             // Delay and redirect to sign-in page
             setTimeout(() => {
                router.push('/auth-sign-in');
@@ -115,13 +115,18 @@ setStatus(await response.status)
                      <PasswordToggle />
                   </div>
                   {errorMessage && (
-               <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-            )}
+                     <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
+                  )}
                </section>
             </form>
             <section className="text-center space-y-6">
-               <Button disabled={desableButton(status,isLoading)} className={`full ${isLoading && "cursor-wait"} ${status === 200 && "cursor-not-allowed"}`}
- onClick={resetPassword}>
+               <Button
+                  disabled={desableButton(status, isLoading)}
+                  className={`full ${isLoading && 'cursor-wait'} ${
+                     status === 200 && 'cursor-not-allowed'
+                  }`}
+                  onClick={resetPassword}
+               >
                   Reset Password
                </Button>
 
@@ -132,7 +137,6 @@ setStatus(await response.status)
                   </a>
                </p>
             </section>
-           
          </section>
       </div>
    );

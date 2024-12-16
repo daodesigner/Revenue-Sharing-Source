@@ -8,21 +8,23 @@ import {
 } from '@apollo/experimental-nextjs-app-support';
 import { onError } from '@apollo/client/link/error';
 
-const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
-   if (graphQLErrors) {
-      graphQLErrors.forEach(({ message, locations, path }) => {
-         console.error(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-         );
-      });
-   }
+const errorLink = onError(
+   ({ graphQLErrors, networkError, operation, forward }) => {
+      if (graphQLErrors) {
+         graphQLErrors.forEach(({ message, locations, path }) => {
+            console.error(
+               `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+            );
+         });
+      }
 
-   if (networkError) {
-      console.error(`[Network error]: ${networkError}`);
-   }
+      if (networkError) {
+         console.error(`[Network error]: ${networkError}`);
+      }
 
-   return forward(operation);
-});
+      return forward(operation);
+   }
+);
 
 function makeClient() {
    const httpLink = new HttpLink({
@@ -52,7 +54,7 @@ function makeClient() {
             fields: {
                totalMinted: {
                   read(existing) {
-                     return existing || "0";
+                     return existing || '0';
                   },
                },
                exhibitDetails: {

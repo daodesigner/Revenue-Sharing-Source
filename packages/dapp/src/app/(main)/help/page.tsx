@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import { ChevronRight, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -45,7 +45,8 @@ const steps = [
             <div className="mt-4 p-3 bg-orange-50 rounded-lg">
                <strong className="text-orange-700">Mobile Users:</strong>
                <ul className="mt-2 space-y-1">
-                  <li>• Android: We recommend using{' '}
+                  <li>
+                     • Android: We recommend using{' '}
                      <a
                         href="https://play.google.com/store/apps/details?id=org.toshi"
                         target="_blank"
@@ -56,7 +57,8 @@ const steps = [
                      </a>{' '}
                      for the best experience
                   </li>
-                  <li>• iOS: {' '}
+                  <li>
+                     • iOS:{' '}
                      <a
                         href="https://apps.apple.com/us/app/rainbow-ethereum-wallet/id1457119021"
                         target="_blank"
@@ -85,7 +87,8 @@ const steps = [
                Click on the <strong>&#39;Connect Wallet&#39;</strong> button on
                the SummitShare platform to link your wallet. Ensure that your
                wallet is <strong>unlocked</strong> and you are connected to the{' '}
-               <strong>correct network</strong> (e.g., Optimism Mainnet). Learn more about{' '}
+               <strong>correct network</strong> (e.g., Optimism Mainnet). Learn
+               more about{' '}
                <a
                   href="https://support.metamask.io/hc/en-us/articles/360015489871-What-are-gas-fees-"
                   target="_blank"
@@ -93,7 +96,8 @@ const steps = [
                   className="text-orange-600 hover:underline"
                >
                   network fees
-               </a>.
+               </a>
+               .
             </div>
          </>
       ),
@@ -155,7 +159,8 @@ const steps = [
             <div className="p-6 rounded-lg bg-gradient-to-r from-orange-50 via-orange-50/70 to-white border border-orange-100">
                <div className="space-y-4">
                   <p className="text-lg font-medium text-orange-800">
-                     If you experience any challenges during the process, our support team is here to help.
+                     If you experience any challenges during the process, our
+                     support team is here to help.
                   </p>
                   <p className="text-orange-700">
                      Contact us at:{' '}
@@ -167,11 +172,16 @@ const steps = [
                      </a>
                   </p>
                   <div className="mt-4 bg-white/80 p-4 rounded-lg shadow-sm">
-                     <p className="font-medium text-orange-800 mb-2">Please include:</p>
+                     <p className="font-medium text-orange-800 mb-2">
+                        Please include:
+                     </p>
                      <ul className="list-disc pl-5 space-y-2 text-gray-700">
                         <li>Your registered email address</li>
                         <li>Your wallet address</li>
-                        <li>A detailed description of the issue you&apos;re experiencing</li>
+                        <li>
+                           A detailed description of the issue you&apos;re
+                           experiencing
+                        </li>
                      </ul>
                   </div>
                </div>

@@ -6,7 +6,9 @@ import { signOut } from 'next-auth/react';
 
 function Page({ params }: { params: { slug: string } }) {
    const router = useRouter();
-   const [verificationStatus, setVerificationStatus] = useState<number | null>(null);
+   const [verificationStatus, setVerificationStatus] = useState<number | null>(
+      null
+   );
    const [verificationMessage, setVerificationMessage] = useState<string>('');
    const hasFetched = useRef(false);
    const [loading, setLoading] = useState<boolean>(true);

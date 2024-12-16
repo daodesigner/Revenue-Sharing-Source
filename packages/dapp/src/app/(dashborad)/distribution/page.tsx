@@ -74,7 +74,7 @@ const InsightsPage = () => {
          goal: 'Physical Exhibit/Launch',
          tooltip:
             'Live exhibition event in Lusaka, Zambia featuring physical artifacts and community engagement',
-         status: 'yellow',
+         status: 'green',
          transaction_id: 'Transaction ID 2',
       },
       {
@@ -83,7 +83,7 @@ const InsightsPage = () => {
          goal: 'Funds distributed into community Escrow',
          tooltip:
             'Transfer of collected funds to a secure escrow contract for community benefit (80%) and administrative costs (20%)',
-         status: 'orange',
+         status: 'yellow',
          transaction_id: 'Transaction ID 3',
       },
       {

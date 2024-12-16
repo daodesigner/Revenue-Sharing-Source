@@ -33,7 +33,6 @@ const Note = async ({ params }: { params: { id: string } }) => {
                className="space-y-6"
                dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
-          
          </div>
       );
    } catch (error) {

@@ -85,7 +85,7 @@ export async function GET(req: Request, res: NextResponse) {
       });
 
       if (!verificationRecord) {
-         console.log(`wrong token ${token}`)
+         console.log(`wrong token ${token}`);
          return NextResponse.json(
             {
                message:

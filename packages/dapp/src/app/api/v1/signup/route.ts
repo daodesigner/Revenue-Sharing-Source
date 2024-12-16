@@ -22,8 +22,6 @@ async function createSendTokens(user: users, email: string) {
       const token = crypto.randomUUID(); // Generate a token
       const now = new Date();
 
-
-      
       const expires = new Date(now.getTime() + 60 * 60 * 1000); // adds 1 hour to the current time
 
       const nowISO = now.toISOString();

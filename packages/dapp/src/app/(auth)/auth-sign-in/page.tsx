@@ -15,7 +15,7 @@ function Page() {
    const [isVisible, setIsVisible] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
    const { inputType, PasswordToggle } = usePasswordVisibility();
-   const [status,setStatus] = useState<number>()
+   const [status, setStatus] = useState<number>();
    const router = useRouter();
 
    const onSubmit = useCallback(async () => {
@@ -39,7 +39,7 @@ function Page() {
          } else {
             // Successful login
             router.push('/');
-            setStatus(await response.status)
+            setStatus(await response.status);
          }
       } else {
          setErrorMessage('An error occurred. Please try again.');
@@ -100,8 +100,10 @@ function Page() {
                <Button
                   size="medium"
                   onClick={onSubmit}
-                  className={`w-full ${isLoading && "cursor-wait"} ${status === 200 && "cursor-not-allowed"}`}
-                  disabled={desableButton(status,isLoading)}
+                  className={`w-full ${isLoading && 'cursor-wait'} ${
+                     status === 200 && 'cursor-not-allowed'
+                  }`}
+                  disabled={desableButton(status, isLoading)}
                >
                   {isLoading ? 'Signing in...' : 'Sign into my account'}
                </Button>

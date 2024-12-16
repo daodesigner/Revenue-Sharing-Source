@@ -1,101 +1,153 @@
-import React, { ReactNode, useState, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import {
    OrbitControls,
    AdaptiveDpr,
    AdaptiveEvents,
    BakeShadows,
+   Preload,
+   useProgress,
+   Html,
 } from '@react-three/drei';
+import * as THREE from 'three';
 
-interface SummitShareCanvasProps {
-   children: ReactNode;
-   shadows?: boolean;
+// Declare global type for the renderer
+declare global {
+   interface Window {
+      __THREEJS_RENDERER__?: THREE.WebGLRenderer;
+   }
 }
 
-const SummitShareCanvas: React.FC<SummitShareCanvasProps> = ({
-   children,
-   shadows = true,
-}) => {
-   const [isLoading, setIsLoading] = useState(true);
+// Loading indicator component with progress
+const ModelLoader = () => {
+   const { progress } = useProgress();
+   return (
+      <Html center>
+         <div className="flex flex-col items-center justify-center">
+            <div className="text-lg font-medium text-gray-700">
+               Loading Model... {progress.toFixed(0)}%
+            </div>
+            <div className="w-32 h-1 bg-gray-200 rounded-full mt-2">
+               <div
+                  className="h-full bg-orange-500 rounded-full transition-all duration-300"
+                  style={{ width: `${progress}%` }}
+               />
+            </div>
+         </div>
+      </Html>
+   );
+};
+
+interface DynamicCanvasProps {
+   children: React.ReactNode;
+}
+
+const DynamicCanvas: React.FC<DynamicCanvasProps> = ({ children }) => {
+   const [isVisible, setIsVisible] = useState(false);
 
    useEffect(() => {
-      // Simulate a loading state for 4.5 seconds
-      const timer = setTimeout(() => {
-         setIsLoading(false);
-      }, 4500);
+      const observer = new IntersectionObserver(
+         ([entry]) => {
+            setIsVisible(entry.isIntersecting);
+         },
+         {
+            root: null,
+            rootMargin: '100px',
+            threshold: 0.1,
+         }
+      );
 
-      return () => clearTimeout(timer); // Clean up the timer when the component unmounts
+      const element = document.getElementById('canvas-container');
+      if (element) {
+         observer.observe(element);
+      }
+
+      return () => {
+         if (element) {
+            observer.unobserve(element);
+         }
+      };
    }, []);
 
-   if (isLoading) {
-      // Render a loading placeholder
-      return (
-         <div className="h-[360px] w-full flex items-center justify-center bg-primary-50 rounded-[8px]">
-            <p className="text-2xl font-bold text-gray-700 animate-pulse">
-               Loading...
-            </p>
-         </div>
-      );
-   }
+   // Memory cleanup
+   useEffect(() => {
+      return () => {
+         if (typeof window !== 'undefined' && window.__THREEJS_RENDERER__) {
+            window.__THREEJS_RENDERER__.dispose();
+            THREE.Cache.clear();
+            delete window.__THREEJS_RENDERER__;
+         }
+      };
+   }, []);
 
    return (
-      <div className="bg-primary-50 from-orange-600 to-orange-400 h-[360px] w-full rounded-[8px]">
-         <Canvas
-            frameloop="demand"
-            shadows={shadows}
-            camera={{
-               position: [0, 0, 10],
-               fov: 45,
-               near: 0.1,
-               far: 1000,
-            }}
-            gl={{
-               preserveDrawingBuffer: true,
-               antialias: true,
-               alpha: false,
-               stencil: false,
-               depth: true,
-               powerPreference: 'high-performance',
-            }}
-            dpr={[1, 2]}
-            performance={{ min: 0.5 }}
-         >
-            <color attach="background" args={['#F5F5F1']} />
+      <div
+         id="canvas-container"
+         className="h-[360px] w-full rounded-[8px] bg-primary-50"
+      >
+         {isVisible && (
+            <Canvas
+               frameloop="demand"
+               shadows
+               camera={{
+                  position: [0, 0, 10],
+                  fov: 45,
+                  near: 0.1,
+                  far: 200,
+               }}
+               gl={{
+                  antialias: true,
+                  alpha: false,
+                  stencil: false,
+                  depth: true,
+                  powerPreference: 'high-performance',
+                  logarithmicDepthBuffer: true,
+               }}
+               onCreated={({ gl }) => {
+                  if (typeof window !== 'undefined') {
+                     window.__THREEJS_RENDERER__ = gl;
+                  }
+               }}
+               dpr={[1, 1.5]}
+               performance={{ min: 0.5 }}
+            >
+               <color attach="background" args={['#F5F5F1']} />
 
-            {/* Scene-wide optimizations */}
-            <AdaptiveDpr pixelated />
-            <AdaptiveEvents />
-            {shadows && <BakeShadows />}
+               <AdaptiveDpr pixelated />
+               <AdaptiveEvents />
+               <BakeShadows />
 
-            {/* Lights */}
-            <directionalLight
-               intensity={5}
-               position={[5, 10, 5]}
-               shadow-mapSize-width={1024}
-               shadow-mapSize-height={1024}
-               shadow-camera-far={20}
-               shadow-camera-near={0.1}
-            />
-            <ambientLight intensity={5} />
+               <directionalLight
+                  intensity={5}
+                  position={[5, 10, 5]}
+                  shadow-mapSize-width={512}
+                  shadow-mapSize-height={512}
+                  shadow-camera-far={20}
+                  shadow-camera-near={0.1}
+                  castShadow
+               />
+               <ambientLight intensity={5} />
 
-            {/* Scene content */}
-            {children}
+               <Suspense fallback={<ModelLoader />}>
+                  {children}
+                  <Preload all />
+               </Suspense>
 
-            {/* Controls */}
-            <OrbitControls
-               enableZoom={true}
-               enablePan={false}
-               minDistance={7}
-               maxDistance={20}
-               target={[0, 0, 0]}
-               enableDamping={true}
-               dampingFactor={0.05}
-               rotateSpeed={0.5}
-               zoomSpeed={0.5}
-            />
-         </Canvas>
+               <OrbitControls
+                  enableZoom={true}
+                  enablePan={false}
+                  minDistance={7}
+                  maxDistance={20}
+                  target={[0, 0, 0]}
+                  enableDamping={true}
+                  dampingFactor={0.05}
+                  rotateSpeed={0.5}
+                  zoomSpeed={0.5}
+               />
+            </Canvas>
+         )}
       </div>
    );
 };
 
-export default SummitShareCanvas;
+export default DynamicCanvas;

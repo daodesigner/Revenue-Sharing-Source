@@ -93,13 +93,13 @@ export const validatePageAccess = async (
    // Get user_id from session
    const user_id = getUserIdFromSession(session);
 
-   // // Check for missing eventId
-   // if (!user_id) {
-   //    console.warn('User ID is missing. Redirecting.');
-   //    router.push('/auth-sign-in');
-   //    isLoading = false;
-   //    return { isLoading: false, hasAccess: false };
-   // }
+   // Check for missing userId
+   if (!user_id) {
+      console.warn('User ID is missing. Redirecting.');
+      router.push('/auth-sign-in');
+      isLoading = false;
+      return { isLoading: false, hasAccess: false };
+   }
 
    console.log('Validating page access with:', {
       userAddress,

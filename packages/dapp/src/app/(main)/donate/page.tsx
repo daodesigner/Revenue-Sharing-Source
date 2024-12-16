@@ -73,19 +73,22 @@ function Page() {
       <div className="space-y-10 mx-6 lg:mx-[15%] my-40">
          <header className="text-left space-y-2">
             <div className="space-y-4">
-         <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 tracking-tight relative 
+               <h2
+                  className="text-3xl md:text-4xl font-bold text-neutral-900 tracking-tight relative 
                         after:content-[''] after:block after:w-24 after:h-1 
-                        after:bg-orange-500 after:mt-4">
-           Support The Project
-         </h2>
-         <p className=" text-lg md:text-xl leading-relaxed text-neutral-700  max-w-2xl">
-         We strive to create meaningful change and experiences.
-               Your generous contribution fuels our mission. By donating, you
-               become an essential part of our creative ecosystem, enabling us to
-               continue pushing boundaries and inspiring change.         </p>
-       </div>
-         </header> 
-     
+                        after:bg-orange-500 after:mt-4"
+               >
+                  Support The Project
+               </h2>
+               <p className=" text-lg md:text-xl leading-relaxed text-neutral-700  max-w-2xl">
+                  We strive to create meaningful change and experiences. Your
+                  generous contribution fuels our mission. By donating, you become
+                  an essential part of our creative ecosystem, enabling us to
+                  continue pushing boundaries and inspiring change.{' '}
+               </p>
+            </div>
+         </header>
+
          <div className="md:grid md:grid-cols-2 gap-4">
             <section className="space-y-6 md:flex md:flex-col md:justify-between md:h-full">
                <div className="space-y-6">
