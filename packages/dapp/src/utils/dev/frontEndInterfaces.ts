@@ -246,6 +246,15 @@ export interface ObjectDescription {
    figure_references: string[][];
 }
 
+export interface WomanData {
+   name: string;
+   image: string;
+   video: string;
+   link: string;
+   artifact: string;
+}
+
+
 // Help pages steps
 // Define an interface for the step
 export interface Step {
