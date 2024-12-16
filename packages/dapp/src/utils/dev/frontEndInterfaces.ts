@@ -235,7 +235,7 @@ export interface createTicketProps {
 // exhibit details slug
 export interface ObjectDescription {
    title: string;
-   image:string;
+   image: string;
    object_URL?: string | ReactNode;
    object_name: string;
    object_address: string;
@@ -253,7 +253,6 @@ export interface WomanData {
    link: string;
    artifact: string;
 }
-
 
 // Help pages steps
 // Define an interface for the step
