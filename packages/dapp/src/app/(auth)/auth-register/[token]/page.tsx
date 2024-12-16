@@ -2,14 +2,10 @@
 import { desableButton } from '@/app/(test)/functions/disable';
 import { Button } from '@/app/components/button/Button';
 import { TextInput } from '@/app/components/inputs/TextInput';
-import { TableRow } from '@/components/ui/table';
 import { usePasswordVisibility } from '@/utils/methods/auth/usePasswordVisibility';
-import { stat } from 'fs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { resolve } from 'path';
 import React, { useState } from 'react';
-import { set } from 'react-hook-form';
 
 function Page({ params }: { params: { token: string } }) {
    const router = useRouter();
