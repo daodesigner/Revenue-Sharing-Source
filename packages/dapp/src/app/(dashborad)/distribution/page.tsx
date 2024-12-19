@@ -103,6 +103,14 @@ const InsightsPage = () => {
          status: 'orange',
          transaction_id: 'Transaction ID 5',
       },
+      {
+         id_no: 6,
+         date: 'TBA',
+         goal: 'Implementation of Community Funding Proposal',
+         tooltip: 'The IRL stage which involves the actual implementation of community voted proposal + Data collection',
+         status: 'orange',
+         transaction_id: 'Transaction ID 5',
+      },
    ];
 
    return (
