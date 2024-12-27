@@ -16,6 +16,7 @@ const nextConfig = {
          's3.tebi.io',
          'summitshare3.s3.eu-north-1.amazonaws.com',
          'optimistic.etherscan.io',
+         'hackmd.io/_uploads',
       ],
    },
    env: {
