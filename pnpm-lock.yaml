@@ -216,9 +216,6 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
-      install:
-        specifier: ^0.13.0
-        version: 0.13.0
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
@@ -234,9 +231,6 @@ importers:
       nodemailer:
         specifier: ^6.9.7
         version: 6.9.16
-      npm:
-        specifier: ^11.0.0
-        version: 11.0.0
       pino-pretty:
         specifier: ^11.2.1
         version: 11.3.0
@@ -360,7 +354,7 @@ importers:
     dependencies:
       '@graphprotocol/graph-cli':
         specifier: 0.60.0
-        version: 0.60.0(@types/node@22.10.2)(bufferutil@4.0.8)(encoding@0.1.13)(node-fetch@2.7.0(encoding@0.1.13))(typescript@5.6.3)(utf-8-validate@5.0.10)
+        version: 0.60.0(@types/node@22.10.2)(bufferutil@4.0.8)(encoding@0.1.13)(node-fetch@3.3.2)(typescript@5.6.3)(utf-8-validate@5.0.10)
       '@graphprotocol/graph-ts':
         specifier: 0.30.0
         version: 0.30.0
@@ -373,7 +367,7 @@ importers:
     dependencies:
       '@graphprotocol/graph-cli':
         specifier: 0.71.2
-        version: 0.71.2(@types/node@22.10.2)(bufferutil@4.0.8)(encoding@0.1.13)(node-fetch@3.3.2)(typescript@5.6.3)(utf-8-validate@5.0.10)
+        version: 0.71.2(@types/node@22.10.2)(bufferutil@4.0.8)(encoding@0.1.13)(node-fetch@2.7.0(encoding@0.1.13))(typescript@5.6.3)(utf-8-validate@5.0.10)
       '@graphprotocol/graph-ts':
         specifier: 0.32.0
         version: 0.32.0
@@ -6530,10 +6524,6 @@ packages:
     resolution: {integrity: sha512-M1WuAmb7pn9zdFRtQYk26ZBoY043Sse0wVDdk4Bppr+JOXyQYybdtvK+l9wUibhtjdjvtoiNy8tk+EgsYIUqKg==}
     engines: {node: '>=12.0.0'}
 
-  install@0.13.0:
-    resolution: {integrity: sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==}
-    engines: {node: '>= 0.10'}
-
   interface-datastore@6.1.1:
     resolution: {integrity: sha512-AmCS+9CT34pp2u0QQVXjKztkuq3y5T+BIciuiHDDtDZucZD8VudosnSdUyXJV6IsRkN5jc4RFDhCk1O6Q3Gxjg==}
 
@@ -8087,78 +8077,6 @@ packages:
   npm-run-path@5.3.0:
     resolution: {integrity: sha512-ppwTtiJZq0O/ai0z7yfudtBpWIoxM8yE6nHi1X47eFR2EWORqfbu6CnPlNsjeN683eT0qG6H/Pyf9fCcvjnnnQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-
-  npm@11.0.0:
-    resolution: {integrity: sha512-Ed/ylWXSKXx058WUqXYlgb3pafCqXL5vWzZEvwCKFsBl7OYQlNn/u4ESW+ON+OG6Q+uCRLPTDGHreX6aJEDj7A==}
-    engines: {node: ^20.17.0 || >=22.9.0}
-    hasBin: true
-    bundledDependencies:
-      - '@isaacs/string-locale-compare'
-      - '@npmcli/arborist'
-      - '@npmcli/config'
-      - '@npmcli/fs'
-      - '@npmcli/map-workspaces'
-      - '@npmcli/package-json'
-      - '@npmcli/promise-spawn'
-      - '@npmcli/redact'
-      - '@npmcli/run-script'
-      - '@sigstore/tuf'
-      - abbrev
-      - archy
-      - cacache
-      - chalk
-      - ci-info
-      - cli-columns
-      - fastest-levenshtein
-      - fs-minipass
-      - glob
-      - graceful-fs
-      - hosted-git-info
-      - ini
-      - init-package-json
-      - is-cidr
-      - json-parse-even-better-errors
-      - libnpmaccess
-      - libnpmdiff
-      - libnpmexec
-      - libnpmfund
-      - libnpmorg
-      - libnpmpack
-      - libnpmpublish
-      - libnpmsearch
-      - libnpmteam
-      - libnpmversion
-      - make-fetch-happen
-      - minimatch
-      - minipass
-      - minipass-pipeline
-      - ms
-      - node-gyp
-      - nopt
-      - normalize-package-data
-      - npm-audit-report
-      - npm-install-checks
-      - npm-package-arg
-      - npm-pick-manifest
-      - npm-profile
-      - npm-registry-fetch
-      - npm-user-validate
-      - p-map
-      - pacote
-      - parse-conflict-json
-      - proc-log
-      - qrcode-terminal
-      - read
-      - semver
-      - spdx-expression-parse
-      - ssri
-      - supports-color
-      - tar
-      - text-table
-      - tiny-relative-date
-      - treeverse
-      - validate-npm-package-name
-      - which
 
   npmlog@5.0.1:
     resolution: {integrity: sha512-AqZtDUWOMKs1G/8lwylVjrdYgqA4d9nu8hc+0gzRxlDb1I10+FHBGMXs6aiQHFdCUUlqH99MUMuLfzWDNDtfxw==}
@@ -11053,10 +10971,10 @@ snapshots:
       '@babel/helpers': 7.26.0
       '@babel/parser': 7.26.2
       '@babel/template': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
       '@babel/types': 7.26.0
       convert-source-map: 2.0.0
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -11077,7 +10995,7 @@ snapshots:
 
   '@babel/helper-builder-binary-assignment-operator-visitor@7.25.9':
     dependencies:
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
       '@babel/types': 7.26.0
     transitivePeerDependencies:
       - supports-color
@@ -11098,7 +11016,7 @@ snapshots:
       '@babel/helper-optimise-call-expression': 7.25.9
       '@babel/helper-replace-supers': 7.25.9(@babel/core@7.26.0)
       '@babel/helper-skip-transparent-expression-wrappers': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
@@ -11115,7 +11033,7 @@ snapshots:
       '@babel/core': 7.26.0
       '@babel/helper-compilation-targets': 7.25.9
       '@babel/helper-plugin-utils': 7.25.9
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       lodash.debounce: 4.0.8
       resolve: 1.22.8
     transitivePeerDependencies:
@@ -11123,14 +11041,7 @@ snapshots:
 
   '@babel/helper-member-expression-to-functions@7.25.9':
     dependencies:
-      '@babel/traverse': 7.25.9
-      '@babel/types': 7.26.0
-    transitivePeerDependencies:
-      - supports-color
-
-  '@babel/helper-module-imports@7.25.9':
-    dependencies:
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
       '@babel/types': 7.26.0
     transitivePeerDependencies:
       - supports-color
@@ -11145,9 +11056,9 @@ snapshots:
   '@babel/helper-module-transforms@7.26.0(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
-      '@babel/helper-module-imports': 7.25.9
+      '@babel/helper-module-imports': 7.25.9(supports-color@5.5.0)
       '@babel/helper-validator-identifier': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -11162,7 +11073,7 @@ snapshots:
       '@babel/core': 7.26.0
       '@babel/helper-annotate-as-pure': 7.25.9
       '@babel/helper-wrap-function': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -11171,20 +11082,20 @@ snapshots:
       '@babel/core': 7.26.0
       '@babel/helper-member-expression-to-functions': 7.25.9
       '@babel/helper-optimise-call-expression': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
   '@babel/helper-simple-access@7.25.9':
     dependencies:
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
       '@babel/types': 7.26.0
     transitivePeerDependencies:
       - supports-color
 
   '@babel/helper-skip-transparent-expression-wrappers@7.25.9':
     dependencies:
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
       '@babel/types': 7.26.0
     transitivePeerDependencies:
       - supports-color
@@ -11198,7 +11109,7 @@ snapshots:
   '@babel/helper-wrap-function@7.25.9':
     dependencies:
       '@babel/template': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
       '@babel/types': 7.26.0
     transitivePeerDependencies:
       - supports-color
@@ -11216,7 +11127,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -11243,7 +11154,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -11409,14 +11320,14 @@ snapshots:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
       '@babel/helper-remap-async-to-generator': 7.25.9(@babel/core@7.26.0)
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
   '@babel/plugin-transform-async-to-generator@7.25.9(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
-      '@babel/helper-module-imports': 7.25.9
+      '@babel/helper-module-imports': 7.25.9(supports-color@5.5.0)
       '@babel/helper-plugin-utils': 7.25.9
       '@babel/helper-remap-async-to-generator': 7.25.9(@babel/core@7.26.0)
     transitivePeerDependencies:
@@ -11455,7 +11366,7 @@ snapshots:
       '@babel/helper-compilation-targets': 7.25.9
       '@babel/helper-plugin-utils': 7.25.9
       '@babel/helper-replace-supers': 7.25.9(@babel/core@7.26.0)
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -11525,7 +11436,7 @@ snapshots:
       '@babel/core': 7.26.0
       '@babel/helper-compilation-targets': 7.25.9
       '@babel/helper-plugin-utils': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -11572,7 +11483,7 @@ snapshots:
       '@babel/helper-module-transforms': 7.26.0(@babel/core@7.26.0)
       '@babel/helper-plugin-utils': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -11679,7 +11590,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-annotate-as-pure': 7.25.9
-      '@babel/helper-module-imports': 7.25.9
+      '@babel/helper-module-imports': 7.25.9(supports-color@5.5.0)
       '@babel/helper-plugin-utils': 7.25.9
       '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.26.0)
       '@babel/types': 7.26.0
@@ -11706,7 +11617,7 @@ snapshots:
   '@babel/plugin-transform-runtime@7.25.9(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
-      '@babel/helper-module-imports': 7.25.9
+      '@babel/helper-module-imports': 7.25.9(supports-color@5.5.0)
       '@babel/helper-plugin-utils': 7.25.9
       babel-plugin-polyfill-corejs2: 0.4.12(@babel/core@7.26.0)
       babel-plugin-polyfill-corejs3: 0.10.6(@babel/core@7.26.0)
@@ -11896,18 +11807,6 @@ snapshots:
       '@babel/parser': 7.26.2
       '@babel/types': 7.26.0
 
-  '@babel/traverse@7.25.9':
-    dependencies:
-      '@babel/code-frame': 7.26.2
-      '@babel/generator': 7.26.2
-      '@babel/parser': 7.26.2
-      '@babel/template': 7.25.9
-      '@babel/types': 7.26.0
-      debug: 4.3.7(supports-color@8.1.1)
-      globals: 11.12.0
-    transitivePeerDependencies:
-      - supports-color
-
   '@babel/traverse@7.25.9(supports-color@5.5.0)':
     dependencies:
       '@babel/code-frame': 7.26.2
@@ -11959,7 +11858,7 @@ snapshots:
 
   '@emotion/babel-plugin@11.13.5':
     dependencies:
-      '@babel/helper-module-imports': 7.25.9
+      '@babel/helper-module-imports': 7.25.9(supports-color@5.5.0)
       '@babel/runtime': 7.26.0
       '@emotion/hash': 0.9.2
       '@emotion/memoize': 0.9.0
@@ -12062,7 +11961,7 @@ snapshots:
   '@eslint/eslintrc@2.1.4':
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       espree: 9.6.1
       globals: 13.24.0
       ignore: 5.3.2
@@ -12416,7 +12315,7 @@ snapshots:
       ndarray-lanczos: 0.1.2
       ndarray-pixels: 1.0.0
 
-  '@graphprotocol/graph-cli@0.60.0(@types/node@22.10.2)(bufferutil@4.0.8)(encoding@0.1.13)(node-fetch@2.7.0(encoding@0.1.13))(typescript@5.6.3)(utf-8-validate@5.0.10)':
+  '@graphprotocol/graph-cli@0.60.0(@types/node@22.10.2)(bufferutil@4.0.8)(encoding@0.1.13)(node-fetch@3.3.2)(typescript@5.6.3)(utf-8-validate@5.0.10)':
     dependencies:
       '@float-capital/float-subgraph-uncrashable': 0.0.0-internal-testing.5
       '@oclif/core': 2.8.6(@types/node@22.10.2)(typescript@5.6.3)
@@ -12435,11 +12334,51 @@ snapshots:
       gluegun: 5.1.2(debug@4.3.4)
       graphql: 15.5.0
       immutable: 4.2.1
-      ipfs-http-client: 55.0.0(encoding@0.1.13)(node-fetch@2.7.0(encoding@0.1.13))
+      ipfs-http-client: 55.0.0(encoding@0.1.13)(node-fetch@3.3.2)
       jayson: 4.0.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       js-yaml: 3.14.1
       prettier: 1.19.1
       request: 2.88.2
+      semver: 7.4.0
+      sync-request: 6.1.0
+      tmp-promise: 3.0.3
+      web3-eth-abi: 1.7.0
+      which: 2.0.2
+      yaml: 1.10.2
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
+      - '@types/node'
+      - bufferutil
+      - encoding
+      - node-fetch
+      - supports-color
+      - typescript
+      - utf-8-validate
+
+  '@graphprotocol/graph-cli@0.71.2(@types/node@22.10.2)(bufferutil@4.0.8)(encoding@0.1.13)(node-fetch@2.7.0(encoding@0.1.13))(typescript@5.6.3)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@float-capital/float-subgraph-uncrashable': 0.0.0-internal-testing.5
+      '@oclif/core': 2.8.6(@types/node@22.10.2)(typescript@5.6.3)
+      '@oclif/plugin-autocomplete': 2.3.10(@types/node@22.10.2)(typescript@5.6.3)
+      '@oclif/plugin-not-found': 2.4.3(@types/node@22.10.2)(typescript@5.6.3)
+      '@whatwg-node/fetch': 0.8.8
+      assemblyscript: 0.19.23
+      binary-install-raw: 0.0.13(debug@4.3.4)
+      chalk: 3.0.0
+      chokidar: 3.5.3
+      debug: 4.3.4(supports-color@8.1.1)
+      docker-compose: 0.23.19
+      dockerode: 2.5.8
+      fs-extra: 9.1.0
+      glob: 9.3.5
+      gluegun: 5.1.6(debug@4.3.4)
+      graphql: 15.5.0
+      immutable: 4.2.1
+      ipfs-http-client: 55.0.0(encoding@0.1.13)(node-fetch@2.7.0(encoding@0.1.13))
+      jayson: 4.0.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      js-yaml: 3.14.1
+      prettier: 3.0.3
       semver: 7.4.0
       sync-request: 6.1.0
       tmp-promise: 3.0.3
@@ -12549,7 +12488,7 @@ snapshots:
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
       '@humanwhocodes/object-schema': 2.0.3
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -12876,7 +12815,7 @@ snapshots:
       bufferutil: 4.0.8
       cross-fetch: 4.0.0(encoding@0.1.13)
       date-fns: 2.30.0
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       eciesjs: 0.4.12
       eventemitter2: 6.4.9
       readable-stream: 3.6.2
@@ -12903,7 +12842,7 @@ snapshots:
       '@metamask/sdk-install-modal-web': 0.30.0(i18next@23.11.5)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.2(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.12)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)
       bowser: 2.11.0
       cross-fetch: 4.0.0(encoding@0.1.13)
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       eciesjs: 0.4.12
       eth-rpc-errors: 4.0.3
       eventemitter2: 6.4.9
@@ -12933,7 +12872,7 @@ snapshots:
     dependencies:
       '@ethereumjs/tx': 4.2.0
       '@types/debug': 4.1.12
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       semver: 7.6.3
       superstruct: 1.0.4
     transitivePeerDependencies:
@@ -12946,7 +12885,7 @@ snapshots:
       '@noble/hashes': 1.5.0
       '@scure/base': 1.1.9
       '@types/debug': 4.1.12
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       pony-cause: 2.1.11
       semver: 7.6.3
       uuid: 9.0.1
@@ -12960,7 +12899,7 @@ snapshots:
       '@noble/hashes': 1.5.0
       '@scure/base': 1.1.9
       '@types/debug': 4.1.12
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       pony-cause: 2.1.11
       semver: 7.6.3
       uuid: 9.0.1
@@ -13149,7 +13088,7 @@ snapshots:
 
   '@nomicfoundation/hardhat-ethers@3.0.8(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(hardhat@2.22.16(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))(typescript@5.6.3)(utf-8-validate@5.0.10))':
     dependencies:
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       ethers: 6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       hardhat: 2.22.16(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))(typescript@5.6.3)(utf-8-validate@5.0.10)
       lodash.isequal: 4.5.0
@@ -13186,7 +13125,7 @@ snapshots:
       '@ethersproject/abi': 5.7.0
       '@ethersproject/address': 5.7.0
       cbor: 8.1.0
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       hardhat: 2.22.16(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))(typescript@5.6.3)(utf-8-validate@5.0.10)
       lodash.clonedeep: 4.5.0
       picocolors: 1.1.1
@@ -13677,7 +13616,7 @@ snapshots:
       '@openzeppelin/defender-sdk-network-client': 1.15.2(debug@4.3.7)(encoding@0.1.13)
       '@openzeppelin/upgrades-core': 1.40.0
       chalk: 4.1.2
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       ethereumjs-util: 7.1.5
       ethers: 6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       hardhat: 2.22.16(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))(typescript@5.6.3)(utf-8-validate@5.0.10)
@@ -13695,7 +13634,7 @@ snapshots:
       cbor: 9.0.2
       chalk: 4.1.2
       compare-versions: 6.1.1
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       ethereumjs-util: 7.1.5
       minimatch: 9.0.5
       minimist: 1.2.8
@@ -15248,7 +15187,7 @@ snapshots:
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.6.3)
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       eslint: 8.57.1
     optionalDependencies:
       typescript: 5.6.3
@@ -15269,7 +15208,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 8.15.0(typescript@5.6.3)
       '@typescript-eslint/utils': 8.15.0(eslint@8.57.1)(typescript@5.6.3)
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       eslint: 8.57.1
       ts-api-utils: 1.4.0(typescript@5.6.3)
     optionalDependencies:
@@ -15285,7 +15224,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/visitor-keys': 5.62.0
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.6.3
@@ -15299,7 +15238,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.15.0
       '@typescript-eslint/visitor-keys': 8.15.0
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       fast-glob: 3.3.2
       is-glob: 4.0.3
       minimatch: 9.0.5
@@ -15861,7 +15800,7 @@ snapshots:
 
   agent-base@6.0.2:
     dependencies:
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -17335,7 +17274,7 @@ snapshots:
 
   dns-over-http-resolver@1.2.3(node-fetch@2.7.0(encoding@0.1.13)):
     dependencies:
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       native-fetch: 3.0.0(node-fetch@2.7.0(encoding@0.1.13))
       receptacle: 1.3.2
     transitivePeerDependencies:
@@ -17344,7 +17283,7 @@ snapshots:
 
   dns-over-http-resolver@1.2.3(node-fetch@3.3.2):
     dependencies:
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       native-fetch: 3.0.0(node-fetch@3.3.2)
       receptacle: 1.3.2
     transitivePeerDependencies:
@@ -17488,7 +17427,7 @@ snapshots:
   engine.io-client@6.6.2(bufferutil@4.0.8)(utf-8-validate@5.0.10):
     dependencies:
       '@socket.io/component-emitter': 3.1.2
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       engine.io-parser: 5.2.3
       ws: 8.17.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       xmlhttprequest-ssl: 2.1.2
@@ -17714,7 +17653,7 @@ snapshots:
   eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0)(eslint@8.57.1):
     dependencies:
       '@nolyfill/is-core-module': 1.0.39
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       enhanced-resolve: 5.17.1
       eslint: 8.57.1
       eslint-module-utils: 2.12.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
@@ -17846,7 +17785,7 @@ snapshots:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.6
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
       eslint-scope: 7.2.2
@@ -18328,7 +18267,7 @@ snapshots:
 
   follow-redirects@1.15.9(debug@4.3.7):
     optionalDependencies:
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
 
   for-each@0.3.3:
     dependencies:
@@ -18884,7 +18823,7 @@ snapshots:
       boxen: 5.1.2
       chokidar: 4.0.1
       ci-info: 2.0.0
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       enquirer: 2.4.1
       env-paths: 2.2.1
       ethereum-cryptography: 1.2.0
@@ -19063,7 +19002,7 @@ snapshots:
     dependencies:
       '@tootallnate/once': 1.1.2
       agent-base: 6.0.2
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -19071,7 +19010,7 @@ snapshots:
     dependencies:
       '@tootallnate/once': 2.0.0
       agent-base: 6.0.2
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -19090,7 +19029,7 @@ snapshots:
   https-proxy-agent@5.0.1:
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -19267,8 +19206,6 @@ snapshots:
       strip-ansi: 6.0.1
       through: 2.3.8
       wrap-ansi: 6.2.0
-
-  install@0.13.0: {}
 
   interface-datastore@6.1.1:
     dependencies:
@@ -20673,8 +20610,8 @@ snapshots:
 
   metro-source-map@0.81.0:
     dependencies:
-      '@babel/traverse': 7.25.9
-      '@babel/traverse--for-generate-function-map': '@babel/traverse@7.25.9'
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
+      '@babel/traverse--for-generate-function-map': '@babel/traverse@7.25.9(supports-color@5.5.0)'
       '@babel/types': 7.26.0
       flow-enums-runtime: 0.0.6
       invariant: 2.2.4
@@ -20703,7 +20640,7 @@ snapshots:
       '@babel/core': 7.26.0
       '@babel/generator': 7.26.2
       '@babel/template': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
       flow-enums-runtime: 0.0.6
       nullthrows: 1.1.1
     transitivePeerDependencies:
@@ -20736,7 +20673,7 @@ snapshots:
       '@babel/generator': 7.26.2
       '@babel/parser': 7.26.2
       '@babel/template': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/traverse': 7.25.9(supports-color@5.5.0)
       '@babel/types': 7.26.0
       accepts: 1.3.8
       chalk: 4.1.2
@@ -20952,7 +20889,7 @@ snapshots:
   micromark@4.0.1:
     dependencies:
       '@types/debug': 4.1.12
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       decode-named-character-reference: 1.0.2
       devlop: 1.1.0
       micromark-core-commonmark: 2.0.2
@@ -21515,8 +21452,6 @@ snapshots:
   npm-run-path@5.3.0:
     dependencies:
       path-key: 4.0.0
-
-  npm@11.0.0: {}
 
   npmlog@5.0.1:
     dependencies:
@@ -23093,7 +23028,7 @@ snapshots:
   socket.io-client@4.8.1(bufferutil@4.0.8)(utf-8-validate@5.0.10):
     dependencies:
       '@socket.io/component-emitter': 3.1.2
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       engine.io-client: 6.6.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       socket.io-parser: 4.2.4
     transitivePeerDependencies:
@@ -23104,14 +23039,14 @@ snapshots:
   socket.io-parser@4.2.4:
     dependencies:
       '@socket.io/component-emitter': 3.1.2
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
   socks-proxy-agent@7.0.0:
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       socks: 2.8.3
     transitivePeerDependencies:
       - supports-color
@@ -23829,7 +23764,7 @@ snapshots:
   tuf-js@1.1.7:
     dependencies:
       '@tufjs/models': 1.0.4
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       make-fetch-happen: 11.1.1
     transitivePeerDependencies:
       - supports-color
@@ -23881,7 +23816,7 @@ snapshots:
   typechain@8.3.2(typescript@5.6.3):
     dependencies:
       '@types/prettier': 2.7.3
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.3.7(supports-color@5.5.0)
       fs-extra: 7.0.1
       glob: 7.1.7
       js-sha3: 0.8.0
