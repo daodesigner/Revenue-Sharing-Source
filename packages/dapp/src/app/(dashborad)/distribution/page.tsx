@@ -75,7 +75,7 @@ const InsightsPage = () => {
          tooltip:
             'Live exhibition event in Lusaka, Zambia featuring physical artifacts and community engagement',
          status: 'green',
-         transaction_id: 'Transaction ID 2',
+         transaction_id: 'https://summitshare.co/blog/rkAQd7hB1l',
       },
       {
          id_no: 3,
@@ -113,6 +113,29 @@ const InsightsPage = () => {
          transaction_id: 'Transaction ID 5',
       },
    ];
+
+   const SmartLink = ({ transactionId }: { transactionId: string }) => {
+      const isBlog = transactionId.includes('summitshare.co/blog');
+
+      const linkProps = isBlog
+         ? {
+              href: transactionId,
+              className:
+                 'inline-flex items-center space-x-1 px-3 py-1 rounded-full text-xs bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors border border-blue-200',
+           }
+         : {
+              href: `https://optimistic.etherscan.io/tx/${transactionId}`,
+              className:
+                 'inline-flex items-center space-x-1 px-3 py-1 rounded-full text-xs bg-stone-50 text-stone-700 hover:bg-stone-100 transition-colors border border-stone-200',
+           };
+
+      return (
+         <a {...linkProps} target="_blank" rel="noopener noreferrer">
+            <span>{isBlog ? 'Read' : 'View'}</span>
+            <ExternalLink className="w-3 h-3" />
+         </a>
+      );
+   };
 
    return (
       <Tooltip.Provider delayDuration={200}>
@@ -235,15 +258,7 @@ const InsightsPage = () => {
                                  </span>
                               </TableCell>
                               <TableCell>
-                                 <a
-                                    href={`https://optimistic.etherscan.io/tx/${row.transaction_id}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center space-x-1 px-3 py-1 rounded-full text-xs bg-stone-50 text-stone-700 hover:bg-stone-100 transition-colors border border-stone-200"
-                                 >
-                                    <span>View</span>
-                                    <ExternalLink className="w-3 h-3" />
-                                 </a>
+                                 <SmartLink transactionId={row.transaction_id} />
                               </TableCell>
                            </TableRow>
                         ))}
